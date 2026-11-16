@@ -38,8 +38,13 @@ jobs:
       - if: steps.blender_cache.outputs.cache-hit != 'true'
         run: |
           mkdir -p tools && cd tools
-          curl -sSfL -o b.tar.xz https://download.blender.org/release/Blender4.2/blender-4.2.3-linux-x64.tar.xz
-          curl -sSfL https://download.blender.org/release/Blender4.2/blender-4.2.3.sha256 | grep linux-x64.tar.xz | sed 's/blender-4.2.3-linux-x64.tar.xz/b.tar.xz/' | sha256sum -c
+          # download.blender.org answers 403 to runners: try official mirrors, verify the official checksum
+          SUM=3a64efd1982465395abab4259b4091d5c8c56054c7267e9633e4f702a71ea3f4
+          for u in https://download.blender.org/release https://mirror.clarkson.edu/blender/release                    https://ftp.nluug.nl/pub/graphics/blender/release https://mirrors.ocf.berkeley.edu/blender/release; do
+            curl -sSfL --retry 2 -o b.tar.xz "$u/Blender4.2/blender-4.2.3-linux-x64.tar.xz"               && echo "$SUM  b.tar.xz" | sha256sum -c && break
+            rm -f b.tar.xz
+          done
+          test -f b.tar.xz
           tar -xf b.tar.xz && rm b.tar.xz && mv blender-4.2.3-linux-x64 blender
       - name: open data
         run: |

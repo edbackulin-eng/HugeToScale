@@ -30,6 +30,7 @@ def fetch(url, data=None, timeout=180):
 
 
 def record(path, url, licence, page=None):
+    CACHE.mkdir(parents=True, exist_ok=True)
     log = CACHE / "fetched.json"
     items = json.loads(log.read_text()) if log.exists() else {}
     items[str(Path(path).relative_to(ROOT)).replace("\\", "/")] = {
