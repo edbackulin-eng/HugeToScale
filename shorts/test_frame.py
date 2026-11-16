@@ -1,11 +1,13 @@
-"""Render one test frame of a trial Short and time it.
+"""Render one test frame of a trial Short and time it (Blender scenes; maps are 2D, see map2d.py).
 
     blender -b --factory-startup -P shorts/test_frame.py -- <scene> <out.png> [--preview]
 
-Scenes: titanic_times_square, texas_france, saturnv_bigben.
-Writes <out>.png and <out>.json: render seconds, settings, size checks, and the estimate for a whole Short.
-Real lens (focal length, aperture), Cycles CPU, adaptive sampling, OpenImageDenoise, mist for aerial
-perspective. Size check: every real object must match its source within 1 % or the frame is not rendered.
+Scenes: titanic_aerial (drone view over USGS NAIP orthophoto of Times Square),
+        titanic_pitch (fallback: beside a FIFA-size football pitch),
+        saturnv_pyramid (Saturn V beside the Great Pyramid of Giza).
+Style (owner 17.11): bright daytime sun only, crisp shadows, light haze, AgX Punchy; grade.py finishes the colour.
+Budget: 40 samples + OpenImageDenoise, simple materials, 24 fps, <= 30 s a frame.
+Size check: every real object must match its source within 1 % or the frame is not rendered.
 """
 import json
 import math
@@ -20,12 +22,14 @@ from mathutils import Vector
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
 sys.path.insert(0, str(HERE))
-import city  # noqa: E402
-import maps  # noqa: E402
+sys.path.insert(0, str(ROOT / "branding3d"))
 import objects as O  # noqa: E402
+import models as BM  # noqa: E402
 
 CACHE = ROOT / "data/cache"
 HDRI = ROOT / "assets/hdri"
+TEX = ROOT / "assets/textures"
+FPS = 24
 CHECKS = []
 
 
@@ -38,47 +42,75 @@ def check(name, model, real, unit="m", tol=0.01, note=None):
 
 # ------------------------------------------------------------------------------------------- common
 
-def reset():
-    bpy.ops.wm.read_factory_settings(use_empty=True)
-
-
 def render_setup(preview):
+    bpy.ops.wm.read_factory_settings(use_empty=True)
     sc = bpy.context.scene
     sc.render.engine = "CYCLES"
     sc.cycles.device = "CPU"
-    sc.cycles.samples = 16 if preview else 128
+    sc.cycles.samples = 12 if preview else 40
     sc.cycles.use_adaptive_sampling = True
-    sc.cycles.adaptive_threshold = 0.03 if preview else 0.01
+    sc.cycles.adaptive_threshold = 0.03
     sc.cycles.use_denoising = True
     sc.cycles.denoiser = "OPENIMAGEDENOISE"
-    sc.cycles.max_bounces = 6
-    sc.cycles.glossy_bounces = 3
-    sc.cycles.transparent_max_bounces = 8
+    sc.cycles.denoising_input_passes = "RGB_ALBEDO_NORMAL"
+    sc.cycles.max_bounces = 4
+    sc.cycles.diffuse_bounces = 2
+    sc.cycles.glossy_bounces = 2
+    sc.cycles.transmission_bounces = 2
+    sc.cycles.volume_bounces = 0
+    sc.cycles.caustics_reflective = sc.cycles.caustics_refractive = False
+    sc.render.fps = FPS
     sc.render.resolution_x, sc.render.resolution_y = 1080, 1920
     sc.render.resolution_percentage = 40 if preview else 100
     sc.render.use_motion_blur = True
     sc.render.motion_blur_shutter = 0.5
     sc.view_settings.view_transform = "AgX"
     sc.view_settings.look = "AgX - Punchy"
+    sc.view_settings.exposure = 0.35
     sc.render.image_settings.file_format = "PNG"
     sc.frame_set(1)
 
 
-def world_hdri(name, strength=1.0, rot=0.0):
+def sunny_world(hdri="kloofendal_43d_clear_puresky", strength=1.4, rot=0.0):
+    """Clear-sky HDRI (Poly Haven CC0): its sun disk gives crisp shadows, the sky stays saturated blue."""
     w = bpy.data.worlds.new("world")
     bpy.context.scene.world = w
     w.use_nodes = True
     nt = w.node_tree
     bg = nt.nodes["Background"]
     env = nt.nodes.new("ShaderNodeTexEnvironment")
-    env.image = bpy.data.images.load(str(HDRI / f"{name}_2k.hdr"))
+    env.image = bpy.data.images.load(str(HDRI / f"{hdri}_2k.hdr"))
     tc = nt.nodes.new("ShaderNodeTexCoord")
     mp = nt.nodes.new("ShaderNodeMapping")
     mp.inputs["Rotation"].default_value = (0, 0, math.radians(rot))
     nt.links.new(tc.outputs["Generated"], mp.inputs["Vector"])
     nt.links.new(mp.outputs["Vector"], env.inputs["Vector"])
+    # deepen the blue of the sky a little (camera rays only; lighting keeps the HDRI's real colour)
+    hsv = nt.nodes.new("ShaderNodeHueSaturation")
+    hsv.inputs["Saturation"].default_value = 1.6
+    nt.links.new(env.outputs["Color"], hsv.inputs["Color"])
+    bg_cam = nt.nodes.new("ShaderNodeBackground")
+    nt.links.new(hsv.outputs["Color"], bg_cam.inputs["Color"])
+    bg_cam.inputs["Strength"].default_value = strength
     nt.links.new(env.outputs["Color"], bg.inputs["Color"])
     bg.inputs["Strength"].default_value = strength
+    lp = nt.nodes.new("ShaderNodeLightPath")
+    mix = nt.nodes.new("ShaderNodeMixShader")
+    nt.links.new(lp.outputs["Is Camera Ray"], mix.inputs[0])
+    nt.links.new(bg.outputs[0], mix.inputs[1])
+    nt.links.new(bg_cam.outputs[0], mix.inputs[2])
+    nt.links.new(mix.outputs[0], nt.nodes["World Output"].inputs[0])
+
+
+def sun(elev, azim, strength=4.0, angle=1.2):
+    """Sun lamp: azim is the compass direction the light comes FROM (0 = north, 90 = east)."""
+    d = bpy.data.lights.new("sun", "SUN")
+    d.energy = strength
+    d.angle = math.radians(angle)
+    o = bpy.data.objects.new("sun", d)
+    bpy.context.collection.objects.link(o)
+    o.rotation_euler = (math.radians(90 - elev), 0, math.radians(180 - azim))
+    return o
 
 
 def camera(loc, target, lens, fstop=8.0, focus=None, clip=20000):
@@ -100,8 +132,8 @@ def camera(loc, target, lens, fstop=8.0, focus=None, clip=20000):
     return o
 
 
-def aerial_perspective(start, depth, colour, amount=0.35):
-    """Mist pass blended toward the sky colour: distant buildings fade like in real air."""
+def haze(start, depth, colour=(0.72, 0.84, 0.98), amount=0.22):
+    """Light aerial perspective: the mist pass blends far things toward a bright sky blue."""
     sc = bpy.context.scene
     sc.view_layers[0].use_pass_mist = True
     sc.world.mist_settings.start = start
@@ -120,169 +152,183 @@ def aerial_perspective(start, depth, colour, amount=0.35):
     nt.links.new(mix.outputs[0], comp.inputs["Image"])
 
 
+def pbr(name, tid, scale, bump=0.6, tint=None):
+    """Poly Haven CC0 texture set, box-projected in object space so no UVs are needed."""
+    m = bpy.data.materials.new(name)
+    m.use_nodes = True
+    nt = m.node_tree
+    b = nt.nodes["Principled BSDF"]
+    tc = nt.nodes.new("ShaderNodeTexCoord")
+    mp = nt.nodes.new("ShaderNodeMapping")
+    mp.inputs["Scale"].default_value = (1 / scale, 1 / scale, 1 / scale)
+    nt.links.new(tc.outputs["Object"], mp.inputs["Vector"])
+
+    def img(kind, colour):
+        t = nt.nodes.new("ShaderNodeTexImage")
+        t.image = bpy.data.images.load(str(TEX / f"{tid}_{kind}_2k.jpg"))
+        t.image.colorspace_settings.name = "sRGB" if colour else "Non-Color"
+        t.projection = "BOX"
+        t.projection_blend = 0.25
+        nt.links.new(mp.outputs["Vector"], t.inputs["Vector"])
+        return t
+
+    d = img("diff", True)
+    if tint:
+        mixc = nt.nodes.new("ShaderNodeMix"); mixc.data_type = "RGBA"; mixc.blend_type = "MULTIPLY"
+        mixc.inputs["Factor"].default_value = 1.0
+        mixc.inputs["B"].default_value = (*tint, 1)
+        nt.links.new(d.outputs["Color"], mixc.inputs["A"])
+        nt.links.new(mixc.outputs["Result"], b.inputs["Base Color"])
+    else:
+        nt.links.new(d.outputs["Color"], b.inputs["Base Color"])
+    r = img("rough", False)
+    nt.links.new(r.outputs["Color"], b.inputs["Roughness"])
+    n = img("nor", False)
+    nm = nt.nodes.new("ShaderNodeNormalMap"); nm.inputs["Strength"].default_value = bump
+    nt.links.new(n.outputs["Color"], nm.inputs["Color"])
+    nt.links.new(nm.outputs["Normal"], b.inputs["Normal"])
+    return m
+
+
+def plane(name, size, m, loc=(0, 0, 0)):
+    bpy.ops.mesh.primitive_plane_add(size=size, location=loc)
+    o = bpy.context.object
+    o.name = name
+    o.data.materials.append(m)
+    return o
+
+
 # ------------------------------------------------------------------------------------------- scenes
 
-def titanic_times_square(preview):
-    data = city.load(CACHE / "osm_times_square.json")
-    world_hdri("kloofendal_48d_partly_cloudy_puresky", 1.0, rot=float(os.environ.get("HDRI_ROT", 270)))
-    city.ground()
-    city.build(data, radius=430)
+def titanic_aerial(preview):
+    """Drone view over the real Times Square (NAIP orthophoto); the ship casts its shadow on the photo."""
+    meta = json.loads((CACHE / "naip_times_square.json").read_text())
+    half = meta["half_m"]
+    sunny_world(strength=1.2)
+    m = bpy.data.materials.new("naip")
+    m.use_nodes = True
+    nt = m.node_tree
+    b = nt.nodes["Principled BSDF"]
+    t = nt.nodes.new("ShaderNodeTexImage")
+    t.image = bpy.data.images.load(str(CACHE / "naip_times_square.jpg"))
+    t.interpolation = "Cubic"
+    nt.links.new(t.outputs["Color"], b.inputs["Base Color"])
+    b.inputs["Roughness"].default_value = 0.9
+    b.inputs["Specular IOR Level"].default_value = 0.2
+    plane("NAIP Times Square", 2 * half, m)  # default plane UVs cover the image exactly
     ship = O.titanic()
     check("Titanic length overall", O.local_extent(ship, 0), 269.1)
     check("Titanic beam", O.local_extent(ship, 1), 28.2)
     check("Titanic keel to funnel tops", O.top_of(ship, "funnel top"), 53.3)
-    # place it in the square along the avenue grid, where it hits the fewest buildings
-    feats = [f for f in city.footprints(data) if math.hypot(*f["pts"][0]) < 450]
-
-    def fp(b, a, p):
-        d = (math.sin(math.radians(b)), math.cos(math.radians(b)))
-        n = (d[1], -d[0])
-        cx, cy = d[0] * a + n[0] * p, d[1] * a + n[1] * p
-        return [(cx + d[0] * s + n[0] * w, cy + d[1] * s + n[1] * w)
-                for s in range(-130, 131, 10) for w in (-13, 0, 13)]
-
-    cands = [(b, a, p) for b in (27.5, 29, 30.5) for a in range(-80, 81, 20) for p in range(-40, 41, 5)]
-    hits, (b, a, p) = city.free_spot(feats, fp, cands)
-    print("ship placement", b, a, p, "overlap samples", hits)
-    d = Vector((math.sin(math.radians(b)), math.cos(math.radians(b)), 0))
-    n = Vector((d.y, -d.x, 0))
-    centre = d * a + n * p
-    ship.location = centre
+    bearing = 29.0  # Manhattan's avenue grid, along 7th Avenue through the square
+    d = Vector((math.sin(math.radians(bearing)), math.cos(math.radians(bearing)), 0))
     ship.rotation_euler.z = math.atan2(d.y, d.x)
-    bow = centre + d * (O.L / 2)
-    for along, side in ((18, 34), (18, -34), (26, 24), (26, -24), (35, 14), (35, -14), (50, 6)):
-        cam_pos = bow + d * along + n * side + Vector((0, 0, 1.7))
-        if not any(city.point_in((cam_pos.x, cam_pos.y), [tuple(q) for q in f["pts"]])
-                   for f in feats if (f["min_height"] or 0) < 3):
-            break
-    print("camera", along, side)
-    target = centre + d * 35 + Vector((0, 0, 26))
-    camera(cam_pos, target, lens=20, fstop=5.6, focus=(bow - cam_pos).length)
-    aerial_perspective(120, 1800, (0.62, 0.72, 0.85), 0.3)
-    return {"placement": {"bearing_deg": b, "along_m": a, "across_m": p, "overlap_samples": hits}}
+    ship.location = (0, 0, 0)
+    # the photo's own shadows fall to the north-west: the sun stands in the south-east
+    sun(58, 150, strength=4.5)
+    n = Vector((d.y, -d.x, 0))
+    cam = d * 250 + n * 110 + Vector((0, 0, 380))
+    camera(cam, d * 10, lens=30, fstop=11, focus=(cam - d * 10).length)
+    haze(250, 2500, amount=0.15)
+    return {"aerial": "USGS NAIP Plus orthoimagery, public domain", "bearing_deg": bearing}
 
 
-def texas_france(preview):
-    adm0 = CACHE / "ne_50m_admin_0_countries.geojson"
-    adm1 = CACHE / "ne_10m_admin_1_states_provinces.geojson"
-    fr = maps.find(adm0, ADMIN="France")
-    tx = maps.find(adm1, name="Texas", admin="United States of America")
-    lon0, lat0 = 2.4, 46.6  # metropolitan France
-    fr_rings = [r for r in maps.project(fr, lon0, lat0, 2e8) if max(abs(x) for x, _ in r) < 1.2e6]
-    tx_rings = maps.project(tx, -99.3, 31.4, 1e7)
-    a_fr = sum(maps.area(r) for r in fr_rings) / 1e6
-    a_tx = sum(maps.area(r) for r in tx_rings) / 1e6
-    # Natural Earth 1:50m is generalised: its area must still be within 2 % of the official land area
-    check("France (metropolitan) area, Natural Earth 1:50m vs INSEE 543 940 km²", a_fr, 543940, "km2")
-    check("Texas area, Natural Earth 1:10m vs US Census total 695 662 km²", a_tx, 695662, "km2", tol=0.02,
-          note="outline covers land + bays/lakes but not coastal sea: lies between Census land (676 587) and "
-               "total (695 662); FOR OWNER REVIEW before the full Short")
-    cfr = maps.centroid(fr_rings)
-    ctx = maps.centroid(tx_rings)
-    sea = city.flat_mat("sea", (0.01, 0.10, 0.32), 0.15, coat=0.6)
-    land = city.flat_mat("land", (0.20, 0.50, 0.18), 0.8)
-    france = city.flat_mat("france", (0.05, 0.25, 0.85), 0.6)
-    texas = bpy.data.materials.new("texas")
-    texas.use_nodes = True
-    tb = texas.node_tree.nodes["Principled BSDF"]
-    tb.inputs["Base Color"].default_value = (1.0, 0.38, 0.02, 1)
-    tb.inputs["Alpha"].default_value = 0.78
-    tb.inputs["Roughness"].default_value = 0.35
-    tb.inputs["Emission Color"].default_value = (1.0, 0.35, 0.0, 1)
-    tb.inputs["Emission Strength"].default_value = 0.4
-    white = city.flat_mat("border", (0.95, 0.95, 0.95), 0.4)
-    yellow = city.flat_mat("outline", (1.0, 0.85, 0.05), 0.3)
-    bpy.ops.mesh.primitive_plane_add(size=2.0e7, location=(0, 0, 0))
-    bpy.context.object.data.materials.append(sea)
-    # neighbours for context
-    data = json.loads(open(adm0, encoding="utf-8").read())
-    for f in data["features"]:
-        if f["properties"]["ADMIN"] == "France":
-            continue
-        rings = []
-        for poly in maps.polygons(f["geometry"]):
-            ll = poly[0]
-            if all(-25 < lo < 40 and 30 < la < 72 for lo, la in ll):
-                rings.append([maps.laea(lo, la, lon0, lat0) for lo, la in ll])
-        if rings:
-            maps.slab(f["properties"]["ADMIN"], rings, 0, 4000, land)
-            maps.outline(f["properties"]["ADMIN"] + " border", rings, 4100, 1500, white)
-    maps.slab("France", fr_rings, 0, 6000, france)
-    maps.outline("France border", fr_rings, 6100, 2500, yellow)
-    t = maps.slab("Texas", tx_rings, 0, 5000, texas, shift=(cfr[0] - ctx[0], cfr[1] - ctx[1]))
-    t.location.z = 30000
-    maps.outline("Texas outline", tx_rings, 35200, 3000, yellow, shift=(cfr[0] - ctx[0], cfr[1] - ctx[1]))
-    sun = bpy.data.lights.new("sun", "SUN"); sun.energy = 4.0; sun.angle = math.radians(2)
-    so = bpy.data.objects.new("sun", sun); bpy.context.collection.objects.link(so)
-    so.rotation_euler = (math.radians(50), 0, math.radians(-35))
-    world_hdri("kloofendal_48d_partly_cloudy_puresky", 0.6)
-    tgt = Vector((cfr[0], cfr[1] - 60000, 0))
-    cam = tgt + Vector((0, -1.05e6, 2.45e6))
-    camera(cam, tgt, lens=35, fstop=64, clip=2.0e7)
-    return {"area_km2": {"france_ne50m": round(a_fr), "texas_ne50m": round(a_tx)}}
+def pbr_or_flat():
+    m = bpy.data.materials.new("park grass")
+    m.use_nodes = True
+    nt = m.node_tree
+    b = nt.nodes["Principled BSDF"]
+    noise = nt.nodes.new("ShaderNodeTexNoise"); noise.inputs["Scale"].default_value = 0.05
+    ramp = nt.nodes.new("ShaderNodeValToRGB")
+    ramp.color_ramp.elements[0].color = (0.10, 0.30, 0.05, 1)
+    ramp.color_ramp.elements[1].color = (0.20, 0.42, 0.08, 1)
+    nt.links.new(noise.outputs["Fac"], ramp.inputs[0])
+    nt.links.new(ramp.outputs[0], b.inputs["Base Color"])
+    b.inputs["Roughness"].default_value = 0.9
+    return m
 
 
-def saturnv_bigben(preview):
-    data = city.load(CACHE / "osm_westminster.json")
-    lat0, lon0 = data["origin"]
-    tpos = ((-0.12461 - lon0) * math.cos(math.radians(lat0)) * 111320, (51.50073 - lat0) * 110574)
-    et = next(f for f in data["features"] if f["id"] == "way/123557148")
-    pts = et["pts"]
-    edges = [(math.dist(a, b), math.atan2(b[1] - a[1], b[0] - a[0])) for a, b in zip(pts, pts[1:])]
-    rot = max(edges)[1]
+def titanic_pitch(preview):
+    """Fallback: Titanic lying beside a FIFA-standard football pitch (105 x 68 m) on open grass."""
+    sunny_world(strength=1.3, rot=40)
+    grass = bpy.data.materials.new("pitch grass")
+    grass.use_nodes = True
+    nt = grass.node_tree
+    b = nt.nodes["Principled BSDF"]
+    tc = nt.nodes.new("ShaderNodeTexCoord")
+    sep = nt.nodes.new("ShaderNodeSeparateXYZ")
+    nt.links.new(tc.outputs["Object"], sep.inputs[0])
+    stripe = nt.nodes.new("ShaderNodeMath"); stripe.operation = "PINGPONG"; stripe.inputs[1].default_value = 5.25
+    nt.links.new(sep.outputs[0], stripe.inputs[0])
+    st = nt.nodes.new("ShaderNodeMath"); st.operation = "GREATER_THAN"; st.inputs[1].default_value = 2.625
+    nt.links.new(stripe.outputs[0], st.inputs[0])
+    noise = nt.nodes.new("ShaderNodeTexNoise"); noise.inputs["Scale"].default_value = 0.6
+    mix = nt.nodes.new("ShaderNodeMix"); mix.data_type = "RGBA"
+    mix.inputs["A"].default_value = (0.10, 0.36, 0.06, 1)
+    mix.inputs["B"].default_value = (0.16, 0.48, 0.09, 1)
+    nt.links.new(st.outputs[0], mix.inputs["Factor"])
+    mix2 = nt.nodes.new("ShaderNodeMix"); mix2.data_type = "RGBA"; mix2.blend_type = "MULTIPLY"
+    mix2.inputs["Factor"].default_value = 0.25
+    nt.links.new(mix.outputs["Result"], mix2.inputs["A"])
+    nt.links.new(noise.outputs["Color"], mix2.inputs["B"])
+    nt.links.new(mix2.outputs["Result"], b.inputs["Base Color"])
+    b.inputs["Roughness"].default_value = 0.85
+    pitch = plane("pitch", 1, grass)
+    pitch.scale = (111, 74, 1)
+    pitch.location.z = 0.004
+    plane("park grass", 4000, pbr_or_flat())
+    white = O.mat("lines", (0.95, 0.95, 0.95), 0.6)
+    L_, W_ = 105.0, 68.0
+    lw = 0.12
+    lines = [((0, W_ / 2), (L_, lw)), ((0, -W_ / 2), (L_, lw)), ((L_ / 2, 0), (lw, W_)), ((-L_ / 2, 0), (lw, W_)),
+             ((0, 0), (lw, W_))]
+    for sx in (1, -1):  # penalty and goal areas
+        lines += [((sx * (L_ / 2 - 16.5), 0), (lw, 40.32)), ((sx * (L_ / 2 - 8.25), 20.16), (16.5, lw)),
+                  ((sx * (L_ / 2 - 8.25), -20.16), (16.5, lw)), ((sx * (L_ / 2 - 5.5), 0), (lw, 18.32)),
+                  ((sx * (L_ / 2 - 2.75), 9.16), (5.5, lw)), ((sx * (L_ / 2 - 2.75), -9.16), (5.5, lw))]
+    for (x, y), (sx_, sy_) in lines:
+        O.box("line", (x, y, 0.01), (sx_, sy_, 0.02), white)
+    O.cylinder("centre circle", (0, 0, 0.0), 9.15, 0.02, white, n=96)
+    O.cylinder("centre grass", (0, 0, 0.005), 9.15 - lw, 0.03, grass, n=96)
+    for sx in (1, -1):  # goals 7.32 x 2.44 m
+        for y in (-3.66, 3.66):
+            O.cylinder("post", (sx * L_ / 2, y, 0), 0.06, 2.44, white, n=12)
+        O.box("bar", (sx * L_ / 2, 0, 2.44), (0.12, 7.44, 0.12), white)
+    check("pitch length", L_, 105.0)
+    ship = O.titanic()
+    check("Titanic length overall", O.local_extent(ship, 0), 269.1)
+    check("Titanic beam", O.local_extent(ship, 1), 28.2)
+    ship.location = (25, 62, 0)
+    cam = Vector((150, -190, 70))
+    camera(cam, Vector((10, 30, 10)), lens=28, fstop=11)
+    haze(300, 3000, amount=0.18)
+    return {"pitch": "FIFA Laws of the Game: 105 x 68 m"}
 
-    def near_tower(f):
-        cx = sum(p[0] for p in f["pts"]) / len(f["pts"]); cy = sum(p[1] for p in f["pts"]) / len(f["pts"])
-        return math.hypot(cx - tpos[0], cy - tpos[1]) < 9.5
 
-    world_hdri("kloppenheim_06_puresky", 1.0, rot=60)
-    city.ground()
-    city.build(data, skip=near_tower, radius=400)
-    tower = O.elizabeth_tower()
-    tower.location = (tpos[0], tpos[1], 0)
-    tower.rotation_euler.z = rot
-    check("Elizabeth Tower height", O.world_bounds(tower)[2][1], 96.0)
-    # Saturn V: own model from NASA's published stage dimensions (branding3d/models.py). The NASA 3D Resources
-    # .glb was tried first: low-poly, renders semi-transparent and has a navy band on the S-II stage.
-    sys.path.insert(0, str(ROOT / "branding3d"))
-    import models as BM  # noqa: E402
-    sv = BM.saturn_v(0, 0)
-    raw_h, s = 110.6, 1.0
-    feats = [f for f in city.footprints(data) if not near_tower(f)]
-
-    def fp(x, y):
-        return [(x + r * math.cos(k * math.pi / 6), y + r * math.sin(k * math.pi / 6)) for r in (0, 6, 11) for k in range(12)]
-
-    cands = sorted([(tpos[0] + dx, tpos[1] + dy) for dx in range(-120, 121, 8) for dy in range(-120, 121, 8)
-                    if 40 < math.hypot(dx, dy) < 120 and dy > -20],
-                   key=lambda c: math.hypot(c[0] - tpos[0] - 25, c[1] - tpos[1] - 55))
-    hits, (sx, sy) = city.free_spot(feats, fp, cands)
-    sv.location = (sx, sy, 0)
-    bpy.context.view_layer.update()
-    print("SV bounds", [tuple(round(v, 1) for v in ax) for ax in O.world_bounds(sv)], "cam will look at", tpos)
+def saturnv_pyramid(preview):
+    """Saturn V (110.6 m) beside the Great Pyramid (138.5 m now, base 230.3 m) in the desert."""
+    sunny_world(strength=1.5, rot=float(os.environ.get("HDRI_ROT", 0)))
+    sand = pbr("sand", "aerial_sand", 6.0, bump=0.4, tint=(1.0, 0.78, 0.52))
+    stone = pbr("limestone blocks", "large_sandstone_blocks", 3.2, bump=1.0, tint=(1.0, 0.80, 0.52))
+    plane("desert", 20000, sand)
+    pyr = BM.frustum(0, 0, 0, 138.5, 230.3, 9.0, stone, name="Great Pyramid")
+    check("Great Pyramid height (present)", O.world_bounds(pyr)[2][1], 138.5)
+    check("Great Pyramid base side", O.world_bounds(pyr)[0][1] - O.world_bounds(pyr)[0][0], 230.3)
+    sv = BM.saturn_v(150, -95)
     check("Saturn V height", O.world_bounds(sv)[2][1] - O.world_bounds(sv)[2][0], 110.6)
-    mid = Vector(((tpos[0] + sx) / 2, (tpos[1] + sy) / 2, 0))
-    away = Vector((-1.0, -0.45, 0)).normalized()
-    cam = mid + away * 165 + Vector((0, 0, 1.7))
-    camo = camera(cam, mid + Vector((0, 0, 44)), lens=24, fstop=8, focus=(cam - mid).length)
-    from bpy_extras.object_utils import world_to_camera_view
-    bpy.context.view_layer.update()
-    for nm, p3 in (("rocket base", (sx, sy, 0)), ("rocket top", (sx, sy, 110)), ("tower top", (tpos[0], tpos[1], 96))):
-        print("VIEW", nm, [round(v, 3) for v in world_to_camera_view(bpy.context.scene, camo, Vector(p3))])
-    aerial_perspective(150, 2500, (0.70, 0.78, 0.88), 0.3)
-    return {"saturn_v_spot": [round(sx, 1), round(sy, 1)], "overlap_samples": hits,
-            "saturn_v_model": "own (branding3d/models.py), NASA dimensions", "tower_rotation_deg": round(math.degrees(rot), 1)}
+    cam = Vector((260, -340, 1.8))
+    camera(cam, Vector((70, -40, 95)), lens=24, fstop=11)
+    haze(400, 5000, colour=(0.78, 0.86, 0.98), amount=0.25)
+    return {"pyramid": "present height 138.5 m, base 230.3 m"}
 
 
-SCENES = {"titanic_times_square": titanic_times_square, "texas_france": texas_france,
-          "saturnv_bigben": saturnv_bigben}
+SCENES = {"titanic_aerial": titanic_aerial, "titanic_pitch": titanic_pitch, "saturnv_pyramid": saturnv_pyramid}
 
 
 def main():
     argv = sys.argv[sys.argv.index("--") + 1:]
     name, out = argv[0], Path(argv[1]).resolve()
     preview = "--preview" in argv
-    reset()
     render_setup(preview)
     t0 = time.time()
     extra = SCENES[name](preview)
@@ -301,11 +347,12 @@ def main():
     info.update({"status": "rendered", "build_seconds": round(build_s, 1), "render_seconds": round(secs, 1),
                  "resolution": [sc.render.resolution_x * sc.render.resolution_percentage // 100,
                                 sc.render.resolution_y * sc.render.resolution_percentage // 100],
-                 "samples": sc.cycles.samples, "threads": os.cpu_count()})
+                 "samples": sc.cycles.samples, "threads": os.cpu_count(), "fps": FPS})
     for sec in (20, 30, 45):
-        frames = sec * 30
-        info[f"estimate_{sec}s_short"] = {"frames": frames, "cpu_hours": round(frames * secs / 3600, 1),
-                                          "jobs_at_4h": math.ceil(frames * secs / 3600 / 4)}
+        frames = sec * FPS
+        hours = frames * secs / 3600
+        info[f"estimate_{sec}s_short"] = {"frames": frames, "cpu_hours": round(hours, 1),
+                                          "jobs_at_4h": max(1, math.ceil(hours / 4))}
     out.with_suffix(".json").write_text(json.dumps(info, indent=1))
     print("RENDER", name, round(secs, 1), "s")
 

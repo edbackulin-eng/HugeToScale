@@ -1,0 +1,26 @@
+{
+ "assets/hdri/kloofendal_48d_partly_cloudy_puresky_2k.hdr": {
+  "url": "https://polyhaven.com/a/kloofendal_48d_partly_cloudy_puresky",
+  "licence": "CC0 1.0",
+  "licence_page": "https://polyhaven.com/license",
+  "date": "2026-11-16"
+ },
+ "assets/hdri/spruit_sunrise_2k.hdr": {
+  "url": "https://polyhaven.com/a/spruit_sunrise",
+  "licence": "CC0 1.0",
+  "licence_page": "https://polyhaven.com/license",
+  "date": "2026-11-16"
+ },
+ "assets/hdri/kloppenheim_06_puresky_2k.hdr": {
+  "url": "https://polyhaven.com/a/kloppenheim_06_puresky",
+  "licence": "CC0 1.0",
+  "licence_page": "https://polyhaven.com/license",
+  "date": "2026-11-16"
+ },
+ "data/cache/osm_westminster.json": {
+  "url": "https://www.openstreetmap.org/#map=17/51.5005/-0.1255",
+  "licence": "ODbL 1.0 \u2014 \u00a9 OpenStreetMap contributors",
+  "licence_page": "https://www.openstreetmap.org/copyright",
+  "date": "2026-11-16"
+ }
+}

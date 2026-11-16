@@ -20,7 +20,7 @@ ROOT = Path(__file__).resolve().parents[1]
 CACHE = ROOT / "data/cache"
 UA = {"User-Agent": "HugeToScale-build/0.1 (+https://github.com/edbackulin-eng/HugeToScale)"}
 OVERPASS = ["https://overpass-api.de/api/interpreter", "https://overpass.kumi.systems/api/interpreter"]
-HDRIS = ["kloofendal_48d_partly_cloudy_puresky", "spruit_sunrise", "kloppenheim_06_puresky"]
+HDRIS = ["kloofendal_43d_clear_puresky", "kloofendal_48d_partly_cloudy_puresky"]  # bright daytime only (owner 17.11)
 
 
 def fetch(url, data=None, timeout=180):
@@ -150,6 +150,39 @@ def nasa(folder):
     print("nasa", p.name, p.stat().st_size)
 
 
+def naip(name, lat0, lon0, half, px=3000):
+    """USGS NAIP Plus orthoimagery (public domain), a square of 2*half metres around a point."""
+    dlat = half / 110574.0
+    dlon = half / (111320.0 * math.cos(math.radians(lat0)))
+    q = urllib.parse.urlencode({"bbox": f"{lon0 - dlon},{lat0 - dlat},{lon0 + dlon},{lat0 + dlat}", "bboxSR": 4326,
+                                "imageSR": 4326, "size": f"{px},{px}", "format": "jpg", "compressionQuality": 92,
+                                "f": "image"})
+    url = "https://imagery.nationalmap.gov/arcgis/rest/services/USGSNAIPPlus/ImageServer/exportImage?" + q
+    p = CACHE / f"naip_{name}.jpg"
+    p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_bytes(fetch(url, timeout=300))
+    (CACHE / f"naip_{name}.json").write_text(json.dumps({"origin": [lat0, lon0], "half_m": half, "px": px}))
+    record(p, url.split("?")[0], "public domain (USGS / USDA, The National Map: Orthoimagery)",
+           "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits")
+    print("naip", name, p.stat().st_size)
+
+
+def textures(*ids, res="2k"):
+    """Poly Haven CC0 PBR textures: diffuse, normal (GL), roughness."""
+    out = ROOT / "assets/textures"
+    out.mkdir(parents=True, exist_ok=True)
+    for tid in ids:
+        files = json.loads(fetch(f"https://api.polyhaven.com/files/{tid}"))
+        for key, fname in (("Diffuse", "diff"), ("nor_gl", "nor"), ("Rough", "rough")):
+            if key not in files:
+                continue
+            p = out / f"{tid}_{fname}_{res}.jpg"
+            if not p.exists():
+                p.write_bytes(fetch(files[key][res]["jpg"]["url"]))
+        record(out / f"{tid}_diff_{res}.jpg", f"https://polyhaven.com/a/{tid}", "CC0 1.0", "https://polyhaven.com/license")
+        print("texture", tid)
+
+
 if __name__ == "__main__":
     cmd = sys.argv[1]
     if cmd == "hdri":
@@ -158,5 +191,9 @@ if __name__ == "__main__":
         osm(sys.argv[2], float(sys.argv[3]), float(sys.argv[4]), float(sys.argv[5]))
     elif cmd == "borders":
         borders()
+    elif cmd == "naip":
+        naip(sys.argv[2], float(sys.argv[3]), float(sys.argv[4]), float(sys.argv[5]))
+    elif cmd == "textures":
+        textures(*sys.argv[2:])
     elif cmd == "nasa":
         nasa(sys.argv[2])

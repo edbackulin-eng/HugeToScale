@@ -1,12 +1,12 @@
 name: test-frames
-# Owner's test stage: one frame of each trial Short at full quality, timed on a GitHub runner.
+# Owner's test stage: one frame of each trial Short, rendered, graded and timed on a GitHub runner.
 # Manual only (workflow_dispatch) — nothing here is scheduled.
 on:
   workflow_dispatch:
     inputs:
       scenes:
         description: "comma-separated scenes"
-        default: "titanic_times_square,texas_france,saturnv_bigben"
+        default: "titanic_aerial,titanic_pitch,saturnv_pyramid,texas_france"
 permissions:
   contents: read
 jobs:
@@ -20,7 +20,7 @@ jobs:
   frame:
     needs: plan
     runs-on: ubuntu-24.04
-    timeout-minutes: 120
+    timeout-minutes: 90
     strategy:
       fail-fast: false
       matrix:
@@ -30,36 +30,46 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: "3.11"
+      - run: pip install --quiet pillow
       - id: blender_cache
+        if: matrix.scene != 'texas_france'
         uses: actions/cache@v4
         with:
           path: tools/blender
           key: blender-4.2.3-linux
-      - if: steps.blender_cache.outputs.cache-hit != 'true'
+      - if: matrix.scene != 'texas_france' && steps.blender_cache.outputs.cache-hit != 'true'
         run: |
           mkdir -p tools && cd tools
           # download.blender.org answers 403 to runners: try official mirrors, verify the official checksum
           SUM=3a64efd1982465395abab4259b4091d5c8c56054c7267e9633e4f702a71ea3f4
-          for u in https://download.blender.org/release https://mirror.clarkson.edu/blender/release                    https://ftp.nluug.nl/pub/graphics/blender/release https://mirrors.ocf.berkeley.edu/blender/release; do
-            curl -sSfL --retry 2 -o b.tar.xz "$u/Blender4.2/blender-4.2.3-linux-x64.tar.xz"               && echo "$SUM  b.tar.xz" | sha256sum -c && break
+          for u in https://download.blender.org/release https://mirror.clarkson.edu/blender/release \
+                   https://ftp.nluug.nl/pub/graphics/blender/release https://mirrors.ocf.berkeley.edu/blender/release; do
+            curl -sSfL --retry 2 -o b.tar.xz "$u/Blender4.2/blender-4.2.3-linux-x64.tar.xz" \
+              && echo "$SUM  b.tar.xz" | sha256sum -c && break
             rm -f b.tar.xz
           done
           test -f b.tar.xz
           tar -xf b.tar.xz && rm b.tar.xz && mv blender-4.2.3-linux-x64 blender
       - name: open data
         run: |
-          python shorts/data_prep.py hdri
           case "${{ matrix.scene }}" in
-            titanic_times_square) python shorts/data_prep.py osm times_square 40.7577 -73.9857 420 ;;
-            saturnv_bigben)       python shorts/data_prep.py osm westminster 51.5005 -0.1255 380 ;;
-            texas_france)         python shorts/data_prep.py borders ;;
+            titanic_aerial)  python shorts/data_prep.py hdri && python shorts/data_prep.py naip times_square 40.7577 -73.9857 700 ;;
+            titanic_pitch)   python shorts/data_prep.py hdri ;;
+            saturnv_pyramid) python shorts/data_prep.py hdri && python shorts/data_prep.py textures large_sandstone_blocks aerial_sand ;;
+            texas_france)    python shorts/data_prep.py borders ;;
           esac
-      - name: render one frame (1080x1920, full quality)
+      - name: render one frame (1080x1920) and grade it
         run: |
           mkdir -p shorts/out
-          tools/blender/blender -b --factory-startup -P shorts/test_frame.py -- "${{ matrix.scene }}" "$PWD/shorts/out/${{ matrix.scene }}.png" 2>&1 | grep -vE "^(Fra:|Read |TBB)" | tail -40
-          cp data/cache/fetched.json "shorts/out/${{ matrix.scene }}_fetched.json"
-          nproc; free -g
+          S="${{ matrix.scene }}"
+          if [ "$S" = texas_france ]; then
+            python shorts/map2d.py texas_france "$PWD/shorts/out/raw_$S.png"
+          else
+            tools/blender/blender -b --factory-startup -P shorts/test_frame.py -- "$S" "$PWD/shorts/out/raw_$S.png" 2>&1 | grep -vE "^(Fra:|Read |TBB)" | tail -30
+          fi
+          python shorts/grade.py "shorts/out/raw_$S.png" "shorts/out/$S.png"
+          cp data/cache/fetched.json "shorts/out/${S}_fetched.json"
+          nproc
       - uses: actions/upload-artifact@v4
         with:
           name: frame-${{ matrix.scene }}

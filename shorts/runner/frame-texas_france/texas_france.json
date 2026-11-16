@@ -1,0 +1,54 @@
+{
+ "scene": "texas_france",
+ "preview": false,
+ "checks": [
+  {
+   "object": "France (metropolitan) area, Natural Earth 1:50m vs INSEE 543 940 km\u00b2",
+   "model": 545571.38,
+   "source": 543940,
+   "unit": "km2",
+   "error_pct": 0.3,
+   "ok": true,
+   "tolerance_pct": 1.0,
+   "note": null
+  },
+  {
+   "object": "Texas area, Natural Earth 1:10m vs US Census total 695 662 km\u00b2",
+   "model": 685904.89,
+   "source": 695662,
+   "unit": "km2",
+   "error_pct": 1.403,
+   "ok": true,
+   "tolerance_pct": 2.0,
+   "note": "outline covers land + bays/lakes but not coastal sea: lies between Census land (676 587) and total (695 662); FOR OWNER REVIEW before the full Short"
+  }
+ ],
+ "area_km2": {
+  "france_ne50m": 545571,
+  "texas_ne50m": 685905
+ },
+ "status": "rendered",
+ "build_seconds": 1.6,
+ "render_seconds": 427.9,
+ "resolution": [
+  1080,
+  1920
+ ],
+ "samples": 128,
+ "threads": 4,
+ "estimate_20s_short": {
+  "frames": 600,
+  "cpu_hours": 71.3,
+  "jobs_at_4h": 18
+ },
+ "estimate_30s_short": {
+  "frames": 900,
+  "cpu_hours": 107.0,
+  "jobs_at_4h": 27
+ },
+ "estimate_45s_short": {
+  "frames": 1350,
+  "cpu_hours": 160.5,
+  "jobs_at_4h": 41
+ }
+}

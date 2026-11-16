@@ -1,0 +1,57 @@
+{
+ "scene": "saturnv_bigben",
+ "preview": false,
+ "checks": [
+  {
+   "object": "Elizabeth Tower height",
+   "model": 96.0,
+   "source": 96.0,
+   "unit": "m",
+   "error_pct": 0.0,
+   "ok": true,
+   "tolerance_pct": 1.0,
+   "note": null
+  },
+  {
+   "object": "Saturn V height",
+   "model": 110.61,
+   "source": 110.6,
+   "unit": "m",
+   "error_pct": 0.009,
+   "ok": true,
+   "tolerance_pct": 1.0,
+   "note": null
+  }
+ ],
+ "saturn_v_spot": [
+  93.7,
+  73.4
+ ],
+ "overlap_samples": 0,
+ "saturn_v_model": "own (branding3d/models.py), NASA dimensions",
+ "tower_rotation_deg": -6.3,
+ "status": "rendered",
+ "build_seconds": 1.0,
+ "render_seconds": 159.5,
+ "resolution": [
+  1080,
+  1920
+ ],
+ "samples": 128,
+ "threads": 4,
+ "estimate_20s_short": {
+  "frames": 600,
+  "cpu_hours": 26.6,
+  "jobs_at_4h": 7
+ },
+ "estimate_30s_short": {
+  "frames": 900,
+  "cpu_hours": 39.9,
+  "jobs_at_4h": 10
+ },
+ "estimate_45s_short": {
+  "frames": 1350,
+  "cpu_hours": 59.8,
+  "jobs_at_4h": 15
+ }
+}
