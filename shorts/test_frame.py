@@ -47,9 +47,10 @@ def render_setup(preview):
     sc = bpy.context.scene
     sc.render.engine = "CYCLES"
     sc.cycles.device = "CPU"
-    sc.cycles.samples = 12 if preview else 40
+    sc.cycles.samples = 12 if preview else int(os.environ.get("SAMPLES", 24))
     sc.cycles.use_adaptive_sampling = True
-    sc.cycles.adaptive_threshold = 0.03
+    sc.cycles.adaptive_threshold = float(os.environ.get("ADAPTIVE", 0.05))
+    sc.render.use_persistent_data = True  # animation: scene/BVH kept between frames
     sc.cycles.use_denoising = True
     sc.cycles.denoiser = "OPENIMAGEDENOISE"
     sc.cycles.denoising_input_passes = "RGB_ALBEDO_NORMAL"
