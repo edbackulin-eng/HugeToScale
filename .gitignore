@@ -32,3 +32,4 @@ shorts/out/
 !branding/final/*.png
 __pycache__/
 *.pyc
+shorts/runner*/
