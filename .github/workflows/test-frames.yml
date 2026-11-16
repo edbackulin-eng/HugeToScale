@@ -1,0 +1,61 @@
+name: test-frames
+# Owner's test stage: one frame of each trial Short at full quality, timed on a GitHub runner.
+# Manual only (workflow_dispatch) — nothing here is scheduled.
+on:
+  workflow_dispatch:
+    inputs:
+      scenes:
+        description: "comma-separated scenes"
+        default: "titanic_times_square,texas_france,saturnv_bigben"
+permissions:
+  contents: read
+jobs:
+  plan:
+    runs-on: ubuntu-24.04
+    outputs:
+      scenes: ${{ steps.s.outputs.scenes }}
+    steps:
+      - id: s
+        run: echo "scenes=$(echo '${{ inputs.scenes }}' | python3 -c 'import sys,json;print(json.dumps([x.strip() for x in sys.stdin.read().split(",") if x.strip()]))')" >> "$GITHUB_OUTPUT"
+  frame:
+    needs: plan
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      matrix:
+        scene: ${{ fromJson(needs.plan.outputs.scenes) }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+      - id: blender_cache
+        uses: actions/cache@v4
+        with:
+          path: tools/blender
+          key: blender-4.2.3-linux
+      - if: steps.blender_cache.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p tools && cd tools
+          curl -sSfL -o b.tar.xz https://download.blender.org/release/Blender4.2/blender-4.2.3-linux-x64.tar.xz
+          curl -sSfL https://download.blender.org/release/Blender4.2/blender-4.2.3.sha256 | grep linux-x64.tar.xz | sed 's/blender-4.2.3-linux-x64.tar.xz/b.tar.xz/' | sha256sum -c
+          tar -xf b.tar.xz && rm b.tar.xz && mv blender-4.2.3-linux-x64 blender
+      - name: open data
+        run: |
+          python shorts/data_prep.py hdri
+          case "${{ matrix.scene }}" in
+            titanic_times_square) python shorts/data_prep.py osm times_square 40.7577 -73.9857 420 ;;
+            saturnv_bigben)       python shorts/data_prep.py osm westminster 51.5005 -0.1255 380 ;;
+            texas_france)         python shorts/data_prep.py borders ;;
+          esac
+      - name: render one frame (1080x1920, full quality)
+        run: |
+          mkdir -p shorts/out
+          tools/blender/blender -b --factory-startup -P shorts/test_frame.py -- "${{ matrix.scene }}" "$PWD/shorts/out/${{ matrix.scene }}.png" 2>&1 | grep -vE "^(Fra:|Read |TBB)" | tail -40
+          cp data/cache/fetched.json "shorts/out/${{ matrix.scene }}_fetched.json"
+          nproc; free -g
+      - uses: actions/upload-artifact@v4
+        with:
+          name: frame-${{ matrix.scene }}
+          path: shorts/out/
