@@ -1,0 +1,34 @@
+# Public repository: secrets never enter it.
+.env
+.env.*
+*.pem
+client_secret*.json
+credentials.json
+token*.json
+youtube_token.json
+secrets/
+
+# Downloaded on the runner (or locally for previews), never committed
+assets/hdri/
+assets/models/
+data/cache/
+tools/
+
+# Renders and previews
+branding/out/
+branding3d/out/
+branding3d/test/
+branding3d/final/
+shorts/out/
+*.mp4
+*.mov
+*.wav
+*.mp3
+*.exr
+*.blend
+*.blend1
+*.png
+*.jpg
+!branding/final/*.png
+__pycache__/
+*.pyc

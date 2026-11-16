@@ -1,0 +1,24 @@
+{
+  "what": "channel art (banner, avatar) for Huge To Scale",
+  "checked": "2026-11-16",
+  "assets": [
+    {"file": "assets/hdri/kloofendal_48d_partly_cloudy_puresky_2k.hdr", "use": "lighting (banner/avatar A, C)",
+     "url": "https://polyhaven.com/a/kloofendal_48d_partly_cloudy_puresky", "license": "CC0 1.0",
+     "license_page": "https://polyhaven.com/license", "authors": "Greg Zaal, Jarod Guest"},
+    {"file": "assets/hdri/spruit_sunrise_2k.hdr", "use": "lighting (banner/avatar B)",
+     "url": "https://polyhaven.com/a/spruit_sunrise", "license": "CC0 1.0",
+     "license_page": "https://polyhaven.com/license", "authors": "Greg Zaal"},
+    {"file": "assets/fonts/Anton-Regular.ttf", "use": "channel name and size label",
+     "url": "https://github.com/googlefonts/AntonFont", "license": "SIL Open Font License 1.1",
+     "license_file": "assets/fonts/Anton-OFL.txt"},
+    {"file": "branding3d/models.py", "use": "all 3D models",
+     "url": null, "license": "own work: simplified models built from primitives in Blender, no third-party meshes, no logos"}
+  ],
+  "sizes_used_m": {
+    "Saturn V": 110.6, "Statue of Liberty (ground to torch)": 93.0, "Elizabeth Tower (Big Ben)": 96.0,
+    "Taj Mahal": 73.0, "Leaning Tower of Pisa": 56.7, "Great Pyramid (present)": 138.5,
+    "Eiffel Tower (with antennas)": 330.0, "Seawise Giant (length)": 458.45, "person": 1.8
+  },
+  "sizes_note": "Commonly published figures, used for the channel art only. Every Short gets its own check: Wikidata + a second official source, stopped if they differ by more than 2 %. The model heights match these figures within 1 % (scene.py self-check, printed as SIZE lines).",
+  "not_used": "no AI imagery, no photos, no Christ the Redeemer, no night lighting of the Eiffel Tower, no NASA or other logos"
+}
