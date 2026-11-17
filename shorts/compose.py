@@ -58,7 +58,77 @@ def caption_layer(c):
     return Image.alpha_composite(base, img)
 
 
-def caption_frames(short, total, outdir):
+def nice_step(m_per_px, min_px=170):
+    for v in (1, 2, 5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000, 20000):
+        if v / m_per_px >= min_px:
+            return v
+    return 50000
+
+
+def fmt_m(v):
+    return f"{v / 1000:g} km" if v >= 1000 else f"{v:g} m"
+
+
+def ladder_overlay(frame, track, t, short):
+    """Growing height ruler on the left + small labels on the earlier objects (all of them in the overview)."""
+    s = P.SHORTS[short]
+    L = P.LADDERS[s["ladder"]]
+    row = track["track"][min(len(track["track"]) - 1, int(round(t * P.FPS)))]
+    S = row["S"]
+    gy = track["ground_y"] * H
+    ppm = H / S
+    d = ImageDraw.Draw(frame)
+    # ruler
+    step = nice_step(1 / ppm)
+    f_r = ImageFont.truetype(FONT, 30)
+    x0 = 46
+    d.line([(x0, gy), (x0, 170)], fill=(255, 255, 255, 230), width=4)
+    v = 0
+    while gy - v * ppm >= 175:
+        y = gy - v * ppm
+        d.line([(x0 - 10, y), (x0 + 14, y)], fill=(255, 255, 255, 240), width=4)
+        if v:
+            d.text((x0 + 22, y), fmt_m(v), font=f_r, fill=(255, 255, 255, 255), stroke_width=4,
+                   stroke_fill=STROKE, anchor="lm")
+        v += step
+    # labels (none during the rewind: the loop starts clean)
+    if t >= L["rewind"]:
+        return True
+    steps = L["steps"]
+    cur = max(i for i, st in enumerate(steps) if st["t"] <= t)
+    overview = L["overview"] <= t < L["rewind"]
+    f_l = ImageFont.truetype(FONT, 36)
+    boxes = []
+    items = []
+    for i, st in enumerate(steps):
+        sc = row.get(st["key"], 1.0)
+        if sc < 0.6 or (i == cur and not overview):
+            continue
+        hpx = st["h"] * sc * ppm
+        if hpx < 22 and not overview:
+            continue
+        xp = W / 2 + (st["x"] - row["x"]) * ppm
+        yt = gy - hpx
+        if not (10 < xp < W - 10):
+            continue
+        items.append((xp, yt, st))
+    for xp, yt, st in sorted(items, key=lambda a: a[0]):
+        txt = f"{st['name']}  {st['value']}"
+        wl = f_l.getlength(txt)
+        bx = min(max(xp - wl / 2, 20), W - 20 - wl)
+        by = yt - 70
+        for b in boxes:
+            if bx < b[2] and bx + wl > b[0] and by < b[3] and by + 44 > b[1]:
+                by = b[1] - 50
+        boxes.append((bx, by, bx + wl, by + 44))
+        d.line([(xp, yt - 4), (xp, by + 44)], fill=(255, 255, 255, 220), width=3)
+        d.text((bx, by), st["name"] + "  ", font=f_l, fill=(255, 255, 255, 255), stroke_width=5, stroke_fill=STROKE)
+        d.text((bx + f_l.getlength(st["name"] + "  "), by), st["value"], font=f_l, fill=(*P.YELLOW, 255),
+               stroke_width=5, stroke_fill=STROKE)
+    return True
+
+
+def caption_frames(short, total, outdir, track=None):
     s = P.SHORTS[short]
     layers = [(c, caption_layer(c)) for c in s["captions"]]
     outdir.mkdir(parents=True, exist_ok=True)
@@ -66,11 +136,11 @@ def caption_frames(short, total, outdir):
     for i in range(total):
         t = i / P.FPS
         frame = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-        any_on = False
+        any_on = bool(track) and ladder_overlay(frame, track, t, short)
         for c, lay in layers:
             if not (c["t0"] <= t <= min(c["t1"], s["seconds"])):
                 continue
-            k_in = ease_out((t - c["t0"]) / 0.22)
+            k_in = 1.0 if c["t0"] < 0 else ease_out((t - c["t0"]) / 0.22)
             k_out = 1.0 if c["t1"] >= s["seconds"] else min(1.0, (c["t1"] - t) / 0.2)
             alpha = min(k_in, k_out)
             sc = 0.86 + 0.14 * k_in
@@ -142,7 +212,9 @@ def main():
             dst.hardlink_to(f) if hasattr(dst, "hardlink_to") else dst.write_bytes(f.read_bytes())
     rendered = len(frames)
     hold = s["seconds"] - rendered * step / P.FPS
-    caption_frames(short, total, work / "cap")
+    tracks = sorted(chunks.glob("**/ladder_track.json"))
+    track = json.loads(tracks[0].read_text()) if tracks else None
+    caption_frames(short, total, work / "cap", track)
     track = music(short, work / "music.mp3")
     mp4 = out / f"{short}{'_preview' if step > 1 else ''}.mp4"
     vf = (f"[0:v]scale={W}:{H}:flags=lanczos,fps={P.FPS},{G.GRADE},"

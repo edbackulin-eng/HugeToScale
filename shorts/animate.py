@@ -529,7 +529,12 @@ def saturnv_pyramid(preview, rig):
     return info
 
 
-SCENES = {"crater_manhattan": crater_manhattan, "saturnv_pyramid": saturnv_pyramid}
+def ladder_heights(preview, rig):
+    import ladder
+    return ladder.build("ladder_heights", preview, rig)
+
+
+SCENES = {"crater_manhattan": crater_manhattan, "saturnv_pyramid": saturnv_pyramid, "ladder_heights": ladder_heights}
 
 
 def main():
@@ -569,9 +574,13 @@ def main():
         t2 = time.time()
         bpy.ops.render.render(write_still=True)
         info["probe_full_quality_seconds"] = round(time.time() - t2, 1)
+    tr = CACHE.parent / "ladder_track.json"
+    if tr.exists():
+        (out / "ladder_track.json").write_bytes(tr.read_bytes())
     info["status"] = "rendered"
     (out / f"info_{name}_{a}.json").write_text(json.dumps(info, indent=1))
     print("DONE", json.dumps({k: info[k] for k in ("seconds_per_frame", "build_seconds")}))
 
 
-main()
+if __name__ == "__main__":
+    main()

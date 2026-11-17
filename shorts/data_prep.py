@@ -209,6 +209,56 @@ def dem(name, lat0, lon0, half, px=1000):
     print("dem", name, px, round(min(vals), 1), round(max(vals), 1))
 
 
+COPDEM = "https://copernicus-dem-30m.s3.amazonaws.com/Copernicus_DSM_COG_10_{t}_DEM/Copernicus_DSM_COG_10_{t}_DEM.tif"
+COPDEM_LICENCE = ("Copernicus DEM GLO-30: produced using Copernicus WorldDEM-30 © DLR e.V. 2010-2014 and © Airbus "
+                  "Defence and Space GmbH 2014-2018 provided under COPERNICUS by the European Union and ESA; all rights reserved")
+
+
+def copdem(name, lat0, lon0, half, px=600):
+    """Copernicus DEM GLO-30 (free licence, attribution above) on a px x px local metric grid of 2*half metres
+    around a summit (row 0 = north). Needs numpy + rasterio (runner only). Saved like dem(): raw float32 + json."""
+    import numpy as np
+    import rasterio
+    dlat = half / 110574.0
+    dlon = half / (111320.0 * math.cos(math.radians(lat0)))
+    g = np.linspace(-1, 1, px)
+    lat = lat0 - g[:, None] * dlat + 0 * g[None, :]
+    lon = lon0 + g[None, :] * dlon + 0 * g[:, None]
+    out = np.full((px, px), np.nan, dtype=np.float64)
+    tiles = set()
+    for la in np.unique(np.floor(lat)):
+        for lo in np.unique(np.floor(lon)):
+            tiles.add((int(la), int(lo)))
+    urls = []
+    for la, lo in sorted(tiles):
+        t = f"{'N' if la >= 0 else 'S'}{abs(la):02d}_00_{'E' if lo >= 0 else 'W'}{abs(lo):03d}_00"
+        url = COPDEM.format(t=t)
+        urls.append(url)
+        raw = fetch(url, timeout=300)
+        with rasterio.MemoryFile(raw) as mf, mf.open() as ds:
+            z = ds.read(1).astype(np.float64)
+            inv = ~ds.transform
+            m = (np.floor(lat) == la) & (np.floor(lon) == lo)
+            c, r = inv * (lon[m], lat[m])
+            c = np.clip(c - 0.5, 0, z.shape[1] - 1.001); r = np.clip(r - 0.5, 0, z.shape[0] - 1.001)
+            i, j = r.astype(int), c.astype(int); fr, fc = r - i, c - j
+            out[m] = ((z[i, j] * (1 - fc) + z[i, j + 1] * fc) * (1 - fr)
+                      + (z[i + 1, j] * (1 - fc) + z[i + 1, j + 1] * fc) * fr)
+    out = np.nan_to_num(out, nan=0.0).astype("<f4")
+    p = CACHE / f"dem_{name}.f32"
+    p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_bytes(out.tobytes())
+    # the summit: highest DEM value within 1.5 km of the given point
+    yy, xx = np.meshgrid(g * half, g * half, indexing="ij")
+    near = np.hypot(xx, yy) < 1500
+    k = np.argmax(np.where(near, out, -1e9))
+    (CACHE / f"dem_{name}.json").write_text(json.dumps({
+        "origin": [lat0, lon0], "half_m": half, "px": px, "min": float(out.min()), "max": float(out.max()),
+        "summit_m": float(out.flat[k]), "summit_xy": [float(xx.flat[k]), float(-yy.flat[k])], "tiles": urls}))
+    record(p, urls[0], COPDEM_LICENCE, "https://spacedata.copernicus.eu/collections/copernicus-digital-elevation-model")
+    print("copdem", name, px, "summit", round(float(out.flat[k]), 1))
+
+
 def overpass(q):
     for url in OVERPASS:
         try:
@@ -316,6 +366,8 @@ if __name__ == "__main__":
         dem(sys.argv[2], float(sys.argv[3]), float(sys.argv[4]), float(sys.argv[5]), *(int(a) for a in sys.argv[6:7]))
     elif cmd == "naip":
         naip(sys.argv[2], float(sys.argv[3]), float(sys.argv[4]), float(sys.argv[5]), *(int(a) for a in sys.argv[6:7]))
+    elif cmd == "copdem":
+        copdem(sys.argv[2], float(sys.argv[3]), float(sys.argv[4]), float(sys.argv[5]), *(int(a) for a in sys.argv[6:7]))
     elif cmd == "water":
         water(sys.argv[2], float(sys.argv[3]), float(sys.argv[4]), float(sys.argv[5]), *(int(a) for a in sys.argv[6:7]))
     elif cmd == "textures":

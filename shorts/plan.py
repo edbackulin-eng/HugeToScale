@@ -134,6 +134,71 @@ SHORTS = {
 }
 
 
+# ------------------------------------------------------------------ "size ladder" format (owner 17.11)
+# 15-20 s: first object with its number -> every 2-3 s a taller one appears beside it, the camera pulls back
+# so all fit -> final: the largest + the whole ladder -> rewind into the first frame (seamless loop).
+# Orthographic side view: every object is compared at true scale wherever it stands; a height ruler grows.
+LADDERS = {
+    "ladder_heights": {
+        "steps": [
+            {"key": "saturnv", "name": "SATURN V", "value": "111 m", "h": 110.6, "x": -4460, "y": 0, "t": 0.0,
+             "sources": ["https://www.space.com/saturn-v-rocket-guide-apollo", "https://en.wikipedia.org/wiki/Saturn_V"]},
+            {"key": "pyramid", "name": "GREAT PYRAMID", "value": "139 m", "h": 138.5, "x": -4300, "y": 0, "t": 2.0,
+             "sources": ["https://en.wikipedia.org/wiki/Great_Pyramid_of_Giza",
+                         "https://www.britannica.com/place/Great-Pyramid-of-Giza"]},
+            {"key": "burj", "name": "BURJ KHALIFA", "value": "828 m", "h": 828.0, "x": -4090, "y": 0, "t": 4.6,
+             "sources": ["https://burjkhalifa.ae/en/the-tower/facts-figures",
+                         "https://www.skyscrapercenter.com/building/burj-khalifa/3"]},
+            {"key": "fuji", "name": "MOUNT FUJI", "value": "3,776 m", "h": 3776.0, "x": -2600, "y": 8000, "t": 7.2,
+             "dem": ["fuji", "35.3606", "138.7274", "7000", "560"], "r_in": 3500, "r_out": 6500,
+             "sources": ["https://www.nippon.com/en/japan-data/h01233/ (GSI data)", "https://en.wikipedia.org/wiki/Mount_Fuji"]},
+            {"key": "kili", "name": "KILIMANJARO", "value": "5,895 m", "h": 5895.0, "x": -500, "y": 22000, "t": 9.8,
+             "dem": ["kilimanjaro", "-3.0758", "37.3533", "9500", "620"], "r_in": 5000, "r_out": 9000,
+             "sources": ["https://en.wikipedia.org/wiki/Mount_Kilimanjaro (TANAPA figure)",
+                         "https://worldheritageoutlook.iucn.org/node/1030"]},
+            {"key": "everest", "name": "EVEREST", "value": "8,849 m", "h": 8848.86, "x": 3400, "y": 40000, "t": 12.4,
+             "dem": ["everest", "27.9881", "86.9250", "11500", "720"], "r_in": 6000, "r_out": 11000,
+             "sources": ["https://kathmandupost.com/national/2020/12/08/it-s-official-mount-everest-is-8-848-86-metres-tall",
+                         "https://en.wikipedia.org/wiki/Mount_Everest"]},
+        ],
+        "overview": 15.0,     # the whole ladder, all labelled
+        "rewind": 17.2,       # quick rewind into the first frame
+        "seconds": 18.0,
+        "replaced": {"Olympus Mons (~22 km)": "In a vertical 9:16 frame at true scale it is a 600 km wide, very flat "
+                     "shield: framed for its height it fills the frame as a flat wall, framed whole it is a sliver. "
+                     "Kept for a wide map-format Short (Olympus Mons over a country); Kilimanjaro takes its step."},
+    },
+}
+
+
+def ladder_short(name):
+    L = LADDERS[name]
+    st = L["steps"]
+    caps = []
+    for i, s in enumerate(st):
+        t1 = st[i + 1]["t"] - 0.12 if i + 1 < len(st) else L["overview"] - 0.1
+        caps.append(cap(-1.0 if i == 0 else s["t"] + 0.12, t1, 280, (s["name"], 104, WHITE), (s["value"], 124, YELLOW)))
+    s0 = st[0]
+    caps.append(cap(L["rewind"] + 0.5, 99, 280, (s0["name"], 104, WHITE), (s0["value"], 124, YELLOW)))
+    return {
+        "renderer": "blender", "seconds": L["seconds"], "hold": 0.0, "appear": 0.0, "ladder": name,
+        "data": [["hdri"]] + [["copdem", *s["dem"]] for s in st if "dem" in s],
+        "captions": caps,
+        "music": {"id": "oga-inevitable", "start": 119},
+        "queries": ["size comparison", "mountain size comparison", "everest size comparison", "burj khalifa vs everest"],
+        "titles": ["Size Comparison: 111 m Rocket to 8,849 m Everest",
+                   "Burj Khalifa vs Everest: 828 m Next to 8,849 m",
+                   "Taller and Taller: Saturn V to Everest in 6 Steps"],
+        "facts": [[f"{s['name'].title()}: {s['value']}", s["sources"][0], "second source: " + s["sources"][1]] for s in st],
+        "hashtags": ["#sizecomparison", "#everest", "#burjkhalifa", "#3d", "#scale"],
+        "intro": "Six real things, each taller than the last, side by side at true scale: Saturn V, the Great "
+                 "Pyramid, Burj Khalifa, Mount Fuji, Kilimanjaro and Mount Everest (real elevation data).",
+    }
+
+
+SHORTS["ladder_heights"] = ladder_short("ladder_heights")
+
+
 def frames(short):
     s = SHORTS[short]
     return round((s["seconds"] - s["hold"]) * FPS)   # rendered frames; the hold is the last frame, repeated
