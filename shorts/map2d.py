@@ -5,7 +5,8 @@
 Natural Earth (public domain) outlines; each shape is projected with a Lambert azimuthal equal-area
 projection centred on itself, so area and shape are true, then moved onto the target.
 Areas in captions are the official totals (owner 17.11): Texas 695,662 km² (US Census), France
-(metropolitan) 543,940 km² (Wikidata Q212429; second official source still to confirm).
+(metropolitan) 551,500 km², land + inland waters, UN Demographic Yearbook 2013 table 3 (owner 17.11:
+same basis as the Texas total, which includes water).
 """
 import json
 import math
@@ -118,7 +119,7 @@ def texas_france(t=1.0):
     img.paste(over, (0, 0), over)
     d = ImageDraw.Draw(img)
     tx_km, tx_mi = 695662, 268596  # US Census Bureau, total area (official sq mi figure, not a conversion)
-    fr_km = 543940
+    fr_km = 551500  # UN Demographic Yearbook 2013, table 3: land area + inland waters
     fr_mi = round(fr_km / KM2_PER_SQMI)
     if t >= 1.0:
         text(d, (W / 2, 250), "TEXAS", 120, (255, 214, 10))
@@ -127,6 +128,8 @@ def texas_france(t=1.0):
         text(d, (W / 2, 1425), f"{fr_km:,} km²  ·  {fr_mi:,} sq mi", 46)
     out = img.resize((W, H), Image.LANCZOS)
     return out, {"texas_km2": tx_km, "texas_sqmi": tx_mi, "france_km2": fr_km,
+                 "sources": {"texas": "US Census Bureau, total area 695,662 km² (268,596 sq mi)",
+                             "france": "UN Demographic Yearbook 2013, table 3 (land + inland waters), https://unstats.un.org/UNSD/demographic/products/dyb/dyb2013/Table03.pdf"},
                  "france_sqmi": fr_mi,
                  "outline_area_km2": {"texas_ne10m": round(sum(area(r) for r in tx_rings) / 1e6),
                                       "france_ne50m": round(sum(area(r) for r in fr_rings) / 1e6)}}

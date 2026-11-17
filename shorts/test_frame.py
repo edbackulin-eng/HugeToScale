@@ -250,7 +250,7 @@ def titanic_aerial(preview):
     t.interpolation = "Linear"
     # grade the photo itself: lighter, more saturated, not grey
     hs = nt.nodes.new("ShaderNodeHueSaturation")
-    hs.inputs["Saturation"].default_value = 1.25
+    hs.inputs["Saturation"].default_value = 1.4
     hs.inputs["Value"].default_value = 1.18
     bc = nt.nodes.new("ShaderNodeBrightContrast")
     bc.inputs["Bright"].default_value = 0.04
@@ -270,13 +270,14 @@ def titanic_aerial(preview):
     ship.rotation_euler.z = math.atan2(d.y, d.x)
     ship.location = (0, 0, 0)
     # the photo's own shadows fall to the north-west: the sun stands in the south-east
-    sun(58, float(os.environ.get("SUN_AZ", 150)), strength=4.5)
+    sun(float(os.environ.get("SUN_EL", 22)), float(os.environ.get("SUN_AZ", 140)), strength=5.0)  # low morning sun
     contact_shadow(ship, O.L + 24, O.B + 18)
     # almost straight down, like the photo itself, so its leaning towers are not seen from the side
-    cam = Vector((0, 0, 330)) - d * 70
-    co = camera(cam, Vector((0, 0, 0)), lens=30, fstop=16, focus=330)
-    # straight down with a 4 degree forward tilt; the frame's long side runs along the ship (bow up)
-    co.rotation_euler = (math.radians(12), 0, math.atan2(-d.x, d.y))
+    # 3/4 view from the sunlit side, 32 degrees off vertical: side, red bottom and funnels all show
+    n = Vector((d.y, -d.x, 0))
+    off = 300 * math.tan(math.radians(32))
+    cam = Vector((0, 0, 300)) + (n * 0.5 - d * 0.87).normalized() * off
+    camera(cam, Vector((0, 0, 8)), lens=30, fstop=16, focus=350)
     veil(0.04)
     return {"aerial": "USGS NAIP Plus orthoimagery, public domain", "bearing_deg": bearing}
 
@@ -404,8 +405,8 @@ def titanic_pitch(preview):
 def saturnv_pyramid(preview):
     """Saturn V (110.6 m) beside the Great Pyramid (138.5 m now, base 230.3 m) in the desert."""
     sunny_world(strength=1.5, rot=float(os.environ.get("HDRI_ROT", 0)))
-    sand = pbr("sand", "aerial_sand", 6.0, bump=0.4, tint=(1.0, 0.78, 0.52))
-    stone = pbr("limestone blocks", "large_sandstone_blocks", 3.2, bump=1.0, tint=(1.0, 0.80, 0.52),
+    sand = pbr("sand", "aerial_sand", 22.0, bump=0.4, tint=(1.0, 0.78, 0.52))  # large scale: no visible tiling at long lens
+    stone = pbr("limestone blocks", "large_sandstone_blocks", 5.0, bump=0.8, tint=(1.0, 0.80, 0.52),
                 disp=0.45, sand_tid="aerial_sand", sand_height=7.0)
     plane("desert", 20000, sand)
     dunes = plane("dunes", 3000, sand, loc=(0, 0, -0.6))
@@ -425,10 +426,10 @@ def saturnv_pyramid(preview):
     ps.render_levels = 8
     check("Great Pyramid height (present)", O.world_bounds(pyr)[2][1], 138.5)
     check("Great Pyramid base side", O.world_bounds(pyr)[0][1] - O.world_bounds(pyr)[0][0], 230.3)
-    sv = BM.saturn_v(150, -95)
+    sv = BM.saturn_v(128, 0)  # same depth as the apex, so perspective does not cheat the comparison
     check("Saturn V height", O.world_bounds(sv)[2][1] - O.world_bounds(sv)[2][0], 110.6)
-    cam = Vector((260, -340, 1.8))
-    camera(cam, Vector((70, -40, 95)), lens=24, fstop=11)
+    cam = Vector((64, -420, 70))  # drone height, long lens: apex and rocket equally far, a fair comparison
+    camera(cam, Vector((64, 0, 56)), lens=50, fstop=11)
     haze(400, 5000, colour=(0.78, 0.86, 0.98), amount=0.25)
     return {"pyramid": "present height 138.5 m, base 230.3 m"}
 

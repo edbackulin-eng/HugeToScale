@@ -200,12 +200,29 @@ def titanic():
         return box(name, ((x0 + x1) / 2, 0, z0 + h / 2), (x1 - x0, 2 * hb, h), white, bevel=0.15)
 
     zc = _deck(0)
+    _planks(wood)
+    roof = mat("ti_roof", (0.80, 0.80, 0.77), 0.5, bump=0.1)
     parts += [deckhouse("B deck", -95, 66, zc, 3.0, 0.3),
               deckhouse("A deck", -86, 60, zc + 3.0, 3.0, 0.6),
-              deckhouse("boat deck house", -78, 52, zc + 6.0, 2.8, 5.5),
               deckhouse("bridge", 46, 54, zc + 6.0, 2.6, 2.0)]
-    # wooden decks on top of the houses and the well decks
-    parts.append(box("boat deck", (-13, 0, zc + 6.02), (138, B - 1.6, 0.05), wood))
+    # boat deck: pine planking, with separate white deckhouses between the funnels (gaps show the deck)
+    parts.append(box("boat deck", (-13, 0, zc + 6.02), (146, B - 1.4, 0.06), wood))
+    for k, (x0, x1) in enumerate(((40, 46), (18, 32), (-6, 8), (-30, -17), (-60, -42), (-77, -64))):
+        h = deckhouse(f"boat deckhouse {k}", x0, x1, zc + 6.0, 2.8, 6.5)
+        parts.append(h)
+        parts.append(box("deckhouse roof", ((x0 + x1) / 2, 0, zc + 8.85), (x1 - x0 - 0.6, B - 13.6, 0.08), roof))
+    # first-class grand staircase skylight (glass dome) and the forward/aft cargo cranes
+    parts.append(cylinder("skylight", (27.0, 0, zc + 8.8), 3.0, 1.4, mat("ti_glass", (0.45, 0.55, 0.6), 0.1, 0.3), n=24, r2=1.2))
+    crane = mat("ti_crane", (0.85, 0.85, 0.82), 0.5)
+    for x in (110.0, 100.0, -108.0, -118.0):
+        for side in (1, -1):
+            parts.append(box("crane post", (x, side * 4.5, _deck(x) + 2.5), (0.8, 0.8, 5.0), crane))
+            c = box("crane jib", (x + 2.0, side * 4.5, _deck(x) + 5.2), (6.0, 0.4, 0.4), crane)
+            c.rotation_euler.y = math.radians(-18)
+            parts.append(c)
+    # hatch covers on the fore and aft decks
+    for x in (118.0, 104.0, 86.0, -104.0, -118.0):
+        parts.append(box("hatch", (x, 0, _deck(x) + 0.35), (5.5, 7.0, 0.7), mat("ti_hatch", (0.30, 0.22, 0.14), 0.7)))
     # lifeboats along the boat deck, 8 per side
     for side in (1, -1):
         for k in range(8):
@@ -222,9 +239,40 @@ def titanic():
             o.rotation_euler.y = math.radians(-2.5)
         parts += [f, top]
     # masts and rigging lines (thin), cranes omitted
+    mast_m = mat("ti_mast", (0.75, 0.62, 0.42), 0.6)
     for x, top in ((96.0, 62.0), (-96.0, 60.0)):
-        parts.append(cylinder("mast", (x, 0, _deck(x)), 0.45, top - _deck(x), mat("ti_mast", (0.75, 0.62, 0.42), 0.6), n=12, r2=0.2))
+        parts.append(cylinder("mast", (x, 0, _deck(x)), 0.45, top - _deck(x), mast_m, n=12, r2=0.2))
+    # wireless aerial strung between the mast heads
+    span = 96.0 * 2
+    w = cylinder("aerial wire", (0, 0, 0), 0.06, span, mat("ti_wire", (0.1, 0.1, 0.1), 0.5), n=6)
+    w.rotation_euler.y = -math.pi / 2
+    w.location = (96.0, 0, 61.0)
+    parts.append(w)
     return root("RMS Titanic", parts)
+
+
+def _planks(m):
+    """Turn a plain wood material into deck planking (bands along the ship, light seams)."""
+    nt = m.node_tree
+    b = nt.nodes["Principled BSDF"]
+    if any(n.type == "TEX_WAVE" for n in nt.nodes):
+        return
+    tc = nt.nodes.new("ShaderNodeTexCoord")
+    wv = nt.nodes.new("ShaderNodeTexWave")
+    wv.wave_type = "BANDS"; wv.bands_direction = "Y"; wv.wave_profile = "SAW"
+    wv.inputs["Scale"].default_value = 0.0  # set below via mapping
+    mp = nt.nodes.new("ShaderNodeMapping")
+    mp.inputs["Scale"].default_value = (1.0, 1 / 0.14, 1.0)  # 14 cm planks
+    nt.links.new(tc.outputs["Object"], mp.inputs["Vector"])
+    wv.inputs["Scale"].default_value = 1.0
+    nt.links.new(mp.outputs["Vector"], wv.inputs["Vector"])
+    seam = nt.nodes.new("ShaderNodeMath"); seam.operation = "GREATER_THAN"; seam.inputs[1].default_value = 0.93
+    nt.links.new(wv.outputs["Fac"], seam.inputs[0])
+    mix = nt.nodes.new("ShaderNodeMix"); mix.data_type = "RGBA"
+    mix.inputs["A"].default_value = (0.72, 0.55, 0.36, 1)
+    mix.inputs["B"].default_value = (0.35, 0.26, 0.18, 1)
+    nt.links.new(seam.outputs[0], mix.inputs["Factor"])
+    nt.links.new(mix.outputs["Result"], b.inputs["Base Color"])
 
 
 # ---------------------------------------------------------------------------------- Elizabeth Tower
