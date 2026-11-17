@@ -159,12 +159,22 @@ def nasa(folder):
     print("nasa", p.name, p.stat().st_size)
 
 
+def mercator_bbox(lat0, lon0, half):
+    """Square of 2*half GROUND metres as a Web Mercator (EPSG:3857) bbox.
+    A degree bbox (EPSG:4326) is not square in degrees, and the image server widens it to square degree
+    pixels: the result is squeezed north-south by cos(latitude) (found 17.11 by the crater size check).
+    In Web Mercator, ground metres scale by 1/cos(lat), so a square bbox gives square ground pixels."""
+    Rm = 6378137.0
+    x = Rm * math.radians(lon0)
+    y = Rm * math.log(math.tan(math.pi / 4 + math.radians(lat0) / 2))
+    hm = half / math.cos(math.radians(lat0))
+    return f"{x - hm},{y - hm},{x + hm},{y + hm}"
+
+
 def naip(name, lat0, lon0, half, px=3000):
     """USGS NAIP Plus orthoimagery (public domain), a square of 2*half metres around a point."""
-    dlat = half / 110574.0
-    dlon = half / (111320.0 * math.cos(math.radians(lat0)))
-    q = urllib.parse.urlencode({"bbox": f"{lon0 - dlon},{lat0 - dlat},{lon0 + dlon},{lat0 + dlat}", "bboxSR": 4326,
-                                "imageSR": 4326, "size": f"{px},{px}", "format": "jpg", "compressionQuality": 92,
+    q = urllib.parse.urlencode({"bbox": mercator_bbox(lat0, lon0, half), "bboxSR": 3857,
+                                "imageSR": 3857, "size": f"{px},{px}", "format": "jpg", "compressionQuality": 92,
                                 "f": "image"})
     url = "https://imagery.nationalmap.gov/arcgis/rest/services/USGSNAIPPlus/ImageServer/exportImage?" + q
     p = CACHE / f"naip_{name}.jpg"
@@ -174,6 +184,29 @@ def naip(name, lat0, lon0, half, px=3000):
     record(p, url.split("?")[0], "public domain (USGS / USDA, The National Map: Orthoimagery)",
            "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits")
     print("naip", name, p.stat().st_size)
+
+
+def dem(name, lat0, lon0, half, px=1000):
+    """USGS 3DEP elevation (public domain), float32 metres on a px x px grid over 2*half metres.
+    Saved as raw little-endian float32 (row 0 = north) + json, so Blender reads it without extra packages."""
+    import array
+    import io
+
+    from PIL import Image
+    q = urllib.parse.urlencode({"bbox": mercator_bbox(lat0, lon0, half), "bboxSR": 3857,
+                                "imageSR": 3857, "size": f"{px},{px}", "format": "tiff", "pixelType": "F32",
+                                "interpolation": "RSP_BilinearInterpolation", "f": "image"})
+    url = "https://elevation.nationalmap.gov/arcgis/rest/services/3DEPElevation/ImageServer/exportImage?" + q
+    im = Image.open(io.BytesIO(fetch(url, timeout=300)))
+    vals = array.array("f", (float(v) for v in im.getdata()))
+    p = CACHE / f"dem_{name}.f32"
+    p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_bytes(vals.tobytes())
+    (CACHE / f"dem_{name}.json").write_text(json.dumps({"origin": [lat0, lon0], "half_m": half, "px": px,
+                                                        "min": min(vals), "max": max(vals)}))
+    record(p, url.split("?")[0], "public domain (USGS 3D Elevation Program)",
+           "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits")
+    print("dem", name, px, round(min(vals), 1), round(max(vals), 1))
 
 
 def textures(*ids, res="2k"):
@@ -200,6 +233,8 @@ if __name__ == "__main__":
         osm(sys.argv[2], float(sys.argv[3]), float(sys.argv[4]), float(sys.argv[5]))
     elif cmd == "borders":
         borders()
+    elif cmd == "dem":
+        dem(sys.argv[2], float(sys.argv[3]), float(sys.argv[4]), float(sys.argv[5]), *(int(a) for a in sys.argv[6:7]))
     elif cmd == "naip":
         naip(sys.argv[2], float(sys.argv[3]), float(sys.argv[4]), float(sys.argv[5]), *(int(a) for a in sys.argv[6:7]))
     elif cmd == "textures":

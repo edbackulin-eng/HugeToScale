@@ -6,7 +6,7 @@ on:
     inputs:
       scenes:
         description: "comma-separated scenes"
-        default: "titanic_aerial,titanic_pitch,saturnv_pyramid,texas_france"
+        default: "crater_manhattan,saturnv_pyramid,texas_france"
 permissions:
   contents: read
 jobs:
@@ -57,6 +57,7 @@ jobs:
           case "${{ matrix.scene }}" in
             titanic_aerial)  python shorts/data_prep.py hdri && python shorts/data_prep.py naip times_square 40.7577 -73.9857 700 2200 ;;
             titanic_pitch)   python shorts/data_prep.py hdri ;;
+            crater_manhattan) python shorts/data_prep.py hdri && python shorts/data_prep.py dem meteor_crater 35.0275 -111.0225 1300 1000                                && python shorts/data_prep.py naip meteor_crater 35.0275 -111.0225 1300 2600                                && python shorts/data_prep.py naip manhattan 40.7577 -73.9857 1500 3000                                && python shorts/data_prep.py naip manhattan_wide 40.7577 -73.9857 6000 3000 ;;
             saturnv_pyramid) python shorts/data_prep.py hdri && python shorts/data_prep.py textures large_sandstone_blocks aerial_sand ;;
             texas_france)    python shorts/data_prep.py borders ;;
           esac

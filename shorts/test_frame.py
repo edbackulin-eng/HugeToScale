@@ -163,17 +163,62 @@ def pbr(name, tid, scale, bump=0.6, tint=None, disp=0.0, sand_tid=None, sand_hei
     mp = nt.nodes.new("ShaderNodeMapping")
     mp.inputs["Scale"].default_value = (1 / scale, 1 / scale, 1 / scale)
     nt.links.new(tc.outputs["Object"], mp.inputs["Vector"])
+    # anti-tiling: warp the texture space with low-frequency noise so repeats never line up
+    warp_n = nt.nodes.new("ShaderNodeTexNoise")
+    warp_n.inputs["Scale"].default_value = 0.35
+    warp_n.inputs["Detail"].default_value = 1.0
+    nt.links.new(mp.outputs["Vector"], warp_n.inputs["Vector"])
+    centre = nt.nodes.new("ShaderNodeVectorMath"); centre.operation = "SUBTRACT"
+    centre.inputs[1].default_value = (0.5, 0.5, 0.5)
+    nt.links.new(warp_n.outputs["Color"], centre.inputs[0])
+    amt = nt.nodes.new("ShaderNodeVectorMath"); amt.operation = "SCALE"
+    amt.inputs["Scale"].default_value = 0.22
+    nt.links.new(centre.outputs[0], amt.inputs[0])
+    warped = nt.nodes.new("ShaderNodeVectorMath"); warped.operation = "ADD"
+    nt.links.new(mp.outputs["Vector"], warped.inputs[0])
+    nt.links.new(amt.outputs[0], warped.inputs[1])
+    vec = warped.outputs[0]
 
-    def img(kind, colour):
+    def img(kind, colour, vector=None):
         t = nt.nodes.new("ShaderNodeTexImage")
         t.image = bpy.data.images.load(str(TEX / f"{tid}_{kind}_2k.jpg"))
         t.image.colorspace_settings.name = "sRGB" if colour else "Non-Color"
         t.projection = "BOX"
         t.projection_blend = 0.25
-        nt.links.new(mp.outputs["Vector"], t.inputs["Vector"])
+        nt.links.new(vector or vec, t.inputs["Vector"])
         return t
 
-    d = img("diff", True)
+    d1 = img("diff", True)
+    # a second sample, rotated and rescaled, blended in by a large soft mask: breaks the remaining repeats
+    rot = nt.nodes.new("ShaderNodeMapping")
+    rot.inputs["Rotation"].default_value = (0, 0, 0.65)
+    rot.inputs["Scale"].default_value = (0.71, 0.71, 0.71)
+    rot.inputs["Location"].default_value = (0.37, 0.11, 0.0)
+    nt.links.new(vec, rot.inputs["Vector"])
+    d2 = img("diff", True, rot.outputs["Vector"])
+    mask_n = nt.nodes.new("ShaderNodeTexNoise")
+    mask_n.inputs["Scale"].default_value = 0.12
+    nt.links.new(mp.outputs["Vector"], mask_n.inputs["Vector"])
+    ramp = nt.nodes.new("ShaderNodeMapRange")
+    ramp.inputs["From Min"].default_value = 0.42
+    ramp.inputs["From Max"].default_value = 0.58
+    nt.links.new(mask_n.outputs["Fac"], ramp.inputs["Value"])
+    dmix = nt.nodes.new("ShaderNodeMix"); dmix.data_type = "RGBA"
+    nt.links.new(ramp.outputs[0], dmix.inputs["Factor"])
+    nt.links.new(d1.outputs["Color"], dmix.inputs["A"])
+    nt.links.new(d2.outputs["Color"], dmix.inputs["B"])
+    # broad tonal variation (weathering, wind-blown dust)
+    tone_n = nt.nodes.new("ShaderNodeTexNoise")
+    tone_n.inputs["Scale"].default_value = 0.05
+    nt.links.new(mp.outputs["Vector"], tone_n.inputs["Vector"])
+    tone = nt.nodes.new("ShaderNodeMix"); tone.data_type = "RGBA"; tone.blend_type = "OVERLAY"
+    tone.inputs["Factor"].default_value = 0.35
+    nt.links.new(dmix.outputs["Result"], tone.inputs["A"])
+    nt.links.new(tone_n.outputs["Color"], tone.inputs["B"])
+
+    class _D:  # keep the rest of the function unchanged: d.outputs["Color"] is the blended colour
+        outputs = {"Color": tone.outputs["Result"]}
+    d = _D()
     if tint:
         mixc = nt.nodes.new("ShaderNodeMix"); mixc.data_type = "RGBA"; mixc.blend_type = "MULTIPLY"
         mixc.inputs["Factor"].default_value = 1.0
@@ -434,7 +479,158 @@ def saturnv_pyramid(preview):
     return {"pyramid": "present height 138.5 m, base 230.3 m"}
 
 
-SCENES = {"titanic_aerial": titanic_aerial, "titanic_pitch": titanic_pitch, "saturnv_pyramid": saturnv_pyramid}
+def crater_manhattan(preview):
+    """Barringer (Meteor) Crater, Arizona, set into Midtown Manhattan at true size.
+    Relief: USGS 3DEP; imagery: USGS NAIP of the crater and of Manhattan (all public domain).
+    One terrain mesh: crater relief and crater photo inside, city photo outside, soft transition at the ejecta."""
+    import array
+    meta = json.loads((CACHE / "dem_meteor_crater.json").read_text())
+    n_px, half_d = meta["px"], meta["half_m"]
+    z = array.array("f")
+    z.frombytes((CACHE / "dem_meteor_crater.f32").read_bytes())
+
+    def h(x, y):  # bilinear sample of the DEM at local metres (x east, y north)
+        u = (x + half_d) / (2 * half_d) * (n_px - 1)
+        v = (half_d - y) / (2 * half_d) * (n_px - 1)
+        u = min(max(u, 0), n_px - 1.001); v = min(max(v, 0), n_px - 1.001)
+        i, j = int(v), int(u); fu, fv = u - j, v - i
+        a = z[i * n_px + j]; b = z[i * n_px + j + 1]
+        c = z[(i + 1) * n_px + j]; d = z[(i + 1) * n_px + j + 1]
+        return (a * (1 - fu) + b * fu) * (1 - fv) + (c * (1 - fu) + d * fu) * fv
+
+    # level of the surrounding plain = median height on a ring well outside the rim
+    ring = sorted(h(r * math.cos(t), r * math.sin(t)) for r in (1000, 1150, 1250) for t in
+                  [k * math.pi / 36 for k in range(72)])
+    plain = ring[len(ring) // 2]
+    floor_z = min(z) - plain
+    rims = []
+    for k in range(72):
+        t = k * math.pi / 36
+        best = max(((h(r * math.cos(t), r * math.sin(t)), r) for r in range(400, 800, 5)))
+        rims.append(best)
+    rim_h = sum(v for v, _ in rims) / len(rims) - plain
+    diameter = 2 * sum(r for _, r in rims) / len(rims)
+    check("Barringer Crater rim-crest diameter (3DEP) vs 1186 m", diameter, 1186.0, tol=0.03,
+          note="published ~1.19 km; measured on the DEM rim crest")
+    check("Barringer Crater depth rim to floor (3DEP) vs 170 m", rim_h - floor_z, 170.0, tol=0.08,
+          note="published ~170 m; DEM floor lowest point")
+
+    half = 1500.0
+    N = 340 if preview else 620
+    step = 2 * half / N
+    r_in, r_out = 690.0, 860.0  # crater relief (rim crest ~600 m) fades into the flat city between these radii
+    import bmesh as _bm
+    bm = _bm.new()
+    verts = []
+    for iy in range(N + 1):
+        y = -half + iy * step
+        row = []
+        for ix in range(N + 1):
+            x = -half + ix * step
+            r = math.hypot(x, y)
+            w = 1.0 if r <= r_in else 0.0 if r >= r_out else 0.5 + 0.5 * math.cos(math.pi * (r - r_in) / (r_out - r_in))
+            row.append(bm.verts.new((x, y, (h(x, y) - plain) * w if w else 0.0)))
+        verts.append(row)
+    for iy in range(N):
+        for ix in range(N):
+            bm.faces.new((verts[iy][ix], verts[iy][ix + 1], verts[iy + 1][ix + 1], verts[iy + 1][ix]))
+    me = bpy.data.meshes.new("terrain")
+    bm.to_mesh(me); bm.free()
+    for p in me.polygons:
+        p.use_smooth = True
+    terrain = bpy.data.objects.new("Manhattan with Meteor Crater", me)
+    bpy.context.collection.objects.link(terrain)
+
+    m = bpy.data.materials.new("photos")
+    m.use_nodes = True
+    nt = m.node_tree
+    b = nt.nodes["Principled BSDF"]
+    b.inputs["Roughness"].default_value = 0.92
+    b.inputs["Specular IOR Level"].default_value = 0.15
+    tc = nt.nodes.new("ShaderNodeTexCoord")
+    sep = nt.nodes.new("ShaderNodeSeparateXYZ")
+    nt.links.new(tc.outputs["Object"], sep.inputs[0])
+
+    def photo(name, half_m, sat, val):
+        mp = nt.nodes.new("ShaderNodeMapping")
+        mp.vector_type = "POINT"
+        mp.inputs["Scale"].default_value = (1 / (2 * half_m), 1 / (2 * half_m), 1)
+        mp.inputs["Location"].default_value = (0.5, 0.5, 0)
+        nt.links.new(tc.outputs["Object"], mp.inputs["Vector"])
+        t = nt.nodes.new("ShaderNodeTexImage")
+        t.image = bpy.data.images.load(str(CACHE / f"naip_{name}.jpg"))
+        t.extension = "EXTEND"
+        nt.links.new(mp.outputs["Vector"], t.inputs["Vector"])
+        hs = nt.nodes.new("ShaderNodeHueSaturation")
+        hs.inputs["Saturation"].default_value = sat
+        hs.inputs["Value"].default_value = val
+        nt.links.new(t.outputs["Color"], hs.inputs["Color"])
+        return hs.outputs["Color"]
+
+    city_c = photo("manhattan", half, 1.4, 1.18)
+    crater_c = photo("meteor_crater", half_d, 1.15, 1.05)
+    # photo blend: same radii as the relief, with a ragged noisy edge so no circle shows
+    ln = nt.nodes.new("ShaderNodeVectorMath"); ln.operation = "LENGTH"
+    cx = nt.nodes.new("ShaderNodeCombineXYZ")
+    nt.links.new(sep.outputs[0], cx.inputs[0]); nt.links.new(sep.outputs[1], cx.inputs[1])
+    nt.links.new(cx.outputs[0], ln.inputs[0])
+    nz = nt.nodes.new("ShaderNodeTexNoise"); nz.inputs["Scale"].default_value = 0.004
+    nz.inputs["Detail"].default_value = 6
+    nt.links.new(tc.outputs["Object"], nz.inputs["Vector"])
+    jit = nt.nodes.new("ShaderNodeMath"); jit.operation = "MULTIPLY_ADD"
+    jit.inputs[1].default_value = 160.0; jit.inputs[2].default_value = -80.0
+    nt.links.new(nz.outputs["Fac"], jit.inputs[0])
+    rr = nt.nodes.new("ShaderNodeMath"); rr.operation = "ADD"
+    nt.links.new(ln.outputs["Value"], rr.inputs[0]); nt.links.new(jit.outputs[0], rr.inputs[1])
+    mr = nt.nodes.new("ShaderNodeMapRange")
+    mr.inputs["From Min"].default_value = r_in - 60
+    mr.inputs["From Max"].default_value = r_out - 40
+    mr.interpolation_type = "SMOOTHSTEP"
+    nt.links.new(rr.outputs[0], mr.inputs["Value"])
+    mix = nt.nodes.new("ShaderNodeMix"); mix.data_type = "RGBA"
+    nt.links.new(mr.outputs[0], mix.inputs["Factor"])
+    nt.links.new(crater_c, mix.inputs["A"])
+    nt.links.new(city_c, mix.inputs["B"])
+    nt.links.new(mix.outputs["Result"], b.inputs["Base Color"])
+    terrain.data.materials.append(m)
+    # wider Manhattan around it (lower resolution, 4 m/px) so the frame never shows the edge of the photo
+    wm = bpy.data.materials.new("photo wide")
+    wm.use_nodes = True
+    wn = wm.node_tree
+    wb = wn.nodes["Principled BSDF"]
+    wb.inputs["Roughness"].default_value = 0.92
+    wt = wn.nodes.new("ShaderNodeTexImage")
+    wt.image = bpy.data.images.load(str(CACHE / "naip_manhattan_wide.jpg"))
+    whs = wn.nodes.new("ShaderNodeHueSaturation")
+    whs.inputs["Saturation"].default_value = 1.4
+    whs.inputs["Value"].default_value = 1.18
+    wn.links.new(wt.outputs["Color"], whs.inputs["Color"])
+    wn.links.new(whs.outputs["Color"], wb.inputs["Base Color"])
+    # a frame of four strips around the 3 km terrain, so nothing covers the crater
+    W = 12000.0
+    for cx_, cy_, sx_, sy_ in ((0, (W / 2 + half) / 2, W, W / 2 - half), (0, -(W / 2 + half) / 2, W, W / 2 - half),
+                               ((W / 2 + half) / 2, 0, W / 2 - half, 2 * half), (-(W / 2 + half) / 2, 0, W / 2 - half, 2 * half)):
+        strip = plane("Manhattan wide", 1.0, wm, loc=(cx_, cy_, -0.3))
+        strip.scale = (sx_, sy_, 1)
+        # UVs of the strip must address the 12 km photo at its own place
+        for loop in strip.data.loops:
+            co = strip.data.vertices[loop.vertex_index].co
+            strip.data.uv_layers.active.data[loop.index].uv = ((cx_ + co.x * sx_) / W + 0.5, (cy_ + co.y * sy_) / W + 0.5)
+
+    sunny_world(strength=1.2)
+    sun(38, 125, strength=4.5)  # morning sun from the south-east, as in both photos
+    # drone: 45 degrees off vertical from the south-south-east, crater and Midtown in one frame
+    tgt = Vector((0, 60, -60))
+    cam = Vector((420, -1250, 1150))
+    camera(cam, tgt, lens=22, fstop=16, focus=(cam - tgt).length, clip=30000)
+    haze(900, 6000, colour=(0.76, 0.86, 1.0), amount=0.18)
+    return {"crater": {"diameter_m_dem": round(diameter), "depth_m_dem": round(rim_h - floor_z),
+                       "rim_above_plain_m": round(rim_h), "plain_level_m": round(plain)},
+            "sources": "USGS 3DEP elevation; USGS NAIP orthoimagery of Meteor Crater AZ and Midtown Manhattan (public domain)"}
+
+
+SCENES = {"titanic_aerial": titanic_aerial, "titanic_pitch": titanic_pitch, "saturnv_pyramid": saturnv_pyramid,
+          "crater_manhattan": crater_manhattan}
 
 
 def main():
