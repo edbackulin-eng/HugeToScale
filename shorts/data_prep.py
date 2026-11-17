@@ -209,6 +209,85 @@ def dem(name, lat0, lon0, half, px=1000):
     print("dem", name, px, round(min(vals), 1), round(max(vals), 1))
 
 
+def overpass(q):
+    for url in OVERPASS:
+        try:
+            return json.loads(fetch(url, urllib.parse.urlencode({"data": q}).encode()))
+        except Exception as e:  # noqa: BLE001 — try the mirror
+            print("overpass failed:", url, e)
+    raise SystemExit("Overpass unreachable")
+
+
+def ll_bbox(lat0, lon0, half):
+    dlat = half / 110574.0
+    dlon = half / (111320.0 * math.cos(math.radians(lat0)))
+    return f"{lat0 - dlat},{lon0 - dlon},{lat0 + dlat},{lon0 + dlon}"
+
+
+def water(name, lat0, lon0, half, px=4000):
+    """Water mask (white = water) on the same square as naip(name, ...): OSM coastline (sea, tidal rivers
+    such as the Hudson and East River) + natural=water areas. Needs shapely (runner: pip install shapely).
+    Coastline ways keep land on their LEFT; faces cut out by the coastline are classified by that rule."""
+    from PIL import Image, ImageDraw, ImageFilter
+    from shapely.geometry import LineString, Point, Polygon, box
+    from shapely.ops import linemerge, polygonize, unary_union
+    pad = half * 1.15
+    d = overpass(f"""[out:json][timeout:180];
+(way["natural"="coastline"]({ll_bbox(lat0, lon0, pad)});way["natural"="water"]({ll_bbox(lat0, lon0, pad)});
+ relation["natural"="water"]({ll_bbox(lat0, lon0, pad)}););out geom tags;""")
+
+    def xy(g):
+        return [local_xy(p["lat"], p["lon"], lat0, lon0) for p in g]
+    frame = box(-pad, -pad, pad, pad)
+    coast, areas = [], []
+    for el in d["elements"]:
+        t = el.get("tags", {})
+        if el["type"] == "way" and t.get("natural") == "coastline":
+            coast.append(LineString(xy(el["geometry"])))
+        elif el["type"] == "way" and len(el.get("geometry", [])) >= 4:
+            areas.append(Polygon(xy(el["geometry"])).buffer(0))
+        elif el["type"] == "relation":
+            outer = [LineString(xy(m["geometry"])) for m in el.get("members", []) if m.get("role") == "outer" and "geometry" in m]
+            inner = [LineString(xy(m["geometry"])) for m in el.get("members", []) if m.get("role") == "inner" and "geometry" in m]
+            po = unary_union(list(polygonize(linemerge(outer)))) if outer else None
+            if po is not None and not po.is_empty:
+                pi = unary_union(list(polygonize(linemerge(inner)))) if inner else None
+                areas.append(po.difference(pi) if pi is not None and not pi.is_empty else po)
+    sea = []
+    if coast:
+        merged = linemerge(coast)
+        lines = list(merged.geoms) if hasattr(merged, "geoms") else [merged]
+        cut = unary_union([ln.intersection(frame) for ln in lines] + [frame.boundary])
+        for face in polygonize(cut):
+            p = face.representative_point()
+            ln = min(lines, key=lambda L: L.distance(p))
+            s = ln.project(p)
+            a, b = ln.interpolate(max(s - 2, 0)), ln.interpolate(min(s + 2, ln.length))
+            q = ln.interpolate(s)
+            cross = (b.x - a.x) * (p.y - q.y) - (b.y - a.y) * (p.x - q.x)
+            if cross < 0:  # right of the coastline = water
+                sea.append(face)
+    wat = unary_union(sea + areas).intersection(box(-half, -half, half, half))
+    img = Image.new("L", (px, px), 0)
+    dr = ImageDraw.Draw(img)
+
+    def to_px(c):
+        return [((x + half) / (2 * half) * px, (half - y) / (2 * half) * px) for x, y in c]
+    for g in getattr(wat, "geoms", [wat]):
+        if g.is_empty or g.geom_type != "Polygon":
+            continue
+        dr.polygon(to_px(g.exterior.coords), fill=255)
+        for r in g.interiors:
+            dr.polygon(to_px(r.coords), fill=0)
+    img = img.filter(ImageFilter.GaussianBlur(1.2))
+    p = CACHE / f"water_{name}.png"
+    p.parent.mkdir(parents=True, exist_ok=True)
+    img.save(p)
+    record(p, f"https://www.openstreetmap.org/#map=14/{lat0}/{lon0}", "ODbL 1.0 — © OpenStreetMap contributors",
+           "https://www.openstreetmap.org/copyright")
+    print("water", name, round(wat.area / 4 / half / half * 100, 1), "% of the square")
+
+
 def textures(*ids, res="2k"):
     """Poly Haven CC0 PBR textures: diffuse, normal (GL), roughness."""
     out = ROOT / "assets/textures"
@@ -237,6 +316,8 @@ if __name__ == "__main__":
         dem(sys.argv[2], float(sys.argv[3]), float(sys.argv[4]), float(sys.argv[5]), *(int(a) for a in sys.argv[6:7]))
     elif cmd == "naip":
         naip(sys.argv[2], float(sys.argv[3]), float(sys.argv[4]), float(sys.argv[5]), *(int(a) for a in sys.argv[6:7]))
+    elif cmd == "water":
+        water(sys.argv[2], float(sys.argv[3]), float(sys.argv[4]), float(sys.argv[5]), *(int(a) for a in sys.argv[6:7]))
     elif cmd == "textures":
         textures(*sys.argv[2:])
     elif cmd == "nasa":

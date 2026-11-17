@@ -65,7 +65,7 @@ def text(d, xy, s, size, fill=(255, 255, 255), stroke=(12, 14, 30), anchor="mm")
            stroke_fill=stroke, anchor=anchor)
 
 
-def texas_france(t=1.0):
+def texas_france(t=1.0, scale=1 / 1450.0, labels=True, show_texas=True):
     adm0 = CACHE / "ne_50m_admin_0_countries.geojson"
     adm1 = CACHE / "ne_10m_admin_1_states_provinces.geojson"
     lon0, lat0 = 2.4, 46.6
@@ -76,7 +76,7 @@ def texas_france(t=1.0):
     tx_rings = [r for r in ([laea(lo, la, -99.3, 31.4) for lo, la in p[0]] for p in polys(tx["geometry"]))
                 if area(r) > 1e7]
     cfr, ctx = centroid(fr_rings), centroid(tx_rings)
-    scale = 1 / 1450.0  # px per metre: Texas (~1,240 km wide) fills ~85 % of the width
+    # scale: px per metre; 1/1450: Texas (~1,240 km wide) fills ~85 % of the width
     cx, cy = W / 2, H * 0.47
 
     def px(x, y, dx=0.0, dy=0.0):
@@ -103,7 +103,9 @@ def texas_france(t=1.0):
     for r in fr_rings:
         d.polygon([px(x, y) for x, y in r], fill=(52, 120, 245), outline=(255, 214, 10), width=4 * SS)
     # Texas slides in from the top (t: 0 -> 1) and settles on France with a soft shadow
-    off = (1 - t) * 900e3
+    off = (1 - t) * 1800e3
+    if not show_texas:
+        off = 1e9
     shadow = Image.new("L", img.size, 0)
     sd = ImageDraw.Draw(shadow)
     for r in tx_rings:
@@ -121,7 +123,7 @@ def texas_france(t=1.0):
     tx_km, tx_mi = 695662, 268596  # US Census Bureau, total area (official sq mi figure, not a conversion)
     fr_km = 551500  # UN Demographic Yearbook 2013, table 3: land area + inland waters
     fr_mi = round(fr_km / KM2_PER_SQMI)
-    if t >= 1.0:
+    if labels and t >= 1.0:
         text(d, (W / 2, 250), "TEXAS", 120, (255, 214, 10))
         text(d, (W / 2, 360), f"{tx_km:,} km²  ·  {tx_mi:,} sq mi", 52)
         text(d, (W / 2, 1330), "FRANCE", 96, (255, 255, 255))
@@ -135,7 +137,35 @@ def texas_france(t=1.0):
                                       "france_ne50m": round(sum(area(r) for r in fr_rings) / 1e6)}}
 
 
-if __name__ == "__main__":
+def ease_in_out(x):
+    x = min(1.0, max(0.0, x))
+    return x * x * (3 - 2 * x)
+
+
+def anim(outdir, a, b, step=1):
+    """Frames of the Texas-on-France Short (timeline in plan.py; captions are added by compose.py).
+    0-1.2 s France alone, 1.2-1.9 s Texas drops in (accelerating), then a slow pull-back to the final framing."""
+    import plan as P
+    s = P.SHORTS["texas_france"]
+    t_a, t_land = s["appear"], s["appear"] + 0.7
+    t_end = s["seconds"] - s["hold"]
+    outdir = Path(outdir)
+    outdir.mkdir(parents=True, exist_ok=True)
+    t0 = time.time()
+    n = 0
+    for f in range(a, b + 1, step):
+        t = (f - 1) / P.FPS
+        zoom = 1 / 1120.0 + (1 / 1450.0 - 1 / 1120.0) * ease_in_out(t / (t_end - 0.6))
+        drop = 0.0 if t < t_a else min(1.0, ((t - t_a) / (t_land - t_a)) ** 2)
+        img, _ = texas_france(drop, scale=zoom, labels=False, show_texas=t >= t_a)
+        img.save(outdir / f"f{f:04d}.png")
+        n += 1
+    print("map frames", n, round((time.time() - t0) / max(n, 1), 2), "s/frame")
+
+
+if __name__ == "__main__" and sys.argv[1] == "anim":
+    anim(sys.argv[2], int(sys.argv[3]), int(sys.argv[4]), int(sys.argv[5]) if len(sys.argv) > 5 else 1)
+elif __name__ == "__main__":
     name, out = sys.argv[1], Path(sys.argv[2])
     t = float(sys.argv[sys.argv.index("--t") + 1]) if "--t" in sys.argv else 1.0
     t0 = time.time()

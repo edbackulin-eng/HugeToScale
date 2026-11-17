@@ -1,0 +1,144 @@
+name: trial-shorts
+# Owner's trial stage: full trial Shorts rendered on runners. Manual only (workflow_dispatch) — nothing is
+# scheduled and nothing is uploaded to YouTube from here.
+on:
+  workflow_dispatch:
+    inputs:
+      shorts:
+        description: "comma-separated Shorts"
+        default: "crater_manhattan,saturnv_pyramid,texas_france"
+      mode:
+        description: "preview (low-res, every 3rd frame) or full"
+        default: "preview"
+      chunks:
+        description: "render jobs per 3D Short (full mode)"
+        default: "4"
+permissions:
+  contents: read
+jobs:
+  plan:
+    runs-on: ubuntu-24.04
+    outputs:
+      matrix: ${{ steps.m.outputs.matrix }}
+      shorts: ${{ steps.m.outputs.shorts }}
+    steps:
+      - uses: actions/checkout@v5
+      - id: m
+        run: |
+          echo "matrix=$(python3 shorts/plan.py matrix '${{ inputs.shorts }}' '${{ inputs.mode }}' '${{ inputs.chunks }}')" >> "$GITHUB_OUTPUT"
+          echo "shorts=$(echo '${{ inputs.shorts }}' | python3 -c 'import sys,json;print(json.dumps([x.strip() for x in sys.stdin.read().split(",") if x.strip()]))')" >> "$GITHUB_OUTPUT"
+
+  data:
+    needs: plan
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      matrix:
+        short: ${{ fromJson(needs.plan.outputs.shorts) }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+      - run: pip install --quiet pillow shapely
+      - run: python shorts/plan.py data ${{ matrix.short }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: data-${{ matrix.short }}
+          path: |
+            data/cache/
+            assets/hdri/
+            assets/textures/
+          retention-days: 7
+
+  render:
+    needs: [plan, data]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 345
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJson(needs.plan.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+      - run: pip install --quiet pillow
+      - uses: actions/download-artifact@v4
+        with:
+          name: data-${{ matrix.short }}
+          path: .
+      - id: blender_cache
+        if: matrix.renderer == 'blender'
+        uses: actions/cache@v4
+        with:
+          path: tools/blender
+          key: blender-4.2.3-linux
+      - if: matrix.renderer == 'blender' && steps.blender_cache.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p tools && cd tools
+          SUM=3a64efd1982465395abab4259b4091d5c8c56054c7267e9633e4f702a71ea3f4
+          for u in https://download.blender.org/release https://mirror.clarkson.edu/blender/release \
+                   https://ftp.nluug.nl/pub/graphics/blender/release https://mirrors.ocf.berkeley.edu/blender/release; do
+            curl -sSfL --retry 2 -o b.tar.xz "$u/Blender4.2/blender-4.2.3-linux-x64.tar.xz" \
+              && echo "$SUM  b.tar.xz" | sha256sum -c && break
+            rm -f b.tar.xz
+          done
+          test -f b.tar.xz
+          tar -xf b.tar.xz && rm b.tar.xz && mv blender-4.2.3-linux-x64 blender
+      - name: render frames ${{ matrix.start }}-${{ matrix.end }}
+        run: |
+          OUT="$PWD/out/${{ matrix.short }}/c${{ matrix.chunk }}"
+          if [ "${{ inputs.mode }}" = preview ]; then STEP=3; PV="--preview --step 3 --probe ${{ matrix.end }}"; else STEP=1; PV=""; fi
+          if [ "${{ matrix.renderer }}" = map2d ]; then
+            python shorts/map2d.py anim "$OUT" ${{ matrix.start }} ${{ matrix.end }} $STEP
+          else
+            tools/blender/blender -b --factory-startup -P shorts/animate.py -- ${{ matrix.short }} "$OUT" \
+              ${{ matrix.start }} ${{ matrix.end }} $PV 2>&1 | grep -vE "^(Fra:|Read |TBB)| Synchronizing| Updating" | tail -60
+          fi
+          ls "$OUT" | wc -l
+          cat "$OUT"/info_*.json 2>/dev/null | head -60 || true
+          test -n "$(ls "$OUT"/f*.png)"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: chunk-${{ matrix.short }}-${{ matrix.chunk }}
+          path: out/
+          retention-days: 7
+
+  compose:
+    needs: [plan, render]
+    if: always() && needs.render.result != 'cancelled'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      matrix:
+        short: ${{ fromJson(needs.plan.outputs.shorts) }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+      - run: |
+          pip install --quiet pillow
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg > /dev/null
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: chunk-${{ matrix.short }}-*
+          path: chunks
+          merge-multiple: true
+      - uses: actions/download-artifact@v4
+        with:
+          name: data-${{ matrix.short }}
+          path: .
+      - run: |
+          if [ "${{ inputs.mode }}" = preview ]; then PV="--preview 3"; else PV=""; fi
+          python shorts/compose.py ${{ matrix.short }} chunks/${{ matrix.short }} final $PV
+          rm -rf final/work/seq final/work/cap
+          mkdir -p final/probe && cp chunks/${{ matrix.short }}/*/probe_*.png final/probe/ 2>/dev/null || true
+      - uses: actions/upload-artifact@v4
+        with:
+          name: short-${{ matrix.short }}-${{ inputs.mode }}
+          path: final/
+          retention-days: 14

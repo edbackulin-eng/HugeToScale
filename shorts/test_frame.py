@@ -674,4 +674,5 @@ def main():
     print("RENDER", name, round(secs, 1), "s")
 
 
-main()
+if __name__ == "__main__":
+    main()
