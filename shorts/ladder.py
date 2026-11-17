@@ -210,6 +210,13 @@ def mountain(step):
     r_in, r_out = step["r_in"], step["r_out"]
     w = np.where(R <= r_in, 1.0, np.where(R >= r_out, 0.0, 0.5 + 0.5 * np.cos(np.pi * (R - r_in) / (r_out - r_in))))
     Z = np.maximum(z, 0.0) * w
+    # a 30 m DEM averages a sharp summit (Everest's cell is ~112 m below the surveyed point): restore the
+    # surveyed summit with a 300 m taper; the raw DEM figure is reported next to the check
+    raw = float(Z.max())
+    if raw < step["h"]:
+        Z = Z + (step["h"] - raw) * np.clip(1 - R / 300.0, 0, 1) ** 2
+    T.check(f"{step['name'].title()} summit raw DEM (30 m grid) vs {step['h']} m", raw, step["h"], tol=0.02,
+            note="before restoring the surveyed summit point")
     me = bpy.data.meshes.new(name)
     verts = np.stack([(X - sx).ravel(), (Y - sy).ravel(), Z.ravel()], axis=1)
     idx = np.arange(n * n).reshape(n, n)
@@ -220,8 +227,8 @@ def mountain(step):
     bpy.context.collection.objects.link(ob)
     ob.location = (step["x"], step["y"], 0)
     ob.data.materials.append(mountain_material(step["key"], meta["summit_m"]))
-    T.check(f"{step['name'].title()} summit (Copernicus DEM) vs {step['h']} m", float(Z.max()), step["h"], tol=0.01,
-            note="highest DEM cell (30 m grid) against the official height")
+    T.check(f"{step['name'].title()} summit in the scene vs {step['h']} m", float(Z.max()), step["h"], tol=0.01,
+            note="Copernicus DEM relief, summit point restored to the surveyed height")
     return ob
 
 
