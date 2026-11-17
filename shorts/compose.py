@@ -92,7 +92,7 @@ def caption_frames(short, total, outdir):
 
 
 def music(short, dst):
-    m = P.SHORTS[short]["music"]
+    m = P.track(short)
     req = urllib.request.Request(m["url"], headers={"User-Agent": "HugeToScale-build/0.1"})
     dst.write_bytes(urllib.request.urlopen(req, timeout=120).read())
     return m
@@ -100,7 +100,7 @@ def music(short, dst):
 
 def build_text(short, fetched):
     s = P.SHORTS[short]
-    m = s["music"]
+    m = P.track(short)
     lines = [s["intro"], "", "Facts:"]
     for fact, url, note in s["facts"]:
         lines.append(f"- {fact}" + (f" ({note})" if note else "") + (f" — {url}" if url else ""))
@@ -148,7 +148,7 @@ def main():
     vf = (f"[0:v]scale={W}:{H}:flags=lanczos,fps={P.FPS},{G.GRADE},"
           f"tpad=stop_mode=clone:stop_duration={hold:.3f},trim=duration={s['seconds']}[v];"
           f"[v][1:v]overlay=0:0:format=auto,format=yuv420p[vo];"
-          f"[2:a]atrim=0:{s['seconds']},afade=t=in:d=0.25,afade=t=out:st={s['seconds'] - 1.8}:d=1.8,"
+          f"[2:a]atrim=start={track['start']}:duration={s['seconds']},asetpts=PTS-STARTPTS,afade=t=in:d=0.6,afade=t=out:st={s['seconds'] - 1.8}:d=1.8,"
           f"loudnorm=I=-15:TP=-1.5:LRA=11,aresample=48000[ao]")
     cmd = ["ffmpeg", "-v", "error", "-y", "-framerate", str(P.FPS / step), "-i", str(seq / "s%04d.png"),
            "-framerate", str(P.FPS), "-i", str(work / "cap/c%04d.png"), "-i", str(work / "music.mp3"),
@@ -172,7 +172,7 @@ def main():
     infos = [json.loads(p.read_text()) for p in chunks.glob("**/info_*.json")]
     sources = {
         "short": short, "data": fetched,
-        "music": {**track, "checked_on_page": "CC0 deed linked on the Freesound page", "list": P.MUSIC_LIST},
+        "music": {**track, "registry": P.MUSIC_LIST},
         "font": {"name": "Anton", "licence": "SIL Open Font License 1.1", "file": "assets/fonts/Anton-OFL.txt"},
         "facts": [{"fact": a, "url": b, "note": c} for a, b, c in s["facts"]],
         "size_checks": infos[0]["checks"] if infos else [],

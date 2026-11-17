@@ -9,11 +9,21 @@ Structure of every Short (owner spec): 1-2 s familiar place -> the object appear
 import json
 import subprocess
 import sys
+from pathlib import Path
 
 FPS = 24
 YELLOW = (255, 214, 10)
 WHITE = (255, 255, 255)
-MUSIC_LIST = "https://github.com/beautyapp800-ctrl/yt-kids/blob/main/data/music-cc0-verified.json"
+MUSIC_LIST = "data/music-registry.json"
+
+
+def track(short):
+    """Registry entry of the Short's music (CC0, licence checked on the source page) + start offset."""
+    reg = json.loads((Path(__file__).resolve().parents[1] / MUSIC_LIST).read_text(encoding="utf-8"))
+    m = SHORTS[short]["music"]
+    t = next(x for x in reg["tracks"] if x["id"] == m["id"])
+    assert t["status"] == "active", "track removed from rotation"
+    return {**t, "start": m["start"]}
 
 
 def cap(t0, t1, y, *lines):
@@ -40,9 +50,7 @@ SHORTS = {
             cap(22.5, 99, 300, ("WIDER THAN", 84, WHITE), ("CENTRAL PARK", 112, YELLOW),
                 ("1.2 km  vs  0.8 km", 70, WHITE)),
         ],
-        "music": {"title": "Happy Train Abstract Industrial Ethno World Jazz Drum Flute Marimba Cinematic Music",
-                  "creator": "szegvari", "page": "https://freesound.org/people/szegvari/sounds/608802",
-                  "url": "https://cdn.freesound.org/previews/608/608802_2282212-hq.mp3", "licence": "CC0 1.0"},
+        "music": {"id": "oga-eclipse-legion", "start": 58},
         "queries": ["meteor crater size comparison", "meteor crater arizona", "barringer crater",
                     "new york city size comparison"],
         "titles": ["Meteor Crater Size Comparison: a 1.2 km Hole in Manhattan",
@@ -76,9 +84,7 @@ SHORTS = {
             cap(20.0, 99, 300, ("THE PYRAMID IS", 80, WHITE), ("28 m TALLER", 124, YELLOW),
                 ("138.5 m  vs  110.6 m", 70, WHITE)),
         ],
-        "music": {"title": "'danger and beauty' ukulele loop by Rea", "creator": "reasanka",
-                  "page": "https://freesound.org/people/reasanka/sounds/383026",
-                  "url": "https://cdn.freesound.org/previews/383/383026_6336990-hq.mp3", "licence": "CC0 1.0"},
+        "music": {"id": "oga-the-ancient-legend", "start": 151},
         "queries": ["saturn v size comparison", "great pyramid of giza size comparison", "how big are the pyramids",
                     "great pyramid scale"],
         "titles": ["Saturn V Size Comparison: 110.6 m Next to the Great Pyramid",
@@ -109,9 +115,7 @@ SHORTS = {
             cap(18.0, 99, 250, ("TEXAS  695,662 km²", 78, YELLOW), ("268,596 sq mi", 58, WHITE)),
             cap(18.0, 99, 1340, ("FRANCE  551,500 km²", 70, WHITE), ("212,935 sq mi", 54, WHITE)),
         ],
-        "music": {"title": "fun dancetrack", "creator": "evanjones4",
-                  "page": "https://freesound.org/people/evanjones4/sounds/320089",
-                  "url": "https://cdn.freesound.org/previews/320/320089_1738784-hq.mp3", "licence": "CC0 1.0"},
+        "music": {"id": "oga-inevitable", "start": 119},
         "queries": ["texas vs france", "how big is texas compared to europe", "texas compared to other countries",
                     "how big is texas really"],
         "titles": ["Texas vs France: Texas Is 26% Bigger",
