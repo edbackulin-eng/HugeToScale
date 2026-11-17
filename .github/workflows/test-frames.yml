@@ -55,7 +55,7 @@ jobs:
       - name: open data
         run: |
           case "${{ matrix.scene }}" in
-            titanic_aerial)  python shorts/data_prep.py hdri && python shorts/data_prep.py naip times_square 40.7577 -73.9857 700 ;;
+            titanic_aerial)  python shorts/data_prep.py hdri && python shorts/data_prep.py naip times_square 40.7577 -73.9857 700 2200 ;;
             titanic_pitch)   python shorts/data_prep.py hdri ;;
             saturnv_pyramid) python shorts/data_prep.py hdri && python shorts/data_prep.py textures large_sandstone_blocks aerial_sand ;;
             texas_france)    python shorts/data_prep.py borders ;;

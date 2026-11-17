@@ -192,7 +192,7 @@ if __name__ == "__main__":
     elif cmd == "borders":
         borders()
     elif cmd == "naip":
-        naip(sys.argv[2], float(sys.argv[3]), float(sys.argv[4]), float(sys.argv[5]))
+        naip(sys.argv[2], float(sys.argv[3]), float(sys.argv[4]), float(sys.argv[5]), *(int(a) for a in sys.argv[6:7]))
     elif cmd == "textures":
         textures(*sys.argv[2:])
     elif cmd == "nasa":

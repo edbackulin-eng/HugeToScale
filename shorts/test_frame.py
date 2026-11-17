@@ -212,7 +212,7 @@ def titanic_aerial(preview):
     b = nt.nodes["Principled BSDF"]
     t = nt.nodes.new("ShaderNodeTexImage")
     t.image = bpy.data.images.load(str(CACHE / "naip_times_square.jpg"))
-    t.interpolation = "Cubic"
+    t.interpolation = "Linear"
     nt.links.new(t.outputs["Color"], b.inputs["Base Color"])
     b.inputs["Roughness"].default_value = 0.9
     b.inputs["Specular IOR Level"].default_value = 0.2
@@ -344,7 +344,16 @@ def main():
     sc.render.filepath = str(out)
     t1 = time.time()
     bpy.ops.render.render(write_still=True)
-    secs = time.time() - t1
+    first = time.time() - t1
+    # steady state, as in a real animation: frame 2 with the camera moved, scene kept in memory
+    cam = sc.camera
+    cam.location.x += 1.5
+    sc.frame_set(2)
+    sc.render.filepath = str(out.with_name(out.stem + "_f2.png"))
+    t2 = time.time()
+    bpy.ops.render.render(write_still=True)
+    secs = time.time() - t2
+    info["first_frame_seconds"] = round(first, 1)
     info.update({"status": "rendered", "build_seconds": round(build_s, 1), "render_seconds": round(secs, 1),
                  "resolution": [sc.render.resolution_x * sc.render.resolution_percentage // 100,
                                 sc.render.resolution_y * sc.render.resolution_percentage // 100],
