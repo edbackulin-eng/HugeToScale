@@ -153,7 +153,7 @@ def haze(start, depth, colour=(0.72, 0.84, 0.98), amount=0.22):
     nt.links.new(mix.outputs[0], comp.inputs["Image"])
 
 
-def pbr(name, tid, scale, bump=0.6, tint=None):
+def pbr(name, tid, scale, bump=0.6, tint=None, disp=0.0, sand_tid=None, sand_height=0.0):
     """Poly Haven CC0 texture set, box-projected in object space so no UVs are needed."""
     m = bpy.data.materials.new(name)
     m.use_nodes = True
@@ -188,6 +188,41 @@ def pbr(name, tid, scale, bump=0.6, tint=None):
     nm = nt.nodes.new("ShaderNodeNormalMap"); nm.inputs["Strength"].default_value = bump
     nt.links.new(n.outputs["Color"], nm.inputs["Color"])
     nt.links.new(nm.outputs["Normal"], b.inputs["Normal"])
+    if disp:  # real relief of the blocks (needs a subdivided mesh)
+        dimg = img("disp", False)
+        dn = nt.nodes.new("ShaderNodeDisplacement")
+        dn.inputs["Scale"].default_value = disp
+        dn.inputs["Midlevel"].default_value = 0.5
+        nt.links.new(dimg.outputs["Color"], dn.inputs["Height"])
+        nt.links.new(dn.outputs["Displacement"], nt.nodes["Material Output"].inputs["Displacement"])
+        m.displacement_method = "BOTH"
+    if sand_tid:  # windblown sand banked against the lowest courses
+        st = nt.nodes.new("ShaderNodeTexImage")
+        st.image = bpy.data.images.load(str(TEX / f"{sand_tid}_diff_2k.jpg"))
+        st.projection = "BOX"
+        nt.links.new(mp.outputs["Vector"], st.inputs["Vector"])
+        sep = nt.nodes.new("ShaderNodeSeparateXYZ")
+        nt.links.new(tc.outputs["Object"], sep.inputs[0])
+        nz = nt.nodes.new("ShaderNodeTexNoise")
+        nz.inputs["Scale"].default_value = 0.08
+        nt.links.new(tc.outputs["Object"], nz.inputs["Vector"])
+        hz = nt.nodes.new("ShaderNodeMath"); hz.operation = "MULTIPLY"
+        hz.inputs[1].default_value = sand_height * 1.6
+        nt.links.new(nz.outputs["Fac"], hz.inputs[0])
+        lt = nt.nodes.new("ShaderNodeMapRange")
+        nt.links.new(sep.outputs[2], lt.inputs["Value"])
+        nt.links.new(hz.outputs[0], lt.inputs["From Min"])
+        lt.inputs["From Max"].default_value = 0.0
+        tint_s = nt.nodes.new("ShaderNodeMix"); tint_s.data_type = "RGBA"; tint_s.blend_type = "MULTIPLY"
+        tint_s.inputs["Factor"].default_value = 1.0
+        tint_s.inputs["B"].default_value = (1.0, 0.78, 0.52, 1)
+        nt.links.new(st.outputs["Color"], tint_s.inputs["A"])
+        mx = nt.nodes.new("ShaderNodeMix"); mx.data_type = "RGBA"
+        cur = b.inputs["Base Color"].links[0].from_socket
+        nt.links.new(lt.outputs[0], mx.inputs["Factor"])
+        nt.links.new(cur, mx.inputs["A"])
+        nt.links.new(tint_s.outputs["Result"], mx.inputs["B"])
+        nt.links.new(mx.outputs["Result"], b.inputs["Base Color"])
     return m
 
 
@@ -213,7 +248,16 @@ def titanic_aerial(preview):
     t = nt.nodes.new("ShaderNodeTexImage")
     t.image = bpy.data.images.load(str(CACHE / "naip_times_square.jpg"))
     t.interpolation = "Linear"
-    nt.links.new(t.outputs["Color"], b.inputs["Base Color"])
+    # grade the photo itself: lighter, more saturated, not grey
+    hs = nt.nodes.new("ShaderNodeHueSaturation")
+    hs.inputs["Saturation"].default_value = 1.25
+    hs.inputs["Value"].default_value = 1.18
+    bc = nt.nodes.new("ShaderNodeBrightContrast")
+    bc.inputs["Bright"].default_value = 0.04
+    bc.inputs["Contrast"].default_value = 0.12
+    nt.links.new(t.outputs["Color"], hs.inputs["Color"])
+    nt.links.new(hs.outputs["Color"], bc.inputs["Color"])
+    nt.links.new(bc.outputs["Color"], b.inputs["Base Color"])
     b.inputs["Roughness"].default_value = 0.9
     b.inputs["Specular IOR Level"].default_value = 0.2
     plane("NAIP Times Square", 2 * half, m)  # default plane UVs cover the image exactly
@@ -226,12 +270,63 @@ def titanic_aerial(preview):
     ship.rotation_euler.z = math.atan2(d.y, d.x)
     ship.location = (0, 0, 0)
     # the photo's own shadows fall to the north-west: the sun stands in the south-east
-    sun(58, 150, strength=4.5)
-    n = Vector((d.y, -d.x, 0))
-    cam = d * 250 + n * 110 + Vector((0, 0, 380))
-    camera(cam, d * 10, lens=30, fstop=11, focus=(cam - d * 10).length)
-    haze(250, 2500, amount=0.15)
+    sun(58, float(os.environ.get("SUN_AZ", 150)), strength=4.5)
+    contact_shadow(ship, O.L + 24, O.B + 18)
+    # almost straight down, like the photo itself, so its leaning towers are not seen from the side
+    cam = Vector((0, 0, 330)) - d * 70
+    co = camera(cam, Vector((0, 0, 0)), lens=30, fstop=16, focus=330)
+    # straight down with a 4 degree forward tilt; the frame's long side runs along the ship (bow up)
+    co.rotation_euler = (math.radians(12), 0, math.atan2(-d.x, d.y))
+    veil(0.04)
     return {"aerial": "USGS NAIP Plus orthoimagery, public domain", "bearing_deg": bearing}
+
+
+def contact_shadow(parent, length, width):
+    """Soft dark ellipse under a hull: the ship sits on the photo instead of floating over it."""
+    m = bpy.data.materials.new("contact shadow")
+    m.use_nodes = True
+    nt = m.node_tree
+    nt.nodes.clear()
+    out = nt.nodes.new("ShaderNodeOutputMaterial")
+    tc = nt.nodes.new("ShaderNodeTexCoord")
+    mp = nt.nodes.new("ShaderNodeMapping")
+    mp.inputs["Scale"].default_value = (2.0, 2.0, 1.0)
+    mp.inputs["Location"].default_value = (-1.0, -1.0, 0)
+    nt.links.new(tc.outputs["Generated"], mp.inputs["Vector"])
+    g = nt.nodes.new("ShaderNodeTexGradient")
+    g.gradient_type = "SPHERICAL"
+    nt.links.new(mp.outputs["Vector"], g.inputs["Vector"])
+    pw = nt.nodes.new("ShaderNodeMath"); pw.operation = "POWER"; pw.inputs[1].default_value = 1.6
+    nt.links.new(g.outputs["Fac"], pw.inputs[0])
+    k = nt.nodes.new("ShaderNodeMath"); k.operation = "MULTIPLY"; k.inputs[1].default_value = 0.55
+    nt.links.new(pw.outputs[0], k.inputs[0])
+    tr = nt.nodes.new("ShaderNodeBsdfTransparent")
+    dk = nt.nodes.new("ShaderNodeBsdfDiffuse")
+    dk.inputs["Color"].default_value = (0.0, 0.0, 0.0, 1)
+    mx = nt.nodes.new("ShaderNodeMixShader")
+    nt.links.new(k.outputs[0], mx.inputs[0])
+    nt.links.new(tr.outputs[0], mx.inputs[1])
+    nt.links.new(dk.outputs[0], mx.inputs[2])
+    nt.links.new(mx.outputs[0], out.inputs["Surface"])
+    p = plane("contact shadow", 1, m, loc=(0, 0, 0.08))
+    p.scale = (length, width, 1)
+    p.parent = parent
+    p.visible_shadow = False
+    return p
+
+
+def veil(amount, colour=(0.80, 0.88, 1.0)):
+    """Very light atmospheric veil over the whole frame: photo and model share the same air."""
+    sc = bpy.context.scene
+    sc.use_nodes = True
+    nt = sc.node_tree
+    rl = nt.nodes.get("Render Layers") or nt.nodes.new("CompositorNodeRLayers")
+    comp = nt.nodes.get("Composite") or nt.nodes.new("CompositorNodeComposite")
+    mix = nt.nodes.new("CompositorNodeMixRGB")
+    mix.inputs[0].default_value = amount
+    mix.inputs[2].default_value = (*colour, 1)
+    nt.links.new(rl.outputs["Image"], mix.inputs[1])
+    nt.links.new(mix.outputs[0], comp.inputs["Image"])
 
 
 def pbr_or_flat():
@@ -310,9 +405,24 @@ def saturnv_pyramid(preview):
     """Saturn V (110.6 m) beside the Great Pyramid (138.5 m now, base 230.3 m) in the desert."""
     sunny_world(strength=1.5, rot=float(os.environ.get("HDRI_ROT", 0)))
     sand = pbr("sand", "aerial_sand", 6.0, bump=0.4, tint=(1.0, 0.78, 0.52))
-    stone = pbr("limestone blocks", "large_sandstone_blocks", 3.2, bump=1.0, tint=(1.0, 0.80, 0.52))
+    stone = pbr("limestone blocks", "large_sandstone_blocks", 3.2, bump=1.0, tint=(1.0, 0.80, 0.52),
+                disp=0.45, sand_tid="aerial_sand", sand_height=7.0)
     plane("desert", 20000, sand)
+    dunes = plane("dunes", 3000, sand, loc=(0, 0, -0.6))
+    sub = dunes.modifiers.new("sub", "SUBSURF")
+    sub.subdivision_type = "SIMPLE"
+    sub.levels = sub.render_levels = 7
+    tex = bpy.data.textures.new("dunes", "CLOUDS")
+    tex.noise_scale = 160
+    dsp = dunes.modifiers.new("dsp", "DISPLACE")
+    dsp.texture = tex
+    dsp.strength = 4.0
+    dsp.texture_coords = "GLOBAL"
     pyr = BM.frustum(0, 0, 0, 138.5, 230.3, 9.0, stone, name="Great Pyramid")
+    ps = pyr.modifiers.new("sub", "SUBSURF")
+    ps.subdivision_type = "SIMPLE"
+    ps.levels = 2
+    ps.render_levels = 8
     check("Great Pyramid height (present)", O.world_bounds(pyr)[2][1], 138.5)
     check("Great Pyramid base side", O.world_bounds(pyr)[0][1] - O.world_bounds(pyr)[0][0], 230.3)
     sv = BM.saturn_v(150, -95)

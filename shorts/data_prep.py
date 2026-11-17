@@ -173,7 +173,7 @@ def textures(*ids, res="2k"):
     out.mkdir(parents=True, exist_ok=True)
     for tid in ids:
         files = json.loads(fetch(f"https://api.polyhaven.com/files/{tid}"))
-        for key, fname in (("Diffuse", "diff"), ("nor_gl", "nor"), ("Rough", "rough")):
+        for key, fname in (("Diffuse", "diff"), ("nor_gl", "nor"), ("Rough", "rough"), ("Displacement", "disp")):
             if key not in files:
                 continue
             p = out / f"{tid}_{fname}_{res}.jpg"

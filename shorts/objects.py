@@ -158,6 +158,30 @@ def titanic():
     hull = _obj("Titanic hull", bm, [black, red], smooth=True)
     parts.append(hull)
 
+    # open decks (pine planking) following the sheer, seen from above
+    bm = bmesh.new()
+    prev = None
+    for x in xs[1:-1]:
+        hb = max(0.05, _half_beam(x) - 0.35)
+        z = _deck(x) + 0.06
+        pair = (bm.verts.new((x, -hb, z)), bm.verts.new((x, hb, z)))
+        if prev:
+            bm.faces.new((prev[0], pair[0], pair[1], prev[1]))
+        prev = pair
+    parts.append(_obj("open deck", bm, wood))
+    # gold sheer line along the top of the black hull
+    for side in (1, -1):
+        bm = bmesh.new()
+        prev = None
+        for x in xs[2:-2]:
+            hb = _half_beam(x) + 0.03
+            z = _deck(x) - 0.9
+            pair = (bm.verts.new((x, side * hb, z)), bm.verts.new((x, side * hb, z + 0.35)))
+            if prev:
+                bm.faces.new((prev[0], pair[0], pair[1], prev[1]))
+            prev = pair
+        parts.append(_obj("sheer line", bm, gold))
+
     # portholes: two rows along the straight midbody, both sides
     for side in (1, -1):
         for z in (13.0, 16.2):
