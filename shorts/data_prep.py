@@ -23,10 +23,19 @@ OVERPASS = ["https://overpass-api.de/api/interpreter", "https://overpass.kumi.sy
 HDRIS = ["kloofendal_43d_clear_puresky", "kloofendal_48d_partly_cloudy_puresky"]  # bright daytime only (owner 17.11)
 
 
-def fetch(url, data=None, timeout=180):
-    req = urllib.request.Request(url, data=data, headers=UA)
-    with urllib.request.urlopen(req, timeout=timeout) as r:
-        return r.read()
+def fetch(url, data=None, timeout=180, tries=4):
+    """GET/POST with retries: public map services (USGS, Overpass) answer 5xx/429 now and then."""
+    import time
+    for k in range(tries):
+        try:
+            req = urllib.request.Request(url, data=data, headers=UA)
+            with urllib.request.urlopen(req, timeout=timeout) as r:
+                return r.read()
+        except Exception as e:  # noqa: BLE001
+            if k == tries - 1:
+                raise
+            print(f"fetch retry {k + 1} after {e}")
+            time.sleep(20 * (k + 1))
 
 
 def record(path, url, licence, page=None):
