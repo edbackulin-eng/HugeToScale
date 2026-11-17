@@ -69,20 +69,26 @@ def sandstone():
     br.inputs["Mortar Size"].default_value = 0.035
     br.inputs["Mortar Smooth"].default_value = 0.4
     br.inputs["Bias"].default_value = 0.0
-    br.inputs["Color1"].default_value = (0.62, 0.50, 0.34, 1)
-    br.inputs["Color2"].default_value = (0.74, 0.61, 0.43, 1)
-    br.inputs["Mortar"].default_value = (0.40, 0.31, 0.21, 1)
+    br.inputs["Color1"].default_value = (0.74, 0.56, 0.34, 1)
+    br.inputs["Color2"].default_value = (0.84, 0.66, 0.42, 1)
+    br.inputs["Mortar"].default_value = (0.50, 0.38, 0.24, 1)
     nt.links.new(vec.outputs[0], br.inputs["Vector"])
     nz = nt.nodes.new("ShaderNodeTexNoise"); nz.inputs["Scale"].default_value = 0.05
     nz.inputs["Detail"].default_value = 6
     nt.links.new(tc.outputs["Object"], nz.inputs["Vector"])
-    weather = A.mix_rgb(nt, 0.25, br.outputs["Color"], nz.outputs["Color"])
+    # weathering changes brightness only (mixing grey noise colour turned the stone grey)
     fine = nt.nodes.new("ShaderNodeTexNoise"); fine.inputs["Scale"].default_value = 2.5
     nt.links.new(tc.outputs["Object"], fine.inputs["Vector"])
-    col = A.mix_rgb(nt, 0.12, weather, fine.outputs["Color"])
-    sat = nt.nodes.new("ShaderNodeHueSaturation"); sat.inputs["Saturation"].default_value = 0.9
-    nt.links.new(col, sat.inputs["Color"])
-    nt.links.new(sat.outputs["Color"], b.inputs["Base Color"])
+    shade = A.math_node(nt, "ADD", A.math_node(nt, "MULTIPLY", nz.outputs["Fac"], 0.35), 0.82)
+    shade = A.math_node(nt, "ADD", shade, A.math_node(nt, "MULTIPLY", fine.outputs["Fac"], 0.12))
+    mul = nt.nodes.new("ShaderNodeMix"); mul.data_type = "RGBA"; mul.blend_type = "MULTIPLY"
+    mul.inputs["Factor"].default_value = 1.0
+    nt.links.new(br.outputs["Color"], mul.inputs["A"])
+    gray = nt.nodes.new("ShaderNodeCombineXYZ")
+    for k in range(3):
+        nt.links.new(shade, gray.inputs[k])
+    nt.links.new(gray.outputs[0], mul.inputs["B"])
+    nt.links.new(mul.outputs["Result"], b.inputs["Base Color"])
     b.inputs["Roughness"].default_value = 0.9
     bump = nt.nodes.new("ShaderNodeBump"); bump.inputs["Strength"].default_value = 0.45
     bump.inputs["Distance"].default_value = 0.08
@@ -166,7 +172,7 @@ def backdrop_material(rot_deg, strength):
     sky = A.math_node(nt, "GREATER_THAN", v, vg)
     # ground: sunlit desert plain, haze towards the horizon line
     gf = A.maprange(nt, v, 0.0, vg)
-    gf = A.math_node(nt, "POWER", gf, 3.0)
+    gf = A.math_node(nt, "POWER", gf, 6.0)
     ground = A.mix_rgb(nt, gf, (0.50, 0.38, 0.25), hs.outputs["Color"])
     col = A.mix_rgb(nt, sky, ground, hs.outputs["Color"])
     em = nt.nodes.new("ShaderNodeEmission"); em.inputs["Strength"].default_value = strength
