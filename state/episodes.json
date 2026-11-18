@@ -1,0 +1,33 @@
+{
+ "note": "Huge To Scale episodes in publishing order (owner 18.11): the 3 trial Shorts and the height ladder first, then ladders from data/ladder-topics.json. queued -> ready (draft release ep-<slug>) -> uploaded.",
+ "episodes": [
+  {
+   "slug": "crater-manhattan",
+   "short": "crater_manhattan",
+   "status": "ready",
+   "note": "trial render 17.11 (runner10) goes into the draft release by hand",
+   "release": "ep-crater-manhattan",
+   "rendered": "2026-11-17"
+  },
+  {
+   "slug": "texas-france",
+   "short": "texas_france",
+   "status": "ready",
+   "note": "trial render 17.11",
+   "release": "ep-texas-france",
+   "rendered": "2026-11-17"
+  },
+  {
+   "slug": "saturnv-pyramid",
+   "short": "saturnv_pyramid",
+   "status": "queued",
+   "note": "re-render with the warm sandstone + fill light"
+  },
+  {
+   "slug": "ladder-heights",
+   "short": "ladder_heights",
+   "status": "queued",
+   "topic": "heights-saturnv-everest"
+  }
+ ]
+}

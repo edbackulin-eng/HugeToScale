@@ -1,0 +1,63 @@
+name: produce
+# Daily episode render (owner 18.11). 17:00 UTC: after What If's builds (start 05:00-12:00) and long before
+# America Over Time (Sun/Thu 01:00 UTC); a ladder takes ~2 h on 4 jobs (max-parallel 4, account limit 20,
+# channels-monitor docs/render-schedule.md). Renders only when fewer than 2 episodes are ready (draft releases).
+on:
+  schedule:
+    - cron: "0 17 * * *"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "1 = render the next episode even if 2 are ready"
+        default: "0"
+concurrency:
+  group: produce
+  cancel-in-progress: false
+permissions:
+  contents: write
+  issues: write
+jobs:
+  pick:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    outputs:
+      short: ${{ steps.p.outputs.short }}
+      sha: ${{ steps.p.outputs.sha }}
+    steps:
+      - uses: actions/checkout@v5
+      - id: p
+        env:
+          GH_TOKEN: ${{ github.token }}
+          FORCE: ${{ inputs.force == '1' && '1' || '' }}
+        run: |
+          S=$(python3 automation/episodes.py next)
+          python3 -c "from core import ytguard; ytguard.persist(['state/episodes.json','data/ladder-topics.json','data/music-registry.json'], 'state: next episode $S')"
+          echo "short=$S" >> "$GITHUB_OUTPUT"
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+          echo "episode: ${S:-none}"
+  render:
+    needs: pick
+    if: needs.pick.outputs.short != ''
+    uses: ./.github/workflows/trial-shorts.yml
+    with:
+      shorts: ${{ needs.pick.outputs.short }}
+      mode: full
+      chunks: "4"
+      ref: ${{ needs.pick.outputs.sha }}
+  store:
+    needs: [pick, render]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: main
+      - uses: actions/download-artifact@v4
+        with:
+          name: short-${{ needs.pick.outputs.short }}-full
+          path: final
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 automation/episodes.py store ${{ needs.pick.outputs.short }} final
+          python3 -c "from core import ytguard; ytguard.persist(['state/episodes.json'], 'state: ${{ needs.pick.outputs.short }} ready')"

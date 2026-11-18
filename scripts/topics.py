@@ -1,0 +1,363 @@
+"""Keep the size-ladder topic queue full (owner 18.11): always 30+ planned topics, only realistic objects with open data,
+a topic never repeats. New topics go into data/ladder-topics.json (the owner can review it). Runs on a runner
+(topics.yml, weekly) - it downloads DEM tiles.
+
+    python scripts/topics.py            # resolve approved topics, verify summits, add new topics until the queue is full
+    python scripts/topics.py --dry      # print what would be added, write nothing
+
+Engines (what can be made automatically today):
+  peaks     - real summits (Copernicus DEM relief) - READY: such a topic gets a "spec" and goes into production.
+  area-map  - areas at true scale on an equal-area map (islands, lakes) - planned, the engine is not built yet.
+A topic of a non-ready engine waits in the file ("engine" names what it needs) and is never scheduled.
+
+Two sources for every height: Wikidata (best-rank elevation, normalised to metres; the English Wikipedia article is
+linked too) and Copernicus DEM GLO-30 measured here: a summit whose DEM top differs by more than 2 % is not used.
+Titles come from real YouTube autocomplete (suggestqueries), <= 60 characters, with a number.
+"""
+import json
+import re
+import sys
+import time
+import urllib.parse
+import urllib.request
+from datetime import date
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT / "shorts"))
+TOPICS = ROOT / "data" / "ladder-topics.json"
+VERIFIED = ROOT / "data" / "peaks-verified.json"
+UA = {"User-Agent": "HugeToScale-topics/1.0 (https://github.com/edbackulin-eng/HugeToScale)"}
+MIN_PLANNED = 32          # owner: 30+ topics ahead (margin 2)
+MIN_READY = 20            # of them renderable today (20 days of Shorts)
+MAX_SHARED = 2            # a new topic shares at most 2 objects with any earlier topic
+RATIO = 1.18              # each step at least 18 % taller than the one before
+VOLCANO = {"Q8072", "Q169358", "Q212057", "Q190869", "Q2120095"}
+
+PEAKS_SPARQL = """
+SELECT ?item ?itemLabel ?elev ?coord ?country ?countryLabel ?range ?rangeLabel ?links ?article WHERE {
+  ?item wdt:P31 wd:%s; wikibase:sitelinks ?links.
+  FILTER(?links >= 22)
+  ?item wdt:P625 ?coord; wdt:P17 ?country; p:P2044/psn:P2044/wikibase:quantityAmount ?elev.
+  OPTIONAL { ?item wdt:P4552 ?range. }
+  ?article schema:about ?item; schema:isPartOf <https://en.wikipedia.org/>.
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
+}"""
+PEAK_CLASSES = ["Q8502", "Q8072", "Q169358", "Q212057", "Q207326"]   # mountain, volcano, strato-, shield volcano, summit
+
+AREA_SPARQL = """
+SELECT ?item ?itemLabel ?area ?country ?countryLabel ?links ?cls WHERE {
+  VALUES ?cls { wd:Q23442 wd:Q23397 }
+  ?item wdt:P31 ?cls; wikibase:sitelinks ?links; wdt:P17 ?country.
+  FILTER(?links >= 30)
+  ?item p:P2046 ?st. ?st a wikibase:BestRank; psn:P2046/wikibase:quantityAmount ?area.
+  FILTER(?area >= 1000000)
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
+}"""
+
+
+def get(url, data=None, tries=4, timeout=120):
+    for k in range(tries):
+        try:
+            req = urllib.request.Request(url, data=data, headers=UA)
+            with urllib.request.urlopen(req, timeout=timeout) as r:
+                return r.read()
+        except Exception as e:                                       # noqa: BLE001
+            if k == tries - 1:
+                raise
+            print(f"retry {k + 1}: {str(e)[:120]}")
+            time.sleep(15 * (k + 1))
+
+
+def sparql(q):
+    body = urllib.parse.urlencode({"query": q, "format": "json"}).encode()
+    r = json.loads(get("https://query.wikidata.org/sparql", data=body, timeout=180))
+    return [{k: v["value"] for k, v in b.items()} for b in r["results"]["bindings"]]
+
+
+def qid(uri):
+    return uri.rsplit("/", 1)[-1]
+
+
+def slug(s):
+    return re.sub(r"[^a-z0-9]+", "-", s.lower()).strip("-")
+
+
+def suggest(q):
+    """Real YouTube search suggestions for q."""
+    url = "https://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=" + urllib.parse.quote(q)
+    try:
+        return json.loads(get(url, tries=2, timeout=30).decode("utf-8", "replace"))[1]
+    except Exception as e:                                           # noqa: BLE001
+        print("suggest failed:", q, str(e)[:80])
+        return []
+
+
+SMALL = {"a", "an", "and", "of", "in", "on", "the", "to", "vs", "vs.", "at", "by", "for", "from"}
+
+
+def title_case(s):
+    w = s.split()
+    return " ".join(x if any(c.isupper() for c in x[1:]) else (x if i and x in SMALL else x[:1].upper() + x[1:])
+                    for i, x in enumerate(w))
+
+
+# ------------------------------------------------------------------------------------------------ peaks
+
+def load_peaks():
+    seen = {}
+    rows = []
+    for cls in PEAK_CLASSES:       # one query per class: a single query with all classes times out
+        rows += [{**r, "cls": cls} for r in sparql(PEAKS_SPARQL % cls)]
+    for r in rows:
+        q = qid(r["item"])
+        m = re.match(r"Point\(([-\d.]+) ([-\d.]+)\)", r["coord"])
+        if not m or re.match(r"^Q\d+$", r["itemLabel"]):
+            continue
+        p = seen.setdefault(q, {"qid": q, "name": r["itemLabel"], "h": round(float(r["elev"]), 2),
+                                "lon": float(m.group(1)), "lat": float(m.group(2)), "links": int(r["links"]),
+                                "countries": set(), "ranges": set(), "volcano": False, "article": r["article"]})
+        p["countries"].add(r["countryLabel"])
+        if r.get("rangeLabel") and not re.match(r"^Q\d+$", r["rangeLabel"]):
+            p["ranges"].add(r["rangeLabel"])
+        p["volcano"] |= r["cls"] in VOLCANO
+        p["h"] = max(p["h"], round(float(r["elev"]), 2))
+    return list(seen.values())
+
+
+def pick_steps(cands, n_max=6, n_min=5):
+    """From the tallest down: each next one at most top/RATIO, the most famous in its band; 5-6 steps, wide range."""
+    cands = sorted(cands, key=lambda p: -p["h"])
+    if not cands:
+        return []
+    out = [cands[0]]
+    while len(out) < n_max:
+        lim = out[-1]["h"] / RATIO
+        band = [p for p in cands if lim / 1.9 <= p["h"] <= lim]
+        if not band:
+            break
+        out.append(max(band, key=lambda p: (p["links"], p["h"])))
+    out = out[::-1]
+    return out if len(out) >= n_min and out[-1]["h"] / out[0]["h"] >= 2.0 else []
+
+
+def dem_check(p, verified):
+    """Second source: the Copernicus DEM top within 1.5 km of the Wikidata point, within 2 %."""
+    if p["qid"] in verified:
+        return verified[p["qid"]]["ok"]
+    import data_prep
+    try:
+        data_prep.copdem(f"v_{p['qid']}", p["lat"], p["lon"], 1600, 128)
+        meta = json.loads((data_prep.CACHE / f"dem_v_{p['qid']}.json").read_text())
+        dem = round(meta["summit_m"], 1)
+        for f in data_prep.CACHE.glob(f"dem_v_{p['qid']}.*"):
+            f.unlink()
+        ok = abs(dem - p["h"]) / p["h"] <= 0.02
+    except Exception as e:                                           # noqa: BLE001
+        print("dem check failed", p["name"], str(e)[:120])
+        dem, ok = None, False
+    verified[p["qid"]] = {"name": p["name"], "wikidata_m": p["h"], "dem_m": dem, "ok": ok, "checked": str(date.today())}
+    print(f"  DEM {p['name']}: wikidata {p['h']} m, DEM {dem} m -> {'ok' if ok else 'REJECTED'}")
+    return ok
+
+
+def spec_step(p, verified):
+    v = verified[p["qid"]]
+    key = slug(p["name"])[:24] + "-" + p["qid"].lower()
+    return {"key": key, "qid": p["qid"], "name": p["name"].upper(), "value": f"{round(p['h']):,} m", "h": p["h"],
+            "lat": round(p["lat"], 5), "lon": round(p["lon"], 5),
+            "sources": [f"https://www.wikidata.org/wiki/{p['qid']} (elevation {p['h']:g} m); {p['article']}",
+                        f"Copernicus DEM GLO-30, summit measured {v['dem_m']} m (within 2 %)"]}
+
+
+def titles_for(seeds, keys, steps):
+    """Up to 3 titles: a real YouTube suggestion (for one of the seeds, mentioning one of the keys) + the numbers."""
+    top = steps[-1]
+    used, sugg = [], []
+    keys = {k.lower() for k in keys} | {top["name"].lower()}
+    for q in list(seeds) + [f"{top['name'].title()} height"]:
+        for s in suggest(q):
+            if any(k in s.lower() for k in keys) and len(s) <= 40 and s not in sugg:
+                sugg.append(s)
+                if q not in used:
+                    used.append(q)
+    n = len(steps)
+    out = []
+    for s in sugg[:8]:
+        s = title_case(s)
+        for t in (f"{s}: {n} Peaks to {top['value']}", f"{s}: {top['value']} at True Scale",
+                  f"{s} ({steps[0]['value']} to {top['value']})"):
+            if len(t) <= 60 and t not in out and re.search(r"\d", t):
+                out.append(t)
+                break
+        if len(out) == 3:
+            break
+    return out, used
+
+
+def seeds_for(group, kind):
+    return {"country": [f"tallest mountains in {group}", f"highest mountains in {group}", f"{group} mountains"],
+            "volcano": [f"volcanoes in {group}", f"biggest volcano in {group}", f"{group} volcanoes"],
+            "range": [f"{group} highest peaks", f"{group} mountains", f"tallest mountains in the {group}"]}[kind]
+
+
+def peak_topics(peaks, verified, taken_ids, taken_sets, need):
+    groups = []
+    by = {}
+    for p in peaks:
+        for c in p["countries"]:
+            by.setdefault(("country", c), []).append(p)
+            if p["volcano"]:
+                by.setdefault(("volcano", c), []).append(p)
+        for r in p["ranges"]:
+            by.setdefault(("range", r), []).append(p)
+    for (kind, g), ps in by.items():
+        if len(ps) >= 6:
+            groups.append((sum(p["links"] for p in ps), kind, g, ps))
+    added = []
+    for _, kind, g, ps in sorted(groups, key=lambda x: -x[0]):
+        if len(added) >= need:
+            break
+        tid = {"country": "peaks-", "volcano": "volcanoes-", "range": "range-"}[kind] + slug(g)
+        if tid in taken_ids:
+            continue
+        pool = list(ps)
+        for _ in range(4):          # a rejected summit is dropped and the pick repeated
+            steps = pick_steps(pool)
+            if not steps:
+                break
+            bad = [p for p in steps if not dem_check(p, verified)]
+            if not bad:
+                break
+            pool = [p for p in pool if p not in bad]
+        else:
+            steps = []
+        if not steps:
+            continue
+        qs = {p["qid"] for p in steps}
+        if any(len(qs & s) > MAX_SHARED for s in taken_sets):
+            continue
+        sp = [spec_step(p, verified) for p in steps]
+        titles, used = titles_for(seeds_for(g, kind), {g}, sp)
+        if not titles:
+            print("no autocomplete title for", tid)
+            continue
+        noun = {"country": f"mountains of {g}", "volcano": f"volcanoes of {g}", "range": f"peaks of the {g}"}[kind]
+        tp = {"id": tid, "kind": "higher", "engine": "peaks", "status": "planned", "source": "generated",
+              "added": str(date.today()), "steps": [f"{s['name'].title()} {s['value']}" for s in sp],
+              "data": "Copernicus DEM GLO-30 + Wikidata elevations (two sources, 2 % check)",
+              "spec": {"steps": sp, "titles": titles, "queries": used,
+                       "hashtags": ["#sizecomparison", "#" + slug(g).replace("-", ""), "#mountains", "#3d", "#scale"],
+                       "intro": f"{len(sp)} real {noun}, each taller than the last, side by side at true scale "
+                                f"(Copernicus DEM elevation data): " + ", ".join(s["name"].title() for s in sp) + "."}}
+        added.append(tp)
+        taken_ids.add(tid)
+        taken_sets.append(qs)
+        print("+", tid, tp["steps"], titles[0])
+    return added
+
+
+def resolve_named(tp, peaks, verified):
+    """Approved topics written as names ("Fuji 3,776 m"): matched to Wikidata summits by name and height."""
+    sp = []
+    for label in tp["steps"]:
+        m = re.match(r"(.+?)\s+~?([\d,]+) m$", label)
+        if not m:
+            return None
+        name, h = m.group(1).strip().lower(), float(m.group(2).replace(",", ""))
+        c = [p for p in peaks if abs(p["h"] - h) / h <= 0.03 and
+             (name in p["name"].lower() or p["name"].lower().replace("mount ", "") in name)]
+        if not c:
+            print("  not found:", label)
+            return None
+        p = max(c, key=lambda p: p["links"])
+        if not dem_check(p, verified):
+            print("  DEM disagrees:", label)
+            return None
+        sp.append(spec_step(p, verified))
+    return sp
+
+
+# ------------------------------------------------------------------------------------------------ areas (engine not built)
+
+def area_topics(taken_ids, need):
+    rows = sparql(AREA_SPARQL)
+    by = {}
+    for r in rows:
+        kind = "islands" if qid(r["cls"]) == "Q23442" else "lakes"
+        if re.match(r"^Q\d+$", r["itemLabel"]):
+            continue
+        by.setdefault((kind, r["countryLabel"]), {})[qid(r["item"])] = (r["itemLabel"], float(r["area"]) / 1e6,
+                                                                       int(r["links"]))
+    added = []
+    for (kind, g), items in sorted(by.items(), key=lambda kv: -sum(v[2] for v in kv[1].values())):
+        if len(added) >= need:
+            break
+        tid = f"{kind}-{slug(g)}"
+        if tid in taken_ids or len(items) < 5:
+            continue
+        xs = sorted(items.items(), key=lambda kv: -kv[1][1])
+        out = [xs[0]]
+        for q, v in xs[1:]:
+            if v[1] <= out[-1][1][1] / 1.6:
+                out.append((q, v))
+            if len(out) == 6:
+                break
+        if len(out) < 5:
+            continue
+        out = out[::-1]
+        added.append({"id": tid, "kind": "area", "engine": "area-map", "status": "planned", "source": "generated",
+                      "added": str(date.today()),
+                      "steps": [f"{v[0]} {round(v[1]):,} km²" for _, v in out],
+                      "qids": [q for q, _ in out],
+                      "data": "Wikidata areas + Natural Earth / OSM outlines (second source: area measured on an "
+                              "equal-area projection); waits for the area-map engine"})
+        taken_ids.add(tid)
+        print("+", tid, added[-1]["steps"])
+    return added
+
+
+def main():
+    dry = "--dry" in sys.argv
+    doc = json.loads(TOPICS.read_text(encoding="utf-8"))
+    topics = doc["topics"]
+    verified = json.loads(VERIFIED.read_text(encoding="utf-8")) if VERIFIED.exists() else {}
+    peaks = load_peaks()
+    print(len(peaks), "Wikidata summits")
+    # approved topics of the peaks engine that are still names only
+    for tp in topics:
+        if tp.get("engine") == "peaks" and not tp.get("spec") and tp["status"] == "planned":
+            sp = resolve_named(tp, peaks, verified)
+            if sp:
+                titles, used = titles_for(tp.get("seeds", []), tp.get("keys", []), sp)
+                tp["spec"] = {"steps": sp, "titles": tp.get("titles") or titles, "queries": tp.get("queries") or used,
+                              "hashtags": tp.get("hashtags") or ["#sizecomparison", "#mountains", "#3d", "#scale"],
+                              "intro": tp.get("intro") or (f"{len(sp)} real mountains, each taller than the last, side "
+                                                           "by side at true scale (Copernicus DEM elevation data): "
+                                                           + ", ".join(s["name"].title() for s in sp) + ".")}
+                print("resolved", tp["id"], tp["spec"]["titles"][:1])
+    planned = [t for t in topics if t["status"] == "planned"]
+    ready = [t for t in planned if t.get("engine") == "peaks" and t.get("spec")]
+    taken_ids = {t["id"] for t in topics}
+    taken_sets = [{s["qid"] for s in t["spec"]["steps"] if "qid" in s} for t in topics if t.get("spec")]
+    need_ready = max(0, MIN_READY - len(ready))
+    need_total = max(0, MIN_PLANNED - len(planned))
+    new = peak_topics(peaks, verified, taken_ids, taken_sets, max(need_ready, need_total))
+    left = need_total - len(new)
+    if left > 0:
+        new += area_topics(taken_ids, left)
+    topics += new
+    planned = [t for t in topics if t["status"] == "planned"]
+    ready = [t for t in planned if t.get("engine") == "peaks" and t.get("spec")]
+    doc["queue"] = {"planned": len(planned), "ready_for_production": len(ready), "updated": str(date.today()),
+                    "rule": f">= {MIN_PLANNED} planned, >= {MIN_READY} renderable; a topic is used once"}
+    print(f"queue: {len(planned)} planned, {len(ready)} renderable, {len(new)} new")
+    if not dry:
+        TOPICS.write_text(json.dumps(doc, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+        VERIFIED.write_text(json.dumps(verified, ensure_ascii=False, indent=1, sort_keys=True) + "\n", encoding="utf-8")
+    if len(planned) < 30:
+        sys.exit(f"queue below 30: {len(planned)}")
+
+
+if __name__ == "__main__":
+    main()

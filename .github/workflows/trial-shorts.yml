@@ -1,7 +1,12 @@
 name: trial-shorts
-# Owner's trial stage: full trial Shorts rendered on runners. Manual only (workflow_dispatch) — nothing is
-# scheduled and nothing is uploaded to YouTube from here.
+# Renders Shorts on runners: by hand (workflow_dispatch) or called by produce.yml. Nothing is uploaded from here.
 on:
+  workflow_call:          # produce.yml renders the daily episode with the same jobs
+    inputs:
+      shorts: {type: string, required: true}
+      mode: {type: string, default: "full"}
+      chunks: {type: string, default: "4"}
+      ref: {type: string, default: ""}
   workflow_dispatch:
     inputs:
       shorts:
@@ -23,6 +28,8 @@ jobs:
       shorts: ${{ steps.m.outputs.shorts }}
     steps:
       - uses: actions/checkout@v5
+        with:
+          ref: ${{ inputs.ref }}
       - id: m
         run: |
           echo "matrix=$(python3 shorts/plan.py matrix '${{ inputs.shorts }}' '${{ inputs.mode }}' '${{ inputs.chunks }}')" >> "$GITHUB_OUTPUT"
@@ -39,6 +46,8 @@ jobs:
         short: ${{ fromJson(needs.plan.outputs.shorts) }}
     steps:
       - uses: actions/checkout@v5
+        with:
+          ref: ${{ inputs.ref }}
       - uses: actions/setup-python@v6
         with:
           python-version: "3.11"
@@ -63,6 +72,8 @@ jobs:
       matrix: ${{ fromJson(needs.plan.outputs.matrix) }}
     steps:
       - uses: actions/checkout@v5
+        with:
+          ref: ${{ inputs.ref }}
       - uses: actions/setup-python@v6
         with:
           python-version: "3.11"
@@ -120,6 +131,8 @@ jobs:
         short: ${{ fromJson(needs.plan.outputs.shorts) }}
     steps:
       - uses: actions/checkout@v5
+        with:
+          ref: ${{ inputs.ref }}
       - uses: actions/setup-python@v6
         with:
           python-version: "3.11"

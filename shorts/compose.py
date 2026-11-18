@@ -173,10 +173,29 @@ def caption_frames(short, total, outdir, track=None):
             frame.save(p)
 
 
+def loudest_start(path, seconds):
+    """Start (s) of the loudest window of the Short's length (the climax of the track), not in the first 5 s."""
+    import array
+    raw = subprocess.run(["ffmpeg", "-v", "error", "-i", str(path), "-ac", "1", "-ar", "2000", "-f", "s16le", "-"],
+                         capture_output=True, check=True).stdout
+    a = array.array("h", raw)
+    blk = 1000                                           # 0.5 s blocks
+    e = [sum(v * v for v in a[i:i + blk]) / blk for i in range(0, len(a) - blk, blk)]
+    n = int(seconds * 2)
+    best, arg = -1.0, 10
+    for k in range(10, max(11, len(e) - n - 4)):
+        w = sum(e[k:k + n])
+        if w > best:
+            best, arg = w, k
+    return arg / 2
+
+
 def music(short, dst):
     m = P.track(short)
     req = urllib.request.Request(m["url"], headers={"User-Agent": "HugeToScale-build/0.1"})
     dst.write_bytes(urllib.request.urlopen(req, timeout=120).read())
+    if m["start"] == "auto":
+        m = {**m, "start": loudest_start(dst, P.SHORTS[short]["seconds"])}
     return m
 
 
@@ -196,7 +215,8 @@ def build_text(short, fetched):
         lines.append(f"- {item['licence']}: {item['url']}")
     lines.append(f"- Music: \"{m['title']}\" by {m['creator']}, {m['licence']} — {m['page']}")
     lines.append("- Font: Anton by Vernon Adams, SIL Open Font License 1.1")
-    if short == "saturnv_pyramid":
+    steps = P.LADDERS.get(s.get("ladder"), {}).get("steps", [])
+    if short == "saturnv_pyramid" or any(st["key"] in ("saturnv", "pyramid", "burj") for st in steps):
         lines.append("- 3D models built for this video from published dimensions (no third-party models)")
     lines.append("- Map data © OpenStreetMap contributors" if any("OpenStreetMap" in i["licence"] for i in fetched.values())
                  else "")

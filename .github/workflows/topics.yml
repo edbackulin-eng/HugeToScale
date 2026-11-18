@@ -1,0 +1,28 @@
+name: topics
+# Keeps the ladder topic queue at 30+ (owner 18.11): Wikidata summits checked against Copernicus DEM, titles from
+# YouTube autocomplete; new topics are committed to data/ladder-topics.json. Weekly, Monday 12:00 UTC (one job).
+on:
+  schedule:
+    - cron: "0 12 * * 1"
+  workflow_dispatch:
+concurrency:
+  group: topics
+  cancel-in-progress: false
+permissions:
+  contents: write
+  issues: write
+jobs:
+  topics:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+      - run: pip install --quiet numpy rasterio pillow
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python scripts/topics.py
+          python -c "from core import ytguard; ytguard.persist(['data/ladder-topics.json','data/peaks-verified.json'], 'topics: queue refilled')"

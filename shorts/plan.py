@@ -21,9 +21,17 @@ def track(short):
     """Registry entry of the Short's music (CC0, licence checked on the source page) + start offset."""
     reg = json.loads((Path(__file__).resolve().parents[1] / MUSIC_LIST).read_text(encoding="utf-8"))
     m = SHORTS[short]["music"]
+    if m["id"] == "auto":   # not assigned by a production run: the rotation's next track (oldest last_used)
+        m = {**m, "id": pick_music(reg)["id"]}
     t = next(x for x in reg["tracks"] if x["id"] == m["id"])
     assert t["status"] == "active", "track removed from rotation"
     return {**t, "start": m["start"]}
+
+
+def pick_music(reg, previous=None):
+    """Rotation (registry rule): active, measured tracks; the oldest last_used first, never the previous Short's."""
+    ok = [x for x in reg["tracks"] if x["status"] == "active" and x.get("seconds") and x["id"] != previous]
+    return sorted(ok, key=lambda x: (x.get("last_used") or "", x["id"]))[0]
 
 
 def cap(t0, t1, y, *lines):
@@ -197,6 +205,10 @@ def ladder_short(name):
 
 
 SHORTS["ladder_heights"] = ladder_short("ladder_heights")
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import ladders as _ladders  # noqa: E402  (ladders from data/ladder-topics.json)
+_ladders.register(SHORTS, LADDERS, ladder_short)
 
 
 def frames(short):

@@ -1,0 +1,34 @@
+name: upload
+# 1 Short a day at 19:00 Europe/Kyiv, 2 scheduled ahead (owner 18.11). automation/publish.py: channel-id guard
+# (YT_CHANNEL_ID), full video list + "[ref: hugetoscale/<slug>]" duplicate guard, private + publishAt,
+# category 28, madeForKids false, containsSyntheticMedia false; the state is committed after every upload.
+on:
+  schedule:
+    - cron: "0 14 * * *"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "1 = read the channel and print the plan, upload nothing"
+        default: "0"
+concurrency:
+  group: upload
+  cancel-in-progress: false
+permissions:
+  contents: write
+  issues: write
+jobs:
+  upload:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+      - run: pip install --quiet google-api-python-client google-auth
+      - env:
+          GH_TOKEN: ${{ github.token }}
+          YT_TOKEN_JSON: ${{ secrets.YT_TOKEN_JSON }}
+          YT_CHANNEL_ID: ${{ vars.YT_CHANNEL_ID }}
+          DRY_RUN: ${{ inputs.dry_run == '1' && '1' || '' }}
+        run: python automation/publish.py

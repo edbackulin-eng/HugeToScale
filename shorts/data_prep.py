@@ -12,6 +12,7 @@ import datetime as dt
 import json
 import math
 import sys
+import urllib.error
 import urllib.parse
 import urllib.request
 from pathlib import Path
@@ -32,7 +33,7 @@ def fetch(url, data=None, timeout=180, tries=4):
             with urllib.request.urlopen(req, timeout=timeout) as r:
                 return r.read()
         except Exception as e:  # noqa: BLE001
-            if k == tries - 1:
+            if k == tries - 1 or (isinstance(e, urllib.error.HTTPError) and e.code in (403, 404)):
                 raise
             print(f"fetch retry {k + 1} after {e}")
             time.sleep(20 * (k + 1))
@@ -234,7 +235,15 @@ def copdem(name, lat0, lon0, half, px=600):
         t = f"{'N' if la >= 0 else 'S'}{abs(la):02d}_00_{'E' if lo >= 0 else 'W'}{abs(lo):03d}_00"
         url = COPDEM.format(t=t)
         urls.append(url)
-        raw = fetch(url, timeout=300)
+        try:
+            raw = fetch(url, timeout=300)
+        except urllib.error.HTTPError as e:     # GLO-30 has no tile over open sea: that part is sea level
+            if e.code not in (403, 404):
+                raise
+            print("copdem: no tile", t, "(sea)")
+            out[(np.floor(lat) == la) & (np.floor(lon) == lo)] = 0.0
+            urls.pop()
+            continue
         with rasterio.MemoryFile(raw) as mf, mf.open() as ds:
             z = ds.read(1).astype(np.float64)
             inv = ~ds.transform

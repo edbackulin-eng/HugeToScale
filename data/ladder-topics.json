@@ -1,62 +1,326 @@
 {
- "note": "Size-ladder topics (owner 17.11). Only things that render realistically: simple structures, real relief (USGS 3DEP / Copernicus DEM / GEBCO bathymetry / NASA LRO & MOLA), equal-area maps. A topic is used once (status: used).",
+ "note": "Size-ladder topics (owner 17-18.11). Only things that render realistically, open data, two sources per number. A topic is used once (status planned -> scheduled). scripts/topics.py (topics.yml, weekly) keeps >= 30 planned, >= 20 of them renderable today (engine 'peaks' with a 'spec'). Topics of other engines wait until that engine is built.",
  "topics": [
-  {"id": "heights-saturnv-everest", "kind": "higher", "status": "trial",
-   "steps": ["Saturn V 111 m", "Great Pyramid 139 m", "Burj Khalifa 828 m", "Mount Fuji 3,776 m", "Kilimanjaro 5,895 m", "Everest 8,849 m"],
-   "data": "own models + Copernicus DEM"},
-  {"id": "volcanoes", "kind": "higher", "status": "planned",
-   "steps": ["Vesuvius 1,281 m", "Mount St. Helens 2,549 m", "Etna ~3,357 m", "Fuji 3,776 m", "Kilimanjaro 5,895 m", "Ojos del Salado 6,893 m"],
-   "data": "Copernicus DEM, USGS 3DEP"},
-  {"id": "seven-summits", "kind": "higher", "status": "planned",
-   "steps": ["Kosciuszko 2,228 m", "Mont Blanc 4,806 m", "Elbrus 5,642 m", "Kilimanjaro 5,895 m", "Denali 6,190 m", "Aconcagua 6,961 m", "Everest 8,849 m"],
-   "data": "Copernicus DEM, USGS 3DEP (Denali)"},
-  {"id": "us-peaks", "kind": "higher", "status": "planned",
-   "steps": ["Mount Washington 1,917 m", "Mount Mitchell 2,037 m", "Mount Rainier 4,392 m", "Mount Whitney 4,421 m", "Denali 6,190 m"],
-   "data": "USGS 3DEP"},
-  {"id": "monuments", "kind": "higher", "status": "planned",
-   "steps": ["Stonehenge 7 m", "Statue of Liberty 93 m", "Washington Monument 169 m", "Great Pyramid 139 m", "Gateway Arch 192 m", "Burj Khalifa 828 m"],
-   "data": "own simple models from official dimensions (no facade detail)"},
-  {"id": "rockets", "kind": "higher", "status": "planned",
-   "steps": ["Mercury-Redstone 25 m", "Gemini-Titan II 33 m", "Space Shuttle stack 56 m", "SLS Block 1 98 m", "Saturn V 111 m"],
-   "data": "own models from NASA dimensions (NASA vehicles only, no company brands)"},
-  {"id": "canyons", "kind": "deeper", "status": "planned",
-   "steps": ["Antelope Canyon ~40 m", "Black Canyon of the Gunnison 829 m", "Grand Canyon ~1,800 m", "Fish River Canyon ~550 m", "Colca Canyon ~3,270 m"],
-   "data": "USGS 3DEP, Copernicus DEM; order by measured depth"},
-  {"id": "holes-and-mines", "kind": "deeper", "status": "planned",
-   "steps": ["Kimberley Big Hole ~215 m", "Meteor Crater 170 m", "Chuquicamata mine ~1,000 m", "Bingham Canyon Mine ~1,200 m", "Grand Canyon ~1,800 m"],
-   "data": "Copernicus DEM, USGS 3DEP; order by measured depth"},
-  {"id": "ocean-depths", "kind": "deeper", "status": "planned",
-   "steps": ["Burj Khalifa 828 m (for scale)", "Lake Baikal 1,642 m", "Grand Canyon 1,800 m", "Puerto Rico Trench ~8,400 m", "Everest 8,849 m upside down", "Mariana Trench ~10,935 m"],
-   "data": "GEBCO bathymetry (public domain), Copernicus DEM"},
-  {"id": "mauna-kea-from-the-seafloor", "kind": "higher", "status": "planned",
-   "steps": ["Fuji 3,776 m", "Kilimanjaro 5,895 m", "Everest 8,849 m", "Mauna Kea from its base ~10,200 m"],
-   "data": "GEBCO + USGS 3DEP"},
-  {"id": "craters-earth", "kind": "wider", "status": "planned",
-   "steps": ["Wolfe Creek ~0.9 km", "Meteor Crater 1.2 km", "Lonar ~1.8 km", "Pingualuit 3.4 km", "Ries ~24 km", "Manicouagan ~100 km"],
-   "data": "Copernicus DEM, USGS 3DEP; drone view over each relief"},
-  {"id": "moon-craters", "kind": "wider", "status": "planned",
-   "steps": ["Linne ~2.4 km", "Aristarchus ~40 km", "Copernicus ~93 km", "Tycho ~85 km", "Clavius ~231 km"],
-   "data": "NASA LRO LOLA DEM (public domain), placed over a map of Earth for scale; order by size"},
-  {"id": "islands-area", "kind": "area", "status": "planned",
-   "steps": ["Malta", "Cyprus", "Sicily", "Ireland", "Great Britain", "Borneo", "Greenland"],
-   "data": "Natural Earth, equal-area projection (map format)"},
-  {"id": "lakes-area", "kind": "area", "status": "planned",
-   "steps": ["Lake Geneva", "Lake Balaton", "Lake Titicaca", "Lake Ontario", "Lake Victoria", "Lake Superior", "Caspian Sea"],
-   "data": "Natural Earth / OSM, equal-area projection"},
-  {"id": "deserts-area", "kind": "area", "status": "planned",
-   "steps": ["Death Valley", "Mojave", "Atacama", "Gobi", "Sahara"],
-   "data": "Natural Earth physical regions, equal-area projection"},
-  {"id": "us-states-vs-countries", "kind": "area", "status": "planned",
-   "steps": ["Rhode Island", "Belgium", "Florida", "Germany", "Texas", "Alaska"],
-   "data": "Natural Earth, US Census areas"},
-  {"id": "rivers-length", "kind": "longer", "status": "planned",
-   "steps": ["Thames 346 km", "Rhine ~1,230 km", "Danube 2,850 km", "Mississippi ~3,730 km", "Nile ~6,650 km"],
-   "data": "Natural Earth rivers, drawn over a map of Europe/US at true scale"},
-  {"id": "olympus-mons-over-countries", "kind": "area", "status": "planned",
-   "steps": ["Olympus Mons footprint (~600 km) over France / Arizona", "height 21.9 km vs Everest"],
-   "data": "NASA MGS MOLA DEM (public domain), map format (wide object: not for a vertical height ladder)"},
-  {"id": "valles-marineris-over-usa", "kind": "longer", "status": "planned",
-   "steps": ["Grand Canyon 446 km", "Valles Marineris ~4,000 km across the USA"],
-   "data": "NASA MOLA + USGS 3DEP, map format"}
+  {
+   "id": "heights-saturnv-everest",
+   "kind": "higher",
+   "status": "scheduled",
+   "steps": [
+    "Saturn V 111 m",
+    "Great Pyramid 139 m",
+    "Burj Khalifa 828 m",
+    "Mount Fuji 3,776 m",
+    "Kilimanjaro 5,895 m",
+    "Everest 8,849 m"
+   ],
+   "data": "own models + Copernicus DEM",
+   "engine": "peaks",
+   "short": "ladder_heights"
+  },
+  {
+   "id": "volcanoes",
+   "kind": "higher",
+   "status": "planned",
+   "steps": [
+    "Vesuvius 1,281 m",
+    "Mount St. Helens 2,549 m",
+    "Etna ~3,357 m",
+    "Fuji 3,776 m",
+    "Kilimanjaro 5,895 m",
+    "Ojos del Salado 6,893 m"
+   ],
+   "data": "Copernicus DEM, USGS 3DEP",
+   "engine": "peaks",
+   "seeds": [
+    "biggest volcanoes in the world",
+    "volcano size comparison",
+    "tallest volcano in the world"
+   ],
+   "keys": [
+    "volcano"
+   ],
+   "hashtags": [
+    "#sizecomparison",
+    "#volcano",
+    "#mountains",
+    "#3d",
+    "#scale"
+   ]
+  },
+  {
+   "id": "seven-summits",
+   "kind": "higher",
+   "status": "planned",
+   "steps": [
+    "Kosciuszko 2,228 m",
+    "Mont Blanc 4,806 m",
+    "Elbrus 5,642 m",
+    "Kilimanjaro 5,895 m",
+    "Denali 6,190 m",
+    "Aconcagua 6,961 m",
+    "Everest 8,849 m"
+   ],
+   "data": "Copernicus DEM, USGS 3DEP (Denali)",
+   "engine": "peaks",
+   "seeds": [
+    "seven summits",
+    "7 summits",
+    "highest mountain on each continent"
+   ],
+   "keys": [
+    "summit",
+    "continent"
+   ],
+   "hashtags": [
+    "#sizecomparison",
+    "#sevensummits",
+    "#mountains",
+    "#3d",
+    "#scale"
+   ]
+  },
+  {
+   "id": "us-peaks",
+   "kind": "higher",
+   "status": "planned",
+   "steps": [
+    "Mount Washington 1,917 m",
+    "Mount Mitchell 2,037 m",
+    "Mount Rainier 4,392 m",
+    "Mount Whitney 4,421 m",
+    "Denali 6,190 m"
+   ],
+   "data": "USGS 3DEP",
+   "engine": "peaks",
+   "seeds": [
+    "highest mountains in the us",
+    "tallest mountains in usa",
+    "highest peak in usa"
+   ],
+   "keys": [
+    "usa",
+    "america",
+    "united states",
+    " us"
+   ],
+   "hashtags": [
+    "#sizecomparison",
+    "#usa",
+    "#mountains",
+    "#3d",
+    "#scale"
+   ]
+  },
+  {
+   "id": "monuments",
+   "kind": "higher",
+   "status": "planned",
+   "steps": [
+    "Stonehenge 7 m",
+    "Statue of Liberty 93 m",
+    "Washington Monument 169 m",
+    "Great Pyramid 139 m",
+    "Gateway Arch 192 m",
+    "Burj Khalifa 828 m"
+   ],
+   "data": "own simple models from official dimensions (no facade detail)",
+   "engine": "models (own simple models; the Statue of Liberty is too detailed - to be replaced)"
+  },
+  {
+   "id": "rockets",
+   "kind": "higher",
+   "status": "planned",
+   "steps": [
+    "Mercury-Redstone 25 m",
+    "Gemini-Titan II 33 m",
+    "Space Shuttle stack 56 m",
+    "SLS Block 1 98 m",
+    "Saturn V 111 m"
+   ],
+   "data": "own models from NASA dimensions (NASA vehicles only, no company brands)",
+   "engine": "models (own NASA-dimension models)"
+  },
+  {
+   "id": "canyons",
+   "kind": "deeper",
+   "status": "planned",
+   "steps": [
+    "Antelope Canyon ~40 m",
+    "Black Canyon of the Gunnison 829 m",
+    "Grand Canyon ~1,800 m",
+    "Fish River Canyon ~550 m",
+    "Colca Canyon ~3,270 m"
+   ],
+   "data": "USGS 3DEP, Copernicus DEM; order by measured depth",
+   "engine": "depth-dem"
+  },
+  {
+   "id": "holes-and-mines",
+   "kind": "deeper",
+   "status": "planned",
+   "steps": [
+    "Kimberley Big Hole ~215 m",
+    "Meteor Crater 170 m",
+    "Chuquicamata mine ~1,000 m",
+    "Bingham Canyon Mine ~1,200 m",
+    "Grand Canyon ~1,800 m"
+   ],
+   "data": "Copernicus DEM, USGS 3DEP; order by measured depth",
+   "engine": "depth-dem"
+  },
+  {
+   "id": "ocean-depths",
+   "kind": "deeper",
+   "status": "planned",
+   "steps": [
+    "Burj Khalifa 828 m (for scale)",
+    "Lake Baikal 1,642 m",
+    "Grand Canyon 1,800 m",
+    "Puerto Rico Trench ~8,400 m",
+    "Everest 8,849 m upside down",
+    "Mariana Trench ~10,935 m"
+   ],
+   "data": "GEBCO bathymetry (public domain), Copernicus DEM",
+   "engine": "bathymetry (GEBCO)"
+  },
+  {
+   "id": "mauna-kea-from-the-seafloor",
+   "kind": "higher",
+   "status": "planned",
+   "steps": [
+    "Fuji 3,776 m",
+    "Kilimanjaro 5,895 m",
+    "Everest 8,849 m",
+    "Mauna Kea from its base ~10,200 m"
+   ],
+   "data": "GEBCO + USGS 3DEP",
+   "engine": "bathymetry (GEBCO)"
+  },
+  {
+   "id": "craters-earth",
+   "kind": "wider",
+   "status": "planned",
+   "steps": [
+    "Wolfe Creek ~0.9 km",
+    "Meteor Crater 1.2 km",
+    "Lonar ~1.8 km",
+    "Pingualuit 3.4 km",
+    "Ries ~24 km",
+    "Manicouagan ~100 km"
+   ],
+   "data": "Copernicus DEM, USGS 3DEP; drone view over each relief",
+   "engine": "aerial (DEM + NAIP/Sentinel)"
+  },
+  {
+   "id": "moon-craters",
+   "kind": "wider",
+   "status": "planned",
+   "steps": [
+    "Linne ~2.4 km",
+    "Aristarchus ~40 km",
+    "Copernicus ~93 km",
+    "Tycho ~85 km",
+    "Clavius ~231 km"
+   ],
+   "data": "NASA LRO LOLA DEM (public domain), placed over a map of Earth for scale; order by size",
+   "engine": "lunar-dem (LRO LOLA)"
+  },
+  {
+   "id": "islands-area",
+   "kind": "area",
+   "status": "planned",
+   "steps": [
+    "Malta",
+    "Cyprus",
+    "Sicily",
+    "Ireland",
+    "Great Britain",
+    "Borneo",
+    "Greenland"
+   ],
+   "data": "Natural Earth, equal-area projection (map format)",
+   "engine": "area-map"
+  },
+  {
+   "id": "lakes-area",
+   "kind": "area",
+   "status": "planned",
+   "steps": [
+    "Lake Geneva",
+    "Lake Balaton",
+    "Lake Titicaca",
+    "Lake Ontario",
+    "Lake Victoria",
+    "Lake Superior",
+    "Caspian Sea"
+   ],
+   "data": "Natural Earth / OSM, equal-area projection",
+   "engine": "area-map"
+  },
+  {
+   "id": "deserts-area",
+   "kind": "area",
+   "status": "planned",
+   "steps": [
+    "Death Valley",
+    "Mojave",
+    "Atacama",
+    "Gobi",
+    "Sahara"
+   ],
+   "data": "Natural Earth physical regions, equal-area projection",
+   "engine": "area-map"
+  },
+  {
+   "id": "us-states-vs-countries",
+   "kind": "area",
+   "status": "planned",
+   "steps": [
+    "Rhode Island",
+    "Belgium",
+    "Florida",
+    "Germany",
+    "Texas",
+    "Alaska"
+   ],
+   "data": "Natural Earth, US Census areas",
+   "engine": "area-map"
+  },
+  {
+   "id": "rivers-length",
+   "kind": "longer",
+   "status": "planned",
+   "steps": [
+    "Thames 346 km",
+    "Rhine ~1,230 km",
+    "Danube 2,850 km",
+    "Mississippi ~3,730 km",
+    "Nile ~6,650 km"
+   ],
+   "data": "Natural Earth rivers, drawn over a map of Europe/US at true scale",
+   "engine": "length-map"
+  },
+  {
+   "id": "olympus-mons-over-countries",
+   "kind": "area",
+   "status": "planned",
+   "steps": [
+    "Olympus Mons footprint (~600 km) over France / Arizona",
+    "height 21.9 km vs Everest"
+   ],
+   "data": "NASA MGS MOLA DEM (public domain), map format (wide object: not for a vertical height ladder)",
+   "engine": "area-map"
+  },
+  {
+   "id": "valles-marineris-over-usa",
+   "kind": "longer",
+   "status": "planned",
+   "steps": [
+    "Grand Canyon 446 km",
+    "Valles Marineris ~4,000 km across the USA"
+   ],
+   "data": "NASA MOLA + USGS 3DEP, map format",
+   "engine": "length-map"
+  }
  ]
 }

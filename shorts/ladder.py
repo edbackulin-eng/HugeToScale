@@ -247,7 +247,7 @@ def framings(L):
     out = []
     left = None
     for s in L["steps"]:
-        half_w = {"saturnv": 8, "pyramid": 116, "burj": 75}.get(s["key"], 900)
+        half_w = s.get("half_w") or {"saturnv": 8, "pyramid": 116, "burj": 75}.get(s["key"], 900)
         lo, hi = s["x"] - half_w, s["x"] + half_w
         left = lo if left is None else min(left, lo)
         S = TOP_FILL * s["h"]
@@ -353,7 +353,7 @@ def build(name, preview, rig):
         objs.append(ob)
     for m in bpy.data.materials:
         if m.name.endswith("relief"):
-            A.aerial(m, CAM_DIST, 120000, 0.5, HDRI_ID, 1.2, rot=rot)
+            A.aerial(m, CAM_DIST, max(120000.0, 1.6 * max(st["y"] for st in L["steps"])), 0.5, HDRI_ID, 1.2, rot=rot)
     # camera: orthographic, looking north, pitch 0
     cam = rig.cam
     for c in list(cam.constraints):
