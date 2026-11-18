@@ -77,7 +77,121 @@
     "#mountains",
     "#3d",
     "#scale"
-   ]
+   ],
+   "spec": {
+    "steps": [
+     {
+      "key": "mount-kosciuszko-q178167",
+      "qid": "Q178167",
+      "name": "MOUNT KOSCIUSZKO",
+      "value": "2,228 m",
+      "h": 2228.0,
+      "lat": -36.45583,
+      "lon": 148.26351,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q178167 (elevation 2228 m); https://en.wikipedia.org/wiki/Mount_Kosciuszko",
+       "Copernicus DEM GLO-30, summit measured 2225.8 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "mont-blanc-q583",
+      "qid": "Q583",
+      "name": "MONT BLANC",
+      "value": "4,810 m",
+      "h": 4810.02,
+      "lat": 45.83278,
+      "lon": 6.865,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q583 (elevation 4810.02 m); https://en.wikipedia.org/wiki/Mont_Blanc",
+       "Copernicus DEM GLO-30, summit measured 4807.8 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "mount-elbrus-q43105",
+      "qid": "Q43105",
+      "name": "MOUNT ELBRUS",
+      "value": "5,642 m",
+      "h": 5642.0,
+      "lat": 43.35254,
+      "lon": 42.43787,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q43105 (elevation 5642 m); https://en.wikipedia.org/wiki/Mount_Elbrus",
+       "Copernicus DEM GLO-30, summit measured 5629.6 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "mount-kilimanjaro-q7296",
+      "qid": "Q7296",
+      "name": "MOUNT KILIMANJARO",
+      "value": "5,895 m",
+      "h": 5895.0,
+      "lat": -3.06667,
+      "lon": 37.35917,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q7296 (elevation 5895 m); https://en.wikipedia.org/wiki/Mount_Kilimanjaro",
+       "Copernicus DEM GLO-30, summit measured 5886.0 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "denali-q130018",
+      "qid": "Q130018",
+      "name": "DENALI",
+      "value": "6,190 m",
+      "h": 6190.0,
+      "lat": 63.06917,
+      "lon": -151.00639,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q130018 (elevation 6190 m); https://en.wikipedia.org/wiki/Denali",
+       "Copernicus DEM GLO-30, summit measured 6178.8 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "aconcagua-q39739",
+      "qid": "Q39739",
+      "name": "ACONCAGUA",
+      "value": "6,962 m",
+      "h": 6962.0,
+      "lat": -32.65306,
+      "lon": -70.01167,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q39739 (elevation 6962 m); https://en.wikipedia.org/wiki/Aconcagua",
+       "Copernicus DEM GLO-30, summit measured 6913.2 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "mount-everest-q513",
+      "qid": "Q513",
+      "name": "MOUNT EVEREST",
+      "value": "8,849 m",
+      "h": 8848.86,
+      "lat": 27.98806,
+      "lon": 86.925,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q513 (elevation 8848.86 m); https://en.wikipedia.org/wiki/Mount_Everest",
+       "Copernicus DEM GLO-30, summit measured 8736.0 m (within 2 %)"
+      ]
+     }
+    ],
+    "titles": [
+     "Seven Summits: 7 Peaks to 8,849 m",
+     "Seven Summits of the World: 7 Peaks to 8,849 m",
+     "Seven Summits Group: 7 Peaks to 8,849 m"
+    ],
+    "queries": [
+     "seven summits",
+     "7 summits",
+     "highest mountain on each continent",
+     "Mount Everest height"
+    ],
+    "hashtags": [
+     "#sizecomparison",
+     "#sevensummits",
+     "#mountains",
+     "#3d",
+     "#scale"
+    ],
+    "intro": "7 real mountains, each taller than the last, side by side at true scale (Copernicus DEM elevation data): Mount Kosciuszko, Mont Blanc, Mount Elbrus, Mount Kilimanjaro, Denali, Aconcagua, Mount Everest."
+   }
   },
   {
    "id": "us-peaks",
@@ -109,7 +223,95 @@
     "#mountains",
     "#3d",
     "#scale"
-   ]
+   ],
+   "spec": {
+    "steps": [
+     {
+      "key": "mount-washington-q572801",
+      "qid": "Q572801",
+      "name": "MOUNT WASHINGTON",
+      "value": "1,917 m",
+      "h": 1917.0,
+      "lat": 44.27083,
+      "lon": -71.30348,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q572801 (elevation 1917 m); https://en.wikipedia.org/wiki/Mount_Washington",
+       "Copernicus DEM GLO-30, summit measured 1912.8 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "mount-mitchell-q615337",
+      "qid": "Q615337",
+      "name": "MOUNT MITCHELL",
+      "value": "2,037 m",
+      "h": 2037.0,
+      "lat": 35.76476,
+      "lon": -82.26486,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q615337 (elevation 2037 m); https://en.wikipedia.org/wiki/Mount_Mitchell",
+       "Copernicus DEM GLO-30, summit measured 2034.0 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "mount-rainier-q194057",
+      "qid": "Q194057",
+      "name": "MOUNT RAINIER",
+      "value": "4,389 m",
+      "h": 4389.0,
+      "lat": 46.85167,
+      "lon": -121.76028,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q194057 (elevation 4389 m); https://en.wikipedia.org/wiki/Mount_Rainier",
+       "Copernicus DEM GLO-30, summit measured 4410.7 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "mount-whitney-q235539",
+      "qid": "Q235539",
+      "name": "MOUNT WHITNEY",
+      "value": "4,421 m",
+      "h": 4421.0,
+      "lat": 36.57861,
+      "lon": -118.29194,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q235539 (elevation 4421 m); https://en.wikipedia.org/wiki/Mount_Whitney",
+       "Copernicus DEM GLO-30, summit measured 4408.7 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "denali-q130018",
+      "qid": "Q130018",
+      "name": "DENALI",
+      "value": "6,190 m",
+      "h": 6190.0,
+      "lat": 63.06917,
+      "lon": -151.00639,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q130018 (elevation 6190 m); https://en.wikipedia.org/wiki/Denali",
+       "Copernicus DEM GLO-30, summit measured 6178.8 m (within 2 %)"
+      ]
+     }
+    ],
+    "titles": [
+     "Highest Mountain in the Us: 5 Peaks to 6,190 m",
+     "Tallest Mountains in the Us: 5 Peaks to 6,190 m",
+     "Highest Peak in Us: 5 Peaks to 6,190 m"
+    ],
+    "queries": [
+     "highest mountains in the us",
+     "tallest mountains in usa",
+     "highest peak in usa",
+     "Denali height"
+    ],
+    "hashtags": [
+     "#sizecomparison",
+     "#usa",
+     "#mountains",
+     "#3d",
+     "#scale"
+    ],
+    "intro": "5 real mountains, each taller than the last, side by side at true scale (Copernicus DEM elevation data): Mount Washington, Mount Mitchell, Mount Rainier, Mount Whitney, Denali."
+   }
   },
   {
    "id": "monuments",
@@ -321,11 +523,1552 @@
    ],
    "data": "NASA MOLA + USGS 3DEP, map format",
    "engine": "length-map"
+  },
+  {
+   "id": "peaks-people-s-republic-of-china",
+   "kind": "higher",
+   "engine": "peaks",
+   "status": "planned",
+   "source": "generated",
+   "added": "2026-11-18",
+   "steps": [
+    "Tai Mo Shan 957 m",
+    "Mount Tai 1,545 m",
+    "Mount Emei 3,099 m",
+    "Hüiten Peak 4,374 m",
+    "Khan Tengri 7,010 m",
+    "Mount Everest 8,849 m"
+   ],
+   "data": "Copernicus DEM GLO-30 + Wikidata elevations (two sources, 2 % check)",
+   "spec": {
+    "steps": [
+     {
+      "key": "tai-mo-shan-q1481864",
+      "qid": "Q1481864",
+      "name": "TAI MO SHAN",
+      "value": "957 m",
+      "h": 957.0,
+      "lat": 22.4118,
+      "lon": 114.123,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q1481864 (elevation 957 m); https://en.wikipedia.org/wiki/Tai_Mo_Shan",
+       "Copernicus DEM GLO-30, summit measured 953.8 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "mount-tai-q216059",
+      "qid": "Q216059",
+      "name": "MOUNT TAI",
+      "value": "1,545 m",
+      "h": 1545.0,
+      "lat": 36.26667,
+      "lon": 117.1,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q216059 (elevation 1545 m); https://en.wikipedia.org/wiki/Mount_Tai",
+       "Copernicus DEM GLO-30, summit measured 1530.2 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "mount-emei-q134927",
+      "qid": "Q134927",
+      "name": "MOUNT EMEI",
+      "value": "3,099 m",
+      "h": 3099.0,
+      "lat": 29.51972,
+      "lon": 103.3325,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q134927 (elevation 3099 m); https://en.wikipedia.org/wiki/Mount_Emei",
+       "Copernicus DEM GLO-30, summit measured 3095.9 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "h-iten-peak-q1091113",
+      "qid": "Q1091113",
+      "name": "HÜITEN PEAK",
+      "value": "4,374 m",
+      "h": 4374.0,
+      "lat": 49.14583,
+      "lon": 87.81917,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q1091113 (elevation 4374 m); https://en.wikipedia.org/wiki/Kh%C3%BCiten_Peak",
+       "Copernicus DEM GLO-30, summit measured 4341.5 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "khan-tengri-q211529",
+      "qid": "Q211529",
+      "name": "KHAN TENGRI",
+      "value": "7,010 m",
+      "h": 7010.0,
+      "lat": 42.21083,
+      "lon": 80.175,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q211529 (elevation 7010 m); https://en.wikipedia.org/wiki/Khan_Tengri",
+       "Copernicus DEM GLO-30, summit measured 7051.1 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "mount-everest-q513",
+      "qid": "Q513",
+      "name": "MOUNT EVEREST",
+      "value": "8,849 m",
+      "h": 8848.86,
+      "lat": 27.98806,
+      "lon": 86.925,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q513 (elevation 8848.86 m); https://en.wikipedia.org/wiki/Mount_Everest",
+       "Copernicus DEM GLO-30, summit measured 8736.0 m (within 2 %)"
+      ]
+     }
+    ],
+    "titles": [
+     "Mount Everest Height: 6 Peaks to 8,849 m",
+     "Mount Everest Height Comparison: 6 Peaks to 8,849 m",
+     "Mount Everest Height vs Burj Khalifa: 6 Peaks to 8,849 m"
+    ],
+    "queries": [
+     "Mount Everest height"
+    ],
+    "hashtags": [
+     "#sizecomparison",
+     "#peoplesrepublicofchina",
+     "#mountains",
+     "#3d",
+     "#scale"
+    ],
+    "intro": "6 real mountains of People's Republic of China, each taller than the last, side by side at true scale (Copernicus DEM elevation data): Tai Mo Shan, Mount Tai, Mount Emei, Hüiten Peak, Khan Tengri, Mount Everest."
+   }
+  },
+  {
+   "id": "peaks-united-states",
+   "kind": "higher",
+   "engine": "peaks",
+   "status": "planned",
+   "source": "generated",
+   "added": "2026-11-18",
+   "steps": [
+    "Mount Monadnock 965 m",
+    "Kīlauea 1,247 m",
+    "Mount Rushmore 1,745 m",
+    "Mount Hood 3,425 m",
+    "Mauna Kea 4,207 m",
+    "Mount Saint Elias 5,491 m"
+   ],
+   "data": "Copernicus DEM GLO-30 + Wikidata elevations (two sources, 2 % check)",
+   "spec": {
+    "steps": [
+     {
+      "key": "mount-monadnock-q289542",
+      "qid": "Q289542",
+      "name": "MOUNT MONADNOCK",
+      "value": "965 m",
+      "h": 965.0,
+      "lat": 42.86083,
+      "lon": -72.10806,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q289542 (elevation 965 m); https://en.wikipedia.org/wiki/Mount_Monadnock",
+       "Copernicus DEM GLO-30, summit measured 958.2 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "k-lauea-q188698",
+      "qid": "Q188698",
+      "name": "KĪLAUEA",
+      "value": "1,247 m",
+      "h": 1247.0,
+      "lat": 19.4211,
+      "lon": -155.28676,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q188698 (elevation 1247 m); https://en.wikipedia.org/wiki/K%C4%ABlauea",
+       "Copernicus DEM GLO-30, summit measured 1245.0 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "mount-rushmore-q83497",
+      "qid": "Q83497",
+      "name": "MOUNT RUSHMORE",
+      "value": "1,745 m",
+      "h": 1745.0,
+      "lat": 43.87889,
+      "lon": -103.45917,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q83497 (elevation 1745 m); https://en.wikipedia.org/wiki/Mount_Rushmore",
+       "Copernicus DEM GLO-30, summit measured 1728.9 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "mount-hood-q275662",
+      "qid": "Q275662",
+      "name": "MOUNT HOOD",
+      "value": "3,425 m",
+      "h": 3425.04,
+      "lat": 45.37361,
+      "lon": -121.69583,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q275662 (elevation 3425.04 m); https://en.wikipedia.org/wiki/Mount_Hood",
+       "Copernicus DEM GLO-30, summit measured 3407.2 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "mauna-kea-q131230",
+      "qid": "Q131230",
+      "name": "MAUNA KEA",
+      "value": "4,207 m",
+      "h": 4207.3,
+      "lat": 19.82056,
+      "lon": -155.46806,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q131230 (elevation 4207.3 m); https://en.wikipedia.org/wiki/Mauna_Kea",
+       "Copernicus DEM GLO-30, summit measured 4203.1 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "mount-saint-elias-q770496",
+      "qid": "Q770496",
+      "name": "MOUNT SAINT ELIAS",
+      "value": "5,491 m",
+      "h": 5491.0,
+      "lat": 60.29222,
+      "lon": -140.93139,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q770496 (elevation 5491 m); https://en.wikipedia.org/wiki/Mount_Saint_Elias",
+       "Copernicus DEM GLO-30, summit measured 5462.1 m (within 2 %)"
+      ]
+     }
+    ],
+    "titles": [
+     "Tallest Mountain in the United States: 6 Peaks to 5,491 m",
+     "United States Mountains: 6 Peaks to 5,491 m"
+    ],
+    "queries": [
+     "tallest mountains in United States",
+     "United States mountains"
+    ],
+    "hashtags": [
+     "#sizecomparison",
+     "#unitedstates",
+     "#mountains",
+     "#3d",
+     "#scale"
+    ],
+    "intro": "6 real mountains of United States, each taller than the last, side by side at true scale (Copernicus DEM elevation data): Mount Monadnock, Kīlauea, Mount Rushmore, Mount Hood, Mauna Kea, Mount Saint Elias."
+   }
+  },
+  {
+   "id": "peaks-russia",
+   "kind": "higher",
+   "engine": "peaks",
+   "status": "planned",
+   "source": "generated",
+   "added": "2026-11-18",
+   "steps": [
+    "Ayu-Dag 572 m",
+    "Ai-Petri 1,234 m",
+    "Mount Yamantau 1,640 m",
+    "Avachinsky 2,741 m",
+    "Belukha Mountain 4,506 m",
+    "Mount Elbrus 5,642 m"
+   ],
+   "data": "Copernicus DEM GLO-30 + Wikidata elevations (two sources, 2 % check)",
+   "spec": {
+    "steps": [
+     {
+      "key": "ayu-dag-q2470386",
+      "qid": "Q2470386",
+      "name": "AYU-DAG",
+      "value": "572 m",
+      "h": 572.0,
+      "lat": 44.56072,
+      "lon": 34.32678,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q2470386 (elevation 572 m); https://en.wikipedia.org/wiki/Ayu-Dag",
+       "Copernicus DEM GLO-30, summit measured 578.5 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "ai-petri-q1517833",
+      "qid": "Q1517833",
+      "name": "AI-PETRI",
+      "value": "1,234 m",
+      "h": 1234.2,
+      "lat": 44.45111,
+      "lon": 34.05278,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q1517833 (elevation 1234.2 m); https://en.wikipedia.org/wiki/Ai-Petri",
+       "Copernicus DEM GLO-30, summit measured 1255.1 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "mount-yamantau-q1514176",
+      "qid": "Q1514176",
+      "name": "MOUNT YAMANTAU",
+      "value": "1,640 m",
+      "h": 1640.0,
+      "lat": 54.255,
+      "lon": 58.102,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q1514176 (elevation 1640 m); https://en.wikipedia.org/wiki/Mount_Yamantau",
+       "Copernicus DEM GLO-30, summit measured 1637.8 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "avachinsky-q791652",
+      "qid": "Q791652",
+      "name": "AVACHINSKY",
+      "value": "2,741 m",
+      "h": 2741.0,
+      "lat": 53.255,
+      "lon": 158.83278,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q791652 (elevation 2741 m); https://en.wikipedia.org/wiki/Avachinsky",
+       "Copernicus DEM GLO-30, summit measured 2728.5 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "belukha-mountain-q724367",
+      "qid": "Q724367",
+      "name": "BELUKHA MOUNTAIN",
+      "value": "4,506 m",
+      "h": 4506.0,
+      "lat": 49.80694,
+      "lon": 86.58972,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q724367 (elevation 4506 m); https://en.wikipedia.org/wiki/Belukha_Mountain",
+       "Copernicus DEM GLO-30, summit measured 4448.4 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "mount-elbrus-q43105",
+      "qid": "Q43105",
+      "name": "MOUNT ELBRUS",
+      "value": "5,642 m",
+      "h": 5642.0,
+      "lat": 43.35254,
+      "lon": 42.43787,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q43105 (elevation 5642 m); https://en.wikipedia.org/wiki/Mount_Elbrus",
+       "Copernicus DEM GLO-30, summit measured 5629.6 m (within 2 %)"
+      ]
+     }
+    ],
+    "titles": [
+     "Tallest Mountain in Russia: 6 Peaks to 5,642 m",
+     "Highest Mountain in Russia: 6 Peaks to 5,642 m",
+     "Russia Mountains: 6 Peaks to 5,642 m"
+    ],
+    "queries": [
+     "tallest mountains in Russia",
+     "highest mountains in Russia",
+     "Russia mountains",
+     "Mount Elbrus height"
+    ],
+    "hashtags": [
+     "#sizecomparison",
+     "#russia",
+     "#mountains",
+     "#3d",
+     "#scale"
+    ],
+    "intro": "6 real mountains of Russia, each taller than the last, side by side at true scale (Copernicus DEM elevation data): Ayu-Dag, Ai-Petri, Mount Yamantau, Avachinsky, Belukha Mountain, Mount Elbrus."
+   }
+  },
+  {
+   "id": "peaks-chile",
+   "kind": "higher",
+   "engine": "peaks",
+   "status": "planned",
+   "source": "generated",
+   "added": "2026-11-18",
+   "steps": [
+    "Terevaka 507 m",
+    "Chaitén 1,122 m",
+    "Puyehue-Cordón Caulle 2,236 m",
+    "Llaima 3,125 m",
+    "Ojos Del Salado 6,893 m"
+   ],
+   "data": "Copernicus DEM GLO-30 + Wikidata elevations (two sources, 2 % check)",
+   "spec": {
+    "steps": [
+     {
+      "key": "terevaka-q538601",
+      "qid": "Q538601",
+      "name": "TEREVAKA",
+      "value": "507 m",
+      "h": 507.0,
+      "lat": -27.08444,
+      "lon": -109.37944,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q538601 (elevation 507 m); https://en.wikipedia.org/wiki/Terevaka",
+       "Copernicus DEM GLO-30, summit measured 507.7 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "chait-n-q152380",
+      "qid": "Q152380",
+      "name": "CHAITÉN",
+      "value": "1,122 m",
+      "h": 1122.0,
+      "lat": -42.83278,
+      "lon": -72.64583,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q152380 (elevation 1122 m); https://en.wikipedia.org/wiki/Chait%C3%A9n_(volcano)",
+       "Copernicus DEM GLO-30, summit measured 1104.9 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "puyehue-cord-n-caulle-q577700",
+      "qid": "Q577700",
+      "name": "PUYEHUE-CORDÓN CAULLE",
+      "value": "2,236 m",
+      "h": 2236.0,
+      "lat": -40.59028,
+      "lon": -72.11722,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q577700 (elevation 2236 m); https://en.wikipedia.org/wiki/Puyehue-Cord%C3%B3n_Caulle",
+       "Copernicus DEM GLO-30, summit measured 2234.3 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "llaima-q164121",
+      "qid": "Q164121",
+      "name": "LLAIMA",
+      "value": "3,125 m",
+      "h": 3125.0,
+      "lat": -38.69741,
+      "lon": -71.73045,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q164121 (elevation 3125 m); https://en.wikipedia.org/wiki/Llaima",
+       "Copernicus DEM GLO-30, summit measured 3125.7 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "ojos-del-salado-q233836",
+      "qid": "Q233836",
+      "name": "OJOS DEL SALADO",
+      "value": "6,893 m",
+      "h": 6893.0,
+      "lat": -27.10972,
+      "lon": -68.54139,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q233836 (elevation 6893 m); https://en.wikipedia.org/wiki/Ojos_del_Salado",
+       "Copernicus DEM GLO-30, summit measured 6883.1 m (within 2 %)"
+      ]
+     }
+    ],
+    "titles": [
+     "Chile Mountains: 5 Peaks to 6,893 m",
+     "Chile Mountain Faces: 5 Peaks to 6,893 m",
+     "Chile Mountain Plane Crash: 5 Peaks to 6,893 m"
+    ],
+    "queries": [
+     "Chile mountains",
+     "Ojos Del Salado height"
+    ],
+    "hashtags": [
+     "#sizecomparison",
+     "#chile",
+     "#mountains",
+     "#3d",
+     "#scale"
+    ],
+    "intro": "5 real mountains of Chile, each taller than the last, side by side at true scale (Copernicus DEM elevation data): Terevaka, Chaitén, Puyehue-Cordón Caulle, Llaima, Ojos Del Salado."
+   }
+  },
+  {
+   "id": "peaks-indonesia",
+   "kind": "higher",
+   "engine": "peaks",
+   "status": "planned",
+   "source": "generated",
+   "added": "2026-11-18",
+   "steps": [
+    "Mount Ruang 725 m",
+    "Mount Awu 1,320 m",
+    "Mount Batur 1,717 m",
+    "Mount Sinabung 2,460 m",
+    "Merapi 2,910 m",
+    "Puncak Jaya 4,884 m"
+   ],
+   "data": "Copernicus DEM GLO-30 + Wikidata elevations (two sources, 2 % check)",
+   "spec": {
+    "steps": [
+     {
+      "key": "mount-ruang-q2094734",
+      "qid": "Q2094734",
+      "name": "MOUNT RUANG",
+      "value": "725 m",
+      "h": 725.0,
+      "lat": 2.305,
+      "lon": 125.365,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q2094734 (elevation 725 m); https://en.wikipedia.org/wiki/Mount_Ruang",
+       "Copernicus DEM GLO-30, summit measured 712.3 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "mount-awu-q791817",
+      "qid": "Q791817",
+      "name": "MOUNT AWU",
+      "value": "1,320 m",
+      "h": 1320.0,
+      "lat": 3.68128,
+      "lon": 125.45387,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q791817 (elevation 1320 m); https://en.wikipedia.org/wiki/Mount_Awu",
+       "Copernicus DEM GLO-30, summit measured 1343.3 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "mount-batur-q43876",
+      "qid": "Q43876",
+      "name": "MOUNT BATUR",
+      "value": "1,717 m",
+      "h": 1717.0,
+      "lat": -8.24194,
+      "lon": 115.375,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q43876 (elevation 1717 m); https://en.wikipedia.org/wiki/Mount_Batur",
+       "Copernicus DEM GLO-30, summit measured 1694.3 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "mount-sinabung-q207678",
+      "qid": "Q207678",
+      "name": "MOUNT SINABUNG",
+      "value": "2,460 m",
+      "h": 2460.0,
+      "lat": 3.17,
+      "lon": 98.39194,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q207678 (elevation 2460 m); https://en.wikipedia.org/wiki/Mount_Sinabung",
+       "Copernicus DEM GLO-30, summit measured 2436.2 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "merapi-q134108",
+      "qid": "Q134108",
+      "name": "MERAPI",
+      "value": "2,910 m",
+      "h": 2910.0,
+      "lat": -7.54139,
+      "lon": 110.44611,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q134108 (elevation 2910 m); https://en.wikipedia.org/wiki/Mount_Merapi",
+       "Copernicus DEM GLO-30, summit measured 2908.4 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "puncak-jaya-q1045888",
+      "qid": "Q1045888",
+      "name": "PUNCAK JAYA",
+      "value": "4,884 m",
+      "h": 4884.0,
+      "lat": -4.08333,
+      "lon": 137.18333,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q1045888 (elevation 4884 m); https://en.wikipedia.org/wiki/Puncak_Jaya",
+       "Copernicus DEM GLO-30, summit measured 4802.6 m (within 2 %)"
+      ]
+     }
+    ],
+    "titles": [
+     "Highest Mountain in Indonesia: 6 Peaks to 4,884 m",
+     "Indonesia Mountains: 6 Peaks to 4,884 m",
+     "Indonesian Mountains: 6 Peaks to 4,884 m"
+    ],
+    "queries": [
+     "tallest mountains in Indonesia",
+     "Indonesia mountains",
+     "Puncak Jaya height"
+    ],
+    "hashtags": [
+     "#sizecomparison",
+     "#indonesia",
+     "#mountains",
+     "#3d",
+     "#scale"
+    ],
+    "intro": "6 real mountains of Indonesia, each taller than the last, side by side at true scale (Copernicus DEM elevation data): Mount Ruang, Mount Awu, Mount Batur, Mount Sinabung, Merapi, Puncak Jaya."
+   }
+  },
+  {
+   "id": "peaks-france",
+   "kind": "higher",
+   "engine": "peaks",
+   "status": "planned",
+   "source": "generated",
+   "added": "2026-11-18",
+   "steps": [
+    "Mont Faron 584 m",
+    "Larrun 905 m",
+    "Mont Agel 1,148 m",
+    "Mount Pelée 1,397 m",
+    "Piton De La Fournaise 2,632 m",
+    "Mont Blanc 4,810 m"
+   ],
+   "data": "Copernicus DEM GLO-30 + Wikidata elevations (two sources, 2 % check)",
+   "spec": {
+    "steps": [
+     {
+      "key": "mont-faron-q2983361",
+      "qid": "Q2983361",
+      "name": "MONT FARON",
+      "value": "584 m",
+      "h": 584.0,
+      "lat": 43.14944,
+      "lon": 5.95111,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q2983361 (elevation 584 m); https://en.wikipedia.org/wiki/Mont_Faron",
+       "Copernicus DEM GLO-30, summit measured 576.6 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "larrun-q2737839",
+      "qid": "Q2737839",
+      "name": "LARRUN",
+      "value": "905 m",
+      "h": 905.0,
+      "lat": 43.30917,
+      "lon": -1.63556,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q2737839 (elevation 905 m); https://en.wikipedia.org/wiki/Larrun",
+       "Copernicus DEM GLO-30, summit measured 893.7 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "mont-agel-q1517182",
+      "qid": "Q1517182",
+      "name": "MONT AGEL",
+      "value": "1,148 m",
+      "h": 1148.0,
+      "lat": 43.77528,
+      "lon": 7.42639,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q1517182 (elevation 1148 m); https://en.wikipedia.org/wiki/Mont_Agel",
+       "Copernicus DEM GLO-30, summit measured 1144.5 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "mount-pel-e-q76309",
+      "qid": "Q76309",
+      "name": "MOUNT PELÉE",
+      "value": "1,397 m",
+      "h": 1397.0,
+      "lat": 14.81306,
+      "lon": -61.16556,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q76309 (elevation 1397 m); https://en.wikipedia.org/wiki/Mount_Pel%C3%A9e",
+       "Copernicus DEM GLO-30, summit measured 1382.5 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "piton-de-la-fournaise-q1049644",
+      "qid": "Q1049644",
+      "name": "PITON DE LA FOURNAISE",
+      "value": "2,632 m",
+      "h": 2632.0,
+      "lat": -21.24312,
+      "lon": 55.70724,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q1049644 (elevation 2632 m); https://en.wikipedia.org/wiki/Piton_de_la_Fournaise",
+       "Copernicus DEM GLO-30, summit measured 2620.5 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "mont-blanc-q583",
+      "qid": "Q583",
+      "name": "MONT BLANC",
+      "value": "4,810 m",
+      "h": 4810.02,
+      "lat": 45.83278,
+      "lon": 6.865,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q583 (elevation 4810.02 m); https://en.wikipedia.org/wiki/Mont_Blanc",
+       "Copernicus DEM GLO-30, summit measured 4807.8 m (within 2 %)"
+      ]
+     }
+    ],
+    "titles": [
+     "Highest Mountain in France: 6 Peaks to 4,810 m",
+     "France Mountains: 6 Peaks to 4,810 m",
+     "France Alps Mountains: 6 Peaks to 4,810 m"
+    ],
+    "queries": [
+     "tallest mountains in France",
+     "France mountains",
+     "Mont Blanc height"
+    ],
+    "hashtags": [
+     "#sizecomparison",
+     "#france",
+     "#mountains",
+     "#3d",
+     "#scale"
+    ],
+    "intro": "6 real mountains of France, each taller than the last, side by side at true scale (Copernicus DEM elevation data): Mont Faron, Larrun, Mont Agel, Mount Pelée, Piton De La Fournaise, Mont Blanc."
+   }
+  },
+  {
+   "id": "peaks-japan",
+   "kind": "higher",
+   "engine": "peaks",
+   "status": "planned",
+   "source": "generated",
+   "added": "2026-11-18",
+   "steps": [
+    "Mount Ikoma 642 m",
+    "Mount Hiei 848 m",
+    "Sakurajima 1,117 m",
+    "Mount Unzen 1,486 m",
+    "Mount Asama 2,568 m",
+    "Mount Fuji 3,777 m"
+   ],
+   "data": "Copernicus DEM GLO-30 + Wikidata elevations (two sources, 2 % check)",
+   "spec": {
+    "steps": [
+     {
+      "key": "mount-ikoma-q996259",
+      "qid": "Q996259",
+      "name": "MOUNT IKOMA",
+      "value": "642 m",
+      "h": 642.0,
+      "lat": 34.67845,
+      "lon": 135.67897,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q996259 (elevation 642 m); https://en.wikipedia.org/wiki/Mount_Ikoma",
+       "Copernicus DEM GLO-30, summit measured 643.3 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "mount-hiei-q748040",
+      "qid": "Q748040",
+      "name": "MOUNT HIEI",
+      "value": "848 m",
+      "h": 848.1,
+      "lat": 35.06667,
+      "lon": 135.83833,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q748040 (elevation 848.1 m); https://en.wikipedia.org/wiki/Mount_Hiei",
+       "Copernicus DEM GLO-30, summit measured 850.8 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "sakurajima-q128841",
+      "qid": "Q128841",
+      "name": "SAKURAJIMA",
+      "value": "1,117 m",
+      "h": 1117.0,
+      "lat": 31.58056,
+      "lon": 130.65806,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q128841 (elevation 1117 m); https://en.wikipedia.org/wiki/Sakurajima",
+       "Copernicus DEM GLO-30, summit measured 1103.4 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "mount-unzen-q620860",
+      "qid": "Q620860",
+      "name": "MOUNT UNZEN",
+      "value": "1,486 m",
+      "h": 1486.0,
+      "lat": 32.76134,
+      "lon": 130.29869,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q620860 (elevation 1486 m); https://en.wikipedia.org/wiki/Mount_Unzen",
+       "Copernicus DEM GLO-30, summit measured 1458.6 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "mount-asama-q242730",
+      "qid": "Q242730",
+      "name": "MOUNT ASAMA",
+      "value": "2,568 m",
+      "h": 2568.0,
+      "lat": 36.4,
+      "lon": 138.51667,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q242730 (elevation 2568 m); https://en.wikipedia.org/wiki/Mount_Asama",
+       "Copernicus DEM GLO-30, summit measured 2563.6 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "mount-fuji-q39231",
+      "qid": "Q39231",
+      "name": "MOUNT FUJI",
+      "value": "3,777 m",
+      "h": 3777.24,
+      "lat": 35.36056,
+      "lon": 138.7275,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q39231 (elevation 3777.24 m); https://en.wikipedia.org/wiki/Mount_Fuji",
+       "Copernicus DEM GLO-30, summit measured 3765.5 m (within 2 %)"
+      ]
+     }
+    ],
+    "titles": [
+     "Tallest Mountain in Japan: 6 Peaks to 3,777 m",
+     "Highest Mountain in Japan: 6 Peaks to 3,777 m",
+     "Famous Mountain in Japan: 6 Peaks to 3,777 m"
+    ],
+    "queries": [
+     "tallest mountains in Japan",
+     "Japan mountains",
+     "Mount Fuji height"
+    ],
+    "hashtags": [
+     "#sizecomparison",
+     "#japan",
+     "#mountains",
+     "#3d",
+     "#scale"
+    ],
+    "intro": "6 real mountains of Japan, each taller than the last, side by side at true scale (Copernicus DEM elevation data): Mount Ikoma, Mount Hiei, Sakurajima, Mount Unzen, Mount Asama, Mount Fuji."
+   }
+  },
+  {
+   "id": "peaks-austria",
+   "kind": "higher",
+   "engine": "peaks",
+   "status": "planned",
+   "source": "generated",
+   "added": "2026-11-18",
+   "steps": [
+    "Manhartsberg 537 m",
+    "Geschriebenstein 884 m",
+    "Plechý / Plöckenstein 1,379 m",
+    "Stol / Hochstuhl 2,237 m",
+    "Zugspitze 2,962 m",
+    "Wildspitze 3,768 m"
+   ],
+   "data": "Copernicus DEM GLO-30 + Wikidata elevations (two sources, 2 % check)",
+   "spec": {
+    "steps": [
+     {
+      "key": "manhartsberg-q695580",
+      "qid": "Q695580",
+      "name": "MANHARTSBERG",
+      "value": "537 m",
+      "h": 537.0,
+      "lat": 48.53333,
+      "lon": 15.73333,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q695580 (elevation 537 m); https://en.wikipedia.org/wiki/Manhartsberg",
+       "Copernicus DEM GLO-30, summit measured 537.7 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "geschriebenstein-q630494",
+      "qid": "Q630494",
+      "name": "GESCHRIEBENSTEIN",
+      "value": "884 m",
+      "h": 884.0,
+      "lat": 47.35281,
+      "lon": 16.43369,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q630494 (elevation 884 m); https://en.wikipedia.org/wiki/Geschriebenstein",
+       "Copernicus DEM GLO-30, summit measured 883.7 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "plech-pl-ckenstein-q700271",
+      "qid": "Q700271",
+      "name": "PLECHÝ / PLÖCKENSTEIN",
+      "value": "1,379 m",
+      "h": 1379.0,
+      "lat": 48.77111,
+      "lon": 13.85722,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q700271 (elevation 1379 m); https://en.wikipedia.org/wiki/Pl%C3%B6ckenstein",
+       "Copernicus DEM GLO-30, summit measured 1374.3 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "stol-hochstuhl-q701904",
+      "qid": "Q701904",
+      "name": "STOL / HOCHSTUHL",
+      "value": "2,237 m",
+      "h": 2237.0,
+      "lat": 46.43389,
+      "lon": 14.17389,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q701904 (elevation 2237 m); https://en.wikipedia.org/wiki/Stol_(Karawanks)",
+       "Copernicus DEM GLO-30, summit measured 2219.8 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "zugspitze-q3375",
+      "qid": "Q3375",
+      "name": "ZUGSPITZE",
+      "value": "2,962 m",
+      "h": 2962.06,
+      "lat": 47.42122,
+      "lon": 10.98631,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q3375 (elevation 2962.06 m); https://en.wikipedia.org/wiki/Zugspitze",
+       "Copernicus DEM GLO-30, summit measured 2948.8 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "wildspitze-q679277",
+      "qid": "Q679277",
+      "name": "WILDSPITZE",
+      "value": "3,768 m",
+      "h": 3768.0,
+      "lat": 46.88528,
+      "lon": 10.86722,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q679277 (elevation 3768 m); https://en.wikipedia.org/wiki/Wildspitze",
+       "Copernicus DEM GLO-30, summit measured 3736.5 m (within 2 %)"
+      ]
+     }
+    ],
+    "titles": [
+     "Highest Mountain in Austria: 6 Peaks to 3,768 m",
+     "Austria Mountains: 6 Peaks to 3,768 m",
+     "Austria Mountains 4k: 6 Peaks to 3,768 m"
+    ],
+    "queries": [
+     "tallest mountains in Austria",
+     "Austria mountains"
+    ],
+    "hashtags": [
+     "#sizecomparison",
+     "#austria",
+     "#mountains",
+     "#3d",
+     "#scale"
+    ],
+    "intro": "6 real mountains of Austria, each taller than the last, side by side at true scale (Copernicus DEM elevation data): Manhartsberg, Geschriebenstein, Plechý / Plöckenstein, Stol / Hochstuhl, Zugspitze, Wildspitze."
+   }
+  },
+  {
+   "id": "peaks-spain",
+   "kind": "higher",
+   "engine": "peaks",
+   "status": "planned",
+   "source": "generated",
+   "added": "2026-11-18",
+   "steps": [
+    "Tibidabo 516 m",
+    "Larrun 905 m",
+    "Puig Major 1,445 m",
+    "Cumbre Vieja 1,944 m",
+    "Teide 3,715 m"
+   ],
+   "data": "Copernicus DEM GLO-30 + Wikidata elevations (two sources, 2 % check)",
+   "spec": {
+    "steps": [
+     {
+      "key": "tibidabo-q658271",
+      "qid": "Q658271",
+      "name": "TIBIDABO",
+      "value": "516 m",
+      "h": 516.5,
+      "lat": 41.4225,
+      "lon": 2.11861,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q658271 (elevation 516.5 m); https://en.wikipedia.org/wiki/Tibidabo",
+       "Copernicus DEM GLO-30, summit measured 516.2 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "larrun-q2737839",
+      "qid": "Q2737839",
+      "name": "LARRUN",
+      "value": "905 m",
+      "h": 905.0,
+      "lat": 43.30917,
+      "lon": -1.63556,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q2737839 (elevation 905 m); https://en.wikipedia.org/wiki/Larrun",
+       "Copernicus DEM GLO-30, summit measured 893.7 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "puig-major-q587189",
+      "qid": "Q587189",
+      "name": "PUIG MAJOR",
+      "value": "1,445 m",
+      "h": 1445.0,
+      "lat": 39.8075,
+      "lon": 2.79333,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q587189 (elevation 1445 m); https://en.wikipedia.org/wiki/Puig_Major",
+       "Copernicus DEM GLO-30, summit measured 1432.5 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "cumbre-vieja-q1143757",
+      "qid": "Q1143757",
+      "name": "CUMBRE VIEJA",
+      "value": "1,944 m",
+      "h": 1944.0,
+      "lat": 28.56667,
+      "lon": -17.83333,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q1143757 (elevation 1944 m); https://en.wikipedia.org/wiki/Cumbre_Vieja",
+       "Copernicus DEM GLO-30, summit measured 1936.0 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "teide-q38954",
+      "qid": "Q38954",
+      "name": "TEIDE",
+      "value": "3,715 m",
+      "h": 3715.0,
+      "lat": 28.27264,
+      "lon": -16.64361,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q38954 (elevation 3715 m); https://en.wikipedia.org/wiki/Teide",
+       "Copernicus DEM GLO-30, summit measured 3705.3 m (within 2 %)"
+      ]
+     }
+    ],
+    "titles": [
+     "Highest Mountain in Spain: 5 Peaks to 3,715 m",
+     "Spain Mountains: 5 Peaks to 3,715 m",
+     "Spain Pyrenees Mountains: 5 Peaks to 3,715 m"
+    ],
+    "queries": [
+     "tallest mountains in Spain",
+     "Spain mountains",
+     "Teide height"
+    ],
+    "hashtags": [
+     "#sizecomparison",
+     "#spain",
+     "#mountains",
+     "#3d",
+     "#scale"
+    ],
+    "intro": "5 real mountains of Spain, each taller than the last, side by side at true scale (Copernicus DEM elevation data): Tibidabo, Larrun, Puig Major, Cumbre Vieja, Teide."
+   }
+  },
+  {
+   "id": "volcanoes-russia",
+   "kind": "higher",
+   "engine": "peaks",
+   "status": "planned",
+   "source": "generated",
+   "added": "2026-11-18",
+   "steps": [
+    "Golovnin 543 m",
+    "Broutona 801 m",
+    "Atsonupuri 1,206 m",
+    "Krasheninnikov 1,856 m",
+    "Avachinsky 2,741 m",
+    "Mount Kazbek 5,033 m"
+   ],
+   "data": "Copernicus DEM GLO-30 + Wikidata elevations (two sources, 2 % check)",
+   "spec": {
+    "steps": [
+     {
+      "key": "golovnin-q2664586",
+      "qid": "Q2664586",
+      "name": "GOLOVNIN",
+      "value": "543 m",
+      "h": 543.0,
+      "lat": 43.84306,
+      "lon": 145.50556,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q2664586 (elevation 543 m); https://en.wikipedia.org/wiki/Golovnin",
+       "Copernicus DEM GLO-30, summit measured 539.6 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "broutona-q991004",
+      "qid": "Q991004",
+      "name": "BROUTONA",
+      "value": "801 m",
+      "h": 801.0,
+      "lat": 46.71667,
+      "lon": 150.73333,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q991004 (elevation 801 m); https://en.wikipedia.org/wiki/Broutona",
+       "Copernicus DEM GLO-30, summit measured 795.1 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "atsonupuri-q524216",
+      "qid": "Q524216",
+      "name": "ATSONUPURI",
+      "value": "1,206 m",
+      "h": 1206.0,
+      "lat": 44.80722,
+      "lon": 147.1275,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q524216 (elevation 1206 m); https://en.wikipedia.org/wiki/Atsonupuri",
+       "Copernicus DEM GLO-30, summit measured 1198.1 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "krasheninnikov-q2386185",
+      "qid": "Q2386185",
+      "name": "KRASHENINNIKOV",
+      "value": "1,856 m",
+      "h": 1856.0,
+      "lat": 54.59333,
+      "lon": 160.27333,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q2386185 (elevation 1856 m); https://en.wikipedia.org/wiki/Krasheninnikov_(volcano)",
+       "Copernicus DEM GLO-30, summit measured 1846.9 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "avachinsky-q791652",
+      "qid": "Q791652",
+      "name": "AVACHINSKY",
+      "value": "2,741 m",
+      "h": 2741.0,
+      "lat": 53.255,
+      "lon": 158.83278,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q791652 (elevation 2741 m); https://en.wikipedia.org/wiki/Avachinsky",
+       "Copernicus DEM GLO-30, summit measured 2728.5 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "mount-kazbek-q207680",
+      "qid": "Q207680",
+      "name": "MOUNT KAZBEK",
+      "value": "5,033 m",
+      "h": 5033.0,
+      "lat": 42.69694,
+      "lon": 44.51889,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q207680 (elevation 5033 m); https://en.wikipedia.org/wiki/Mount_Kazbek",
+       "Copernicus DEM GLO-30, summit measured 5021.8 m (within 2 %)"
+      ]
+     }
+    ],
+    "titles": [
+     "Volcanoes in Russia: 6 Peaks to 5,033 m",
+     "Russian Volcano: 6 Peaks to 5,033 m",
+     "Russia Active Volcano: 6 Peaks to 5,033 m"
+    ],
+    "queries": [
+     "volcanoes in Russia",
+     "Russia volcanoes"
+    ],
+    "hashtags": [
+     "#sizecomparison",
+     "#russia",
+     "#mountains",
+     "#3d",
+     "#scale"
+    ],
+    "intro": "6 real volcanoes of Russia, each taller than the last, side by side at true scale (Copernicus DEM elevation data): Golovnin, Broutona, Atsonupuri, Krasheninnikov, Avachinsky, Mount Kazbek."
+   }
+  },
+  {
+   "id": "peaks-turkey",
+   "kind": "higher",
+   "engine": "peaks",
+   "status": "planned",
+   "source": "generated",
+   "added": "2026-11-18",
+   "steps": [
+    "Mahya Daği 1,031 m",
+    "Mount Sipylus 1,513 m",
+    "Mount Judi 2,118 m",
+    "Uludağ 2,542 m",
+    "Mount Cilo 4,116 m"
+   ],
+   "data": "Copernicus DEM GLO-30 + Wikidata elevations (two sources, 2 % check)",
+   "spec": {
+    "steps": [
+     {
+      "key": "mahya-da-q1402638",
+      "qid": "Q1402638",
+      "name": "MAHYA DAĞI",
+      "value": "1,031 m",
+      "h": 1031.0,
+      "lat": 41.78333,
+      "lon": 27.61667,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q1402638 (elevation 1031 m); https://en.wikipedia.org/wiki/Mount_Mahya",
+       "Copernicus DEM GLO-30, summit measured 1030.1 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "mount-sipylus-q532698",
+      "qid": "Q532698",
+      "name": "MOUNT SIPYLUS",
+      "value": "1,513 m",
+      "h": 1513.0,
+      "lat": 38.56698,
+      "lon": 27.45484,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q532698 (elevation 1513 m); https://en.wikipedia.org/wiki/Mount_Sipylus",
+       "Copernicus DEM GLO-30, summit measured 1506.8 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "mount-judi-q1143135",
+      "qid": "Q1143135",
+      "name": "MOUNT JUDI",
+      "value": "2,118 m",
+      "h": 2118.0,
+      "lat": 37.37753,
+      "lon": 42.45431,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q1143135 (elevation 2118 m); https://en.wikipedia.org/wiki/Mount_Judi",
+       "Copernicus DEM GLO-30, summit measured 2110.5 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "uluda-q925688",
+      "qid": "Q925688",
+      "name": "ULUDAĞ",
+      "value": "2,542 m",
+      "h": 2542.0,
+      "lat": 40.07053,
+      "lon": 29.22201,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q925688 (elevation 2542 m); https://en.wikipedia.org/wiki/Uluda%C4%9F",
+       "Copernicus DEM GLO-30, summit measured 2537.0 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "mount-cilo-q1091987",
+      "qid": "Q1091987",
+      "name": "MOUNT CILO",
+      "value": "4,116 m",
+      "h": 4116.0,
+      "lat": 37.48573,
+      "lon": 44.00416,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q1091987 (elevation 4116 m); https://en.wikipedia.org/wiki/Mount_Cilo",
+       "Copernicus DEM GLO-30, summit measured 4059.6 m (within 2 %)"
+      ]
+     }
+    ],
+    "titles": [
+     "Turkey Mountains: 5 Peaks to 4,116 m",
+     "Turkey Hunting Mountains: 5 Peaks to 4,116 m",
+     "Taurus Mountains Turkey: 5 Peaks to 4,116 m"
+    ],
+    "queries": [
+     "Turkey mountains"
+    ],
+    "hashtags": [
+     "#sizecomparison",
+     "#turkey",
+     "#mountains",
+     "#3d",
+     "#scale"
+    ],
+    "intro": "5 real mountains of Turkey, each taller than the last, side by side at true scale (Copernicus DEM elevation data): Mahya Daği, Mount Sipylus, Mount Judi, Uludağ, Mount Cilo."
+   }
+  },
+  {
+   "id": "peaks-germany",
+   "kind": "higher",
+   "engine": "peaks",
+   "status": "planned",
+   "source": "generated",
+   "added": "2026-11-18",
+   "steps": [
+    "Kaiserstuhl 557 m",
+    "Vogelsberg 773 m",
+    "Brocken 1,141 m",
+    "Feldberg 1,494 m",
+    "Zugspitze 2,962 m"
+   ],
+   "data": "Copernicus DEM GLO-30 + Wikidata elevations (two sources, 2 % check)",
+   "spec": {
+    "steps": [
+     {
+      "key": "kaiserstuhl-q701516",
+      "qid": "Q701516",
+      "name": "KAISERSTUHL",
+      "value": "557 m",
+      "h": 557.0,
+      "lat": 48.08333,
+      "lon": 7.66667,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q701516 (elevation 557 m); https://en.wikipedia.org/wiki/Kaiserstuhl_(Baden-W%C3%BCrttemberg)",
+       "Copernicus DEM GLO-30, summit measured 561.4 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "vogelsberg-q317074",
+      "qid": "Q317074",
+      "name": "VOGELSBERG",
+      "value": "773 m",
+      "h": 773.0,
+      "lat": 50.53333,
+      "lon": 9.23333,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q317074 (elevation 773 m); https://en.wikipedia.org/wiki/Vogelsberg",
+       "Copernicus DEM GLO-30, summit measured 769.2 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "brocken-q155721",
+      "qid": "Q155721",
+      "name": "BROCKEN",
+      "value": "1,141 m",
+      "h": 1141.09,
+      "lat": 51.79913,
+      "lon": 10.61564,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q155721 (elevation 1141.09 m); https://en.wikipedia.org/wiki/Brocken",
+       "Copernicus DEM GLO-30, summit measured 1141.4 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "feldberg-q316401",
+      "qid": "Q316401",
+      "name": "FELDBERG",
+      "value": "1,494 m",
+      "h": 1494.2,
+      "lat": 47.87389,
+      "lon": 8.00391,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q316401 (elevation 1494.2 m); https://en.wikipedia.org/wiki/Feldberg_(Black_Forest)",
+       "Copernicus DEM GLO-30, summit measured 1493.1 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "zugspitze-q3375",
+      "qid": "Q3375",
+      "name": "ZUGSPITZE",
+      "value": "2,962 m",
+      "h": 2962.06,
+      "lat": 47.42122,
+      "lon": 10.98631,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q3375 (elevation 2962.06 m); https://en.wikipedia.org/wiki/Zugspitze",
+       "Copernicus DEM GLO-30, summit measured 2948.8 m (within 2 %)"
+      ]
+     }
+    ],
+    "titles": [
+     "Tallest Mountain in Germany: 5 Peaks to 2,962 m",
+     "Highest Mountain in Germany: 5 Peaks to 2,962 m",
+     "Highest Peak in Germany: 5 Peaks to 2,962 m"
+    ],
+    "queries": [
+     "tallest mountains in Germany",
+     "highest mountains in Germany",
+     "Germany mountains"
+    ],
+    "hashtags": [
+     "#sizecomparison",
+     "#germany",
+     "#mountains",
+     "#3d",
+     "#scale"
+    ],
+    "intro": "5 real mountains of Germany, each taller than the last, side by side at true scale (Copernicus DEM elevation data): Kaiserstuhl, Vogelsberg, Brocken, Feldberg, Zugspitze."
+   }
+  },
+  {
+   "id": "range-scandinavian-mountains",
+   "kind": "higher",
+   "engine": "peaks",
+   "status": "planned",
+   "source": "generated",
+   "added": "2026-11-18",
+   "steps": [
+    "Torghatten 258 m",
+    "Aakenustunturi 570 m",
+    "Saana 1,029 m",
+    "Åreskutan 1,420 m",
+    "Snøhetta 2,286 m"
+   ],
+   "data": "Copernicus DEM GLO-30 + Wikidata elevations (two sources, 2 % check)",
+   "spec": {
+    "steps": [
+     {
+      "key": "torghatten-q1476265",
+      "qid": "Q1476265",
+      "name": "TORGHATTEN",
+      "value": "258 m",
+      "h": 258.0,
+      "lat": 65.39833,
+      "lon": 12.08972,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q1476265 (elevation 258 m); https://en.wikipedia.org/wiki/Torghatten",
+       "Copernicus DEM GLO-30, summit measured 254.5 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "aakenustunturi-q1571816",
+      "qid": "Q1571816",
+      "name": "AAKENUSTUNTURI",
+      "value": "570 m",
+      "h": 570.0,
+      "lat": 67.69167,
+      "lon": 24.46556,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q1571816 (elevation 570 m); https://en.wikipedia.org/wiki/Aakenustunturi",
+       "Copernicus DEM GLO-30, summit measured 567.5 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "saana-q1637507",
+      "qid": "Q1637507",
+      "name": "SAANA",
+      "value": "1,029 m",
+      "h": 1029.0,
+      "lat": 69.04377,
+      "lon": 20.85521,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q1637507 (elevation 1029 m); https://en.wikipedia.org/wiki/Saana",
+       "Copernicus DEM GLO-30, summit measured 1025.6 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "reskutan-q271149",
+      "qid": "Q271149",
+      "name": "ÅRESKUTAN",
+      "value": "1,420 m",
+      "h": 1420.0,
+      "lat": 63.43083,
+      "lon": 13.09306,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q271149 (elevation 1420 m); https://en.wikipedia.org/wiki/%C3%85reskutan",
+       "Copernicus DEM GLO-30, summit measured 1417.8 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "sn-hetta-q979569",
+      "qid": "Q979569",
+      "name": "SNØHETTA",
+      "value": "2,286 m",
+      "h": 2286.0,
+      "lat": 62.32,
+      "lon": 9.26833,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q979569 (elevation 2286 m); https://en.wikipedia.org/wiki/Sn%C3%B8hetta",
+       "Copernicus DEM GLO-30, summit measured 2278.1 m (within 2 %)"
+      ]
+     }
+    ],
+    "titles": [
+     "Scandinavian Mountains: 5 Peaks to 2,286 m"
+    ],
+    "queries": [
+     "Scandinavian Mountains highest peaks"
+    ],
+    "hashtags": [
+     "#sizecomparison",
+     "#scandinavianmountains",
+     "#mountains",
+     "#3d",
+     "#scale"
+    ],
+    "intro": "5 real peaks of the Scandinavian Mountains, each taller than the last, side by side at true scale (Copernicus DEM elevation data): Torghatten, Aakenustunturi, Saana, Åreskutan, Snøhetta."
+   }
+  },
+  {
+   "id": "peaks-finland",
+   "kind": "higher",
+   "engine": "peaks",
+   "status": "planned",
+   "source": "generated",
+   "added": "2026-11-18",
+   "steps": [
+    "Orrdalsklint 127 m",
+    "Aavasaksa 242 m",
+    "Korvatunturi 486 m",
+    "Saana 1,029 m",
+    "Ritničohkka 1,317 m"
+   ],
+   "data": "Copernicus DEM GLO-30 + Wikidata elevations (two sources, 2 % check)",
+   "spec": {
+    "steps": [
+     {
+      "key": "orrdalsklint-q2031587",
+      "qid": "Q2031587",
+      "name": "ORRDALSKLINT",
+      "value": "127 m",
+      "h": 127.0,
+      "lat": 60.32833,
+      "lon": 20.12111,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q2031587 (elevation 127 m); https://en.wikipedia.org/wiki/Orrdalsklint",
+       "Copernicus DEM GLO-30, summit measured 128.1 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "aavasaksa-q303806",
+      "qid": "Q303806",
+      "name": "AAVASAKSA",
+      "value": "242 m",
+      "h": 242.0,
+      "lat": 66.39782,
+      "lon": 23.72533,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q303806 (elevation 242 m); https://en.wikipedia.org/wiki/Aavasaksa",
+       "Copernicus DEM GLO-30, summit measured 242.1 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "korvatunturi-q1784850",
+      "qid": "Q1784850",
+      "name": "KORVATUNTURI",
+      "value": "486 m",
+      "h": 486.0,
+      "lat": 68.07361,
+      "lon": 29.31528,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q1784850 (elevation 486 m); https://en.wikipedia.org/wiki/Korvatunturi",
+       "Copernicus DEM GLO-30, summit measured 477.0 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "saana-q1637507",
+      "qid": "Q1637507",
+      "name": "SAANA",
+      "value": "1,029 m",
+      "h": 1029.0,
+      "lat": 69.04377,
+      "lon": 20.85521,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q1637507 (elevation 1029 m); https://en.wikipedia.org/wiki/Saana",
+       "Copernicus DEM GLO-30, summit measured 1025.6 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "ritni-ohkka-q952552",
+      "qid": "Q952552",
+      "name": "RITNIČOHKKA",
+      "value": "1,317 m",
+      "h": 1317.0,
+      "lat": 69.2875,
+      "lon": 21.3533,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q952552 (elevation 1317 m); https://en.wikipedia.org/wiki/Ridnit%C5%A1ohkka",
+       "Copernicus DEM GLO-30, summit measured 1313.5 m (within 2 %)"
+      ]
+     }
+    ],
+    "titles": [
+     "Highest Mountain in Finland: 5 Peaks to 1,317 m",
+     "Mountains in Finland: 5 Peaks to 1,317 m",
+     "Finland Mountains: 5 Peaks to 1,317 m"
+    ],
+    "queries": [
+     "tallest mountains in Finland",
+     "Finland mountains"
+    ],
+    "hashtags": [
+     "#sizecomparison",
+     "#finland",
+     "#mountains",
+     "#3d",
+     "#scale"
+    ],
+    "intro": "5 real mountains of Finland, each taller than the last, side by side at true scale (Copernicus DEM elevation data): Orrdalsklint, Aavasaksa, Korvatunturi, Saana, Ritničohkka."
+   }
   }
  ],
  "queue": {
   "planned": 32,
-  "ready_for_production": 7,
+  "ready_for_production": 16,
   "updated": "2026-11-18",
   "rule": ">= 32 planned, >= 20 renderable; a topic is used once"
  }
