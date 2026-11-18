@@ -26,8 +26,10 @@
   {
    "slug": "ladder-heights",
    "short": "ladder_heights",
-   "status": "queued",
-   "topic": "heights-saturnv-everest"
+   "status": "ready",
+   "topic": "heights-saturnv-everest",
+   "release": "ep-ladder-heights",
+   "rendered": "2026-11-18"
   }
  ]
 }
