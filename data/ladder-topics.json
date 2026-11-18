@@ -2740,8 +2740,8 @@
   }
  ],
  "queue": {
-  "planned": 35,
-  "ready_for_production": 20,
+  "planned": 45,
+  "ready_for_production": 30,
   "updated": "2026-11-18",
   "rule": ">= 32 planned, >= 20 renderable; a topic is used once"
  }
