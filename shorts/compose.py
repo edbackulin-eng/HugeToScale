@@ -190,6 +190,33 @@ def loudest_start(path, seconds):
     return arg / 2
 
 
+TARGET_LUFS = -14.0      # owner 19.11: every Short at YouTube's -14 LUFS, whatever the track's own loudness
+TRUE_PEAK = -1.5
+
+
+def _loudnorm_stats(args):
+    """Run ffmpeg with a loudnorm print_format=json pass; returns its JSON."""
+    err = subprocess.run(["ffmpeg", "-hide_banner", "-nostats"] + args + ["-f", "null", "-"],
+                         capture_output=True, text=True, check=True).stderr
+    return json.loads(err[err.rindex("{"):err.rindex("}") + 1])
+
+
+def music_chain(path, start, seconds):
+    """Two-pass loudnorm: measure the cut (trim + fades) first, then a linear gain to -14 LUFS (no pumping)."""
+    cut = (f"atrim=start={start}:duration={seconds},asetpts=PTS-STARTPTS,afade=t=in:d=0.6,"
+           f"afade=t=out:st={seconds - 1.8}:d=1.8")
+    m = _loudnorm_stats(["-i", str(path), "-af", f"{cut},loudnorm=I={TARGET_LUFS}:TP={TRUE_PEAK}:LRA=11:print_format=json"])
+    return (f"{cut},loudnorm=I={TARGET_LUFS}:TP={TRUE_PEAK}:LRA=11:measured_I={m['input_i']}:"
+            f"measured_TP={m['input_tp']}:measured_LRA={m['input_lra']}:measured_thresh={m['input_thresh']}:"
+            f"offset={m['target_offset']}:linear=true,aresample=48000")
+
+
+def measure_mp4(mp4):
+    m = _loudnorm_stats(["-i", str(mp4), "-vn", "-af", "loudnorm=print_format=json"])
+    return {"integrated_lufs": float(m["input_i"]), "true_peak_db": float(m["input_tp"]),
+            "target_lufs": TARGET_LUFS, "ok": abs(float(m["input_i"]) - TARGET_LUFS) <= 1.0}
+
+
 def music(short, dst):
     m = P.track(short)
     req = urllib.request.Request(m["url"], headers={"User-Agent": "HugeToScale-build/0.1"})
@@ -252,8 +279,7 @@ def main():
     vf = (f"[0:v]scale={W}:{H}:flags=lanczos,fps={P.FPS},{G.GRADE},"
           f"tpad=stop_mode=clone:stop_duration={hold:.3f},trim=duration={s['seconds']}[v];"
           f"[v][1:v]overlay=0:0:format=auto,format=yuv420p[vo];"
-          f"[2:a]atrim=start={track['start']}:duration={s['seconds']},asetpts=PTS-STARTPTS,afade=t=in:d=0.6,afade=t=out:st={s['seconds'] - 1.8}:d=1.8,"
-          f"loudnorm=I=-15:TP=-1.5:LRA=11,aresample=48000[ao]")
+          f"[2:a]{music_chain(work / 'music.mp3', track['start'], s['seconds'])}[ao]")
     cmd = ["ffmpeg", "-v", "error", "-y", "-framerate", str(P.FPS / step), "-i", str(seq / "s%04d.png"),
            "-framerate", str(P.FPS), "-i", str(work / "cap/c%04d.png"), "-i", str(work / "music.mp3"),
            "-filter_complex", vf, "-map", "[vo]", "-map", "[ao]", "-r", str(P.FPS),
@@ -288,7 +314,7 @@ def main():
     assert all(len(t) <= 60 for t in s["titles"]), "title over 60 characters"
     (out / f"{short}_titles.json").write_text(json.dumps(titles, indent=1, ensure_ascii=False), encoding="utf-8")
     (out / f"{short}_description.txt").write_text(build_text(short, fetched), encoding="utf-8")
-    report = {"short": short, "mp4": mp4.name, "probe": probe, "phone_checks": checks,
+    report = {"short": short, "mp4": mp4.name, "probe": probe, "phone_checks": checks, "loudness": measure_mp4(mp4),
               "phone_ok": all(c["mean_luma"] >= 0.42 for c in checks.values()),
               "rendered_frames": rendered, "step": step, "hold_seconds": round(hold, 2),
               "render": [{k: i.get(k) for k in ("frames", "seconds_per_frame", "probe_full_quality_seconds",

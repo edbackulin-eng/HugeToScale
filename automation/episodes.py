@@ -100,6 +100,8 @@ def check_composed(short, d):
         problems.append("longer than 60 s")
     if not rep.get("phone_ok"):
         problems.append("too dark for a phone")
+    if rep.get("loudness") and not rep["loudness"].get("ok"):
+        problems.append(f"loudness {rep['loudness']['integrated_lufs']} LUFS, not -14")
     bad = [c["object"] for c in src.get("size_checks", []) if not c.get("ok")]
     if bad:
         problems.append("size checks failed: " + ", ".join(bad))
