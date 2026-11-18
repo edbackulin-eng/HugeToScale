@@ -66,12 +66,12 @@ def sandstone():
     br.inputs["Scale"].default_value = 1.0
     br.inputs["Brick Width"].default_value = 1.7
     br.inputs["Row Height"].default_value = 1.0
-    br.inputs["Mortar Size"].default_value = 0.035
+    br.inputs["Mortar Size"].default_value = 0.09
     br.inputs["Mortar Smooth"].default_value = 0.4
     br.inputs["Bias"].default_value = 0.0
-    br.inputs["Color1"].default_value = (0.74, 0.56, 0.34, 1)
-    br.inputs["Color2"].default_value = (0.84, 0.66, 0.42, 1)
-    br.inputs["Mortar"].default_value = (0.50, 0.38, 0.24, 1)
+    br.inputs["Color1"].default_value = (0.80, 0.58, 0.33, 1)
+    br.inputs["Color2"].default_value = (0.90, 0.70, 0.43, 1)
+    br.inputs["Mortar"].default_value = (0.42, 0.30, 0.18, 1)
     nt.links.new(vec.outputs[0], br.inputs["Vector"])
     nz = nt.nodes.new("ShaderNodeTexNoise"); nz.inputs["Scale"].default_value = 0.05
     nz.inputs["Detail"].default_value = 6
@@ -275,8 +275,10 @@ def camera_track(L, total):
         if k > 0:  # move from the previous framing: 0.95 s, log-space zoom (feels like a steady pull-back)
             a = ease((t - st[k]["t"]) / 0.95)
             x0, S0 = fr[k - 1]
-            xc = x0 + (xc - x0) * a
-            S = math.exp(math.log(S0) + (math.log(S) - math.log(S0)) * a)
+            S1_ = S
+            S = math.exp(math.log(S0) + (math.log(S1_) - math.log(S0)) * a)
+            # x follows the zoom (not the clock): the ladder stays put on screen while the camera pulls back
+            xc = x0 + (xc - x0) * (S - S0) / (S1_ - S0) if abs(S1_ - S0) > 1e-6 else x0 + (xc - x0) * a
         # slow drift while holding
         hold_end = st[k + 1]["t"] if k + 1 < len(st) else L["overview"]
         S *= 1 + 0.035 * ease((t - st[k]["t"] - 0.95) / max(0.1, hold_end - st[k]["t"] - 0.95))
@@ -284,11 +286,12 @@ def camera_track(L, total):
             a = ease((t - L["overview"]) / 0.8)
             S *= 1 + 0.10 * a
         if t >= L["rewind"]:
-            a = ease((t - L["rewind"]) / (L["seconds"] - L["rewind"]))  # reaches frame 1 one frame after the end
+            # rewind into frame 1, then 3 still frames identical to the start: a seamless loop
+            a = ease((t - L["rewind"]) / (L["seconds"] - 4 / FPS - L["rewind"]))
             x1, S1 = fr[0]
             xe, Se = track[int(L["rewind"] * FPS) - 1]["x"], track[int(L["rewind"] * FPS) - 1]["S"]
-            xc = xe + (x1 - xe) * a
             S = math.exp(math.log(Se) + (math.log(S1) - math.log(Se)) * a)
+            xc = x1 + (xe - x1) * (S - S1) / (Se - S1)
         track.append({"f": f, "x": xc, "S": S})
     return track
 
@@ -305,8 +308,8 @@ def scale_at(L, i, t):
     v = (1 - (1 - a) ** 3) * up
     if t >= L["rewind"]:
         n = len(L["steps"])
-        r0 = L["rewind"] + 0.07 * (n - 1 - i)
-        v *= 1 - ease((t - r0) / 0.35)
+        r0 = L["rewind"] + 0.06 * (n - 1 - i)
+        v *= 1 - ease((t - r0) / 0.3)
     return v
 
 
