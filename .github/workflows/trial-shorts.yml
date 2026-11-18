@@ -34,6 +34,7 @@ jobs:
     timeout-minutes: 40
     strategy:
       fail-fast: false
+      max-parallel: 2   # account limit: 20 jobs at once for all channels (channels-monitor docs/render-schedule.md)
       matrix:
         short: ${{ fromJson(needs.plan.outputs.shorts) }}
     steps:
@@ -114,6 +115,7 @@ jobs:
     timeout-minutes: 40
     strategy:
       fail-fast: false
+      max-parallel: 2   # account limit: 20 jobs at once for all channels (channels-monitor docs/render-schedule.md)
       matrix:
         short: ${{ fromJson(needs.plan.outputs.shorts) }}
     steps:

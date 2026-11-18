@@ -23,6 +23,7 @@ jobs:
     timeout-minutes: 90
     strategy:
       fail-fast: false
+      max-parallel: 4   # account limit: 20 jobs at once for all channels (channels-monitor docs/render-schedule.md)
       matrix:
         scene: ${{ fromJson(needs.plan.outputs.scenes) }}
     steps:
