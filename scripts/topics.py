@@ -243,7 +243,11 @@ def peak_topics(peaks, verified, taken_ids, taken_sets, need, kinds=("country", 
         tid = {"country": "peaks-", "volcano": "volcanoes-", "range": "range-"}[kind] + slug(g)
         if tid in taken_ids:
             continue
-        pool = list(ps)
+        # summits already in other topics are left out (a topic shares at most MAX_SHARED with any other), except the
+        # two tallest, so a famous top (Fuji, Elbrus) can still crown a new ladder
+        used_all = set().union(*taken_sets) if taken_sets else set()
+        fresh = [p for p in ps if p["qid"] not in used_all]
+        pool = fresh + sorted([p for p in ps if p["qid"] in used_all], key=lambda p: -p["h"])[:MAX_SHARED]
         for _ in range(4):          # a rejected summit is dropped and the pick repeated
             steps = pick_steps(pool)
             if not steps:
@@ -258,6 +262,7 @@ def peak_topics(peaks, verified, taken_ids, taken_sets, need, kinds=("country", 
             continue
         qs = {p["qid"] for p in steps}
         if any(len(qs & s) > MAX_SHARED for s in taken_sets):
+            print("shares too many summits with an earlier topic:", tid)
             continue
         sp = [spec_step(p, verified) for p in steps]
         titles, used = titles_for(seeds_for(g, kind), {g}, sp)
@@ -269,9 +274,11 @@ def peak_topics(peaks, verified, taken_ids, taken_sets, need, kinds=("country", 
               "added": str(date.today()), "steps": [f"{s['name'].title()} {s['value']}" for s in sp],
               "data": "Copernicus DEM GLO-30 + Wikidata elevations (two sources, 2 % check)",
               "spec": {"steps": sp, "titles": titles, "queries": used,
-                       "hashtags": ["#sizecomparison", "#" + slug(g).replace("-", ""), "#mountains", "#3d", "#scale"],
+                       "hashtags": ["#sizecomparison", "#" + slug(g).replace("-", ""),
+                                    "#volcano" if kind == "volcano" else "#mountains", "#3d", "#scale"],
                        "intro": f"{len(sp)} real {noun}, each taller than the last, side by side at true scale "
                                 f"(Copernicus DEM elevation data): " + ", ".join(s["name"].title() for s in sp) + "."}}
+        tp["type"] = "volcanoes" if kind == "volcano" else "mountains"
         added.append(tp)
         taken_ids.add(tid)
         taken_sets.append(qs)
