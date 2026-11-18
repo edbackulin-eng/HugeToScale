@@ -21,6 +21,7 @@ import test_frame as T
 FPS = P.FPS
 GROUND_Y = 1350 / 1920       # base line of every object, fraction of the frame from the top
 TOP_FILL = 2.1               # frame height = 2.1 x the current object's height
+MIN_FILL = 2.05              # never less: the top stays below the caption band (ground at 1350 px, caption to ~420 px)
 HDRI_ID = "kloofendal_43d_clear_puresky"
 CAM_DIST = 60000.0
 
@@ -69,9 +70,9 @@ def sandstone():
     br.inputs["Mortar Size"].default_value = 0.09
     br.inputs["Mortar Smooth"].default_value = 0.4
     br.inputs["Bias"].default_value = 0.0
-    br.inputs["Color1"].default_value = (0.80, 0.58, 0.33, 1)
-    br.inputs["Color2"].default_value = (0.90, 0.70, 0.43, 1)
-    br.inputs["Mortar"].default_value = (0.42, 0.30, 0.18, 1)
+    br.inputs["Color1"].default_value = (0.86, 0.62, 0.34, 1)
+    br.inputs["Color2"].default_value = (0.95, 0.75, 0.46, 1)
+    br.inputs["Mortar"].default_value = (0.55, 0.38, 0.21, 1)
     nt.links.new(vec.outputs[0], br.inputs["Vector"])
     nz = nt.nodes.new("ShaderNodeTexNoise"); nz.inputs["Scale"].default_value = 0.05
     nz.inputs["Detail"].default_value = 6
@@ -79,7 +80,7 @@ def sandstone():
     # weathering changes brightness only (mixing grey noise colour turned the stone grey)
     fine = nt.nodes.new("ShaderNodeTexNoise"); fine.inputs["Scale"].default_value = 2.5
     nt.links.new(tc.outputs["Object"], fine.inputs["Vector"])
-    shade = A.math_node(nt, "ADD", A.math_node(nt, "MULTIPLY", nz.outputs["Fac"], 0.35), 0.82)
+    shade = A.math_node(nt, "ADD", A.math_node(nt, "MULTIPLY", nz.outputs["Fac"], 0.22), 0.90)
     shade = A.math_node(nt, "ADD", shade, A.math_node(nt, "MULTIPLY", fine.outputs["Fac"], 0.12))
     mul = nt.nodes.new("ShaderNodeMix"); mul.data_type = "RGBA"; mul.blend_type = "MULTIPLY"
     mul.inputs["Factor"].default_value = 1.0
@@ -296,8 +297,17 @@ def camera_track(L, total):
     return track
 
 
-def scale_at(L, i, t):
-    """Height scale of step i at time t: rises in 0.4 s (slight overshoot), sinks back during the rewind."""
+def scale_at(L, i, t, S=None):
+    """Height scale of step i at time t: rises in 0.4 s (slight overshoot), sinks back during the rewind.
+    With the frame height S: never taller than the frame allows (owner 18.11: a rising object is not cut at the
+    top) - a tall object rises together with the camera's pull-back, its top just under the caption band."""
+    v = _scale_at(L, i, t)
+    if S is not None and t < L["rewind"] and i > 0:
+        v = min(v, S / (MIN_FILL * L["steps"][i]["h"]))
+    return v
+
+
+def _scale_at(L, i, t):
     s = L["steps"][i]
     if i == 0:
         return 1.0
@@ -372,7 +382,7 @@ def build(name, preview, rig):
         bd.keyframe_insert("scale", frame=f)
         row["zc"] = zc
         for i, ob in enumerate(objs):
-            v = scale_at(L, i, (f - 1) / FPS)
+            v = scale_at(L, i, (f - 1) / FPS, S)
             row[L["steps"][i]["key"]] = round(v, 4)
             if i == 0:
                 continue

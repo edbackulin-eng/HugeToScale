@@ -494,6 +494,14 @@ def saturnv_pyramid(preview, rig):
     bpy.context.scene.camera = rig.cam
     sand = bpy.data.materials["sand"]
     T.plane("far desert", 240000, sand, loc=(0, 0, -1.2))
+    # owner 18.11 (ladder fix carried over): the sky's sun shines from behind the orbit (south, azimuth -80 deg),
+    # so no face we see goes black, and the pyramid wears the warm sandstone courses of the ladder Short
+    import ladder
+    az, _ = ladder.hdri_sun_azimuth()
+    T.sunny_world(ladder.HDRI_ID, strength=1.5, rot=math.degrees(az - math.radians(-80)))
+    pyr = bpy.data.objects["Great Pyramid"]
+    pyr.data.materials.clear()
+    pyr.data.materials.append(ladder.sandstone())
     sv = next(o for o in bpy.data.objects if o.name.startswith("Saturn V") and o.parent is None)
     fa = F(P.SHORTS["saturnv_pyramid"]["appear"])
     land = fa + 14

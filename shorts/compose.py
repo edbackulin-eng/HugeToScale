@@ -84,12 +84,14 @@ def ladder_overlay(frame, track, t, short):
     x0 = 46
     d.line([(x0, gy), (x0, 170)], fill=(255, 255, 255, 230), width=4)
     v = 0
+    ruler_boxes = []   # tick labels: object labels never cover them (owner 18.11: "Burj Khalifa" over "1 km")
     while gy - v * ppm >= 175:
         y = gy - v * ppm
         d.line([(x0 - 10, y), (x0 + 14, y)], fill=(255, 255, 255, 240), width=4)
         if v:
             d.text((x0 + 22, y), fmt_m(v), font=f_r, fill=(255, 255, 255, 255), stroke_width=4,
                    stroke_fill=STROKE, anchor="lm")
+            ruler_boxes.append((x0 - 14, y - 24, x0 + 30 + f_r.getlength(fmt_m(v)), y + 24))
         v += step
     # labels (none during the rewind: the loop starts clean)
     if t >= L["rewind"]:
@@ -117,11 +119,21 @@ def ladder_overlay(frame, track, t, short):
         wl = f_l.getlength(txt)
         bx = min(max(xp - wl / 2, 20), W - 20 - wl)
         by = yt - 70
-        for b in boxes:
-            if bx < b[2] and bx + wl > b[0] and by < b[3] and by + 44 > b[1]:
-                by = b[1] - 50
+
+        def hit(bx, by):
+            return next((b for b in boxes + ruler_boxes
+                         if bx - 8 < b[2] and bx + wl + 8 > b[0] and by - 4 < b[3] and by + 48 > b[1]), None)
+        for _ in range(12):
+            b = hit(bx, by)
+            if b is None:
+                break
+            if b in ruler_boxes and b[2] + 10 + wl < W - 20:
+                bx = b[2] + 10          # step right of the ruler's tick label
+            else:
+                by = b[1] - 52          # stack above the earlier label
         boxes.append((bx, by, bx + wl, by + 44))
-        d.line([(xp, yt - 4), (xp, by + 44)], fill=(255, 255, 255, 220), width=3)
+        lx = min(max(xp, bx + 12), bx + wl - 12)
+        d.line([(xp, yt - 4), (lx, by + 44)], fill=(255, 255, 255, 220), width=3)
         d.text((bx, by), st["name"] + "  ", font=f_l, fill=(255, 255, 255, 255), stroke_width=5, stroke_fill=STROKE)
         d.text((bx + f_l.getlength(st["name"] + "  "), by), st["value"], font=f_l, fill=(*P.YELLOW, 255),
                stroke_width=5, stroke_fill=STROKE)
