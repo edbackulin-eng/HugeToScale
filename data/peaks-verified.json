@@ -6,6 +6,20 @@
   "ok": true,
   "wikidata_m": 461.0
  },
+ "Q1026302": {
+  "checked": "2026-11-18",
+  "dem_m": 1978.6,
+  "name": "Calbuco",
+  "ok": true,
+  "wikidata_m": 2003.0
+ },
+ "Q1026739": {
+  "checked": "2026-11-18",
+  "dem_m": 836.1,
+  "name": "Jebel Moussa",
+  "ok": true,
+  "wikidata_m": 830.0
+ },
  "Q1028902": {
   "checked": "2026-11-18",
   "dem_m": 712.1,
@@ -19,6 +33,13 @@
   "name": "Mount Yoshino",
   "ok": false,
   "wikidata_m": 678.0
+ },
+ "Q1041646": {
+  "checked": "2026-11-18",
+  "dem_m": 781.9,
+  "name": "Mount Stromlo",
+  "ok": true,
+  "wikidata_m": 770.0
  },
  "Q1045888": {
   "checked": "2026-11-18",
@@ -55,6 +76,13 @@
   "ok": true,
   "wikidata_m": 2632.0
  },
+ "Q1055779": {
+  "checked": "2026-11-18",
+  "dem_m": 1673.6,
+  "name": "Cerro Azul",
+  "ok": false,
+  "wikidata_m": 1640.0
+ },
  "Q1055804": {
   "checked": "2026-11-18",
   "dem_m": 2057.8,
@@ -68,6 +96,20 @@
   "name": "Cerro Las Minas",
   "ok": true,
   "wikidata_m": 2849.0
+ },
+ "Q1055899": {
+  "checked": "2026-11-18",
+  "dem_m": 1460.9,
+  "name": "Mount Hudson",
+  "ok": false,
+  "wikidata_m": 1905.0
+ },
+ "Q1055965": {
+  "checked": "2026-11-18",
+  "dem_m": 828.7,
+  "name": "Cerro Tres Kandú",
+  "ok": true,
+  "wikidata_m": 842.0
  },
  "Q1056102": {
   "checked": "2026-11-18",
@@ -83,6 +125,13 @@
   "ok": false,
   "wikidata_m": 521.0
  },
+ "Q1059040": {
+  "checked": "2026-11-18",
+  "dem_m": 481.5,
+  "name": "Savo Island",
+  "ok": true,
+  "wikidata_m": 485.0
+ },
  "Q1062664": {
   "checked": "2026-11-18",
   "dem_m": 2112.6,
@@ -96,6 +145,20 @@
   "name": "Pinta Island",
   "ok": false,
   "wikidata_m": 780.0
+ },
+ "Q1064229": {
+  "checked": "2026-11-18",
+  "dem_m": 703.1,
+  "name": "Mount Usborne",
+  "ok": true,
+  "wikidata_m": 705.0
+ },
+ "Q1076258": {
+  "checked": "2026-11-18",
+  "dem_m": 2013.9,
+  "name": "Chopok",
+  "ok": true,
+  "wikidata_m": 2023.6
  },
  "Q107635": {
   "checked": "2026-11-18",
@@ -118,12 +181,40 @@
   "ok": true,
   "wikidata_m": 4116.0
  },
+ "Q1092415": {
+  "checked": "2026-11-18",
+  "dem_m": 513.4,
+  "name": "Givat HaMoreh",
+  "ok": true,
+  "wikidata_m": 515.0
+ },
+ "Q1117487": {
+  "checked": "2026-11-18",
+  "dem_m": 148.3,
+  "name": "Inishtooskert",
+  "ok": false,
+  "wikidata_m": 172.0
+ },
  "Q1125206": {
   "checked": "2026-11-18",
   "dem_m": 1103.7,
   "name": "Penteliko Mountain",
   "ok": true,
   "wikidata_m": 1109.0
+ },
+ "Q1126206": {
+  "checked": "2026-11-18",
+  "dem_m": 273.6,
+  "name": "Letná",
+  "ok": false,
+  "wikidata_m": 265.0
+ },
+ "Q1129992": {
+  "checked": "2026-11-18",
+  "dem_m": 531.1,
+  "name": "Le Morne Brabant",
+  "ok": false,
+  "wikidata_m": 556.0
  },
  "Q1141849": {
   "checked": "2026-11-18",
@@ -167,6 +258,20 @@
   "ok": true,
   "wikidata_m": 3954.0
  },
+ "Q11638996": {
+  "checked": "2026-11-18",
+  "dem_m": 2308.1,
+  "name": "Nordenskjöld Peak",
+  "ok": true,
+  "wikidata_m": 2355.0
+ },
+ "Q1165152": {
+  "checked": "2026-11-18",
+  "dem_m": 739.0,
+  "name": "Pago",
+  "ok": true,
+  "wikidata_m": 742.0
+ },
  "Q116693": {
   "checked": "2026-11-18",
   "dem_m": 898.4,
@@ -202,6 +307,13 @@
   "ok": true,
   "wikidata_m": 1111.0
  },
+ "Q1193964": {
+  "checked": "2026-11-18",
+  "dem_m": 1261.7,
+  "name": "Augustine Volcano",
+  "ok": true,
+  "wikidata_m": 1260.0
+ },
  "Q1195352": {
   "checked": "2026-11-18",
   "dem_m": 324.3,
@@ -215,6 +327,27 @@
   "name": "Mount Logan",
   "ok": true,
   "wikidata_m": 5959.0
+ },
+ "Q120314": {
+  "checked": "2026-11-18",
+  "dem_m": 3061.3,
+  "name": "Mount Wutai",
+  "ok": true,
+  "wikidata_m": 3061.0
+ },
+ "Q12062114": {
+  "checked": "2026-11-18",
+  "dem_m": 540.7,
+  "name": "Mount Kembla",
+  "ok": true,
+  "wikidata_m": 534.0
+ },
+ "Q1207065": {
+  "checked": "2026-11-18",
+  "dem_m": 517.3,
+  "name": "Devínska Kobyla",
+  "ok": true,
+  "wikidata_m": 514.1
  },
  "Q122795": {
   "checked": "2026-11-18",
@@ -237,6 +370,13 @@
   "ok": false,
   "wikidata_m": 3841.0
  },
+ "Q126063": {
+  "checked": "2026-11-18",
+  "dem_m": 1679.6,
+  "name": "Auyán Tepuy",
+  "ok": false,
+  "wikidata_m": 2500.0
+ },
  "Q1267542": {
   "checked": "2026-11-18",
   "dem_m": 2109.7,
@@ -250,6 +390,13 @@
   "name": "Mount Erciyes",
   "ok": true,
   "wikidata_m": 3916.0
+ },
+ "Q1276168": {
+  "checked": "2026-11-18",
+  "dem_m": 881.2,
+  "name": "Ozren",
+  "ok": false,
+  "wikidata_m": 918.0
  },
  "Q1276211": {
   "checked": "2026-11-18",
@@ -363,6 +510,20 @@
   "ok": true,
   "wikidata_m": 3099.0
  },
+ "Q1361324": {
+  "checked": "2026-11-18",
+  "dem_m": 1041.5,
+  "name": "Socorro Island",
+  "ok": false,
+  "wikidata_m": 920.0
+ },
+ "Q1361458": {
+  "checked": "2026-11-18",
+  "dem_m": 317.5,
+  "name": "Mount Bates",
+  "ok": true,
+  "wikidata_m": 319.0
+ },
  "Q1370044": {
   "checked": "2026-11-18",
   "dem_m": 1745.7,
@@ -433,6 +594,20 @@
   "ok": true,
   "wikidata_m": 6263.47
  },
+ "Q1411801": {
+  "checked": "2026-11-18",
+  "dem_m": 321.9,
+  "name": "Horns of Hattin",
+  "ok": true,
+  "wikidata_m": 326.0
+ },
+ "Q1414448": {
+  "checked": "2026-11-18",
+  "dem_m": 218.4,
+  "name": "Tofua",
+  "ok": false,
+  "wikidata_m": 515.0
+ },
  "Q1419222": {
   "checked": "2026-11-18",
   "dem_m": 1703.0,
@@ -447,6 +622,20 @@
   "ok": false,
   "wikidata_m": 399.0
  },
+ "Q1422715": {
+  "checked": "2026-11-18",
+  "dem_m": 257.0,
+  "name": "Rangitoto Island",
+  "ok": true,
+  "wikidata_m": 260.0
+ },
+ "Q1424033": {
+  "checked": "2026-11-18",
+  "dem_m": 3804.3,
+  "name": "Mount Hagen",
+  "ok": true,
+  "wikidata_m": 3778.0
+ },
  "Q1424979": {
   "checked": "2026-11-18",
   "dem_m": 1171.3,
@@ -454,12 +643,26 @@
   "ok": false,
   "wikidata_m": 1130.0
  },
+ "Q1439530": {
+  "checked": "2026-11-18",
+  "dem_m": 2089.3,
+  "name": "Mount Odin",
+  "ok": false,
+  "wikidata_m": 2147.0
+ },
  "Q1451": {
   "checked": "2026-11-18",
   "dem_m": 1460.6,
   "name": "Pinatubo",
   "ok": true,
   "wikidata_m": 1486.0
+ },
+ "Q1467910": {
+  "checked": "2026-11-18",
+  "dem_m": 1721.8,
+  "name": "Gamalama",
+  "ok": true,
+  "wikidata_m": 1715.0
  },
  "Q147245": {
   "checked": "2026-11-18",
@@ -510,6 +713,13 @@
   "ok": false,
   "wikidata_m": 287.0
  },
+ "Q1501059": {
+  "checked": "2026-11-18",
+  "dem_m": 7127.3,
+  "name": "Muztagh Tower",
+  "ok": false,
+  "wikidata_m": 7273.0
+ },
  "Q1508343": {
   "checked": "2026-11-18",
   "dem_m": 2079.3,
@@ -545,6 +755,13 @@
   "ok": true,
   "wikidata_m": 1234.2
  },
+ "Q1520405": {
+  "checked": "2026-11-18",
+  "dem_m": 1027.5,
+  "name": "Kao",
+  "ok": true,
+  "wikidata_m": 1030.0
+ },
  "Q1520750": {
   "checked": "2026-11-18",
   "dem_m": 2741.1,
@@ -565,6 +782,13 @@
   "name": "Mount Pilatus",
   "ok": true,
   "wikidata_m": 2128.0
+ },
+ "Q152872": {
+  "checked": "2026-11-18",
+  "dem_m": 16.5,
+  "name": "Ball's Pyramid",
+  "ok": false,
+  "wikidata_m": 572.0
  },
  "Q1542459": {
   "checked": "2026-11-18",
@@ -587,12 +811,47 @@
   "ok": false,
   "wikidata_m": 463.0
  },
+ "Q1549215": {
+  "checked": "2026-11-18",
+  "dem_m": 1248.9,
+  "name": "Julianatop",
+  "ok": false,
+  "wikidata_m": 1280.0
+ },
+ "Q1550157": {
+  "checked": "2026-11-18",
+  "dem_m": 502.3,
+  "name": "Late",
+  "ok": false,
+  "wikidata_m": 540.0
+ },
+ "Q1551536": {
+  "checked": "2026-11-18",
+  "dem_m": 1100.1,
+  "name": "Mount Makiling",
+  "ok": true,
+  "wikidata_m": 1090.0
+ },
  "Q155721": {
   "checked": "2026-11-18",
   "dem_m": 1141.4,
   "name": "Brocken",
   "ok": true,
   "wikidata_m": 1142.1
+ },
+ "Q1568704": {
+  "checked": "2026-11-18",
+  "dem_m": 398.6,
+  "name": "Monte do Gozo",
+  "ok": false,
+  "wikidata_m": 372.0
+ },
+ "Q1568968": {
+  "checked": "2026-11-18",
+  "dem_m": 207.5,
+  "name": "Hill of Allen",
+  "ok": true,
+  "wikidata_m": 206.0
  },
  "Q1569913": {
   "checked": "2026-11-18",
@@ -608,6 +867,27 @@
   "ok": true,
   "wikidata_m": 570.0
  },
+ "Q158470": {
+  "checked": "2026-11-18",
+  "dem_m": 3015.9,
+  "name": "Mount Agung",
+  "ok": false,
+  "wikidata_m": 3142.0
+ },
+ "Q158526": {
+  "checked": "2026-11-18",
+  "dem_m": 725.9,
+  "name": "Monte Titano",
+  "ok": false,
+  "wikidata_m": 756.0
+ },
+ "Q159762": {
+  "checked": "2026-11-18",
+  "dem_m": 4167.2,
+  "name": "Mauna Loa",
+  "ok": true,
+  "wikidata_m": 4169.37
+ },
  "Q1607790": {
   "checked": "2026-11-18",
   "dem_m": 589.3,
@@ -621,6 +901,20 @@
   "name": "Hjörleifshöfði",
   "ok": true,
   "wikidata_m": 221.0
+ },
+ "Q1628389": {
+  "checked": "2026-11-18",
+  "dem_m": 1274.9,
+  "name": "Mont Jacques-Cartier",
+  "ok": true,
+  "wikidata_m": 1270.0
+ },
+ "Q1628555": {
+  "checked": "2026-11-18",
+  "dem_m": 1563.8,
+  "name": "Hornopirén",
+  "ok": true,
+  "wikidata_m": 1572.0
  },
  "Q1631727": {
   "checked": "2026-11-18",
@@ -692,12 +986,33 @@
   "ok": true,
   "wikidata_m": 3432.0
  },
+ "Q168714": {
+  "checked": "2026-11-18",
+  "dem_m": 1569.8,
+  "name": "Tambora",
+  "ok": false,
+  "wikidata_m": 2850.0
+ },
  "Q16990": {
   "checked": "2026-11-18",
   "dem_m": 3322.2,
   "name": "Mount Etna",
   "ok": false,
   "wikidata_m": 3403.0
+ },
+ "Q171653": {
+  "checked": "2026-11-18",
+  "dem_m": 489.9,
+  "name": "Waw an Namus",
+  "ok": false,
+  "wikidata_m": 547.0
+ },
+ "Q1718336": {
+  "checked": "2026-11-18",
+  "dem_m": 397.4,
+  "name": "Mount Obama",
+  "ok": true,
+  "wikidata_m": 402.0
  },
  "Q1718867": {
   "checked": "2026-11-18",
@@ -712,6 +1027,13 @@
   "name": "Mount Kenya",
   "ok": false,
   "wikidata_m": 5199.0
+ },
+ "Q1720980": {
+  "checked": "2026-11-18",
+  "dem_m": 389.3,
+  "name": "Kadovar",
+  "ok": false,
+  "wikidata_m": 365.0
  },
  "Q1729630": {
   "checked": "2026-11-18",
@@ -741,12 +1063,47 @@
   "ok": false,
   "wikidata_m": 1117.0
  },
+ "Q1753878": {
+  "checked": "2026-11-18",
+  "dem_m": 1070.1,
+  "name": "Mount Augustus",
+  "ok": false,
+  "wikidata_m": 1106.0
+ },
  "Q17541": {
   "checked": "2026-11-18",
   "dem_m": 545.2,
   "name": "Victoria Peak",
   "ok": true,
   "wikidata_m": 552.0
+ },
+ "Q17605402": {
+  "checked": "2026-11-18",
+  "dem_m": 1430.2,
+  "name": "Jebel Kissane",
+  "ok": false,
+  "wikidata_m": 1485.0
+ },
+ "Q1767298": {
+  "checked": "2026-11-18",
+  "dem_m": 1554.8,
+  "name": "Luční hora",
+  "ok": true,
+  "wikidata_m": 1556.0
+ },
+ "Q1777280": {
+  "checked": "2026-11-18",
+  "dem_m": 144.0,
+  "name": "Achillbeg",
+  "ok": false,
+  "wikidata_m": 110.0
+ },
+ "Q1777377": {
+  "checked": "2026-11-18",
+  "dem_m": 320.1,
+  "name": "Knocknarea",
+  "ok": false,
+  "wikidata_m": 327.0
  },
  "Q1780789": {
   "checked": "2026-11-18",
@@ -776,6 +1133,13 @@
   "ok": false,
   "wikidata_m": 610.0
  },
+ "Q1790072": {
+  "checked": "2026-11-18",
+  "dem_m": 672.3,
+  "name": "Mount Okmok",
+  "ok": false,
+  "wikidata_m": 1073.0
+ },
  "Q1798109": {
   "checked": "2026-11-18",
   "dem_m": 552.1,
@@ -783,12 +1147,33 @@
   "ok": true,
   "wikidata_m": 551.0
  },
+ "Q181157": {
+  "checked": "2026-11-18",
+  "dem_m": 5403.9,
+  "name": "Popocatépetl",
+  "ok": true,
+  "wikidata_m": 5454.0
+ },
+ "Q1814846": {
+  "checked": "2026-11-18",
+  "dem_m": 1516.7,
+  "name": "Mount Alayta",
+  "ok": true,
+  "wikidata_m": 1501.0
+ },
  "Q1827535": {
   "checked": "2026-11-18",
   "dem_m": 366.8,
   "name": "Poike",
   "ok": false,
   "wikidata_m": 412.0
+ },
+ "Q182913": {
+  "checked": "2026-11-18",
+  "dem_m": 1475.0,
+  "name": "Grímsvötn",
+  "ok": false,
+  "wikidata_m": 1725.0
  },
  "Q184975": {
   "checked": "2026-11-18",
@@ -811,6 +1196,20 @@
   "ok": false,
   "wikidata_m": 2015.0
  },
+ "Q1858048": {
+  "checked": "2026-11-18",
+  "dem_m": 1144.4,
+  "name": "Umboi Island",
+  "ok": false,
+  "wikidata_m": 1548.0
+ },
+ "Q1869839": {
+  "checked": "2026-11-18",
+  "dem_m": 0.0,
+  "name": "Lopevi",
+  "ok": false,
+  "wikidata_m": 1413.0
+ },
  "Q1883683": {
   "checked": "2026-11-18",
   "dem_m": 3449.0,
@@ -824,6 +1223,20 @@
   "name": "Kīlauea",
   "ok": true,
   "wikidata_m": 1247.0
+ },
+ "Q190562": {
+  "checked": "2026-11-18",
+  "dem_m": 4028.3,
+  "name": "Mount Cameroon",
+  "ok": true,
+  "wikidata_m": 4095.0
+ },
+ "Q193785": {
+  "checked": "2026-11-18",
+  "dem_m": 564.8,
+  "name": "Mount Tabor",
+  "ok": false,
+  "wikidata_m": 530.0
  },
  "Q194057": {
   "checked": "2026-11-18",
@@ -839,12 +1252,26 @@
   "ok": false,
   "wikidata_m": 867.0
  },
+ "Q1945426": {
+  "checked": "2026-11-18",
+  "dem_m": 283.8,
+  "name": "Hill 262",
+  "ok": false,
+  "wikidata_m": 262.0
+ },
  "Q1951029": {
   "checked": "2026-11-18",
   "dem_m": 2000.8,
   "name": "Mousa Ali",
   "ok": true,
   "wikidata_m": 2028.0
+ },
+ "Q1963949": {
+  "checked": "2026-11-18",
+  "dem_m": 994.2,
+  "name": "Mashuk",
+  "ok": true,
+  "wikidata_m": 993.0
  },
  "Q1969482": {
   "checked": "2026-11-18",
@@ -860,6 +1287,20 @@
   "ok": false,
   "wikidata_m": 2330.0
  },
+ "Q202629": {
+  "checked": "2026-11-18",
+  "dem_m": 2848.7,
+  "name": "Lonquimay",
+  "ok": true,
+  "wikidata_m": 2865.0
+ },
+ "Q2026998": {
+  "checked": "2026-11-18",
+  "dem_m": 602.4,
+  "name": "Burning Mountain",
+  "ok": false,
+  "wikidata_m": 520.0
+ },
  "Q2031587": {
   "checked": "2026-11-18",
   "dem_m": 128.1,
@@ -874,6 +1315,13 @@
   "ok": true,
   "wikidata_m": 2468.85
  },
+ "Q204552": {
+  "checked": "2026-11-18",
+  "dem_m": 1265.0,
+  "name": "Kunanyi / Mount Wellington",
+  "ok": true,
+  "wikidata_m": 1271.0
+ },
  "Q204821": {
   "checked": "2026-11-18",
   "dem_m": 250.8,
@@ -881,12 +1329,26 @@
   "ok": false,
   "wikidata_m": 270.0
  },
+ "Q205976": {
+  "checked": "2026-11-18",
+  "dem_m": 830.5,
+  "name": "Mount of Olives",
+  "ok": true,
+  "wikidata_m": 826.0
+ },
  "Q2062890": {
   "checked": "2026-11-18",
   "dem_m": 2039.1,
   "name": "Queen Mary's Peak",
   "ok": true,
   "wikidata_m": 2062.0
+ },
+ "Q2063471": {
+  "checked": "2026-11-18",
+  "dem_m": 2177.6,
+  "name": "Whistler Mountain",
+  "ok": true,
+  "wikidata_m": 2181.0
  },
  "Q2071883": {
   "checked": "2026-11-18",
@@ -951,6 +1413,13 @@
   "ok": true,
   "wikidata_m": 4058.0
  },
+ "Q2094533": {
+  "checked": "2026-11-18",
+  "dem_m": 131.0,
+  "name": "Inishvickillane",
+  "ok": false,
+  "wikidata_m": 135.0
+ },
  "Q2094734": {
   "checked": "2026-11-18",
   "dem_m": 712.3,
@@ -965,12 +1434,40 @@
   "ok": true,
   "wikidata_m": 350.0
  },
+ "Q2098121": {
+  "checked": "2026-11-18",
+  "dem_m": 1150.3,
+  "name": "Planche des Belles Filles",
+  "ok": true,
+  "wikidata_m": 1148.0
+ },
+ "Q210722": {
+  "checked": "2026-11-18",
+  "dem_m": 326.9,
+  "name": "Sugarloaf Mountain",
+  "ok": false,
+  "wikidata_m": 395.0
+ },
+ "Q2114101": {
+  "checked": "2026-11-18",
+  "dem_m": 2749.3,
+  "name": "Mawson Peak",
+  "ok": true,
+  "wikidata_m": 2745.0
+ },
  "Q211529": {
   "checked": "2026-11-18",
   "dem_m": 7051.1,
   "name": "Khan Tengri",
   "ok": true,
   "wikidata_m": 7010.0
+ },
+ "Q2116298": {
+  "checked": "2026-11-18",
+  "dem_m": 1193.7,
+  "name": "Marion Island",
+  "ok": false,
+  "wikidata_m": 925.0
  },
  "Q2133217": {
   "checked": "2026-11-18",
@@ -985,6 +1482,13 @@
   "name": "Table Mountain",
   "ok": true,
   "wikidata_m": 1085.0
+ },
+ "Q214696": {
+  "checked": "2026-11-18",
+  "dem_m": 3453.8,
+  "name": "Mount Nyiragongo",
+  "ok": true,
+  "wikidata_m": 3470.0
  },
  "Q214916": {
   "checked": "2026-11-18",
@@ -1007,6 +1511,13 @@
   "ok": true,
   "wikidata_m": 1545.0
  },
+ "Q216894": {
+  "checked": "2026-11-18",
+  "dem_m": 513.1,
+  "name": "Mount Arafat",
+  "ok": false,
+  "wikidata_m": 454.0
+ },
  "Q217142": {
   "checked": "2026-11-18",
   "dem_m": 1071.8,
@@ -1028,12 +1539,54 @@
   "ok": false,
   "wikidata_m": 2403.0
  },
+ "Q2269026": {
+  "checked": "2026-11-18",
+  "dem_m": 1481.9,
+  "name": "Monte Burney",
+  "ok": false,
+  "wikidata_m": 1758.0
+ },
  "Q229107": {
   "checked": "2026-11-18",
   "dem_m": 6448.3,
   "name": "Mount Kailash",
   "ok": false,
   "wikidata_m": 6638.0
+ },
+ "Q229624": {
+  "checked": "2026-11-18",
+  "dem_m": 691.5,
+  "name": "Zuma Rock",
+  "ok": true,
+  "wikidata_m": 700.0
+ },
+ "Q230265": {
+  "checked": "2026-11-18",
+  "dem_m": 622.6,
+  "name": "Zuqar Island",
+  "ok": false,
+  "wikidata_m": 524.0
+ },
+ "Q230269": {
+  "checked": "2026-11-18",
+  "dem_m": 3006.9,
+  "name": "Mount Zuqualla",
+  "ok": true,
+  "wikidata_m": 2998.0
+ },
+ "Q231620": {
+  "checked": "2026-11-18",
+  "dem_m": 2798.1,
+  "name": "Parícutin",
+  "ok": true,
+  "wikidata_m": 2800.0
+ },
+ "Q2317348": {
+  "checked": "2026-11-18",
+  "dem_m": 2519.5,
+  "name": "Marijash",
+  "ok": true,
+  "wikidata_m": 2533.0
  },
  "Q233351": {
   "checked": "2026-11-18",
@@ -1077,6 +1630,13 @@
   "ok": true,
   "wikidata_m": 4421.0
  },
+ "Q2383371": {
+  "checked": "2026-11-18",
+  "dem_m": 2447.6,
+  "name": "Tidighin",
+  "ok": true,
+  "wikidata_m": 2456.0
+ },
  "Q2385621": {
   "checked": "2026-11-18",
   "dem_m": 541.0,
@@ -1091,6 +1651,13 @@
   "ok": true,
   "wikidata_m": 1856.0
  },
+ "Q2388278": {
+  "checked": "2026-11-18",
+  "dem_m": 4779.9,
+  "name": "Tetnuldi",
+  "ok": true,
+  "wikidata_m": 4858.0
+ },
  "Q2417680": {
   "checked": "2026-11-18",
   "dem_m": 1129.0,
@@ -1104,6 +1671,13 @@
   "name": "Mount Asama",
   "ok": true,
   "wikidata_m": 2568.0
+ },
+ "Q246976": {
+  "checked": "2026-11-18",
+  "dem_m": 768.1,
+  "name": "Záruby",
+  "ok": true,
+  "wikidata_m": 767.4
  },
  "Q2470386": {
   "checked": "2026-11-18",
@@ -1133,12 +1707,68 @@
   "ok": true,
   "wikidata_m": 3562.0
  },
+ "Q254143": {
+  "checked": "2026-11-18",
+  "dem_m": 970.0,
+  "name": "Sakar Island",
+  "ok": false,
+  "wikidata_m": 992.0
+ },
+ "Q2587548": {
+  "checked": "2026-11-18",
+  "dem_m": 1593.2,
+  "name": "Ostredok",
+  "ok": true,
+  "wikidata_m": 1596.0
+ },
+ "Q260465": {
+  "checked": "2026-11-18",
+  "dem_m": 175.8,
+  "name": "Budj Bim",
+  "ok": true,
+  "wikidata_m": 178.0
+ },
+ "Q2631355": {
+  "checked": "2026-11-18",
+  "dem_m": 1880.6,
+  "name": "North Baikal Highlands",
+  "ok": false,
+  "wikidata_m": 857.0
+ },
+ "Q264862": {
+  "checked": "2026-11-18",
+  "dem_m": 477.0,
+  "name": "Tavurvur",
+  "ok": false,
+  "wikidata_m": 688.0
+ },
+ "Q26544": {
+  "checked": "2026-11-18",
+  "dem_m": 1105.1,
+  "name": "La Soufrière",
+  "ok": false,
+  "wikidata_m": 1220.0
+ },
+ "Q2662514": {
+  "checked": "2026-11-18",
+  "dem_m": 153.8,
+  "name": "Tearaght Island",
+  "ok": false,
+  "wikidata_m": 200.0
+ },
  "Q2664586": {
   "checked": "2026-11-18",
   "dem_m": 539.6,
   "name": "Golovnin",
   "ok": true,
   "wikidata_m": 543.0
+ },
+ "Q2671162": {
+  "checked": "2026-11-18",
+  "dem_m": 3105.6,
+  "name": "Mount Entoto",
+  "ok": false,
+  "wikidata_m": 3200.0
  },
  "Q2672570": {
   "checked": "2026-11-18",
@@ -1175,6 +1805,13 @@
   "ok": false,
   "wikidata_m": 943.28
  },
+ "Q2729991": {
+  "checked": "2026-11-18",
+  "dem_m": 1577.5,
+  "name": "Lewotobi",
+  "ok": false,
+  "wikidata_m": 1703.0
+ },
  "Q2737839": {
   "checked": "2026-11-18",
   "dem_m": 893.7,
@@ -1202,6 +1839,27 @@
   "name": "Mount Hood",
   "ok": true,
   "wikidata_m": 3425.04
+ },
+ "Q277441": {
+  "checked": "2026-11-18",
+  "dem_m": 4473.2,
+  "name": "Mount Wilhelm",
+  "ok": true,
+  "wikidata_m": 4509.0
+ },
+ "Q279980": {
+  "checked": "2026-11-18",
+  "dem_m": 863.2,
+  "name": "Kata Tjuta",
+  "ok": false,
+  "wikidata_m": 1069.0
+ },
+ "Q283712": {
+  "checked": "2026-11-18",
+  "dem_m": 563.4,
+  "name": "Tafahi",
+  "ok": false,
+  "wikidata_m": 546.0
  },
  "Q2859566": {
   "checked": "2026-11-18",
@@ -1231,6 +1889,34 @@
   "ok": true,
   "wikidata_m": 965.0
  },
+ "Q2901143": {
+  "checked": "2026-11-18",
+  "dem_m": 833.9,
+  "name": "Har Hotzvim",
+  "ok": false,
+  "wikidata_m": 700.0
+ },
+ "Q2915766": {
+  "checked": "2026-11-18",
+  "dem_m": 459.4,
+  "name": "Tur'an",
+  "ok": false,
+  "wikidata_m": 227.0
+ },
+ "Q2940365": {
+  "checked": "2026-11-18",
+  "dem_m": 1127.5,
+  "name": "Carrán-Los Venados",
+  "ok": true,
+  "wikidata_m": 1114.0
+ },
+ "Q29595": {
+  "checked": "2026-11-18",
+  "dem_m": 1802.9,
+  "name": "Cot Seulawah Agam",
+  "ok": true,
+  "wikidata_m": 1810.0
+ },
  "Q2981161": {
   "checked": "2026-11-18",
   "dem_m": 3619.7,
@@ -1252,6 +1938,27 @@
   "ok": true,
   "wikidata_m": 584.0
  },
+ "Q2989698": {
+  "checked": "2026-11-18",
+  "dem_m": 663.8,
+  "name": "Motajica",
+  "ok": false,
+  "wikidata_m": 529.0
+ },
+ "Q2990529": {
+  "checked": "2026-11-18",
+  "dem_m": 735.2,
+  "name": "Ksudach",
+  "ok": false,
+  "wikidata_m": 1079.0
+ },
+ "Q3026089": {
+  "checked": "2026-11-18",
+  "dem_m": 435.2,
+  "name": "Diamond Hill",
+  "ok": true,
+  "wikidata_m": 442.0
+ },
  "Q303806": {
   "checked": "2026-11-18",
   "dem_m": 242.1,
@@ -1265,6 +1972,27 @@
   "name": "Holy Island",
   "ok": false,
   "wikidata_m": 313.94
+ },
+ "Q306201": {
+  "checked": "2026-11-18",
+  "dem_m": 1400.8,
+  "name": "Devils Tower",
+  "ok": false,
+  "wikidata_m": 1558.0
+ },
+ "Q3066185": {
+  "checked": "2026-11-18",
+  "dem_m": 1310.2,
+  "name": "Volcán Huequi",
+  "ok": true,
+  "wikidata_m": 1318.0
+ },
+ "Q3070583": {
+  "checked": "2026-11-18",
+  "dem_m": 234.3,
+  "name": "Mount Ulia",
+  "ok": true,
+  "wikidata_m": 234.0
  },
  "Q3109835": {
   "checked": "2026-11-18",
@@ -1287,6 +2015,13 @@
   "ok": true,
   "wikidata_m": 2997.0
  },
+ "Q3163385": {
+  "checked": "2026-11-18",
+  "dem_m": 3254.2,
+  "name": "Jbel Siroua",
+  "ok": true,
+  "wikidata_m": 3304.0
+ },
  "Q316401": {
   "checked": "2026-11-18",
   "dem_m": 1493.1,
@@ -1300,6 +2035,20 @@
   "name": "Vogelsberg",
   "ok": true,
   "wikidata_m": 773.0
+ },
+ "Q3178771": {
+  "checked": "2026-11-18",
+  "dem_m": 1035.9,
+  "name": "Montejurra",
+  "ok": true,
+  "wikidata_m": 1046.0
+ },
+ "Q322824": {
+  "checked": "2026-11-18",
+  "dem_m": 706.1,
+  "name": "Signal de Botrange",
+  "ok": true,
+  "wikidata_m": 694.24
  },
  "Q3321804": {
   "checked": "2026-11-18",
@@ -1357,12 +2106,47 @@
   "ok": true,
   "wikidata_m": 450.0
  },
+ "Q354182": {
+  "checked": "2026-11-18",
+  "dem_m": 1933.0,
+  "name": "Uritorco",
+  "ok": false,
+  "wikidata_m": 1979.0
+ },
+ "Q35644": {
+  "checked": "2026-11-18",
+  "dem_m": 621.5,
+  "name": "Mount Pindo",
+  "ok": true,
+  "wikidata_m": 627.0
+ },
  "Q358573": {
   "checked": "2026-11-18",
   "dem_m": 727.3,
   "name": "Adlisberg",
   "ok": false,
   "wikidata_m": 701.0
+ },
+ "Q3631196": {
+  "checked": "2026-11-18",
+  "dem_m": 4749.6,
+  "name": "Mount Sikaram",
+  "ok": true,
+  "wikidata_m": 4755.0
+ },
+ "Q3707308": {
+  "checked": "2026-11-18",
+  "dem_m": 665.7,
+  "name": "Mount Dajo",
+  "ok": false,
+  "wikidata_m": 620.0
+ },
+ "Q377485": {
+  "checked": "2026-11-18",
+  "dem_m": 2250.2,
+  "name": "Mount Sinai",
+  "ok": true,
+  "wikidata_m": 2287.0
  },
  "Q3775494": {
   "checked": "2026-11-18",
@@ -1371,12 +2155,26 @@
   "ok": false,
   "wikidata_m": 760.0
  },
+ "Q380084": {
+  "checked": "2026-11-18",
+  "dem_m": 1628.5,
+  "name": "Adwa",
+  "ok": false,
+  "wikidata_m": 1733.0
+ },
  "Q382139": {
   "checked": "2026-11-18",
   "dem_m": 1260.9,
   "name": "Afdera",
   "ok": false,
   "wikidata_m": 1295.0
+ },
+ "Q3846126": {
+  "checked": "2026-11-18",
+  "dem_m": 316.6,
+  "name": "Kunětice Mountain",
+  "ok": true,
+  "wikidata_m": 315.0
  },
  "Q386192": {
   "checked": "2026-11-18",
@@ -1427,6 +2225,13 @@
   "ok": false,
   "wikidata_m": 3842.0
  },
+ "Q40758": {
+  "checked": "2026-11-18",
+  "dem_m": 5596.9,
+  "name": "Damavand",
+  "ok": true,
+  "wikidata_m": 5628.0
+ },
  "Q408217": {
   "checked": "2026-11-18",
   "dem_m": 469.6,
@@ -1434,12 +2239,47 @@
   "ok": false,
   "wikidata_m": 920.0
  },
+ "Q4115597": {
+  "checked": "2026-11-18",
+  "dem_m": 693.3,
+  "name": "Jbel Lakhdar",
+  "ok": true,
+  "wikidata_m": 687.0
+ },
  "Q414577": {
   "checked": "2026-11-18",
   "dem_m": 1092.5,
   "name": "Akademia Nauk",
   "ok": false,
   "wikidata_m": 1180.0
+ },
+ "Q4178018": {
+  "checked": "2026-11-18",
+  "dem_m": 302.0,
+  "name": "Suwoh",
+  "ok": false,
+  "wikidata_m": 1000.0
+ },
+ "Q42174": {
+  "checked": "2026-11-18",
+  "dem_m": 1279.0,
+  "name": "Gunung Rajabasa",
+  "ok": true,
+  "wikidata_m": 1281.0
+ },
+ "Q422835": {
+  "checked": "2026-11-18",
+  "dem_m": 3430.1,
+  "name": "Tronador",
+  "ok": true,
+  "wikidata_m": 3491.0
+ },
+ "Q4274045": {
+  "checked": "2026-11-18",
+  "dem_m": 558.9,
+  "name": "Magnitnaya",
+  "ok": false,
+  "wikidata_m": 616.0
  },
  "Q427604": {
   "checked": "2026-11-18",
@@ -1455,6 +2295,13 @@
   "ok": true,
   "wikidata_m": 5642.0
  },
+ "Q43512": {
+  "checked": "2026-11-18",
+  "dem_m": 8569.3,
+  "name": "K2",
+  "ok": true,
+  "wikidata_m": 8611.0
+ },
  "Q43876": {
   "checked": "2026-11-18",
   "dem_m": 1694.3,
@@ -1462,12 +2309,33 @@
   "ok": true,
   "wikidata_m": 1717.0
  },
+ "Q447277": {
+  "checked": "2026-11-18",
+  "dem_m": 406.7,
+  "name": "Alu",
+  "ok": false,
+  "wikidata_m": 429.0
+ },
  "Q455963": {
   "checked": "2026-11-18",
   "dem_m": 2943.4,
   "name": "Mount Apo",
   "ok": true,
   "wikidata_m": 2954.0
+ },
+ "Q456557": {
+  "checked": "2026-11-18",
+  "dem_m": 3292.2,
+  "name": "Amba Alagi",
+  "ok": false,
+  "wikidata_m": 3438.0
+ },
+ "Q457596": {
+  "checked": "2026-11-18",
+  "dem_m": 450.1,
+  "name": "Ambitle",
+  "ok": true,
+  "wikidata_m": 450.0
  },
  "Q459948": {
   "checked": "2026-11-18",
@@ -1490,6 +2358,20 @@
   "ok": true,
   "wikidata_m": 1738.0
  },
+ "Q4777": {
+  "checked": "2026-11-18",
+  "dem_m": 2408.7,
+  "name": "Mount Roraima",
+  "ok": false,
+  "wikidata_m": 2810.0
+ },
+ "Q481441": {
+  "checked": "2026-11-18",
+  "dem_m": 1038.4,
+  "name": "Mount Amukta",
+  "ok": false,
+  "wikidata_m": 1066.0
+ },
  "Q485550": {
   "checked": "2026-11-18",
   "dem_m": 2679.6,
@@ -1504,12 +2386,54 @@
   "ok": true,
   "wikidata_m": 5045.0
  },
+ "Q48877": {
+  "checked": "2026-11-18",
+  "dem_m": 3270.7,
+  "name": "Shiveluch",
+  "ok": true,
+  "wikidata_m": 3283.0
+ },
+ "Q494645": {
+  "checked": "2026-11-18",
+  "dem_m": 1810.5,
+  "name": "Hallasan",
+  "ok": false,
+  "wikidata_m": 1947.06
+ },
+ "Q499019": {
+  "checked": "2026-11-18",
+  "dem_m": 349.3,
+  "name": "Jebel Barkal",
+  "ok": false,
+  "wikidata_m": 287.0
+ },
+ "Q499108": {
+  "checked": "2026-11-18",
+  "dem_m": 2780.1,
+  "name": "Pico do Fogo",
+  "ok": true,
+  "wikidata_m": 2829.0
+ },
  "Q502536": {
   "checked": "2026-11-18",
   "dem_m": 957.7,
   "name": "Mount Babel",
   "ok": true,
   "wikidata_m": 952.0
+ },
+ "Q503368": {
+  "checked": "2026-11-18",
+  "dem_m": 1031.9,
+  "name": "Carrauntoohil",
+  "ok": true,
+  "wikidata_m": 1038.6
+ },
+ "Q503433": {
+  "checked": "2026-11-18",
+  "dem_m": 4155.8,
+  "name": "Jbel Toubkal",
+  "ok": true,
+  "wikidata_m": 4167.0
  },
  "Q5047973": {
   "checked": "2026-11-18",
@@ -1525,6 +2449,13 @@
   "ok": true,
   "wikidata_m": 3724.0
  },
+ "Q506938": {
+  "checked": "2026-11-18",
+  "dem_m": 661.9,
+  "name": "Corcovado",
+  "ok": false,
+  "wikidata_m": 710.0
+ },
  "Q507979": {
   "checked": "2026-11-18",
   "dem_m": 1349.8,
@@ -1538,6 +2469,20 @@
   "name": "Mount Everest",
   "ok": true,
   "wikidata_m": 8850.0
+ },
+ "Q515719": {
+  "checked": "2026-11-18",
+  "dem_m": 3051.8,
+  "name": "Haleakalā",
+  "ok": true,
+  "wikidata_m": 3055.0
+ },
+ "Q516145": {
+  "checked": "2026-11-18",
+  "dem_m": 5967.4,
+  "name": "Laila Peak",
+  "ok": false,
+  "wikidata_m": 6096.0
  },
  "Q521811": {
   "checked": "2026-11-18",
@@ -1560,6 +2505,27 @@
   "ok": true,
   "wikidata_m": 1206.0
  },
+ "Q524471": {
+  "checked": "2026-11-18",
+  "dem_m": 370.4,
+  "name": "Murray Hill, Christmas Island",
+  "ok": false,
+  "wikidata_m": 361.0
+ },
+ "Q525281": {
+  "checked": "2026-11-18",
+  "dem_m": 834.6,
+  "name": "Mount Saint Catherine",
+  "ok": true,
+  "wikidata_m": 840.0
+ },
+ "Q527548": {
+  "checked": "2026-11-18",
+  "dem_m": 2352.2,
+  "name": "Mount Karthala",
+  "ok": true,
+  "wikidata_m": 2361.0
+ },
  "Q528654": {
   "checked": "2026-11-18",
   "dem_m": 857.1,
@@ -1581,6 +2547,34 @@
   "ok": true,
   "wikidata_m": 507.0
  },
+ "Q540520": {
+  "checked": "2026-11-18",
+  "dem_m": 1200.9,
+  "name": "Meron",
+  "ok": true,
+  "wikidata_m": 1208.0
+ },
+ "Q545768": {
+  "checked": "2026-11-18",
+  "dem_m": 2895.1,
+  "name": "Mytikas",
+  "ok": true,
+  "wikidata_m": 2917.73
+ },
+ "Q548229": {
+  "checked": "2026-11-18",
+  "dem_m": 783.8,
+  "name": "Reclus",
+  "ok": false,
+  "wikidata_m": 1000.0
+ },
+ "Q550163": {
+  "checked": "2026-11-18",
+  "dem_m": 845.4,
+  "name": "Slieve Donard",
+  "ok": true,
+  "wikidata_m": 849.0
+ },
  "Q564771": {
   "checked": "2026-11-18",
   "dem_m": 284.5,
@@ -1588,12 +2582,33 @@
   "ok": false,
   "wikidata_m": 276.5
  },
+ "Q571805": {
+  "checked": "2026-11-18",
+  "dem_m": 1249.3,
+  "name": "Baluran",
+  "ok": true,
+  "wikidata_m": 1247.0
+ },
  "Q572801": {
   "checked": "2026-11-18",
   "dem_m": 1912.8,
   "name": "Mount Washington",
   "ok": true,
   "wikidata_m": 1917.0
+ },
+ "Q575891": {
+  "checked": "2026-11-18",
+  "dem_m": 1293.9,
+  "name": "Momotombo",
+  "ok": true,
+  "wikidata_m": 1297.0
+ },
+ "Q576985": {
+  "checked": "2026-11-18",
+  "dem_m": 1986.3,
+  "name": "Antillanca Group",
+  "ok": true,
+  "wikidata_m": 1990.0
  },
  "Q577700": {
   "checked": "2026-11-18",
@@ -1616,12 +2631,47 @@
   "ok": true,
   "wikidata_m": 1445.0
  },
+ "Q5919800": {
+  "checked": "2026-11-18",
+  "dem_m": 418.7,
+  "name": "Pic Paradis",
+  "ok": true,
+  "wikidata_m": 424.0
+ },
+ "Q598469": {
+  "checked": "2026-11-18",
+  "dem_m": 77.6,
+  "name": "Croghan Hill",
+  "ok": false,
+  "wikidata_m": 234.0
+ },
  "Q602538": {
   "checked": "2026-11-18",
   "dem_m": 797.5,
   "name": "Ithome",
   "ok": true,
   "wikidata_m": 805.0
+ },
+ "Q60789": {
+  "checked": "2026-11-18",
+  "dem_m": 2190.2,
+  "name": "Adam's Peak",
+  "ok": false,
+  "wikidata_m": 2243.0
+ },
+ "Q60967": {
+  "checked": "2026-11-18",
+  "dem_m": 4044.2,
+  "name": "Mount Kinabalu",
+  "ok": true,
+  "wikidata_m": 4095.0
+ },
+ "Q612240": {
+  "checked": "2026-11-18",
+  "dem_m": 1618.7,
+  "name": "Trebević",
+  "ok": true,
+  "wikidata_m": 1629.0
  },
  "Q614531": {
   "checked": "2026-11-18",
@@ -1636,6 +2686,20 @@
   "name": "Mount Mitchell",
   "ok": true,
   "wikidata_m": 2037.0
+ },
+ "Q6172515": {
+  "checked": "2026-11-18",
+  "dem_m": 1922.1,
+  "name": "Jebel Kelti",
+  "ok": true,
+  "wikidata_m": 1926.0
+ },
+ "Q617293": {
+  "checked": "2026-11-18",
+  "dem_m": 1206.1,
+  "name": "Apagado",
+  "ok": true,
+  "wikidata_m": 1210.0
  },
  "Q617511": {
   "checked": "2026-11-18",
@@ -1658,12 +2722,26 @@
   "ok": true,
   "wikidata_m": 1486.0
  },
+ "Q622616": {
+  "checked": "2026-11-18",
+  "dem_m": 1337.8,
+  "name": "Mount Lu",
+  "ok": false,
+  "wikidata_m": 1474.0
+ },
  "Q626809": {
   "checked": "2026-11-18",
   "dem_m": 1028.7,
   "name": "Mount Arayat",
   "ok": true,
   "wikidata_m": 1026.0
+ },
+ "Q628687": {
+  "checked": "2026-11-18",
+  "dem_m": 758.3,
+  "name": "Croagh Patrick",
+  "ok": true,
+  "wikidata_m": 764.0
  },
  "Q630494": {
   "checked": "2026-11-18",
@@ -1685,6 +2763,27 @@
   "name": "Corno Grande",
   "ok": true,
   "wikidata_m": 2912.0
+ },
+ "Q639487": {
+  "checked": "2026-11-18",
+  "dem_m": 739.8,
+  "name": "Pitons",
+  "ok": false,
+  "wikidata_m": 786.0
+ },
+ "Q641588": {
+  "checked": "2026-11-18",
+  "dem_m": 1671.1,
+  "name": "Arenal Volcano",
+  "ok": true,
+  "wikidata_m": 1670.0
+ },
+ "Q6470535": {
+  "checked": "2026-11-18",
+  "dem_m": 544.6,
+  "name": "Trebava",
+  "ok": false,
+  "wikidata_m": 400.0
  },
  "Q657937": {
   "checked": "2026-11-18",
@@ -1720,6 +2819,20 @@
   "name": "Wildspitze",
   "ok": true,
   "wikidata_m": 3768.0
+ },
+ "Q679590": {
+  "checked": "2026-11-18",
+  "dem_m": 2490.4,
+  "name": "Mount Bromo",
+  "ok": false,
+  "wikidata_m": 2329.0
+ },
+ "Q679618": {
+  "checked": "2026-11-18",
+  "dem_m": 746.5,
+  "name": "Seerücken",
+  "ok": false,
+  "wikidata_m": 721.0
  },
  "Q68340": {
   "checked": "2026-11-18",
@@ -1770,6 +2883,13 @@
   "ok": true,
   "wikidata_m": 817.0
  },
+ "Q697038": {
+  "checked": "2026-11-18",
+  "dem_m": 3878.2,
+  "name": "Makra Peak",
+  "ok": false,
+  "wikidata_m": 3586.0
+ },
  "Q697119": {
   "checked": "2026-11-18",
   "dem_m": 509.4,
@@ -1819,6 +2939,20 @@
   "ok": false,
   "wikidata_m": 251.0
  },
+ "Q714605": {
+  "checked": "2026-11-18",
+  "dem_m": 1806.5,
+  "name": "Mount Bandai",
+  "ok": true,
+  "wikidata_m": 1819.0
+ },
+ "Q720720": {
+  "checked": "2026-11-18",
+  "dem_m": 1269.0,
+  "name": "Karkar Island",
+  "ok": false,
+  "wikidata_m": 1839.0
+ },
  "Q72303": {
   "checked": "2026-11-18",
   "dem_m": null,
@@ -1861,12 +2995,47 @@
   "ok": true,
   "wikidata_m": 4321.0
  },
+ "Q737859": {
+  "checked": "2026-11-18",
+  "dem_m": 4504.0,
+  "name": "Mount Karisimbi",
+  "ok": true,
+  "wikidata_m": 4507.0
+ },
+ "Q739484": {
+  "checked": "2026-11-18",
+  "dem_m": 2759.6,
+  "name": "Pico da Neblina",
+  "ok": false,
+  "wikidata_m": 2994.0
+ },
+ "Q74158": {
+  "checked": "2026-11-18",
+  "dem_m": 2347.7,
+  "name": "Ulawun",
+  "ok": true,
+  "wikidata_m": 2334.0
+ },
+ "Q747182": {
+  "checked": "2026-11-18",
+  "dem_m": 1609.3,
+  "name": "Mount Ossa",
+  "ok": true,
+  "wikidata_m": 1617.0
+ },
  "Q748040": {
   "checked": "2026-11-18",
   "dem_m": 850.8,
   "name": "Mount Hiei",
   "ok": true,
   "wikidata_m": 848.1
+ },
+ "Q750190": {
+  "checked": "2026-11-18",
+  "dem_m": 1151.9,
+  "name": "Sulaiman-Too",
+  "ok": false,
+  "wikidata_m": 1110.0
  },
  "Q752994": {
   "checked": "2026-11-18",
@@ -1875,12 +3044,26 @@
   "ok": false,
   "wikidata_m": 818.0
  },
+ "Q754734": {
+  "checked": "2026-11-18",
+  "dem_m": 5788.3,
+  "name": "Cayambe",
+  "ok": true,
+  "wikidata_m": 5790.0
+ },
  "Q76309": {
   "checked": "2026-11-18",
   "dem_m": 1382.5,
   "name": "Mount Pelée",
   "ok": true,
   "wikidata_m": 1397.0
+ },
+ "Q766813": {
+  "checked": "2026-11-18",
+  "dem_m": 2601.4,
+  "name": "Gerlachovská veža",
+  "ok": true,
+  "wikidata_m": 2642.0
  },
  "Q770496": {
   "checked": "2026-11-18",
@@ -1917,6 +3100,13 @@
   "ok": true,
   "wikidata_m": 1320.0
  },
+ "Q792922": {
+  "checked": "2026-11-18",
+  "dem_m": 2119.9,
+  "name": "Mount Ayalu",
+  "ok": true,
+  "wikidata_m": 2145.0
+ },
  "Q797800": {
   "checked": "2026-11-18",
   "dem_m": 1068.0,
@@ -1931,12 +3121,61 @@
   "ok": true,
   "wikidata_m": 2917.73
  },
+ "Q8069401": {
+  "checked": "2026-11-18",
+  "dem_m": 1033.6,
+  "name": "Zerhoun",
+  "ok": true,
+  "wikidata_m": 1025.0
+ },
  "Q807788": {
   "checked": "2026-11-18",
   "dem_m": 2580.9,
   "name": "Barbeau Peak",
   "ok": true,
   "wikidata_m": 2616.0
+ },
+ "Q811048": {
+  "checked": "2026-11-18",
+  "dem_m": 754.0,
+  "name": "Batu Tara",
+  "ok": true,
+  "wikidata_m": 748.0
+ },
+ "Q81213": {
+  "checked": "2026-11-18",
+  "dem_m": 2601.1,
+  "name": "Gerlachovský štít",
+  "ok": false,
+  "wikidata_m": 2654.4
+ },
+ "Q814113": {
+  "checked": "2026-11-18",
+  "dem_m": 2260.6,
+  "name": "Beerenberg",
+  "ok": true,
+  "wikidata_m": 2277.0
+ },
+ "Q815401": {
+  "checked": "2026-11-18",
+  "dem_m": 885.8,
+  "name": "Belenkaya",
+  "ok": true,
+  "wikidata_m": 892.0
+ },
+ "Q816458": {
+  "checked": "2026-11-18",
+  "dem_m": 523.1,
+  "name": "Ben Bulben",
+  "ok": true,
+  "wikidata_m": 527.0
+ },
+ "Q819281": {
+  "checked": "2026-11-18",
+  "dem_m": 173.3,
+  "name": "Mount Arbel",
+  "ok": false,
+  "wikidata_m": 282.0
  },
  "Q82019": {
   "checked": "2026-11-18",
@@ -1966,12 +3205,40 @@
   "ok": true,
   "wikidata_m": 1745.0
  },
+ "Q838875": {
+  "checked": "2026-11-18",
+  "dem_m": 4873.8,
+  "name": "Mount Speke",
+  "ok": true,
+  "wikidata_m": 4890.0
+ },
+ "Q839630": {
+  "checked": "2026-11-18",
+  "dem_m": 3296.3,
+  "name": "Koryaksky",
+  "ok": false,
+  "wikidata_m": 3456.0
+ },
+ "Q841189": {
+  "checked": "2026-11-18",
+  "dem_m": 1097.8,
+  "name": "El Chichón",
+  "ok": false,
+  "wikidata_m": 1060.0
+ },
  "Q841926": {
   "checked": "2026-11-18",
   "dem_m": 1337.1,
   "name": "Grouse Mountain",
   "ok": false,
   "wikidata_m": 1231.0
+ },
+ "Q8521766": {
+  "checked": "2026-11-18",
+  "dem_m": 1446.1,
+  "name": "Korosi",
+  "ok": true,
+  "wikidata_m": 1446.0
  },
  "Q858808": {
   "checked": "2026-11-18",
@@ -1994,12 +3261,26 @@
   "ok": true,
   "wikidata_m": 3482.0
  },
+ "Q863196": {
+  "checked": "2026-11-18",
+  "dem_m": 1554.3,
+  "name": "Billy Mitchell",
+  "ok": true,
+  "wikidata_m": 1544.0
+ },
  "Q864337": {
   "checked": "2026-11-18",
   "dem_m": 1538.8,
   "name": "Karymsky",
   "ok": true,
   "wikidata_m": 1536.0
+ },
+ "Q873358": {
+  "checked": "2026-11-18",
+  "dem_m": 911.0,
+  "name": "Mount Sanqing",
+  "ok": false,
+  "wikidata_m": 1817.0
  },
  "Q879882": {
   "checked": "2026-11-18",
@@ -2015,12 +3296,26 @@
   "ok": true,
   "wikidata_m": 812.0
  },
+ "Q902905": {
+  "checked": "2026-11-18",
+  "dem_m": 232.9,
+  "name": "Bray Head",
+  "ok": false,
+  "wikidata_m": 241.0
+ },
  "Q903": {
   "checked": "2026-11-18",
   "dem_m": 594.2,
   "name": "Erta Ale",
   "ok": false,
   "wikidata_m": 613.0
+ },
+ "Q911748": {
+  "checked": "2026-11-18",
+  "dem_m": 1852.2,
+  "name": "Gunung Galunggung",
+  "ok": false,
+  "wikidata_m": 2168.0
  },
  "Q914225": {
   "checked": "2026-11-18",

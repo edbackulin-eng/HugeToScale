@@ -2796,12 +2796,1838 @@
    },
    "removed": "2026-11-18",
    "why": "owner 19.11: every Short is a 3D ladder (maps and rivers dropped)"
+  },
+  {
+   "id": "volcanoes-south-america",
+   "kind": "higher",
+   "engine": "peaks",
+   "status": "planned",
+   "source": "generated",
+   "added": "2026-11-18",
+   "steps": [
+    "Volcán Wolf 1,707 m",
+    "Puyehue-Cordón Caulle 2,236 m",
+    "Copahue 2,997 m",
+    "Galeras 4,276 m",
+    "Nevado Del Ruiz 5,389 m",
+    "Llullaillaco 6,723 m"
+   ],
+   "data": "Copernicus DEM GLO-30 + Wikidata elevations (two sources, 2 % check)",
+   "spec": {
+    "steps": [
+     {
+      "key": "volc-n-wolf-q1376373",
+      "qid": "Q1376373",
+      "name": "VOLCÁN WOLF",
+      "value": "1,707 m",
+      "h": 1707.0,
+      "lat": 0.03333,
+      "lon": -91.33333,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q1376373 (elevation 1707 m); https://en.wikipedia.org/wiki/Volc%C3%A1n_Wolf",
+       "Copernicus DEM GLO-30, summit measured 1702.0 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "puyehue-cord-n-caulle-q577700",
+      "qid": "Q577700",
+      "name": "PUYEHUE-CORDÓN CAULLE",
+      "value": "2,236 m",
+      "h": 2236.0,
+      "lat": -40.59028,
+      "lon": -72.11722,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q577700 (elevation 2236 m); https://en.wikipedia.org/wiki/Puyehue-Cord%C3%B3n_Caulle",
+       "Copernicus DEM GLO-30, summit measured 2234.3 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "copahue-q312930",
+      "qid": "Q312930",
+      "name": "COPAHUE",
+      "value": "2,997 m",
+      "h": 2997.0,
+      "lat": -37.85222,
+      "lon": -71.1675,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q312930 (elevation 2997 m); https://en.wikipedia.org/wiki/Copahue",
+       "Copernicus DEM GLO-30, summit measured 2974.3 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "galeras-q235062",
+      "qid": "Q235062",
+      "name": "GALERAS",
+      "value": "4,276 m",
+      "h": 4276.0,
+      "lat": 1.21667,
+      "lon": -77.36667,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q235062 (elevation 4276 m); https://en.wikipedia.org/wiki/Galeras",
+       "Copernicus DEM GLO-30, summit measured 4216.8 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "nevado-del-ruiz-q233351",
+      "qid": "Q233351",
+      "name": "NEVADO DEL RUIZ",
+      "value": "5,389 m",
+      "h": 5389.0,
+      "lat": 4.89528,
+      "lon": -75.3225,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q233351 (elevation 5389 m); https://en.wikipedia.org/wiki/Nevado_del_Ruiz",
+       "Copernicus DEM GLO-30, summit measured 5284.4 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "llullaillaco-q214916",
+      "qid": "Q214916",
+      "name": "LLULLAILLACO",
+      "value": "6,723 m",
+      "h": 6723.0,
+      "lat": -24.71972,
+      "lon": -68.53667,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q214916 (elevation 6723 m); https://en.wikipedia.org/wiki/Llullaillaco",
+       "Copernicus DEM GLO-30, summit measured 6730.4 m (within 2 %)"
+      ]
+     }
+    ],
+    "titles": [
+     "Volcano in South America: 6 Peaks to 6,723 m",
+     "An Active Volcano in South America: 6 Peaks to 6,723 m",
+     "South American Volcanoes: 6 Peaks to 6,723 m"
+    ],
+    "queries": [
+     "volcanoes in South America",
+     "South America volcanoes",
+     "Llullaillaco height"
+    ],
+    "hashtags": [
+     "#sizecomparison",
+     "#southamerica",
+     "#volcano",
+     "#3d",
+     "#scale"
+    ],
+    "intro": "6 real volcanoes of South America, each taller than the last, side by side at true scale (Copernicus DEM elevation data): Volcán Wolf, Puyehue-Cordón Caulle, Copahue, Galeras, Nevado Del Ruiz, Llullaillaco."
+   },
+   "type": "volcanoes"
+  },
+  {
+   "id": "volcanoes-europe",
+   "kind": "higher",
+   "engine": "peaks",
+   "status": "planned",
+   "source": "generated",
+   "added": "2026-11-18",
+   "steps": [
+    "Fagradalsfjall 385 m",
+    "Zavodovski Island 551 m",
+    "Vogelsberg 773 m",
+    "Mount Vesuvius 1,297 m",
+    "Beerenberg 2,277 m",
+    "Teide 3,715 m"
+   ],
+   "data": "Copernicus DEM GLO-30 + Wikidata elevations (two sources, 2 % check)",
+   "spec": {
+    "steps": [
+     {
+      "key": "fagradalsfjall-q27015522",
+      "qid": "Q27015522",
+      "name": "FAGRADALSFJALL",
+      "value": "385 m",
+      "h": 385.0,
+      "lat": 63.905,
+      "lon": -22.2725,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q27015522 (elevation 385 m); https://en.wikipedia.org/wiki/Fagradalsfjall",
+       "Copernicus DEM GLO-30, summit measured 384.0 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "zavodovski-island-q166972",
+      "qid": "Q166972",
+      "name": "ZAVODOVSKI ISLAND",
+      "value": "551 m",
+      "h": 551.0,
+      "lat": -56.3,
+      "lon": -27.58,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q166972 (elevation 551 m); https://en.wikipedia.org/wiki/Zavodovski_Island",
+       "Copernicus DEM GLO-30, summit measured 553.7 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "vogelsberg-q317074",
+      "qid": "Q317074",
+      "name": "VOGELSBERG",
+      "value": "773 m",
+      "h": 773.0,
+      "lat": 50.53333,
+      "lon": 9.23333,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q317074 (elevation 773 m); https://en.wikipedia.org/wiki/Vogelsberg",
+       "Copernicus DEM GLO-30, summit measured 769.2 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "mount-vesuvius-q524",
+      "qid": "Q524",
+      "name": "MOUNT VESUVIUS",
+      "value": "1,297 m",
+      "h": 1297.0,
+      "lat": 40.82261,
+      "lon": 14.42919,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q524 (elevation 1297 m); https://en.wikipedia.org/wiki/Mount_Vesuvius",
+       "Copernicus DEM GLO-30, summit measured 1285.9 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "beerenberg-q814113",
+      "qid": "Q814113",
+      "name": "BEERENBERG",
+      "value": "2,277 m",
+      "h": 2277.0,
+      "lat": 71.07967,
+      "lon": -8.15588,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q814113 (elevation 2277 m); https://en.wikipedia.org/wiki/Beerenberg",
+       "Copernicus DEM GLO-30, summit measured 2260.6 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "teide-q38954",
+      "qid": "Q38954",
+      "name": "TEIDE",
+      "value": "3,715 m",
+      "h": 3715.0,
+      "lat": 28.27264,
+      "lon": -16.64361,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q38954 (elevation 3715 m); https://en.wikipedia.org/wiki/Teide",
+       "Copernicus DEM GLO-30, summit measured 3705.3 m (within 2 %)"
+      ]
+     }
+    ],
+    "titles": [
+     "Volcanoes in Europe: 6 Peaks to 3,715 m",
+     "Active Volcanoes in Europe: 6 Peaks to 3,715 m",
+     "European Volcanoes: 6 Peaks to 3,715 m"
+    ],
+    "queries": [
+     "volcanoes in Europe",
+     "Europe volcanoes",
+     "Teide height"
+    ],
+    "hashtags": [
+     "#sizecomparison",
+     "#europe",
+     "#volcano",
+     "#3d",
+     "#scale"
+    ],
+    "intro": "6 real volcanoes of Europe, each taller than the last, side by side at true scale (Copernicus DEM elevation data): Fagradalsfjall, Zavodovski Island, Vogelsberg, Mount Vesuvius, Beerenberg, Teide."
+   },
+   "type": "volcanoes"
+  },
+  {
+   "id": "volcanoes-indonesia",
+   "kind": "higher",
+   "engine": "peaks",
+   "status": "planned",
+   "source": "generated",
+   "added": "2026-11-18",
+   "steps": [
+    "Batu Tara 748 m",
+    "Baluran 1,247 m",
+    "Gamalama 1,715 m",
+    "Mount Sinabung 2,460 m",
+    "Merapi 2,910 m",
+    "Mount Kerinci 3,805 m"
+   ],
+   "data": "Copernicus DEM GLO-30 + Wikidata elevations (two sources, 2 % check)",
+   "spec": {
+    "steps": [
+     {
+      "key": "batu-tara-q811048",
+      "qid": "Q811048",
+      "name": "BATU TARA",
+      "value": "748 m",
+      "h": 748.0,
+      "lat": -7.79167,
+      "lon": 123.57917,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q811048 (elevation 748 m); https://en.wikipedia.org/wiki/Mount_Batutara",
+       "Copernicus DEM GLO-30, summit measured 754.0 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "baluran-q571805",
+      "qid": "Q571805",
+      "name": "BALURAN",
+      "value": "1,247 m",
+      "h": 1247.0,
+      "lat": -7.84639,
+      "lon": 114.36222,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q571805 (elevation 1247 m); https://en.wikipedia.org/wiki/Baluran",
+       "Copernicus DEM GLO-30, summit measured 1249.3 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "gamalama-q1467910",
+      "qid": "Q1467910",
+      "name": "GAMALAMA",
+      "value": "1,715 m",
+      "h": 1715.0,
+      "lat": 0.80722,
+      "lon": 127.33389,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q1467910 (elevation 1715 m); https://en.wikipedia.org/wiki/Gamalama",
+       "Copernicus DEM GLO-30, summit measured 1721.8 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "mount-sinabung-q207678",
+      "qid": "Q207678",
+      "name": "MOUNT SINABUNG",
+      "value": "2,460 m",
+      "h": 2460.0,
+      "lat": 3.17,
+      "lon": 98.39194,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q207678 (elevation 2460 m); https://en.wikipedia.org/wiki/Mount_Sinabung",
+       "Copernicus DEM GLO-30, summit measured 2436.2 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "merapi-q134108",
+      "qid": "Q134108",
+      "name": "MERAPI",
+      "value": "2,910 m",
+      "h": 2910.0,
+      "lat": -7.54139,
+      "lon": 110.44611,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q134108 (elevation 2910 m); https://en.wikipedia.org/wiki/Mount_Merapi",
+       "Copernicus DEM GLO-30, summit measured 2908.4 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "mount-kerinci-q827728",
+      "qid": "Q827728",
+      "name": "MOUNT KERINCI",
+      "value": "3,805 m",
+      "h": 3805.0,
+      "lat": -1.69694,
+      "lon": 101.26444,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q827728 (elevation 3805 m); https://en.wikipedia.org/wiki/Mount_Kerinci",
+       "Copernicus DEM GLO-30, summit measured 3774.0 m (within 2 %)"
+      ]
+     }
+    ],
+    "titles": [
+     "Volcanoes in Indonesia: 6 Peaks to 3,805 m",
+     "Volcanoes in Indonesia 2026: 6 Peaks to 3,805 m",
+     "Volcano in Indonesia Today: 6 Peaks to 3,805 m"
+    ],
+    "queries": [
+     "volcanoes in Indonesia",
+     "Indonesia volcanoes"
+    ],
+    "hashtags": [
+     "#sizecomparison",
+     "#indonesia",
+     "#volcano",
+     "#3d",
+     "#scale"
+    ],
+    "intro": "6 real volcanoes of Indonesia, each taller than the last, side by side at true scale (Copernicus DEM elevation data): Batu Tara, Baluran, Gamalama, Mount Sinabung, Merapi, Mount Kerinci."
+   },
+   "type": "volcanoes"
+  },
+  {
+   "id": "volcanoes-chile",
+   "kind": "higher",
+   "engine": "peaks",
+   "status": "planned",
+   "source": "generated",
+   "added": "2026-11-18",
+   "steps": [
+    "Carrán-Los Venados 1,114 m",
+    "Volcán Huequi 1,318 m",
+    "Hornopirén 1,572 m",
+    "Calbuco 2,003 m",
+    "Llaima 3,125 m",
+    "Llullaillaco 6,723 m"
+   ],
+   "data": "Copernicus DEM GLO-30 + Wikidata elevations (two sources, 2 % check)",
+   "spec": {
+    "steps": [
+     {
+      "key": "carr-n-los-venados-q2940365",
+      "qid": "Q2940365",
+      "name": "CARRÁN-LOS VENADOS",
+      "value": "1,114 m",
+      "h": 1114.0,
+      "lat": -40.308,
+      "lon": -72.07,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q2940365 (elevation 1114 m); https://en.wikipedia.org/wiki/Carr%C3%A1n-Los_Venados",
+       "Copernicus DEM GLO-30, summit measured 1127.5 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "volc-n-huequi-q3066185",
+      "qid": "Q3066185",
+      "name": "VOLCÁN HUEQUI",
+      "value": "1,318 m",
+      "h": 1318.0,
+      "lat": -42.37667,
+      "lon": -72.57806,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q3066185 (elevation 1318 m); https://en.wikipedia.org/wiki/Huequi",
+       "Copernicus DEM GLO-30, summit measured 1310.2 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "hornopir-n-q1628555",
+      "qid": "Q1628555",
+      "name": "HORNOPIRÉN",
+      "value": "1,572 m",
+      "h": 1572.0,
+      "lat": -41.87444,
+      "lon": -72.43139,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q1628555 (elevation 1572 m); https://en.wikipedia.org/wiki/Hornopir%C3%A9n_(volcano)",
+       "Copernicus DEM GLO-30, summit measured 1563.8 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "calbuco-q1026302",
+      "qid": "Q1026302",
+      "name": "CALBUCO",
+      "value": "2,003 m",
+      "h": 2003.0,
+      "lat": -41.33278,
+      "lon": -72.61111,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q1026302 (elevation 2003 m); https://en.wikipedia.org/wiki/Calbuco_(volcano)",
+       "Copernicus DEM GLO-30, summit measured 1978.6 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "llaima-q164121",
+      "qid": "Q164121",
+      "name": "LLAIMA",
+      "value": "3,125 m",
+      "h": 3125.0,
+      "lat": -38.69741,
+      "lon": -71.73045,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q164121 (elevation 3125 m); https://en.wikipedia.org/wiki/Llaima",
+       "Copernicus DEM GLO-30, summit measured 3125.7 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "llullaillaco-q214916",
+      "qid": "Q214916",
+      "name": "LLULLAILLACO",
+      "value": "6,723 m",
+      "h": 6723.0,
+      "lat": -24.71972,
+      "lon": -68.53667,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q214916 (elevation 6723 m); https://en.wikipedia.org/wiki/Llullaillaco",
+       "Copernicus DEM GLO-30, summit measured 6730.4 m (within 2 %)"
+      ]
+     }
+    ],
+    "titles": [
+     "Volcanoes in Chile: 6 Peaks to 6,723 m",
+     "Chile Volcano: 6 Peaks to 6,723 m",
+     "Llullaillaco Mountain: 6 Peaks to 6,723 m"
+    ],
+    "queries": [
+     "volcanoes in Chile",
+     "Chile volcanoes",
+     "Llullaillaco height"
+    ],
+    "hashtags": [
+     "#sizecomparison",
+     "#chile",
+     "#volcano",
+     "#3d",
+     "#scale"
+    ],
+    "intro": "6 real volcanoes of Chile, each taller than the last, side by side at true scale (Copernicus DEM elevation data): Carrán-Los Venados, Volcán Huequi, Hornopirén, Calbuco, Llaima, Llullaillaco."
+   },
+   "type": "volcanoes"
+  },
+  {
+   "id": "volcanoes-africa",
+   "kind": "higher",
+   "engine": "peaks",
+   "status": "planned",
+   "source": "generated",
+   "added": "2026-11-18",
+   "steps": [
+    "Borawli 812 m",
+    "Mount Alayta 1,501 m",
+    "Mount Karthala 2,361 m",
+    "Pico Do Fogo 2,829 m",
+    "Mount Nyiragongo 3,470 m",
+    "Mount Karisimbi 4,507 m"
+   ],
+   "data": "Copernicus DEM GLO-30 + Wikidata elevations (two sources, 2 % check)",
+   "spec": {
+    "steps": [
+     {
+      "key": "borawli-q893330",
+      "qid": "Q893330",
+      "name": "BORAWLI",
+      "value": "812 m",
+      "h": 812.0,
+      "lat": 13.30389,
+      "lon": 40.98639,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q893330 (elevation 812 m); https://en.wikipedia.org/wiki/Borawli",
+       "Copernicus DEM GLO-30, summit measured 802.5 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "mount-alayta-q1814846",
+      "qid": "Q1814846",
+      "name": "MOUNT ALAYTA",
+      "value": "1,501 m",
+      "h": 1501.0,
+      "lat": 12.88806,
+      "lon": 40.57194,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q1814846 (elevation 1501 m); https://en.wikipedia.org/wiki/Mount_Alayta",
+       "Copernicus DEM GLO-30, summit measured 1516.7 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "mount-karthala-q527548",
+      "qid": "Q527548",
+      "name": "MOUNT KARTHALA",
+      "value": "2,361 m",
+      "h": 2361.0,
+      "lat": -11.76028,
+      "lon": 43.35306,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q527548 (elevation 2361 m); https://en.wikipedia.org/wiki/Mount_Karthala",
+       "Copernicus DEM GLO-30, summit measured 2352.2 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "pico-do-fogo-q499108",
+      "qid": "Q499108",
+      "name": "PICO DO FOGO",
+      "value": "2,829 m",
+      "h": 2829.0,
+      "lat": 14.94927,
+      "lon": -24.34037,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q499108 (elevation 2829 m); https://en.wikipedia.org/wiki/Pico_do_Fogo",
+       "Copernicus DEM GLO-30, summit measured 2780.1 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "mount-nyiragongo-q214696",
+      "qid": "Q214696",
+      "name": "MOUNT NYIRAGONGO",
+      "value": "3,470 m",
+      "h": 3470.0,
+      "lat": -1.51667,
+      "lon": 29.25,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q214696 (elevation 3470 m); https://en.wikipedia.org/wiki/Mount_Nyiragongo",
+       "Copernicus DEM GLO-30, summit measured 3453.8 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "mount-karisimbi-q737859",
+      "qid": "Q737859",
+      "name": "MOUNT KARISIMBI",
+      "value": "4,507 m",
+      "h": 4507.0,
+      "lat": -1.5,
+      "lon": 29.45,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q737859 (elevation 4507 m); https://en.wikipedia.org/wiki/Mount_Karisimbi",
+       "Copernicus DEM GLO-30, summit measured 4504.0 m (within 2 %)"
+      ]
+     }
+    ],
+    "titles": [
+     "Volcanoes in Africa: 6 Peaks to 4,507 m",
+     "Volcano in Africa Today: 6 Peaks to 4,507 m",
+     "Volcanoes in South Africa: 6 Peaks to 4,507 m"
+    ],
+    "queries": [
+     "volcanoes in Africa",
+     "Africa volcanoes"
+    ],
+    "hashtags": [
+     "#sizecomparison",
+     "#africa",
+     "#volcano",
+     "#3d",
+     "#scale"
+    ],
+    "intro": "6 real volcanoes of Africa, each taller than the last, side by side at true scale (Copernicus DEM elevation data): Borawli, Mount Alayta, Mount Karthala, Pico Do Fogo, Mount Nyiragongo, Mount Karisimbi."
+   },
+   "type": "volcanoes"
+  },
+  {
+   "id": "peaks-europe",
+   "kind": "higher",
+   "engine": "peaks",
+   "status": "planned",
+   "source": "generated",
+   "added": "2026-11-18",
+   "steps": [
+    "Signal De Botrange 694 m",
+    "Snowdon 1,085 m",
+    "Ben Nevis 1,345 m",
+    "Mount Athos 2,033 m",
+    "Mount Olympus 2,918 m",
+    "Tetnuldi 4,858 m"
+   ],
+   "data": "Copernicus DEM GLO-30 + Wikidata elevations (two sources, 2 % check)",
+   "spec": {
+    "steps": [
+     {
+      "key": "signal-de-botrange-q322824",
+      "qid": "Q322824",
+      "name": "SIGNAL DE BOTRANGE",
+      "value": "694 m",
+      "h": 694.24,
+      "lat": 50.50167,
+      "lon": 6.09306,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q322824 (elevation 694.24 m); https://en.wikipedia.org/wiki/Signal_de_Botrange",
+       "Copernicus DEM GLO-30, summit measured 706.1 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "snowdon-q217142",
+      "qid": "Q217142",
+      "name": "SNOWDON",
+      "value": "1,085 m",
+      "h": 1085.0,
+      "lat": 53.06886,
+      "lon": -4.07559,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q217142 (elevation 1085 m); https://en.wikipedia.org/wiki/Snowdon",
+       "Copernicus DEM GLO-30, summit measured 1071.8 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "ben-nevis-q104674",
+      "qid": "Q104674",
+      "name": "BEN NEVIS",
+      "value": "1,345 m",
+      "h": 1344.53,
+      "lat": 56.79689,
+      "lon": -5.00368,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q104674 (elevation 1344.53 m); https://en.wikipedia.org/wiki/Ben_Nevis",
+       "Copernicus DEM GLO-30, summit measured 1342.2 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "mount-athos-q130321",
+      "qid": "Q130321",
+      "name": "MOUNT ATHOS",
+      "value": "2,033 m",
+      "h": 2033.0,
+      "lat": 40.15833,
+      "lon": 24.32722,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q130321 (elevation 2033 m); https://en.wikipedia.org/wiki/Mount_Athos",
+       "Copernicus DEM GLO-30, summit measured 2002.9 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "mount-olympus-q80344",
+      "qid": "Q80344",
+      "name": "MOUNT OLYMPUS",
+      "value": "2,918 m",
+      "h": 2917.73,
+      "lat": 40.08333,
+      "lon": 22.35,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q80344 (elevation 2917.73 m); https://en.wikipedia.org/wiki/Mount_Olympus",
+       "Copernicus DEM GLO-30, summit measured 2895.6 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "tetnuldi-q2388278",
+      "qid": "Q2388278",
+      "name": "TETNULDI",
+      "value": "4,858 m",
+      "h": 4858.0,
+      "lat": 43.03139,
+      "lon": 42.99306,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q2388278 (elevation 4858 m); https://en.wikipedia.org/wiki/Tetnuldi",
+       "Copernicus DEM GLO-30, summit measured 4779.9 m (within 2 %)"
+      ]
+     }
+    ],
+    "titles": [
+     "Tallest Mountains in Europe: 6 Peaks to 4,858 m",
+     "Highest Mountains in Europe: 6 Peaks to 4,858 m",
+     "Biggest Mountains in Europe: 6 Peaks to 4,858 m"
+    ],
+    "queries": [
+     "tallest mountains in Europe",
+     "highest mountains in Europe",
+     "Europe mountains",
+     "Tetnuldi height"
+    ],
+    "hashtags": [
+     "#sizecomparison",
+     "#europe",
+     "#mountains",
+     "#3d",
+     "#scale"
+    ],
+    "intro": "6 real mountains of Europe, each taller than the last, side by side at true scale (Copernicus DEM elevation data): Signal De Botrange, Snowdon, Ben Nevis, Mount Athos, Mount Olympus, Tetnuldi."
+   },
+   "type": "mountains"
+  },
+  {
+   "id": "peaks-united-kingdom",
+   "kind": "higher",
+   "engine": "peaks",
+   "status": "planned",
+   "source": "generated",
+   "added": "2026-11-18",
+   "steps": [
+    "Ronas Hill 450 m",
+    "Mount Usborne 705 m",
+    "Slieve Donard 849 m",
+    "Snowdon 1,085 m",
+    "Ben Nevis 1,345 m",
+    "Nordenskjöld Peak 2,355 m"
+   ],
+   "data": "Copernicus DEM GLO-30 + Wikidata elevations (two sources, 2 % check)",
+   "spec": {
+    "steps": [
+     {
+      "key": "ronas-hill-q3441622",
+      "qid": "Q3441622",
+      "name": "RONAS HILL",
+      "value": "450 m",
+      "h": 450.0,
+      "lat": 60.53386,
+      "lon": -1.44593,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q3441622 (elevation 450 m); https://en.wikipedia.org/wiki/Ronas_Hill",
+       "Copernicus DEM GLO-30, summit measured 448.3 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "mount-usborne-q1064229",
+      "qid": "Q1064229",
+      "name": "MOUNT USBORNE",
+      "value": "705 m",
+      "h": 705.0,
+      "lat": -51.69722,
+      "lon": -58.83444,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q1064229 (elevation 705 m); https://en.wikipedia.org/wiki/Mount_Usborne",
+       "Copernicus DEM GLO-30, summit measured 703.1 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "slieve-donard-q550163",
+      "qid": "Q550163",
+      "name": "SLIEVE DONARD",
+      "value": "849 m",
+      "h": 849.0,
+      "lat": 54.18028,
+      "lon": -5.92083,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q550163 (elevation 849 m); https://en.wikipedia.org/wiki/Slieve_Donard",
+       "Copernicus DEM GLO-30, summit measured 845.4 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "snowdon-q217142",
+      "qid": "Q217142",
+      "name": "SNOWDON",
+      "value": "1,085 m",
+      "h": 1085.0,
+      "lat": 53.06886,
+      "lon": -4.07559,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q217142 (elevation 1085 m); https://en.wikipedia.org/wiki/Snowdon",
+       "Copernicus DEM GLO-30, summit measured 1071.8 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "ben-nevis-q104674",
+      "qid": "Q104674",
+      "name": "BEN NEVIS",
+      "value": "1,345 m",
+      "h": 1344.53,
+      "lat": 56.79689,
+      "lon": -5.00368,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q104674 (elevation 1344.53 m); https://en.wikipedia.org/wiki/Ben_Nevis",
+       "Copernicus DEM GLO-30, summit measured 1342.2 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "nordenskj-ld-peak-q11638996",
+      "qid": "Q11638996",
+      "name": "NORDENSKJÖLD PEAK",
+      "value": "2,355 m",
+      "h": 2355.0,
+      "lat": -54.48333,
+      "lon": -36.36667,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q11638996 (elevation 2355 m); https://en.wikipedia.org/wiki/Nordenskj%C3%B6ld_Peak",
+       "Copernicus DEM GLO-30, summit measured 2308.1 m (within 2 %)"
+      ]
+     }
+    ],
+    "titles": [
+     "United Kingdom Mountains: 6 Peaks to 2,355 m"
+    ],
+    "queries": [
+     "United Kingdom mountains"
+    ],
+    "hashtags": [
+     "#sizecomparison",
+     "#unitedkingdom",
+     "#mountains",
+     "#3d",
+     "#scale"
+    ],
+    "intro": "6 real mountains of United Kingdom, each taller than the last, side by side at true scale (Copernicus DEM elevation data): Ronas Hill, Mount Usborne, Slieve Donard, Snowdon, Ben Nevis, Nordenskjöld Peak."
+   },
+   "type": "mountains"
+  },
+  {
+   "id": "peaks-france",
+   "kind": "higher",
+   "engine": "peaks",
+   "status": "planned",
+   "source": "generated",
+   "added": "2026-11-18",
+   "steps": [
+    "Pic Paradis 424 m",
+    "Mont Faron 584 m",
+    "Planche Des Belles Filles 1,148 m",
+    "Mount Pelée 1,397 m",
+    "Piton De La Fournaise 2,632 m",
+    "Mont Blanc 4,810 m"
+   ],
+   "data": "Copernicus DEM GLO-30 + Wikidata elevations (two sources, 2 % check)",
+   "spec": {
+    "steps": [
+     {
+      "key": "pic-paradis-q5919800",
+      "qid": "Q5919800",
+      "name": "PIC PARADIS",
+      "value": "424 m",
+      "h": 424.0,
+      "lat": 18.07528,
+      "lon": -63.06,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q5919800 (elevation 424 m); https://en.wikipedia.org/wiki/Pic_Paradis",
+       "Copernicus DEM GLO-30, summit measured 418.7 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "mont-faron-q2983361",
+      "qid": "Q2983361",
+      "name": "MONT FARON",
+      "value": "584 m",
+      "h": 584.0,
+      "lat": 43.14944,
+      "lon": 5.95111,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q2983361 (elevation 584 m); https://en.wikipedia.org/wiki/Mont_Faron",
+       "Copernicus DEM GLO-30, summit measured 576.6 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "planche-des-belles-fille-q2098121",
+      "qid": "Q2098121",
+      "name": "PLANCHE DES BELLES FILLES",
+      "value": "1,148 m",
+      "h": 1148.0,
+      "lat": 47.7672,
+      "lon": 6.77417,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q2098121 (elevation 1148 m); https://en.wikipedia.org/wiki/La_Planche_des_Belles_Filles",
+       "Copernicus DEM GLO-30, summit measured 1150.3 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "mount-pel-e-q76309",
+      "qid": "Q76309",
+      "name": "MOUNT PELÉE",
+      "value": "1,397 m",
+      "h": 1397.0,
+      "lat": 14.81306,
+      "lon": -61.16556,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q76309 (elevation 1397 m); https://en.wikipedia.org/wiki/Mount_Pel%C3%A9e",
+       "Copernicus DEM GLO-30, summit measured 1382.5 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "piton-de-la-fournaise-q1049644",
+      "qid": "Q1049644",
+      "name": "PITON DE LA FOURNAISE",
+      "value": "2,632 m",
+      "h": 2632.0,
+      "lat": -21.24312,
+      "lon": 55.70724,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q1049644 (elevation 2632 m); https://en.wikipedia.org/wiki/Piton_de_la_Fournaise",
+       "Copernicus DEM GLO-30, summit measured 2620.5 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "mont-blanc-q583",
+      "qid": "Q583",
+      "name": "MONT BLANC",
+      "value": "4,810 m",
+      "h": 4810.02,
+      "lat": 45.83278,
+      "lon": 6.865,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q583 (elevation 4810.02 m); https://en.wikipedia.org/wiki/Mont_Blanc",
+       "Copernicus DEM GLO-30, summit measured 4807.8 m (within 2 %)"
+      ]
+     }
+    ],
+    "titles": [
+     "Highest Mountain in France: 6 Peaks to 4,810 m",
+     "France Mountains: 6 Peaks to 4,810 m",
+     "France Alps Mountains: 6 Peaks to 4,810 m"
+    ],
+    "queries": [
+     "tallest mountains in France",
+     "France mountains",
+     "Mont Blanc height"
+    ],
+    "hashtags": [
+     "#sizecomparison",
+     "#france",
+     "#mountains",
+     "#3d",
+     "#scale"
+    ],
+    "intro": "6 real mountains of France, each taller than the last, side by side at true scale (Copernicus DEM elevation data): Pic Paradis, Mont Faron, Planche Des Belles Filles, Mount Pelée, Piton De La Fournaise, Mont Blanc."
+   },
+   "type": "mountains"
+  },
+  {
+   "id": "range-andes",
+   "kind": "higher",
+   "engine": "peaks",
+   "status": "planned",
+   "source": "generated",
+   "added": "2026-11-18",
+   "steps": [
+    "Antillanca Group 1,990 m",
+    "Lonquimay 2,865 m",
+    "Tronador 3,491 m",
+    "Cayambe 5,790 m",
+    "Ojos Del Salado 6,893 m"
+   ],
+   "data": "Copernicus DEM GLO-30 + Wikidata elevations (two sources, 2 % check)",
+   "spec": {
+    "steps": [
+     {
+      "key": "antillanca-group-q576985",
+      "qid": "Q576985",
+      "name": "ANTILLANCA GROUP",
+      "value": "1,990 m",
+      "h": 1990.0,
+      "lat": -40.77472,
+      "lon": -72.15639,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q576985 (elevation 1990 m); https://en.wikipedia.org/wiki/Antillanca_Group",
+       "Copernicus DEM GLO-30, summit measured 1986.3 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "lonquimay-q202629",
+      "qid": "Q202629",
+      "name": "LONQUIMAY",
+      "value": "2,865 m",
+      "h": 2865.0,
+      "lat": -38.37919,
+      "lon": -71.58992,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q202629 (elevation 2865 m); https://en.wikipedia.org/wiki/Lonquimay_(volcano)",
+       "Copernicus DEM GLO-30, summit measured 2848.7 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "tronador-q422835",
+      "qid": "Q422835",
+      "name": "TRONADOR",
+      "value": "3,491 m",
+      "h": 3491.0,
+      "lat": -41.16083,
+      "lon": -71.8875,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q422835 (elevation 3491 m); https://en.wikipedia.org/wiki/Tronador",
+       "Copernicus DEM GLO-30, summit measured 3430.1 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "cayambe-q754734",
+      "qid": "Q754734",
+      "name": "CAYAMBE",
+      "value": "5,790 m",
+      "h": 5790.0,
+      "lat": 0.0239,
+      "lon": -77.9888,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q754734 (elevation 5790 m); https://en.wikipedia.org/wiki/Cayambe_(volcano)",
+       "Copernicus DEM GLO-30, summit measured 5788.3 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "ojos-del-salado-q233836",
+      "qid": "Q233836",
+      "name": "OJOS DEL SALADO",
+      "value": "6,893 m",
+      "h": 6893.0,
+      "lat": -27.10972,
+      "lon": -68.54139,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q233836 (elevation 6893 m); https://en.wikipedia.org/wiki/Ojos_del_Salado",
+       "Copernicus DEM GLO-30, summit measured 6883.1 m (within 2 %)"
+      ]
+     }
+    ],
+    "titles": [
+     "Andes Highest Peak: 5 Peaks to 6,893 m",
+     "Andes Mountains: 5 Peaks to 6,893 m",
+     "Andes Mountains Chile: 5 Peaks to 6,893 m"
+    ],
+    "queries": [
+     "Andes highest peaks",
+     "Andes mountains",
+     "Ojos Del Salado height"
+    ],
+    "hashtags": [
+     "#sizecomparison",
+     "#andes",
+     "#mountains",
+     "#3d",
+     "#scale"
+    ],
+    "intro": "5 real peaks of the Andes, each taller than the last, side by side at true scale (Copernicus DEM elevation data): Antillanca Group, Lonquimay, Tronador, Cayambe, Ojos Del Salado."
+   },
+   "type": "mountains"
+  },
+  {
+   "id": "peaks-spain",
+   "kind": "higher",
+   "engine": "peaks",
+   "status": "planned",
+   "source": "generated",
+   "added": "2026-11-18",
+   "steps": [
+    "Mount Ulia 234 m",
+    "Tibidabo 516 m",
+    "Montejurra 1,046 m",
+    "Puig Major 1,445 m",
+    "Cumbre Vieja 1,944 m",
+    "Teide 3,715 m"
+   ],
+   "data": "Copernicus DEM GLO-30 + Wikidata elevations (two sources, 2 % check)",
+   "spec": {
+    "steps": [
+     {
+      "key": "mount-ulia-q3070583",
+      "qid": "Q3070583",
+      "name": "MOUNT ULIA",
+      "value": "234 m",
+      "h": 234.0,
+      "lat": 43.33083,
+      "lon": -1.96,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q3070583 (elevation 234 m); https://en.wikipedia.org/wiki/Mount_Ulia",
+       "Copernicus DEM GLO-30, summit measured 234.3 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "tibidabo-q658271",
+      "qid": "Q658271",
+      "name": "TIBIDABO",
+      "value": "516 m",
+      "h": 516.5,
+      "lat": 41.4225,
+      "lon": 2.11861,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q658271 (elevation 516.5 m); https://en.wikipedia.org/wiki/Tibidabo",
+       "Copernicus DEM GLO-30, summit measured 516.2 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "montejurra-q3178771",
+      "qid": "Q3178771",
+      "name": "MONTEJURRA",
+      "value": "1,046 m",
+      "h": 1046.0,
+      "lat": 42.63111,
+      "lon": -2.04472,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q3178771 (elevation 1046 m); https://en.wikipedia.org/wiki/Montejurra",
+       "Copernicus DEM GLO-30, summit measured 1035.9 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "puig-major-q587189",
+      "qid": "Q587189",
+      "name": "PUIG MAJOR",
+      "value": "1,445 m",
+      "h": 1445.0,
+      "lat": 39.8075,
+      "lon": 2.79333,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q587189 (elevation 1445 m); https://en.wikipedia.org/wiki/Puig_Major",
+       "Copernicus DEM GLO-30, summit measured 1432.5 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "cumbre-vieja-q1143757",
+      "qid": "Q1143757",
+      "name": "CUMBRE VIEJA",
+      "value": "1,944 m",
+      "h": 1944.0,
+      "lat": 28.56667,
+      "lon": -17.83333,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q1143757 (elevation 1944 m); https://en.wikipedia.org/wiki/Cumbre_Vieja",
+       "Copernicus DEM GLO-30, summit measured 1936.0 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "teide-q38954",
+      "qid": "Q38954",
+      "name": "TEIDE",
+      "value": "3,715 m",
+      "h": 3715.0,
+      "lat": 28.27264,
+      "lon": -16.64361,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q38954 (elevation 3715 m); https://en.wikipedia.org/wiki/Teide",
+       "Copernicus DEM GLO-30, summit measured 3705.3 m (within 2 %)"
+      ]
+     }
+    ],
+    "titles": [
+     "Highest Mountain in Spain: 6 Peaks to 3,715 m",
+     "Spain Mountains: 6 Peaks to 3,715 m",
+     "Spain Pyrenees Mountains: 6 Peaks to 3,715 m"
+    ],
+    "queries": [
+     "tallest mountains in Spain",
+     "Spain mountains",
+     "Teide height"
+    ],
+    "hashtags": [
+     "#sizecomparison",
+     "#spain",
+     "#mountains",
+     "#3d",
+     "#scale"
+    ],
+    "intro": "6 real mountains of Spain, each taller than the last, side by side at true scale (Copernicus DEM elevation data): Mount Ulia, Tibidabo, Montejurra, Puig Major, Cumbre Vieja, Teide."
+   },
+   "type": "mountains"
+  },
+  {
+   "id": "peaks-canada",
+   "kind": "higher",
+   "engine": "peaks",
+   "status": "planned",
+   "source": "generated",
+   "added": "2026-11-18",
+   "steps": [
+    "Ishpatina Ridge 693 m",
+    "Mont Jacques-Cartier 1,270 m",
+    "Whistler Mountain 2,181 m",
+    "Barbeau Peak 2,616 m",
+    "Mount Robson 3,954 m",
+    "Mount Logan 5,959 m"
+   ],
+   "data": "Copernicus DEM GLO-30 + Wikidata elevations (two sources, 2 % check)",
+   "spec": {
+    "steps": [
+     {
+      "key": "ishpatina-ridge-q1514665",
+      "qid": "Q1514665",
+      "name": "ISHPATINA RIDGE",
+      "value": "693 m",
+      "h": 693.0,
+      "lat": 47.3167,
+      "lon": -80.75,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q1514665 (elevation 693 m); https://en.wikipedia.org/wiki/Ishpatina_Ridge",
+       "Copernicus DEM GLO-30, summit measured 690.9 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "mont-jacques-cartier-q1628389",
+      "qid": "Q1628389",
+      "name": "MONT JACQUES-CARTIER",
+      "value": "1,270 m",
+      "h": 1270.0,
+      "lat": 48.9874,
+      "lon": -65.94842,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q1628389 (elevation 1270 m); https://en.wikipedia.org/wiki/Mount_Jacques-Cartier",
+       "Copernicus DEM GLO-30, summit measured 1274.9 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "whistler-mountain-q2063471",
+      "qid": "Q2063471",
+      "name": "WHISTLER MOUNTAIN",
+      "value": "2,181 m",
+      "h": 2181.0,
+      "lat": 50.05917,
+      "lon": -122.95694,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q2063471 (elevation 2181 m); https://en.wikipedia.org/wiki/Whistler_Mountain",
+       "Copernicus DEM GLO-30, summit measured 2177.6 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "barbeau-peak-q807788",
+      "qid": "Q807788",
+      "name": "BARBEAU PEAK",
+      "value": "2,616 m",
+      "h": 2616.0,
+      "lat": 81.91472,
+      "lon": -75.00917,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q807788 (elevation 2616 m); https://en.wikipedia.org/wiki/Barbeau_Peak",
+       "Copernicus DEM GLO-30, summit measured 2580.9 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "mount-robson-q1161258",
+      "qid": "Q1161258",
+      "name": "MOUNT ROBSON",
+      "value": "3,954 m",
+      "h": 3954.0,
+      "lat": 53.11056,
+      "lon": -119.15667,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q1161258 (elevation 3954 m); https://en.wikipedia.org/wiki/Mount_Robson",
+       "Copernicus DEM GLO-30, summit measured 3911.3 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "mount-logan-q120306",
+      "qid": "Q120306",
+      "name": "MOUNT LOGAN",
+      "value": "5,959 m",
+      "h": 5959.0,
+      "lat": 60.56722,
+      "lon": -140.40528,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q120306 (elevation 5959 m); https://en.wikipedia.org/wiki/Mount_Logan",
+       "Copernicus DEM GLO-30, summit measured 5929.6 m (within 2 %)"
+      ]
+     }
+    ],
+    "titles": [
+     "Tallest Mountain in Canada: 6 Peaks to 5,959 m",
+     "Highest Mountain in Canada: 6 Peaks to 5,959 m",
+     "Canada Mountains: 6 Peaks to 5,959 m"
+    ],
+    "queries": [
+     "tallest mountains in Canada",
+     "highest mountains in Canada",
+     "Canada mountains",
+     "Mount Logan height"
+    ],
+    "hashtags": [
+     "#sizecomparison",
+     "#canada",
+     "#mountains",
+     "#3d",
+     "#scale"
+    ],
+    "intro": "6 real mountains of Canada, each taller than the last, side by side at true scale (Copernicus DEM elevation data): Ishpatina Ridge, Mont Jacques-Cartier, Whistler Mountain, Barbeau Peak, Mount Robson, Mount Logan."
+   },
+   "type": "mountains"
+  },
+  {
+   "id": "peaks-australia",
+   "kind": "higher",
+   "engine": "peaks",
+   "status": "planned",
+   "source": "generated",
+   "added": "2026-11-18",
+   "steps": [
+    "Mount Kembla 534 m",
+    "Mount Stromlo 770 m",
+    "Kunanyi / Mount Wellington 1,271 m",
+    "Mount Ossa 1,617 m",
+    "Mount Kosciuszko 2,228 m",
+    "Mawson Peak 2,745 m"
+   ],
+   "data": "Copernicus DEM GLO-30 + Wikidata elevations (two sources, 2 % check)",
+   "spec": {
+    "steps": [
+     {
+      "key": "mount-kembla-q12062114",
+      "qid": "Q12062114",
+      "name": "MOUNT KEMBLA",
+      "value": "534 m",
+      "h": 534.0,
+      "lat": -34.44,
+      "lon": 150.80944,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q12062114 (elevation 534 m); https://en.wikipedia.org/wiki/Mount_Kembla",
+       "Copernicus DEM GLO-30, summit measured 540.7 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "mount-stromlo-q1041646",
+      "qid": "Q1041646",
+      "name": "MOUNT STROMLO",
+      "value": "770 m",
+      "h": 770.0,
+      "lat": -35.31667,
+      "lon": 149.01667,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q1041646 (elevation 770 m); https://en.wikipedia.org/wiki/Mount_Stromlo",
+       "Copernicus DEM GLO-30, summit measured 781.9 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "kunanyi-mount-wellington-q204552",
+      "qid": "Q204552",
+      "name": "KUNANYI / MOUNT WELLINGTON",
+      "value": "1,271 m",
+      "h": 1271.0,
+      "lat": -42.89917,
+      "lon": 147.2325,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q204552 (elevation 1271 m); https://en.wikipedia.org/wiki/Mount_Wellington_(Tasmania)",
+       "Copernicus DEM GLO-30, summit measured 1265.0 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "mount-ossa-q747182",
+      "qid": "Q747182",
+      "name": "MOUNT OSSA",
+      "value": "1,617 m",
+      "h": 1617.0,
+      "lat": -41.87103,
+      "lon": 146.03334,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q747182 (elevation 1617 m); https://en.wikipedia.org/wiki/Mount_Ossa_(Tasmania)",
+       "Copernicus DEM GLO-30, summit measured 1609.3 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "mount-kosciuszko-q178167",
+      "qid": "Q178167",
+      "name": "MOUNT KOSCIUSZKO",
+      "value": "2,228 m",
+      "h": 2228.0,
+      "lat": -36.45583,
+      "lon": 148.26351,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q178167 (elevation 2228 m); https://en.wikipedia.org/wiki/Mount_Kosciuszko",
+       "Copernicus DEM GLO-30, summit measured 2225.8 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "mawson-peak-q2114101",
+      "qid": "Q2114101",
+      "name": "MAWSON PEAK",
+      "value": "2,745 m",
+      "h": 2745.0,
+      "lat": -53.10444,
+      "lon": 73.51778,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q2114101 (elevation 2745 m); https://en.wikipedia.org/wiki/Mawson_Peak",
+       "Copernicus DEM GLO-30, summit measured 2749.3 m (within 2 %)"
+      ]
+     }
+    ],
+    "titles": [
+     "Tallest Mountain in Australia: 6 Peaks to 2,745 m",
+     "Highest Mountain in Australia: 6 Peaks to 2,745 m",
+     "Highest Peak in Australia: 6 Peaks to 2,745 m"
+    ],
+    "queries": [
+     "tallest mountains in Australia",
+     "highest mountains in Australia",
+     "Australia mountains",
+     "Mawson Peak height"
+    ],
+    "hashtags": [
+     "#sizecomparison",
+     "#australia",
+     "#mountains",
+     "#3d",
+     "#scale"
+    ],
+    "intro": "6 real mountains of Australia, each taller than the last, side by side at true scale (Copernicus DEM elevation data): Mount Kembla, Mount Stromlo, Kunanyi / Mount Wellington, Mount Ossa, Mount Kosciuszko, Mawson Peak."
+   },
+   "type": "mountains"
+  },
+  {
+   "id": "peaks-ireland",
+   "kind": "higher",
+   "engine": "peaks",
+   "status": "planned",
+   "source": "generated",
+   "added": "2026-11-18",
+   "steps": [
+    "Hill Of Allen 206 m",
+    "Diamond Hill 442 m",
+    "Ben Bulben 527 m",
+    "Croagh Patrick 764 m",
+    "Carrauntoohil 1,039 m"
+   ],
+   "data": "Copernicus DEM GLO-30 + Wikidata elevations (two sources, 2 % check)",
+   "spec": {
+    "steps": [
+     {
+      "key": "hill-of-allen-q1568968",
+      "qid": "Q1568968",
+      "name": "HILL OF ALLEN",
+      "value": "206 m",
+      "h": 206.0,
+      "lat": 53.2295,
+      "lon": -6.86331,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q1568968 (elevation 206 m); https://en.wikipedia.org/wiki/Hill_of_Allen",
+       "Copernicus DEM GLO-30, summit measured 207.5 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "diamond-hill-q3026089",
+      "qid": "Q3026089",
+      "name": "DIAMOND HILL",
+      "value": "442 m",
+      "h": 442.0,
+      "lat": 53.55,
+      "lon": -9.91667,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q3026089 (elevation 442 m); https://en.wikipedia.org/wiki/Diamond_Hill_(Ireland)",
+       "Copernicus DEM GLO-30, summit measured 435.2 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "ben-bulben-q816458",
+      "qid": "Q816458",
+      "name": "BEN BULBEN",
+      "value": "527 m",
+      "h": 527.0,
+      "lat": 54.36667,
+      "lon": -8.46667,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q816458 (elevation 527 m); https://en.wikipedia.org/wiki/Benbulbin",
+       "Copernicus DEM GLO-30, summit measured 523.1 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "croagh-patrick-q628687",
+      "qid": "Q628687",
+      "name": "CROAGH PATRICK",
+      "value": "764 m",
+      "h": 764.0,
+      "lat": 53.7595,
+      "lon": -9.6584,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q628687 (elevation 764 m); https://en.wikipedia.org/wiki/Croagh_Patrick",
+       "Copernicus DEM GLO-30, summit measured 758.3 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "carrauntoohil-q503368",
+      "qid": "Q503368",
+      "name": "CARRAUNTOOHIL",
+      "value": "1,039 m",
+      "h": 1038.6,
+      "lat": 51.99889,
+      "lon": -9.74278,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q503368 (elevation 1038.6 m); https://en.wikipedia.org/wiki/Carrauntoohil",
+       "Copernicus DEM GLO-30, summit measured 1031.9 m (within 2 %)"
+      ]
+     }
+    ],
+    "titles": [
+     "Tallest Mountain in Ireland: 5 Peaks to 1,039 m",
+     "Highest Mountain in Ireland: 5 Peaks to 1,039 m",
+     "Highest Peak in Ireland: 5 Peaks to 1,039 m"
+    ],
+    "queries": [
+     "tallest mountains in Ireland",
+     "highest mountains in Ireland",
+     "Ireland mountains",
+     "Carrauntoohil height"
+    ],
+    "hashtags": [
+     "#sizecomparison",
+     "#ireland",
+     "#mountains",
+     "#3d",
+     "#scale"
+    ],
+    "intro": "5 real mountains of Ireland, each taller than the last, side by side at true scale (Copernicus DEM elevation data): Hill Of Allen, Diamond Hill, Ben Bulben, Croagh Patrick, Carrauntoohil."
+   },
+   "type": "mountains"
+  },
+  {
+   "id": "peaks-czech-republic",
+   "kind": "higher",
+   "engine": "peaks",
+   "status": "planned",
+   "source": "generated",
+   "added": "2026-11-18",
+   "steps": [
+    "Kunětice Mountain 315 m",
+    "Říp Mountain 461 m",
+    "Ještěd 1,012 m",
+    "Klínovec 1,244 m",
+    "Luční Hora 1,556 m"
+   ],
+   "data": "Copernicus DEM GLO-30 + Wikidata elevations (two sources, 2 % check)",
+   "spec": {
+    "steps": [
+     {
+      "key": "kun-tice-mountain-q3846126",
+      "qid": "Q3846126",
+      "name": "KUNĚTICE MOUNTAIN",
+      "value": "315 m",
+      "h": 315.0,
+      "lat": 50.08,
+      "lon": 15.81278,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q3846126 (elevation 315 m); https://en.wikipedia.org/wiki/Kun%C4%9Btick%C3%A1_hora",
+       "Copernicus DEM GLO-30, summit measured 316.6 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "p-mountain-q102079702",
+      "qid": "Q102079702",
+      "name": "ŘÍP MOUNTAIN",
+      "value": "461 m",
+      "h": 461.0,
+      "lat": 50.38653,
+      "lon": 14.28963,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q102079702 (elevation 461 m); https://en.wikipedia.org/wiki/%C5%98%C3%ADp",
+       "Copernicus DEM GLO-30, summit measured 465.1 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "je-t-d-q148998",
+      "qid": "Q148998",
+      "name": "JEŠTĚD",
+      "value": "1,012 m",
+      "h": 1012.0,
+      "lat": 50.73222,
+      "lon": 14.98528,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q148998 (elevation 1012 m); https://en.wikipedia.org/wiki/Je%C5%A1t%C4%9Bd",
+       "Copernicus DEM GLO-30, summit measured 1009.3 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "kl-novec-q1569913",
+      "qid": "Q1569913",
+      "name": "KLÍNOVEC",
+      "value": "1,244 m",
+      "h": 1243.7,
+      "lat": 50.39611,
+      "lon": 12.96778,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q1569913 (elevation 1243.7 m); https://en.wikipedia.org/wiki/Kl%C3%ADnovec",
+       "Copernicus DEM GLO-30, summit measured 1245.9 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "lu-n-hora-q1767298",
+      "qid": "Q1767298",
+      "name": "LUČNÍ HORA",
+      "value": "1,556 m",
+      "h": 1556.0,
+      "lat": 50.7278,
+      "lon": 15.6825,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q1767298 (elevation 1556 m); https://en.wikipedia.org/wiki/Lu%C4%8Dn%C3%AD_hora",
+       "Copernicus DEM GLO-30, summit measured 1554.8 m (within 2 %)"
+      ]
+     }
+    ],
+    "titles": [
+     "Czech Republic Mountains: 5 Peaks to 1,556 m"
+    ],
+    "queries": [
+     "Czech Republic mountains"
+    ],
+    "hashtags": [
+     "#sizecomparison",
+     "#czechrepublic",
+     "#mountains",
+     "#3d",
+     "#scale"
+    ],
+    "intro": "5 real mountains of Czech Republic, each taller than the last, side by side at true scale (Copernicus DEM elevation data): Kunětice Mountain, Říp Mountain, Ještěd, Klínovec, Luční Hora."
+   },
+   "type": "mountains"
+  },
+  {
+   "id": "peaks-slovakia",
+   "kind": "higher",
+   "engine": "peaks",
+   "status": "planned",
+   "source": "generated",
+   "added": "2026-11-18",
+   "steps": [
+    "Devínska Kobyla 514 m",
+    "Záruby 767 m",
+    "Ostredok 1,596 m",
+    "Chopok 2,024 m",
+    "Gerlachovská Veža 2,642 m"
+   ],
+   "data": "Copernicus DEM GLO-30 + Wikidata elevations (two sources, 2 % check)",
+   "spec": {
+    "steps": [
+     {
+      "key": "dev-nska-kobyla-q1207065",
+      "qid": "Q1207065",
+      "name": "DEVÍNSKA KOBYLA",
+      "value": "514 m",
+      "h": 514.1,
+      "lat": 48.19056,
+      "lon": 16.99583,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q1207065 (elevation 514.1 m); https://en.wikipedia.org/wiki/Dev%C3%ADnska_Kobyla",
+       "Copernicus DEM GLO-30, summit measured 517.3 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "z-ruby-q246976",
+      "qid": "Q246976",
+      "name": "ZÁRUBY",
+      "value": "767 m",
+      "h": 767.4,
+      "lat": 48.52357,
+      "lon": 17.39167,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q246976 (elevation 767.4 m); https://en.wikipedia.org/wiki/Z%C3%A1ruby",
+       "Copernicus DEM GLO-30, summit measured 768.1 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "ostredok-q2587548",
+      "qid": "Q2587548",
+      "name": "OSTREDOK",
+      "value": "1,596 m",
+      "h": 1596.0,
+      "lat": 48.89964,
+      "lon": 19.08128,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q2587548 (elevation 1596 m); https://en.wikipedia.org/wiki/Ostredok",
+       "Copernicus DEM GLO-30, summit measured 1593.2 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "chopok-q1076258",
+      "qid": "Q1076258",
+      "name": "CHOPOK",
+      "value": "2,024 m",
+      "h": 2023.6,
+      "lat": 48.94306,
+      "lon": 19.59306,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q1076258 (elevation 2023.6 m); https://en.wikipedia.org/wiki/Chopok",
+       "Copernicus DEM GLO-30, summit measured 2013.9 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "gerlachovsk-ve-a-q766813",
+      "qid": "Q766813",
+      "name": "GERLACHOVSKÁ VEŽA",
+      "value": "2,642 m",
+      "h": 2642.0,
+      "lat": 49.16306,
+      "lon": 20.13389,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q766813 (elevation 2642 m); https://en.wikipedia.org/wiki/Gerlachovsk%C3%A1_ve%C5%BEa",
+       "Copernicus DEM GLO-30, summit measured 2601.4 m (within 2 %)"
+      ]
+     }
+    ],
+    "titles": [
+     "High Tatras Mountains in Slovakia: 5 Peaks to 2,642 m",
+     "Slovakia Mountains: 5 Peaks to 2,642 m",
+     "Slovakian Mountains: 5 Peaks to 2,642 m"
+    ],
+    "queries": [
+     "highest mountains in Slovakia",
+     "Slovakia mountains"
+    ],
+    "hashtags": [
+     "#sizecomparison",
+     "#slovakia",
+     "#mountains",
+     "#3d",
+     "#scale"
+    ],
+    "intro": "5 real mountains of Slovakia, each taller than the last, side by side at true scale (Copernicus DEM elevation data): Devínska Kobyla, Záruby, Ostredok, Chopok, Gerlachovská Veža."
+   },
+   "type": "mountains"
+  },
+  {
+   "id": "peaks-morocco",
+   "kind": "higher",
+   "engine": "peaks",
+   "status": "planned",
+   "source": "generated",
+   "added": "2026-11-18",
+   "steps": [
+    "Jebel Moussa 830 m",
+    "Zerhoun 1,025 m",
+    "Jebel Kelti 1,926 m",
+    "Tidighin 2,456 m",
+    "Jbel Siroua 3,304 m",
+    "Jbel Toubkal 4,167 m"
+   ],
+   "data": "Copernicus DEM GLO-30 + Wikidata elevations (two sources, 2 % check)",
+   "spec": {
+    "steps": [
+     {
+      "key": "jebel-moussa-q1026739",
+      "qid": "Q1026739",
+      "name": "JEBEL MOUSSA",
+      "value": "830 m",
+      "h": 830.0,
+      "lat": 35.89883,
+      "lon": -5.41311,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q1026739 (elevation 830 m); https://en.wikipedia.org/wiki/Jebel_Musa_(Morocco)",
+       "Copernicus DEM GLO-30, summit measured 836.1 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "zerhoun-q8069401",
+      "qid": "Q8069401",
+      "name": "ZERHOUN",
+      "value": "1,025 m",
+      "h": 1025.0,
+      "lat": 34.0338,
+      "lon": -5.52015,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q8069401 (elevation 1025 m); https://en.wikipedia.org/wiki/Zerhoun",
+       "Copernicus DEM GLO-30, summit measured 1033.6 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "jebel-kelti-q6172515",
+      "qid": "Q6172515",
+      "name": "JEBEL KELTI",
+      "value": "1,926 m",
+      "h": 1926.0,
+      "lat": 35.35,
+      "lon": -5.26667,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q6172515 (elevation 1926 m); https://en.wikipedia.org/wiki/Jebel_Kelti",
+       "Copernicus DEM GLO-30, summit measured 1922.1 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "tidighin-q2383371",
+      "qid": "Q2383371",
+      "name": "TIDIGHIN",
+      "value": "2,456 m",
+      "h": 2456.0,
+      "lat": 34.84317,
+      "lon": -4.50806,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q2383371 (elevation 2456 m); https://en.wikipedia.org/wiki/Tidighin",
+       "Copernicus DEM GLO-30, summit measured 2447.6 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "jbel-siroua-q3163385",
+      "qid": "Q3163385",
+      "name": "JBEL SIROUA",
+      "value": "3,304 m",
+      "h": 3304.0,
+      "lat": 30.70405,
+      "lon": -7.62226,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q3163385 (elevation 3304 m); https://en.wikipedia.org/wiki/Jbel_Sirwa",
+       "Copernicus DEM GLO-30, summit measured 3254.2 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "jbel-toubkal-q503433",
+      "qid": "Q503433",
+      "name": "JBEL TOUBKAL",
+      "value": "4,167 m",
+      "h": 4167.0,
+      "lat": 31.06194,
+      "lon": -7.91611,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q503433 (elevation 4167 m); https://en.wikipedia.org/wiki/Toubkal",
+       "Copernicus DEM GLO-30, summit measured 4155.8 m (within 2 %)"
+      ]
+     }
+    ],
+    "titles": [
+     "Highest Mountain in Morocco: 6 Peaks to 4,167 m",
+     "Mountains in Morocco: 6 Peaks to 4,167 m",
+     "Morocco Mountains: 6 Peaks to 4,167 m"
+    ],
+    "queries": [
+     "tallest mountains in Morocco",
+     "highest mountains in Morocco",
+     "Morocco mountains"
+    ],
+    "hashtags": [
+     "#sizecomparison",
+     "#morocco",
+     "#mountains",
+     "#3d",
+     "#scale"
+    ],
+    "intro": "6 real mountains of Morocco, each taller than the last, side by side at true scale (Copernicus DEM elevation data): Jebel Moussa, Zerhoun, Jebel Kelti, Tidighin, Jbel Siroua, Jbel Toubkal."
+   },
+   "type": "mountains"
   }
  ],
  "queue": {
-  "planned": 45,
-  "ready_for_production": 30,
+  "planned": 40,
+  "ready_for_production": 32,
   "updated": "2026-11-18",
-  "rule": ">= 32 planned, >= 20 renderable; a topic is used once"
+  "volcanoes": 7,
+  "rule": ">= 32 planned, >= 32 renderable 3D ladders, >= 11 of them volcanoes; a topic is used once"
  }
 }
