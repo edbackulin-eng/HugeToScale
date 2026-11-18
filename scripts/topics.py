@@ -7,7 +7,8 @@ a topic never repeats. New topics go into data/ladder-topics.json (the owner can
 
 Engines (what can be made automatically today):
   peaks     - real summits (Copernicus DEM relief) - READY: such a topic gets a "spec" and goes into production.
-  area-map  - areas at true scale on an equal-area map (islands, lakes) - planned, the engine is not built yet.
+  area-map  - a place dropped onto a country at true size (US states, islands, lakes, deserts) - READY since 19.11
+              (scripts/area_topics.py, shorts/areamap.py).
 A topic of a non-ready engine waits in the file ("engine" names what it needs) and is never scheduled.
 
 Two sources for every height: Wikidata (best-rank elevation, normalised to metres; the English Wikipedia article is
@@ -25,11 +26,13 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "shorts"))
+sys.path.insert(0, str(ROOT / "scripts"))
 TOPICS = ROOT / "data" / "ladder-topics.json"
 VERIFIED = ROOT / "data" / "peaks-verified.json"
 UA = {"User-Agent": "HugeToScale-topics/1.0 (https://github.com/edbackulin-eng/HugeToScale)"}
 MIN_PLANNED = 32          # owner: 30+ topics ahead (margin 2)
 MIN_READY = 20            # of them renderable today (20 days of Shorts)
+MIN_AREA = 12             # of them area-map topics (owner 19.11: no more than 2 mountain ladders in a row)
 MAX_SHARED = 2            # a new topic shares at most 2 objects with any earlier topic
 RATIO = 1.18              # each step at least 18 % taller than the one before
 VOLCANO = {"Q8072", "Q169358", "Q212057", "Q190869", "Q2120095"}
@@ -44,17 +47,6 @@ SELECT ?item ?itemLabel ?elev ?coord ?country ?countryLabel ?range ?rangeLabel ?
   SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
 }"""
 PEAK_CLASSES = ["Q8502", "Q8072", "Q169358", "Q212057", "Q207326"]   # mountain, volcano, strato-, shield volcano, summit
-
-AREA_SPARQL = """
-SELECT ?item ?itemLabel ?area ?country ?countryLabel ?links ?cls WHERE {
-  VALUES ?cls { wd:Q23442 wd:Q23397 }
-  ?item wdt:P31 ?cls; wikibase:sitelinks ?links; wdt:P17 ?country.
-  FILTER(?links >= 30)
-  ?item p:P2046 ?st. ?st a wikibase:BestRank; psn:P2046/wikibase:quantityAmount ?area.
-  FILTER(?area >= 1000000)
-  SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
-}"""
-
 
 def get(url, data=None, tries=4, timeout=120):
     for k in range(tries):
@@ -330,45 +322,6 @@ def resolve_named(tp, peaks, verified):
     return sp if len(sp) >= 5 else None
 
 
-# ------------------------------------------------------------------------------------------------ areas (engine not built)
-
-def area_topics(taken_ids, need):
-    rows = sparql(AREA_SPARQL)
-    by = {}
-    for r in rows:
-        kind = "islands" if qid(r["cls"]) == "Q23442" else "lakes"
-        if re.match(r"^Q\d+$", r["itemLabel"]):
-            continue
-        by.setdefault((kind, r["countryLabel"]), {})[qid(r["item"])] = (r["itemLabel"], float(r["area"]) / 1e6,
-                                                                       int(r["links"]))
-    added = []
-    for (kind, g), items in sorted(by.items(), key=lambda kv: -sum(v[2] for v in kv[1].values())):
-        if len(added) >= need:
-            break
-        tid = f"{kind}-{slug(g)}"
-        if tid in taken_ids or len(items) < 5:
-            continue
-        xs = sorted(items.items(), key=lambda kv: -kv[1][1])
-        out = [xs[0]]
-        for q, v in xs[1:]:
-            if v[1] <= out[-1][1][1] / 1.6:
-                out.append((q, v))
-            if len(out) == 6:
-                break
-        if len(out) < 5:
-            continue
-        out = out[::-1]
-        added.append({"id": tid, "kind": "area", "engine": "area-map", "status": "planned", "source": "generated",
-                      "added": str(date.today()),
-                      "steps": [f"{v[0]} {round(v[1]):,} km²" for _, v in out],
-                      "qids": [q for q, _ in out],
-                      "data": "Wikidata areas + Natural Earth / OSM outlines (second source: area measured on an "
-                              "equal-area projection); waits for the area-map engine"})
-        taken_ids.add(tid)
-        print("+", tid, added[-1]["steps"])
-    return added
-
-
 def main():
     dry = "--dry" in sys.argv
     doc = json.loads(TOPICS.read_text(encoding="utf-8"))
@@ -389,17 +342,25 @@ def main():
                                                            + ", ".join(s["name"].title() for s in sp) + ".")}
                 print("resolved", tp["id"], tp["spec"]["titles"][:1])
     planned = [t for t in topics if t["status"] == "planned"]
-    ready = [t for t in planned if t.get("engine") == "peaks" and t.get("spec")]
+    ready = [t for t in planned if t.get("engine") in ("peaks", "area-map") and t.get("spec")]
     taken_ids = {t["id"] for t in topics}
     taken_sets = [{s["qid"] for s in t["spec"]["steps"] if "qid" in s} for t in topics if t.get("spec")]
     need_ready = max(0, MIN_READY - len(ready))
     need_total = max(0, MIN_PLANNED - len(planned))
-    new = peak_topics(peaks, verified, taken_ids, taken_sets, max(need_ready, need_total))
-    # area topics are not generated automatically: Wikidata areas proved unreliable (Madura 40,471 km², Cyprus listed
-    # among UK islands); area ladders come from Natural Earth when the area-map engine is built
-    topics += new
+    # area-map topics (owner 19.11): alternate with the mountain ladders, so about half of the renderable queue
+    import area_topics
+    area_ready = [t for t in ready if t.get("engine") == "area-map"]
+    new_area = area_topics.area_topics(topics, max(0, MIN_AREA - len(area_ready)), sparql, suggest, title_case)
+    topics += new_area
     planned = [t for t in topics if t["status"] == "planned"]
-    ready = [t for t in planned if t.get("engine") == "peaks" and t.get("spec")]
+    ready = [t for t in planned if t.get("engine") in ("peaks", "area-map") and t.get("spec")]
+    need_ready = max(0, MIN_READY - len(ready))
+    need_total = max(0, MIN_PLANNED - len(planned))
+    new = peak_topics(peaks, verified, taken_ids | {t["id"] for t in new_area}, taken_sets, max(need_ready, need_total))
+    topics += new
+    new += new_area
+    planned = [t for t in topics if t["status"] == "planned"]
+    ready = [t for t in planned if t.get("engine") in ("peaks", "area-map") and t.get("spec")]
     doc["queue"] = {"planned": len(planned), "ready_for_production": len(ready), "updated": str(date.today()),
                     "rule": f">= {MIN_PLANNED} planned, >= {MIN_READY} renderable; a topic is used once"}
     print(f"queue: {len(planned)} planned, {len(ready)} renderable, {len(new)} new")

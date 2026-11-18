@@ -2475,6 +2475,708 @@
     ],
     "intro": "5 real mountains of Philippines, each taller than the last, side by side at true scale (Copernicus DEM elevation data): Camiguin De Babuyanes, Mount Arayat, Pinatubo, Mayon Volcano, Mount Apo."
    }
+  },
+  {
+   "id": "area-lake-baikal-vs-switzerland",
+   "kind": "area",
+   "engine": "area-map",
+   "status": "planned",
+   "source": "generated",
+   "added": "2026-11-18",
+   "category": "lake",
+   "steps": [
+    "Lake Baikal 31,722 km²",
+    "Switzerland 41,291 km²"
+   ],
+   "data": "Wikidata official areas + Natural Earth outlines (within 3 %)",
+   "spec": {
+    "over": {
+     "layer": "lake",
+     "qid": "Q5513",
+     "name": "Lake Baikal",
+     "km2": 31722,
+     "sources": [
+      "https://www.wikidata.org/wiki/Q5513 (area, best rank); https://en.wikipedia.org/wiki/Lake_Baikal",
+      "Natural Earth outline on an equal-area projection: 31,419 km² (within 3 %)"
+     ]
+    },
+    "base": {
+     "layer": "adm0",
+     "qid": "Q39",
+     "name": "Switzerland",
+     "km2": 41291,
+     "sources": [
+      "https://www.wikidata.org/wiki/Q39 (area, best rank); https://en.wikipedia.org/wiki/Switzerland",
+      "Natural Earth outline on an equal-area projection: 41,207 km² (within 3 %)"
+     ]
+    },
+    "titles": [
+     "How Big Is Lake Baikal: 31,722 km² on Switzerland"
+    ],
+    "queries": [
+     "how big is Lake Baikal"
+    ],
+    "hashtags": [
+     "#sizecomparison",
+     "#lakebaikal",
+     "#switzerland",
+     "#maps",
+     "#geography"
+    ],
+    "intro": "Lake Baikal dropped onto Switzerland at true size: both outlines on an equal-area projection (Natural Earth), both areas official figures."
+   }
+  },
+  {
+   "id": "area-lake-victoria-vs-austria",
+   "kind": "area",
+   "engine": "area-map",
+   "status": "planned",
+   "source": "generated",
+   "added": "2026-11-18",
+   "category": "lake",
+   "steps": [
+    "Lake Victoria 68,100 km²",
+    "Austria 83,879 km²"
+   ],
+   "data": "Wikidata official areas + Natural Earth outlines (within 3 %)",
+   "spec": {
+    "over": {
+     "layer": "lake",
+     "qid": "Q5505",
+     "name": "Lake Victoria",
+     "km2": 68100,
+     "sources": [
+      "https://www.wikidata.org/wiki/Q5505 (area, best rank); https://en.wikipedia.org/wiki/Lake_Victoria",
+      "Natural Earth outline on an equal-area projection: 67,332 km² (within 3 %)"
+     ]
+    },
+    "base": {
+     "layer": "adm0",
+     "qid": "Q40",
+     "name": "Austria",
+     "km2": 83879,
+     "sources": [
+      "https://www.wikidata.org/wiki/Q40 (area, best rank); https://en.wikipedia.org/wiki/Austria",
+      "Natural Earth outline on an equal-area projection: 83,911 km² (within 3 %)"
+     ]
+    },
+    "titles": [
+     "How Big Is Lake Victoria: 68,100 km² on Austria"
+    ],
+    "queries": [
+     "how big is Lake Victoria"
+    ],
+    "hashtags": [
+     "#sizecomparison",
+     "#lakevictoria",
+     "#austria",
+     "#maps",
+     "#geography"
+    ],
+    "intro": "Lake Victoria dropped onto Austria at true size: both outlines on an equal-area projection (Natural Earth), both areas official figures."
+   }
+  },
+  {
+   "id": "area-ohio-vs-greece",
+   "kind": "area",
+   "engine": "area-map",
+   "status": "planned",
+   "source": "generated",
+   "added": "2026-11-18",
+   "category": "state",
+   "steps": [
+    "Ohio 116,096 km²",
+    "Greece 131,957 km²"
+   ],
+   "data": "Wikidata official areas + Natural Earth outlines (within 3 %)",
+   "spec": {
+    "over": {
+     "layer": "adm1",
+     "qid": "Q1397",
+     "name": "Ohio",
+     "km2": 116096,
+     "sources": [
+      "https://www.wikidata.org/wiki/Q1397 (area, best rank); https://en.wikipedia.org/wiki/Ohio",
+      "Natural Earth outline on an equal-area projection: 116,137 km² (within 3 %)"
+     ]
+    },
+    "base": {
+     "layer": "adm0",
+     "qid": "Q41",
+     "name": "Greece",
+     "km2": 131957,
+     "sources": [
+      "https://www.wikidata.org/wiki/Q41 (area, best rank); https://en.wikipedia.org/wiki/Greece",
+      "Natural Earth outline on an equal-area projection: 130,067 km² (within 3 %)"
+     ]
+    },
+    "titles": [
+     "How Big Is Ohio: 116,096 km² on Greece"
+    ],
+    "queries": [
+     "how big is Ohio"
+    ],
+    "hashtags": [
+     "#sizecomparison",
+     "#ohio",
+     "#greece",
+     "#maps",
+     "#geography"
+    ],
+    "intro": "Ohio dropped onto Greece at true size: both outlines on an equal-area projection (Natural Earth), both areas official figures."
+   }
+  },
+  {
+   "id": "area-pennsylvania-vs-greece",
+   "kind": "area",
+   "engine": "area-map",
+   "status": "planned",
+   "source": "generated",
+   "added": "2026-11-18",
+   "category": "state",
+   "steps": [
+    "Pennsylvania 119,283 km²",
+    "Greece 131,957 km²"
+   ],
+   "data": "Wikidata official areas + Natural Earth outlines (within 3 %)",
+   "spec": {
+    "over": {
+     "layer": "adm1",
+     "qid": "Q1400",
+     "name": "Pennsylvania",
+     "km2": 119283,
+     "sources": [
+      "https://www.wikidata.org/wiki/Q1400 (area, best rank); https://en.wikipedia.org/wiki/Pennsylvania",
+      "Natural Earth outline on an equal-area projection: 119,161 km² (within 3 %)"
+     ]
+    },
+    "base": {
+     "layer": "adm0",
+     "qid": "Q41",
+     "name": "Greece",
+     "km2": 131957,
+     "sources": [
+      "https://www.wikidata.org/wiki/Q41 (area, best rank); https://en.wikipedia.org/wiki/Greece",
+      "Natural Earth outline on an equal-area projection: 130,067 km² (within 3 %)"
+     ]
+    },
+    "titles": [
+     "How Big Is Pennsylvania: 119,283 km² on Greece"
+    ],
+    "queries": [
+     "how big is Pennsylvania"
+    ],
+    "hashtags": [
+     "#sizecomparison",
+     "#pennsylvania",
+     "#greece",
+     "#maps",
+     "#geography"
+    ],
+    "intro": "Pennsylvania dropped onto Greece at true size: both outlines on an equal-area projection (Natural Earth), both areas official figures."
+   }
+  },
+  {
+   "id": "area-nevada-vs-japan",
+   "kind": "area",
+   "engine": "area-map",
+   "status": "planned",
+   "source": "generated",
+   "added": "2026-11-18",
+   "category": "state",
+   "steps": [
+    "Nevada 286,380 km²",
+    "Japan 377,974 km²"
+   ],
+   "data": "Wikidata official areas + Natural Earth outlines (within 3 %)",
+   "spec": {
+    "over": {
+     "layer": "adm1",
+     "qid": "Q1227",
+     "name": "Nevada",
+     "km2": 286380,
+     "sources": [
+      "https://www.wikidata.org/wiki/Q1227 (area, best rank); https://en.wikipedia.org/wiki/Nevada",
+      "Natural Earth outline on an equal-area projection: 286,770 km² (within 3 %)"
+     ]
+    },
+    "base": {
+     "layer": "adm0",
+     "qid": "Q17",
+     "name": "Japan",
+     "km2": 377974,
+     "sources": [
+      "https://www.wikidata.org/wiki/Q17 (area, best rank); https://en.wikipedia.org/wiki/Japan",
+      "Natural Earth outline on an equal-area projection: 366,862 km² (within 3 %)"
+     ]
+    },
+    "titles": [
+     "How Big Is Nevada: 286,380 km² on Japan"
+    ],
+    "queries": [
+     "how big is Nevada"
+    ],
+    "hashtags": [
+     "#sizecomparison",
+     "#nevada",
+     "#japan",
+     "#maps",
+     "#geography"
+    ],
+    "intro": "Nevada dropped onto Japan at true size: both outlines on an equal-area projection (Natural Earth), both areas official figures."
+   }
+  },
+  {
+   "id": "area-borneo-vs-myanmar",
+   "kind": "area",
+   "engine": "area-map",
+   "status": "planned",
+   "source": "generated",
+   "added": "2026-11-18",
+   "category": "island",
+   "steps": [
+    "Borneo 748,168 km²",
+    "Myanmar 676,577 km²"
+   ],
+   "data": "Wikidata official areas + Natural Earth outlines (within 3 %)",
+   "spec": {
+    "over": {
+     "layer": "region",
+     "qid": "Q36117",
+     "name": "Borneo",
+     "km2": 748168,
+     "sources": [
+      "https://www.wikidata.org/wiki/Q36117 (area, best rank); https://en.wikipedia.org/wiki/Borneo",
+      "Natural Earth outline on an equal-area projection: 728,064 km² (within 3 %)"
+     ]
+    },
+    "base": {
+     "layer": "adm0",
+     "qid": "Q836",
+     "name": "Myanmar",
+     "km2": 676577,
+     "sources": [
+      "https://www.wikidata.org/wiki/Q836 (area, best rank); https://en.wikipedia.org/wiki/Myanmar",
+      "Natural Earth outline on an equal-area projection: 660,939 km² (within 3 %)"
+     ]
+    },
+    "titles": [
+     "Borneo vs Myanmar: Borneo Is 11% Bigger"
+    ],
+    "queries": [
+     "Borneo vs Myanmar"
+    ],
+    "hashtags": [
+     "#sizecomparison",
+     "#borneo",
+     "#myanmar",
+     "#maps",
+     "#geography"
+    ],
+    "intro": "Borneo dropped onto Myanmar at true size: both outlines on an equal-area projection (Natural Earth), both areas official figures."
+   }
+  },
+  {
+   "id": "area-lake-superior-vs-bulgaria",
+   "kind": "area",
+   "engine": "area-map",
+   "status": "planned",
+   "source": "generated",
+   "added": "2026-11-18",
+   "category": "lake",
+   "steps": [
+    "Lake Superior 82,350 km²",
+    "Bulgaria 110,994 km²"
+   ],
+   "data": "Wikidata official areas + Natural Earth outlines (within 3 %)",
+   "spec": {
+    "over": {
+     "layer": "lake",
+     "qid": "Q1066",
+     "name": "Lake Superior",
+     "km2": 82350,
+     "sources": [
+      "https://www.wikidata.org/wiki/Q1066 (area, best rank); https://en.wikipedia.org/wiki/Lake_Superior",
+      "Natural Earth outline on an equal-area projection: 82,079 km² (within 3 %)"
+     ]
+    },
+    "base": {
+     "layer": "adm0",
+     "qid": "Q219",
+     "name": "Bulgaria",
+     "km2": 110994,
+     "sources": [
+      "https://www.wikidata.org/wiki/Q219 (area, best rank); https://en.wikipedia.org/wiki/Bulgaria",
+      "Natural Earth outline on an equal-area projection: 112,421 km² (within 3 %)"
+     ]
+    },
+    "titles": [
+     "Lake Superior Size Comparison: 82,350 km² on Bulgaria",
+     "How Big Is Lake Superior: 82,350 km² on Bulgaria"
+    ],
+    "queries": [
+     "Lake Superior size comparison",
+     "how big is Lake Superior"
+    ],
+    "hashtags": [
+     "#sizecomparison",
+     "#lakesuperior",
+     "#bulgaria",
+     "#maps",
+     "#geography"
+    ],
+    "intro": "Lake Superior dropped onto Bulgaria at true size: both outlines on an equal-area projection (Natural Earth), both areas official figures."
+   }
+  },
+  {
+   "id": "area-lake-michigan-vs-switzerland",
+   "kind": "area",
+   "engine": "area-map",
+   "status": "planned",
+   "source": "generated",
+   "added": "2026-11-18",
+   "category": "lake",
+   "steps": [
+    "Lake Michigan 57,750 km²",
+    "Switzerland 41,291 km²"
+   ],
+   "data": "Wikidata official areas + Natural Earth outlines (within 3 %)",
+   "spec": {
+    "over": {
+     "layer": "lake",
+     "qid": "Q1169",
+     "name": "Lake Michigan",
+     "km2": 57750,
+     "sources": [
+      "https://www.wikidata.org/wiki/Q1169 (area, best rank); https://en.wikipedia.org/wiki/Lake_Michigan",
+      "Natural Earth outline on an equal-area projection: 57,426 km² (within 3 %)"
+     ]
+    },
+    "base": {
+     "layer": "adm0",
+     "qid": "Q39",
+     "name": "Switzerland",
+     "km2": 41291,
+     "sources": [
+      "https://www.wikidata.org/wiki/Q39 (area, best rank); https://en.wikipedia.org/wiki/Switzerland",
+      "Natural Earth outline on an equal-area projection: 41,207 km² (within 3 %)"
+     ]
+    },
+    "titles": [
+     "How Big Is Lake Michigan: 57,750 km² on Switzerland"
+    ],
+    "queries": [
+     "how big is Lake Michigan"
+    ],
+    "hashtags": [
+     "#sizecomparison",
+     "#lakemichigan",
+     "#switzerland",
+     "#maps",
+     "#geography"
+    ],
+    "intro": "Lake Michigan dropped onto Switzerland at true size: both outlines on an equal-area projection (Natural Earth), both areas official figures."
+   }
+  },
+  {
+   "id": "area-lake-malawi-vs-netherlands",
+   "kind": "area",
+   "engine": "area-map",
+   "status": "planned",
+   "source": "generated",
+   "added": "2026-11-18",
+   "category": "lake",
+   "steps": [
+    "Lake Malawi 29,600 km²",
+    "Netherlands 37,378 km²"
+   ],
+   "data": "Wikidata official areas + Natural Earth outlines (within 3 %)",
+   "spec": {
+    "over": {
+     "layer": "lake",
+     "qid": "Q5532",
+     "name": "Lake Malawi",
+     "km2": 29600,
+     "sources": [
+      "https://www.wikidata.org/wiki/Q5532 (area, best rank); https://en.wikipedia.org/wiki/Lake_Malawi",
+      "Natural Earth outline on an equal-area projection: 28,952 km² (within 3 %)"
+     ]
+    },
+    "base": {
+     "layer": "adm0",
+     "qid": "Q55",
+     "name": "Netherlands",
+     "km2": 37378,
+     "sources": [
+      "https://www.wikidata.org/wiki/Q55 (area, best rank); https://en.wikipedia.org/wiki/Netherlands",
+      "Natural Earth outline on an equal-area projection: 36,885 km² (within 3 %)"
+     ]
+    },
+    "titles": [
+     "How Big Is Lake Malawi: 29,600 km² on Netherlands"
+    ],
+    "queries": [
+     "how big is Lake Malawi"
+    ],
+    "hashtags": [
+     "#sizecomparison",
+     "#lakemalawi",
+     "#netherlands",
+     "#maps",
+     "#geography"
+    ],
+    "intro": "Lake Malawi dropped onto Netherlands at true size: both outlines on an equal-area projection (Natural Earth), both areas official figures."
+   }
+  },
+  {
+   "id": "area-oregon-vs-italy",
+   "kind": "area",
+   "engine": "area-map",
+   "status": "planned",
+   "source": "generated",
+   "added": "2026-11-18",
+   "category": "state",
+   "steps": [
+    "Oregon 255,026 km²",
+    "Italy 302,068 km²"
+   ],
+   "data": "Wikidata official areas + Natural Earth outlines (within 3 %)",
+   "spec": {
+    "over": {
+     "layer": "adm1",
+     "qid": "Q824",
+     "name": "Oregon",
+     "km2": 255026,
+     "sources": [
+      "https://www.wikidata.org/wiki/Q824 (area, best rank); https://en.wikipedia.org/wiki/Oregon",
+      "Natural Earth outline on an equal-area projection: 251,208 km² (within 3 %)"
+     ]
+    },
+    "base": {
+     "layer": "adm0",
+     "qid": "Q38",
+     "name": "Italy",
+     "km2": 302068,
+     "sources": [
+      "https://www.wikidata.org/wiki/Q38 (area, best rank); https://en.wikipedia.org/wiki/Italy",
+      "Natural Earth outline on an equal-area projection: 300,004 km² (within 3 %)"
+     ]
+    },
+    "titles": [
+     "Oregon Size Comparison: 255,026 km² on Italy"
+    ],
+    "queries": [
+     "Oregon size comparison"
+    ],
+    "hashtags": [
+     "#sizecomparison",
+     "#oregon",
+     "#italy",
+     "#maps",
+     "#geography"
+    ],
+    "intro": "Oregon dropped onto Italy at true size: both outlines on an equal-area projection (Natural Earth), both areas official figures."
+   }
+  },
+  {
+   "id": "area-lake-erie-vs-albania",
+   "kind": "area",
+   "engine": "area-map",
+   "status": "planned",
+   "source": "generated",
+   "added": "2026-11-18",
+   "category": "lake",
+   "steps": [
+    "Lake Erie 25,744 km²",
+    "Albania 28,748 km²"
+   ],
+   "data": "Wikidata official areas + Natural Earth outlines (within 3 %)",
+   "spec": {
+    "over": {
+     "layer": "lake",
+     "qid": "Q5492",
+     "name": "Lake Erie",
+     "km2": 25744,
+     "sources": [
+      "https://www.wikidata.org/wiki/Q5492 (area, best rank); https://en.wikipedia.org/wiki/Lake_Erie",
+      "Natural Earth outline on an equal-area projection: 25,696 km² (within 3 %)"
+     ]
+    },
+    "base": {
+     "layer": "adm0",
+     "qid": "Q222",
+     "name": "Albania",
+     "km2": 28748,
+     "sources": [
+      "https://www.wikidata.org/wiki/Q222 (area, best rank); https://en.wikipedia.org/wiki/Albania",
+      "Natural Earth outline on an equal-area projection: 28,335 km² (within 3 %)"
+     ]
+    },
+    "titles": [
+     "How Big Is Lake Erie: 25,744 km² on Albania"
+    ],
+    "queries": [
+     "how big is Lake Erie"
+    ],
+    "hashtags": [
+     "#sizecomparison",
+     "#lakeerie",
+     "#albania",
+     "#maps",
+     "#geography"
+    ],
+    "intro": "Lake Erie dropped onto Albania at true size: both outlines on an equal-area projection (Natural Earth), both areas official figures."
+   }
+  },
+  {
+   "id": "area-taiwan-island-vs-albania",
+   "kind": "area",
+   "engine": "area-map",
+   "status": "planned",
+   "source": "generated",
+   "added": "2026-11-18",
+   "category": "island",
+   "steps": [
+    "Taiwan Island 35,883 km²",
+    "Albania 28,748 km²"
+   ],
+   "data": "Wikidata official areas + Natural Earth outlines (within 3 %)",
+   "spec": {
+    "over": {
+     "layer": "region",
+     "qid": "Q22502",
+     "name": "Taiwan Island",
+     "km2": 35883,
+     "sources": [
+      "https://www.wikidata.org/wiki/Q22502 (area, best rank); https://en.wikipedia.org/wiki/Taiwan_(island)",
+      "Natural Earth outline on an equal-area projection: 35,580 km² (within 3 %)"
+     ]
+    },
+    "base": {
+     "layer": "adm0",
+     "qid": "Q222",
+     "name": "Albania",
+     "km2": 28748,
+     "sources": [
+      "https://www.wikidata.org/wiki/Q222 (area, best rank); https://en.wikipedia.org/wiki/Albania",
+      "Natural Earth outline on an equal-area projection: 28,335 km² (within 3 %)"
+     ]
+    },
+    "titles": [
+     "How Big Is Taiwan Island: 35,883 km² on Albania"
+    ],
+    "queries": [
+     "how big is Taiwan Island"
+    ],
+    "hashtags": [
+     "#sizecomparison",
+     "#taiwanisland",
+     "#albania",
+     "#maps",
+     "#geography"
+    ],
+    "intro": "Taiwan Island dropped onto Albania at true size: both outlines on an equal-area projection (Natural Earth), both areas official figures."
+   }
+  },
+  {
+   "id": "area-wisconsin-vs-united-kingdom",
+   "kind": "area",
+   "engine": "area-map",
+   "status": "planned",
+   "source": "generated",
+   "added": "2026-11-18",
+   "category": "state",
+   "steps": [
+    "Wisconsin 169,640 km²",
+    "United Kingdom 242,495 km²"
+   ],
+   "data": "Wikidata official areas + Natural Earth outlines (within 3 %)",
+   "spec": {
+    "over": {
+     "layer": "adm1",
+     "qid": "Q1537",
+     "name": "Wisconsin",
+     "km2": 169640,
+     "sources": [
+      "https://www.wikidata.org/wiki/Q1537 (area, best rank); https://en.wikipedia.org/wiki/Wisconsin",
+      "Natural Earth outline on an equal-area projection: 168,965 km² (within 3 %)"
+     ]
+    },
+    "base": {
+     "layer": "adm0",
+     "qid": "Q145",
+     "name": "United Kingdom",
+     "km2": 242495,
+     "sources": [
+      "https://www.wikidata.org/wiki/Q145 (area, best rank); https://en.wikipedia.org/wiki/United_Kingdom",
+      "Natural Earth outline on an equal-area projection: 239,223 km² (within 3 %)"
+     ]
+    },
+    "titles": [
+     "How Big Is Wisconsin: 169,640 km² on United Kingdom"
+    ],
+    "queries": [
+     "how big is Wisconsin"
+    ],
+    "hashtags": [
+     "#sizecomparison",
+     "#wisconsin",
+     "#unitedkingdom",
+     "#maps",
+     "#geography"
+    ],
+    "intro": "Wisconsin dropped onto United Kingdom at true size: both outlines on an equal-area projection (Natural Earth), both areas official figures."
+   }
+  },
+  {
+   "id": "area-kentucky-vs-austria",
+   "kind": "area",
+   "engine": "area-map",
+   "status": "planned",
+   "source": "generated",
+   "added": "2026-11-18",
+   "category": "state",
+   "steps": [
+    "Kentucky 104,659 km²",
+    "Austria 83,879 km²"
+   ],
+   "data": "Wikidata official areas + Natural Earth outlines (within 3 %)",
+   "spec": {
+    "over": {
+     "layer": "adm1",
+     "qid": "Q1603",
+     "name": "Kentucky",
+     "km2": 104659,
+     "sources": [
+      "https://www.wikidata.org/wiki/Q1603 (area, best rank); https://en.wikipedia.org/wiki/Kentucky",
+      "Natural Earth outline on an equal-area projection: 104,019 km² (within 3 %)"
+     ]
+    },
+    "base": {
+     "layer": "adm0",
+     "qid": "Q40",
+     "name": "Austria",
+     "km2": 83879,
+     "sources": [
+      "https://www.wikidata.org/wiki/Q40 (area, best rank); https://en.wikipedia.org/wiki/Austria",
+      "Natural Earth outline on an equal-area projection: 83,911 km² (within 3 %)"
+     ]
+    },
+    "titles": [
+     "How Big Is Kentucky: 104,659 km² on Austria"
+    ],
+    "queries": [
+     "how big is Kentucky"
+    ],
+    "hashtags": [
+     "#sizecomparison",
+     "#kentucky",
+     "#austria",
+     "#maps",
+     "#geography"
+    ],
+    "intro": "Kentucky dropped onto Austria at true size: both outlines on an equal-area projection (Natural Earth), both areas official figures."
+   }
   }
  ],
  "queue": {

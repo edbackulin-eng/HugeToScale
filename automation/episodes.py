@@ -51,13 +51,29 @@ def assign_music(st, e):
     MUSIC.write_text(json.dumps(reg, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
 
 
-def next_topic():
+MAX_PEAKS_IN_A_ROW = 2                  # owner 19.11: no more than 2 mountain ladders in a row, alternate with maps
+
+
+def kind_of(e):
+    return "peaks" if e["short"].startswith("ladder_") else "area-map" if e["short"].startswith("map_") else "other"
+
+
+def wanted_engines(st):
+    """Alternate: after a mountain ladder a map comes next if there is one; never a 3rd ladder in a row."""
+    last = [kind_of(e) for e in st["episodes"]][-MAX_PEAKS_IN_A_ROW:]
+    if last and last[-1] == "peaks":
+        return ["area-map"] if last.count("peaks") >= MAX_PEAKS_IN_A_ROW else ["area-map", "peaks"]
+    return ["peaks", "area-map"]
+
+
+def next_topic(st):
     doc = json.loads(TOPICS.read_text(encoding="utf-8"))
-    for tp in doc["topics"]:
-        if tp["status"] == "planned" and tp.get("engine") == "peaks" and tp.get("spec"):
-            tp["status"] = "scheduled"
-            TOPICS.write_text(json.dumps(doc, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
-            return tp
+    for engine in wanted_engines(st):
+        for tp in doc["topics"]:
+            if tp["status"] == "planned" and tp.get("engine") == engine and tp.get("spec"):
+                tp["status"] = "scheduled"
+                TOPICS.write_text(json.dumps(doc, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+                return tp
     return None
 
 
@@ -71,16 +87,18 @@ def cmd_next():
     if queued:
         e = queued[0]
     else:
-        tp = next_topic()
+        tp = next_topic(st)
         if not tp:
             from core import ytguard
-            ytguard.notify("Huge To Scale: no renderable topic left", "The topic queue has no planned topic with a "
-                           "ready engine. topics.yml refills it weekly; run it by hand.")
+            ytguard.notify("Huge To Scale: no renderable topic left", "The topic queue has no planned topic that may "
+                           f"come next ({' or '.join(wanted_engines(st))}). topics.yml refills it weekly; run it by hand.")
             return ""
-        e = {"slug": "ladder-" + tp["id"], "short": "ladder_" + tp["id"].replace("-", "_"), "topic": tp["id"],
+        import ladders
+        short = ladders.short_name(tp)
+        e = {"slug": short.replace("_", "-"), "short": short, "topic": tp["id"],
              "status": "queued", "added": str(date.today())}
         st["episodes"].append(e)
-    if not e.get("music") and e["short"].startswith("ladder_") and e["short"] != "ladder_heights":
+    if not e.get("music") and e.get("topic") and e["short"] != "ladder_heights":
         assign_music(st, e)
     save(st)
     return e["short"]

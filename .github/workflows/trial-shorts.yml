@@ -105,7 +105,7 @@ jobs:
           OUT="$PWD/out/${{ matrix.short }}/c${{ matrix.chunk }}"
           if [ "${{ inputs.mode }}" = preview ]; then STEP=3; PV="--preview --step 3 --probe ${{ matrix.end }}"; else STEP=1; PV=""; fi
           if [ "${{ matrix.renderer }}" = map2d ]; then
-            python shorts/map2d.py anim "$OUT" ${{ matrix.start }} ${{ matrix.end }} $STEP
+            python shorts/map2d.py anim "$OUT" ${{ matrix.start }} ${{ matrix.end }} $STEP ${{ matrix.short }}
           else
             tools/blender/blender -b --factory-startup -P shorts/animate.py -- ${{ matrix.short }} "$OUT" \
               ${{ matrix.start }} ${{ matrix.end }} $PV 2>&1 | grep -vE "^(Fra:|Read |TBB)| Synchronizing| Updating" | tail -60

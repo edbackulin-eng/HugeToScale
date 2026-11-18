@@ -147,6 +147,16 @@ def borders():
         print("borders", f)
 
 
+def ne(layer):
+    """One Natural Earth layer (public domain), e.g. ne_10m_lakes, ne_10m_geography_regions_polys."""
+    p = CACHE / f"{layer}.geojson"
+    if not p.exists():
+        p.parent.mkdir(parents=True, exist_ok=True)
+        p.write_bytes(fetch(NE + p.name))
+        record(p, NE + p.name, "public domain (Natural Earth)", "https://www.naturalearthdata.com/about/terms-of-use/")
+    print("ne", layer)
+
+
 def nasa(folder):
     base = "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/master/3D%20Models/"
     url = base + urllib.parse.quote(folder) + "/" + urllib.parse.quote(folder) + ".glb"
@@ -371,6 +381,8 @@ if __name__ == "__main__":
         osm(sys.argv[2], float(sys.argv[3]), float(sys.argv[4]), float(sys.argv[5]))
     elif cmd == "borders":
         borders()
+    elif cmd == "ne":
+        ne(sys.argv[2])
     elif cmd == "dem":
         dem(sys.argv[2], float(sys.argv[3]), float(sys.argv[4]), float(sys.argv[5]), *(int(a) for a in sys.argv[6:7]))
     elif cmd == "naip":
