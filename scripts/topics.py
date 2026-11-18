@@ -37,7 +37,7 @@ VOLCANO = {"Q8072", "Q169358", "Q212057", "Q190869", "Q2120095"}
 PEAKS_SPARQL = """
 SELECT ?item ?itemLabel ?elev ?coord ?country ?countryLabel ?range ?rangeLabel ?links ?article WHERE {
   ?item wdt:P31 wd:%s; wikibase:sitelinks ?links.
-  FILTER(?links >= 22)
+  FILTER(?links >= 15)
   ?item wdt:P625 ?coord; wdt:P17 ?country; p:P2044/psn:P2044/wikibase:quantityAmount ?elev.
   OPTIONAL { ?item wdt:P4552 ?range. }
   ?article schema:about ?item; schema:isPartOf <https://en.wikipedia.org/>.
@@ -93,6 +93,11 @@ def suggest(q):
         return []
 
 
+GOOD = re.compile(r"\b(tallest|highest|biggest|largest|height|heights|size|compar\w*|summits?|peaks?|volcano(es)?|mountains?)\b")
+BAD = re.compile(r"\b(feet|ft|biking|bike|ski|skiing|hike|hiking|trail|map|music|song|movie|film|fire|game|drawing|"
+                 r"live|news|eruption|erupting|trip|tour|vlog|death|deaths|died|climb|climbing|weather|ranges?|video|view|km|meters?|simulator|tamil|hindi|urdu|telugu|bangla|increasing|measurement|"
+                 r"shorts|explained|facts|documentary|names?|list|how|why|what|when)\b")
+
 SMALL = {"a", "an", "and", "of", "in", "on", "the", "to", "vs", "vs.", "at", "by", "for", "from"}
 
 
@@ -121,7 +126,10 @@ def load_peaks():
         if r.get("rangeLabel") and not re.match(r"^Q\d+$", r["rangeLabel"]):
             p["ranges"].add(r["rangeLabel"])
         p["volcano"] |= r["cls"] in VOLCANO
-        p["h"] = max(p["h"], round(float(r["elev"]), 2))
+        v = round(float(r["elev"]), 2)
+        prec = lambda x: len(f"{x:g}".split(".")[1]) if "." in f"{x:g}" else -len(f"{x:g}") + len(f"{x:g}".rstrip("0"))
+        if prec(v) > prec(p["h"]) or (prec(v) == prec(p["h"]) and v > p["h"]):
+            p["h"] = v
     return list(seen.values())
 
 
@@ -177,7 +185,7 @@ def titles_for(seeds, keys, steps):
     keys = {k.lower() for k in keys} | {top["name"].lower()}
     for q in list(seeds) + [f"{top['name'].title()} height"]:
         for s in suggest(q):
-            if any(k in s.lower() for k in keys) and len(s) <= 40 and s not in sugg:
+            if any(k in s.lower() for k in keys) and len(s) <= 40 and s not in sugg and GOOD.search(s.lower())                     and not BAD.search(s.lower()):
                 sugg.append(s)
                 if q not in used:
                     used.append(q)
@@ -257,6 +265,36 @@ def peak_topics(peaks, verified, taken_ids, taken_sets, need):
     return added
 
 
+def search_peak(name):
+    """Wikidata search by name: items with an elevation and coordinates (for summits the class query missed)."""
+    url = ("https://www.wikidata.org/w/api.php?action=wbsearchentities&format=json&language=en&limit=5&search="
+           + urllib.parse.quote(name))
+    ids = [x["id"] for x in json.loads(get(url))["search"]]
+    if not ids:
+        return []
+    ents = json.loads(get("https://www.wikidata.org/w/api.php?action=wbgetentities&format=json&props=claims|labels|sitelinks"
+                          "&ids=" + "|".join(ids)))["entities"]
+    out = []
+    for q, e in ents.items():
+        cl = e.get("claims", {})
+        try:
+            el = [c for c in cl["P2044"] if c["rank"] != "deprecated"]
+            best = [c for c in el if c["rank"] == "preferred"] or el
+            amt = best[0]["mainsnak"]["datavalue"]["value"]
+            h = float(amt["amount"]) * (0.3048 if amt["unit"].endswith("Q3710") else 1.0)
+            co = cl["P625"][0]["mainsnak"]["datavalue"]["value"]
+            art = e.get("sitelinks", {}).get("enwiki", {}).get("title")
+        except (KeyError, IndexError):
+            continue
+        if not art:
+            continue
+        out.append({"qid": q, "name": e["labels"].get("en", {}).get("value", name), "h": round(h, 2),
+                    "lat": co["latitude"], "lon": co["longitude"], "links": len(e.get("sitelinks", {})),
+                    "countries": set(), "ranges": set(), "volcano": False,
+                    "article": "https://en.wikipedia.org/wiki/" + art.replace(" ", "_")})
+    return out
+
+
 def resolve_named(tp, peaks, verified):
     """Approved topics written as names ("Fuji 3,776 m"): matched to Wikidata summits by name and height."""
     sp = []
@@ -267,6 +305,8 @@ def resolve_named(tp, peaks, verified):
         name, h = m.group(1).strip().lower(), float(m.group(2).replace(",", ""))
         c = [p for p in peaks if abs(p["h"] - h) / h <= 0.03 and
              (name in p["name"].lower() or p["name"].lower().replace("mount ", "") in name)]
+        if not c:
+            c = [p for p in search_peak(m.group(1).strip()) if abs(p["h"] - h) / h <= 0.03]
         if not c:
             print("  not found:", label)
             return None
@@ -343,9 +383,8 @@ def main():
     need_ready = max(0, MIN_READY - len(ready))
     need_total = max(0, MIN_PLANNED - len(planned))
     new = peak_topics(peaks, verified, taken_ids, taken_sets, max(need_ready, need_total))
-    left = need_total - len(new)
-    if left > 0:
-        new += area_topics(taken_ids, left)
+    # area topics are not generated automatically: Wikidata areas proved unreliable (Madura 40,471 km², Cyprus listed
+    # among UK islands); area ladders come from Natural Earth when the area-map engine is built
     topics += new
     planned = [t for t in topics if t["status"] == "planned"]
     ready = [t for t in planned if t.get("engine") == "peaks" and t.get("spec")]
