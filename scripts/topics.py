@@ -45,7 +45,7 @@ CONTINENTS = {"Africa": "Africa", "Asia": "Asia", "Europe": "Europe", "North Ame
 PEAKS_SPARQL = """
 SELECT ?item ?itemLabel ?elev ?coord ?country ?countryLabel ?range ?rangeLabel ?links ?article WHERE {
   ?item wdt:P31 wd:%s; wikibase:sitelinks ?links.
-  FILTER(?links >= 10)
+  FILTER(?links >= 8)
   ?item wdt:P625 ?coord; wdt:P17 ?country; p:P2044/psn:P2044/wikibase:quantityAmount ?elev.
   OPTIONAL { ?item wdt:P4552 ?range. }
   ?article schema:about ?item; schema:isPartOf <https://en.wikipedia.org/>.
