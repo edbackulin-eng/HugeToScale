@@ -4,10 +4,13 @@
   {
    "slug": "crater-manhattan",
    "short": "crater_manhattan",
-   "status": "ready",
+   "status": "uploaded",
    "note": "trial render 17.11 (runner10) goes into the draft release by hand",
    "release": "ep-crater-manhattan",
-   "rendered": "2026-11-17"
+   "rendered": "2026-11-17",
+   "video_id": "5tiUd32il0I",
+   "publish_at": "2026-11-19T17:00:00Z",
+   "title": "Meteor Crater Size Comparison: a 1.2 km Hole in Manhattan"
   },
   {
    "slug": "ladder-heights",
