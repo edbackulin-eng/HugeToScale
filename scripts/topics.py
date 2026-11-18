@@ -218,6 +218,10 @@ def peak_topics(peaks, verified, taken_ids, taken_sets, need):
     by = {}
     for p in peaks:
         for c in p["countries"]:
+            # a low summit listed for two countries (Korvatunturi: Finland, also listed for Russia) is not shown as
+            # "a mountain of" either; high border summits (Everest, Mont Blanc, Kanchenjunga) stay
+            if len(p["countries"]) > 1 and p["h"] < 3000:
+                continue
             by.setdefault(("country", c), []).append(p)
             if p["volcano"]:
                 by.setdefault(("volcano", c), []).append(p)
