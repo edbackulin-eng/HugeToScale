@@ -38,10 +38,14 @@ MAX_SHARED = 2            # a new topic shares at most 2 objects with any earlie
 RATIO = 1.18              # each step at least 18 % taller than the one before
 VOLCANO = {"Q8072", "Q169358", "Q212057", "Q190869", "Q2120095"}
 
+CONTINENTS = {"Africa": "Africa", "Asia": "Asia", "Europe": "Europe", "North America": "North America",
+              "South America": "South America", "Oceania": "Oceania", "Insular Oceania": "Oceania",
+              "Australian continent": "Oceania", "Australia": "Oceania", "Antarctica": "Antarctica"}
+
 PEAKS_SPARQL = """
 SELECT ?item ?itemLabel ?elev ?coord ?country ?countryLabel ?range ?rangeLabel ?links ?article WHERE {
   ?item wdt:P31 wd:%s; wikibase:sitelinks ?links.
-  FILTER(?links >= 12)
+  FILTER(?links >= 10)
   ?item wdt:P625 ?coord; wdt:P17 ?country; p:P2044/psn:P2044/wikibase:quantityAmount ?elev.
   OPTIONAL { ?item wdt:P4552 ?range. }
   ?article schema:about ?item; schema:isPartOf <https://en.wikipedia.org/>.
@@ -131,6 +135,16 @@ def load_peaks():
         prec = lambda x: len(f"{x:g}".split(".")[1]) if "." in f"{x:g}" else -len(f"{x:g}") + len(f"{x:g}".rstrip("0"))
         if prec(v) > prec(p["h"]) or (prec(v) == prec(p["h"]) and v > p["h"]):
             p["h"] = v
+    # continent of each summit: from its country when that country lies on one continent only
+    cont = {}
+    for r in sparql("""SELECT ?cLabel ?kLabel WHERE { ?c wdt:P31 wd:Q6256; wdt:P30 ?k.
+                       SERVICE wikibase:label { bd:serviceParam wikibase:language "en". } }"""):
+        k = CONTINENTS.get(r["kLabel"])
+        if k:
+            cont.setdefault(r["cLabel"], set()).add(k)
+    for p in seen.values():
+        ks = set().union(*(cont.get(c, {None, "x"}) for c in p["countries"])) if p["countries"] else set()
+        p["continent"] = next(iter(ks)) if len(ks) == 1 else None
     for p in seen.values():
         # Crimea is Ukraine (Wikidata lists Russia too for occupied Crimea): never "mountains of Russia"
         if "Ukraine" in p["countries"] or (44.3 <= p["lat"] <= 46.3 and 32.4 <= p["lon"] <= 36.7):
@@ -233,6 +247,10 @@ def peak_topics(peaks, verified, taken_ids, taken_sets, need, kinds=("country", 
                 by.setdefault(("volcano", c), []).append(p)
         for r in p["ranges"]:
             by.setdefault(("range", r), []).append(p)
+        if p.get("continent"):                      # "volcanoes of Africa", "tallest mountains in Europe"
+            by.setdefault(("country", p["continent"]), []).append(p)
+            if p["volcano"]:
+                by.setdefault(("volcano", p["continent"]), []).append(p)
     for (kind, g), ps in by.items():
         if len(ps) >= 5 and kind in kinds:
             groups.append((sum(p["links"] for p in ps), kind, g, ps))
