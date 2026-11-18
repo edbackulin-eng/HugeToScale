@@ -7,8 +7,9 @@ a topic never repeats. New topics go into data/ladder-topics.json (the owner can
 
 Engines (what can be made automatically today):
   peaks     - real summits (Copernicus DEM relief) - READY: such a topic gets a "spec" and goes into production.
-  area-map  - a place dropped onto a country at true size (US states, islands, lakes, deserts) - READY since 19.11
-              (scripts/area_topics.py, shorts/areamap.py).
+  (owner 19.11: every Short is a 3D ladder; area maps and rivers were dropped. Next engines: depth, then planets.)
+  Ladder types (no more than 2 of one type in a row): mountains, volcanoes; later canyons/craters, planets/moons,
+  asteroids, tall structures.
 A topic of a non-ready engine waits in the file ("engine" names what it needs) and is never scheduled.
 
 Two sources for every height: Wikidata (best-rank elevation, normalised to metres; the English Wikipedia article is
@@ -31,8 +32,8 @@ TOPICS = ROOT / "data" / "ladder-topics.json"
 VERIFIED = ROOT / "data" / "peaks-verified.json"
 UA = {"User-Agent": "HugeToScale-topics/1.0 (https://github.com/edbackulin-eng/HugeToScale)"}
 MIN_PLANNED = 32          # owner: 30+ topics ahead (margin 2)
-MIN_READY = 20            # of them renderable today (20 days of Shorts)
-MIN_AREA = 12             # of them area-map topics (owner 19.11: no more than 2 mountain ladders in a row)
+MIN_READY = 32            # owner 19.11: 30+ renderable 3D ladders ahead (margin 2)
+MIN_VOLCANO = 11          # a third of them volcano ladders: no more than 2 ladders of one type in a row
 MAX_SHARED = 2            # a new topic shares at most 2 objects with any earlier topic
 RATIO = 1.18              # each step at least 18 % taller than the one before
 VOLCANO = {"Q8072", "Q169358", "Q212057", "Q190869", "Q2120095"}
@@ -213,7 +214,12 @@ def seeds_for(group, kind):
             "range": [f"{group} highest peaks", f"{group} mountains", f"tallest mountains in the {group}"]}[kind]
 
 
-def peak_topics(peaks, verified, taken_ids, taken_sets, need):
+def type_of(tp):
+    """Ladder type for the "no more than 2 of one type in a row" rule (owner 19.11)."""
+    return tp.get("type") or ("volcanoes" if tp["id"].startswith("volcano") else "mountains")
+
+
+def peak_topics(peaks, verified, taken_ids, taken_sets, need, kinds=("country", "volcano", "range")):
     groups = []
     by = {}
     for p in peaks:
@@ -228,7 +234,7 @@ def peak_topics(peaks, verified, taken_ids, taken_sets, need):
         for r in p["ranges"]:
             by.setdefault(("range", r), []).append(p)
     for (kind, g), ps in by.items():
-        if len(ps) >= 5:
+        if len(ps) >= 5 and kind in kinds:
             groups.append((sum(p["links"] for p in ps), kind, g, ps))
     added = []
     for _, kind, g, ps in sorted(groups, key=lambda x: -x[0]):
@@ -345,34 +351,35 @@ def main():
                                                            "by side at true scale (Copernicus DEM elevation data): "
                                                            + ", ".join(s["name"].title() for s in sp) + ".")}
                 print("resolved", tp["id"], tp["spec"]["titles"][:1])
-    planned = [t for t in topics if t["status"] == "planned"]
-    ready = [t for t in planned if t.get("engine") in ("peaks", "area-map") and t.get("spec")]
+    def queue():
+        planned = [t for t in topics if t["status"] == "planned"]
+        return planned, [t for t in planned if t.get("engine") == "peaks" and t.get("spec")]
+    planned, ready = queue()
     taken_ids = {t["id"] for t in topics}
     taken_sets = [{s["qid"] for s in t["spec"].get("steps", []) if "qid" in s} for t in topics if t.get("spec")]
-    need_ready = max(0, MIN_READY - len(ready))
-    need_total = max(0, MIN_PLANNED - len(planned))
-    # area-map topics (owner 19.11): alternate with the mountain ladders, so about half of the renderable queue
-    import area_topics
-    area_ready = [t for t in ready if t.get("engine") == "area-map"]
-    new_area = area_topics.area_topics(topics, max(0, MIN_AREA - len(area_ready)), sparql, suggest, title_case)
-    topics += new_area
-    planned = [t for t in topics if t["status"] == "planned"]
-    ready = [t for t in planned if t.get("engine") in ("peaks", "area-map") and t.get("spec")]
-    need_ready = max(0, MIN_READY - len(ready))
-    need_total = max(0, MIN_PLANNED - len(planned))
-    new = peak_topics(peaks, verified, taken_ids | {t["id"] for t in new_area}, taken_sets, max(need_ready, need_total))
+    # owner 19.11: only 3D ladders (area maps removed); volcano ladders first, so types can alternate
+    need_v = max(0, MIN_VOLCANO - sum(type_of(t) == "volcanoes" for t in ready))
+    new = peak_topics(peaks, verified, taken_ids, taken_sets, need_v, kinds=("volcano",))
     topics += new
-    new += new_area
-    planned = [t for t in topics if t["status"] == "planned"]
-    ready = [t for t in planned if t.get("engine") in ("peaks", "area-map") and t.get("spec")]
+    planned, ready = queue()
+    need = max(MIN_READY - len(ready), MIN_PLANNED - len(planned), 0)
+    more = peak_topics(peaks, verified, taken_ids, taken_sets, need, kinds=("country", "range"))
+    topics += more
+    new += more
+    for t in topics:
+        if t.get("engine") == "peaks":
+            t["type"] = type_of(t)
+    planned, ready = queue()
     doc["queue"] = {"planned": len(planned), "ready_for_production": len(ready), "updated": str(date.today()),
-                    "rule": f">= {MIN_PLANNED} planned, >= {MIN_READY} renderable; a topic is used once"}
+                    "volcanoes": sum(type_of(t) == "volcanoes" for t in ready),
+                    "rule": f">= {MIN_PLANNED} planned, >= {MIN_READY} renderable 3D ladders, >= {MIN_VOLCANO} of them "
+                            "volcanoes; a topic is used once"}
     print(f"queue: {len(planned)} planned, {len(ready)} renderable, {len(new)} new")
     if not dry:
         TOPICS.write_text(json.dumps(doc, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
         VERIFIED.write_text(json.dumps(verified, ensure_ascii=False, indent=1, sort_keys=True) + "\n", encoding="utf-8")
-    if len(planned) < 30:
-        sys.exit(f"queue below 30: {len(planned)}")
+    if len(ready) < 30:
+        sys.exit(f"renderable queue below 30: {len(ready)}")
 
 
 if __name__ == "__main__":

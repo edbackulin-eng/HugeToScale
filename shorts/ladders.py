@@ -86,54 +86,13 @@ def episode_music(short):
     return None
 
 
-def km2_to_sqmi(k):
-    return round(k / 2.589988110336)
-
-
-def fit(text, size, width=980):
-    return min(size, int(width / (0.47 * max(1, len(text)))))
-
-
-def area_short(tp):
-    """'Texas on France' format for an area-map topic: the base country, the place dropped onto it, both numbers,
-    the difference in %, the final frame with both areas (official figures, sq mi converted)."""
-    from plan import cap, WHITE, YELLOW
-    sp = tp["spec"]
-    o, b = sp["over"], sp["base"]
-    O, B = o["name"].upper(), b["name"].upper()
-    pct = round(100 * (o["km2"] / b["km2"] - 1))
-    verdict = (f"{pct}% BIGGER" if pct >= 5 else f"{-pct}% SMALLER" if pct <= -5 else "ALMOST THE SAME")
-    caps = [cap(0.15, 1.2, 250, (B, fit(B, 96), WHITE)),
-            cap(2.0, 6.6, 250, (O, fit(O, 120), YELLOW), (f"{o['km2']:,} km²", 96, WHITE)),
-            cap(7.0, 11.6, 250, (B, fit(B, 110), WHITE), (f"{b['km2']:,} km²", 96, YELLOW)),
-            cap(12.0, 17.2, 250, (f"{O} IS", fit(O + " IS", 90), WHITE), (verdict, fit(verdict, 130), YELLOW)),
-            cap(18.0, 99, 250, (f"{O}  {o['km2']:,} km²", fit(O + "  000,000 km²", 78), YELLOW),
-                (f"{km2_to_sqmi(o['km2']):,} sq mi", 58, WHITE)),
-            cap(18.0, 99, 1340, (f"{B}  {b['km2']:,} km²", fit(B + "  000,000 km²", 70), WHITE),
-                (f"{km2_to_sqmi(b['km2']):,} sq mi", 54, WHITE))]
-    return {"renderer": "map2d", "seconds": 22.0, "hold": 4.0, "appear": 1.2, "area": sp,
-            "data": [["borders"], ["ne", "ne_10m_lakes"], ["ne", "ne_10m_geography_regions_polys"]],
-            "captions": caps, "queries": sp["queries"], "titles": sp["titles"], "hashtags": sp["hashtags"],
-            "intro": sp["intro"],
-            "facts": [[f"{o['name']} area {o['km2']:,} km²", o["sources"][0], "outline: " + o["sources"][1]],
-                      [f"{b['name']} area {b['km2']:,} km²", b["sources"][0], "outline: " + b["sources"][1]],
-                      [f"{o['km2']:,} / {b['km2']:,} = {o['km2'] / b['km2']:.2f}", None, "computed"],
-                      ["sq mi converted from km² (1 sq mi = 2.589988 km²)", None, "computed"]],
-            "topic": tp["id"]}
-
-
 def short_name(tp):
-    return {"peaks": "ladder_", "area-map": "map_"}[tp["engine"]] + tp["id"].replace("-", "_")
+    return "ladder_" + tp["id"].replace("-", "_")
 
 
 def register(shorts, ladders, ladder_short):
     for tp in load_topics():
         spec = tp.get("spec")
-        if spec and tp.get("engine") == "area-map":
-            name = short_name(tp)
-            if name not in shorts:
-                shorts[name] = {**area_short(tp), "music": episode_music(name) or {"id": "auto", "start": "auto"}}
-            continue
         if not spec or tp.get("engine") != "peaks":
             continue
         name = "ladder_" + tp["id"].replace("-", "_")

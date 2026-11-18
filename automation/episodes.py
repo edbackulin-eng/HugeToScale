@@ -51,30 +51,41 @@ def assign_music(st, e):
     MUSIC.write_text(json.dumps(reg, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
 
 
-MAX_PEAKS_IN_A_ROW = 2                  # owner 19.11: no more than 2 mountain ladders in a row, alternate with maps
+MAX_SAME_TYPE = 2       # owner 19.11: every Short is a 3D ladder; no more than 2 ladders of one type in a row
+ENGINES = ("peaks",)    # engines that render today (next: depth, then planets and moons)
+TRIAL_TYPES = {"crater_manhattan": "craters", "saturnv_pyramid": "structures", "ladder_heights": "mixed",
+               "texas_france": "map"}
 
 
-def kind_of(e):
-    return "peaks" if e["short"].startswith("ladder_") else "area-map" if e["short"].startswith("map_") else "other"
+def type_of(e, topics):
+    if e["short"] in TRIAL_TYPES:
+        return TRIAL_TYPES[e["short"]]
+    tp = topics.get(e.get("topic"), {})
+    return tp.get("type") or ("volcanoes" if str(e.get("topic", "")).startswith("volcano") else "mountains")
 
 
-def wanted_engines(st):
-    """Alternate: after a mountain ladder a map comes next if there is one; never a 3rd ladder in a row."""
-    last = [kind_of(e) for e in st["episodes"]][-MAX_PEAKS_IN_A_ROW:]
-    if last and last[-1] == "peaks":
-        return ["area-map"] if last.count("peaks") >= MAX_PEAKS_IN_A_ROW else ["area-map", "peaks"]
-    return ["peaks", "area-map"]
+def blocked_type(st, topics):
+    """The type that may not come next (it already ran MAX_SAME_TYPE times in a row), and the last type."""
+    seq = [type_of(e, topics) for e in st["episodes"] if e["status"] != "withdrawn"]
+    last = seq[-MAX_SAME_TYPE:]
+    blocked = last[0] if len(last) == MAX_SAME_TYPE and len(set(last)) == 1 else None
+    return blocked, (seq[-1] if seq else None)
 
 
 def next_topic(st):
     doc = json.loads(TOPICS.read_text(encoding="utf-8"))
-    for engine in wanted_engines(st):
-        for tp in doc["topics"]:
-            if tp["status"] == "planned" and tp.get("engine") == engine and tp.get("spec"):
-                tp["status"] = "scheduled"
-                TOPICS.write_text(json.dumps(doc, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
-                return tp
-    return None
+    topics = {t["id"]: t for t in doc["topics"]}
+    blocked, last = blocked_type(st, topics)
+    cands = [t for t in doc["topics"] if t["status"] == "planned" and t.get("engine") in ENGINES and t.get("spec")
+             and t.get("type") != blocked]
+    # alternate when possible: a type other than the last one first, file order otherwise
+    cands.sort(key=lambda t: t.get("type") == last)
+    if not cands:
+        return None
+    tp = cands[0]
+    tp["status"] = "scheduled"
+    TOPICS.write_text(json.dumps(doc, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    return tp
 
 
 def cmd_next():
@@ -91,7 +102,7 @@ def cmd_next():
         if not tp:
             from core import ytguard
             ytguard.notify("Huge To Scale: no renderable topic left", "The topic queue has no planned topic that may "
-                           f"come next ({' or '.join(wanted_engines(st))}). topics.yml refills it weekly; run it by hand.")
+                           f"come next (no 3rd ladder of one type in a row). topics.yml refills it weekly; run it by hand.")
             return ""
         import ladders
         short = ladders.short_name(tp)

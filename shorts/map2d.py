@@ -164,12 +164,7 @@ def anim(outdir, a, b, step=1):
 
 
 if __name__ == "__main__" and sys.argv[1] == "anim":
-    short = sys.argv[6] if len(sys.argv) > 6 else "texas_france"
-    if short == "texas_france":
-        anim(sys.argv[2], int(sys.argv[3]), int(sys.argv[4]), int(sys.argv[5]) if len(sys.argv) > 5 else 1)
-    else:                                   # area-map topics (shorts/areamap.py)
-        import areamap
-        areamap.anim(short, sys.argv[2], int(sys.argv[3]), int(sys.argv[4]), int(sys.argv[5]) if len(sys.argv) > 5 else 1)
+    anim(sys.argv[2], int(sys.argv[3]), int(sys.argv[4]), int(sys.argv[5]) if len(sys.argv) > 5 else 1)
 elif __name__ == "__main__":
     name, out = sys.argv[1], Path(sys.argv[2])
     t = float(sys.argv[sys.argv.index("--t") + 1]) if "--t" in sys.argv else 1.0

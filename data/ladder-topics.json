@@ -1,5 +1,5 @@
 {
- "note": "Size-ladder topics (owner 17-18.11). Only things that render realistically, open data, two sources per number. A topic is used once (status planned -> scheduled). scripts/topics.py (topics.yml, weekly) keeps >= 30 planned, >= 20 of them renderable today (engine 'peaks' with a 'spec'). Topics of other engines wait until that engine is built.",
+ "note": "3D size ladders only (owner 19.11: area maps and rivers removed). Only things that render realistically, open data, two sources per number. A topic is used once (planned -> scheduled). scripts/topics.py (topics.yml, weekly) keeps >= 32 renderable ladders ahead, a third of them volcanoes; no more than 2 ladders of one type in a row. Topics of other engines (depth, planets) wait until that engine is built.",
  "topics": [
   {
    "id": "heights-saturnv-everest",
@@ -15,7 +15,8 @@
    ],
    "data": "own models + Copernicus DEM",
    "engine": "peaks",
-   "short": "ladder_heights"
+   "short": "ladder_heights",
+   "type": "mixed"
   },
   {
    "id": "volcanoes",
@@ -133,7 +134,8 @@
      "#scale"
     ],
     "intro": "5 real mountains, each taller than the last, side by side at true scale (Copernicus DEM elevation data): Mount Vesuvius, Mount St. Helens, Mount Fuji, Mount Kilimanjaro, Ojos Del Salado."
-   }
+   },
+   "type": "volcanoes"
   },
   {
    "id": "seven-summits",
@@ -279,7 +281,8 @@
      "#scale"
     ],
     "intro": "7 real mountains, each taller than the last, side by side at true scale (Copernicus DEM elevation data): Mount Kosciuszko, Mont Blanc, Mount Elbrus, Mount Kilimanjaro, Denali, Aconcagua, Mount Everest."
-   }
+   },
+   "type": "mountains"
   },
   {
    "id": "us-peaks",
@@ -399,7 +402,8 @@
      "#scale"
     ],
     "intro": "5 real mountains, each taller than the last, side by side at true scale (Copernicus DEM elevation data): Mount Washington, Mount Mitchell, Mount Rainier, Mount Whitney, Denali."
-   }
+   },
+   "type": "mountains"
   },
   {
    "id": "monuments",
@@ -518,7 +522,7 @@
   {
    "id": "islands-area",
    "kind": "area",
-   "status": "planned",
+   "status": "removed",
    "steps": [
     "Malta",
     "Cyprus",
@@ -529,12 +533,14 @@
     "Greenland"
    ],
    "data": "Natural Earth, equal-area projection (map format)",
-   "engine": "area-map"
+   "engine": "area-map",
+   "removed": "2026-11-18",
+   "why": "owner 19.11: every Short is a 3D ladder (maps and rivers dropped)"
   },
   {
    "id": "lakes-area",
    "kind": "area",
-   "status": "planned",
+   "status": "removed",
    "steps": [
     "Lake Geneva",
     "Lake Balaton",
@@ -545,12 +551,14 @@
     "Caspian Sea"
    ],
    "data": "Natural Earth / OSM, equal-area projection",
-   "engine": "area-map"
+   "engine": "area-map",
+   "removed": "2026-11-18",
+   "why": "owner 19.11: every Short is a 3D ladder (maps and rivers dropped)"
   },
   {
    "id": "deserts-area",
    "kind": "area",
-   "status": "planned",
+   "status": "removed",
    "steps": [
     "Death Valley",
     "Mojave",
@@ -559,12 +567,14 @@
     "Sahara"
    ],
    "data": "Natural Earth physical regions, equal-area projection",
-   "engine": "area-map"
+   "engine": "area-map",
+   "removed": "2026-11-18",
+   "why": "owner 19.11: every Short is a 3D ladder (maps and rivers dropped)"
   },
   {
    "id": "us-states-vs-countries",
    "kind": "area",
-   "status": "planned",
+   "status": "removed",
    "steps": [
     "Rhode Island",
     "Belgium",
@@ -574,12 +584,14 @@
     "Alaska"
    ],
    "data": "Natural Earth, US Census areas",
-   "engine": "area-map"
+   "engine": "area-map",
+   "removed": "2026-11-18",
+   "why": "owner 19.11: every Short is a 3D ladder (maps and rivers dropped)"
   },
   {
    "id": "rivers-length",
    "kind": "longer",
-   "status": "planned",
+   "status": "removed",
    "steps": [
     "Thames 346 km",
     "Rhine ~1,230 km",
@@ -588,29 +600,35 @@
     "Nile ~6,650 km"
    ],
    "data": "Natural Earth rivers, drawn over a map of Europe/US at true scale",
-   "engine": "length-map"
+   "engine": "length-map",
+   "removed": "2026-11-18",
+   "why": "owner 19.11: every Short is a 3D ladder (maps and rivers dropped)"
   },
   {
    "id": "olympus-mons-over-countries",
    "kind": "area",
-   "status": "planned",
+   "status": "removed",
    "steps": [
     "Olympus Mons footprint (~600 km) over France / Arizona",
     "height 21.9 km vs Everest"
    ],
    "data": "NASA MGS MOLA DEM (public domain), map format (wide object: not for a vertical height ladder)",
-   "engine": "area-map"
+   "engine": "area-map",
+   "removed": "2026-11-18",
+   "why": "owner 19.11: every Short is a 3D ladder (maps and rivers dropped)"
   },
   {
    "id": "valles-marineris-over-usa",
    "kind": "longer",
-   "status": "planned",
+   "status": "removed",
    "steps": [
     "Grand Canyon 446 km",
     "Valles Marineris ~4,000 km across the USA"
    ],
    "data": "NASA MOLA + USGS 3DEP, map format",
-   "engine": "length-map"
+   "engine": "length-map",
+   "removed": "2026-11-18",
+   "why": "owner 19.11: every Short is a 3D ladder (maps and rivers dropped)"
   },
   {
    "id": "peaks-people-s-republic-of-china",
@@ -725,7 +743,8 @@
      "#scale"
     ],
     "intro": "6 real mountains of People's Republic of China, each taller than the last, side by side at true scale (Copernicus DEM elevation data): Tai Mo Shan, Mount Tai, Mount Emei, Hüiten Peak, Khan Tengri, Mount Everest."
-   }
+   },
+   "type": "mountains"
   },
   {
    "id": "peaks-united-states",
@@ -840,7 +859,8 @@
      "#scale"
     ],
     "intro": "6 real mountains of United States, each taller than the last, side by side at true scale (Copernicus DEM elevation data): Mount Monadnock, Kīlauea, Mount Rushmore, Mount Hood, Mauna Kea, Mount Saint Elias."
-   }
+   },
+   "type": "mountains"
   },
   {
    "id": "peaks-chile",
@@ -942,7 +962,8 @@
      "#scale"
     ],
     "intro": "5 real mountains of Chile, each taller than the last, side by side at true scale (Copernicus DEM elevation data): Terevaka, Chaitén, Puyehue-Cordón Caulle, Llaima, Ojos Del Salado."
-   }
+   },
+   "type": "mountains"
   },
   {
    "id": "peaks-indonesia",
@@ -1059,7 +1080,8 @@
      "#scale"
     ],
     "intro": "6 real mountains of Indonesia, each taller than the last, side by side at true scale (Copernicus DEM elevation data): Mount Ruang, Mount Awu, Mount Batur, Mount Sinabung, Merapi, Puncak Jaya."
-   }
+   },
+   "type": "mountains"
   },
   {
    "id": "peaks-japan",
@@ -1176,7 +1198,8 @@
      "#scale"
     ],
     "intro": "6 real mountains of Japan, each taller than the last, side by side at true scale (Copernicus DEM elevation data): Mount Ikoma, Mount Hiei, Sakurajima, Mount Unzen, Mount Asama, Mount Fuji."
-   }
+   },
+   "type": "mountains"
   },
   {
    "id": "peaks-austria",
@@ -1292,7 +1315,8 @@
      "#scale"
     ],
     "intro": "6 real mountains of Austria, each taller than the last, side by side at true scale (Copernicus DEM elevation data): Manhartsberg, Geschriebenstein, Plechý / Plöckenstein, Stol / Hochstuhl, Zugspitze, Wildspitze."
-   }
+   },
+   "type": "mountains"
   },
   {
    "id": "volcanoes-russia",
@@ -1408,7 +1432,8 @@
      "#scale"
     ],
     "intro": "6 real volcanoes of Russia, each taller than the last, side by side at true scale (Copernicus DEM elevation data): Golovnin, Broutona, Atsonupuri, Krasheninnikov, Avachinsky, Mount Kazbek."
-   }
+   },
+   "type": "volcanoes"
   },
   {
    "id": "peaks-turkey",
@@ -1509,7 +1534,8 @@
      "#scale"
     ],
     "intro": "5 real mountains of Turkey, each taller than the last, side by side at true scale (Copernicus DEM elevation data): Mahya Daği, Mount Sipylus, Mount Judi, Uludağ, Mount Cilo."
-   }
+   },
+   "type": "mountains"
   },
   {
    "id": "peaks-germany",
@@ -1612,7 +1638,8 @@
      "#scale"
     ],
     "intro": "5 real mountains of Germany, each taller than the last, side by side at true scale (Copernicus DEM elevation data): Kaiserstuhl, Vogelsberg, Brocken, Feldberg, Zugspitze."
-   }
+   },
+   "type": "mountains"
   },
   {
    "id": "range-scandinavian-mountains",
@@ -1711,7 +1738,8 @@
      "#scale"
     ],
     "intro": "5 real peaks of the Scandinavian Mountains, each taller than the last, side by side at true scale (Copernicus DEM elevation data): Torghatten, Aakenustunturi, Saana, Åreskutan, Snøhetta."
-   }
+   },
+   "type": "mountains"
   },
   {
    "id": "peaks-india",
@@ -1815,7 +1843,8 @@
      "#scale"
     ],
     "intro": "5 real mountains of India, each taller than the last, side by side at true scale (Copernicus DEM elevation data): Agastya Mala, Doddabetta, Sandakpu, Trisul, Kanchenjunga."
-   }
+   },
+   "type": "mountains"
   },
   {
    "id": "peaks-norway",
@@ -1931,7 +1960,8 @@
      "#scale"
     ],
     "intro": "6 real mountains of Norway, each taller than the last, side by side at true scale (Copernicus DEM elevation data): Gråkallen, Bjørnfjell, Operafjellet, Tromsdalstinden, Newtontoppen, Galdhøpiggen."
-   }
+   },
+   "type": "mountains"
   },
   {
    "id": "peaks-philippines",
@@ -2034,13 +2064,14 @@
      "#scale"
     ],
     "intro": "5 real mountains of Philippines, each taller than the last, side by side at true scale (Copernicus DEM elevation data): Camiguin De Babuyanes, Mount Arayat, Pinatubo, Mayon Volcano, Mount Apo."
-   }
+   },
+   "type": "mountains"
   },
   {
    "id": "area-lake-baikal-vs-switzerland",
    "kind": "area",
    "engine": "area-map",
-   "status": "planned",
+   "status": "removed",
    "source": "generated",
    "added": "2026-11-18",
    "category": "lake",
@@ -2084,13 +2115,15 @@
      "#geography"
     ],
     "intro": "Lake Baikal dropped onto Switzerland at true size: both outlines on an equal-area projection (Natural Earth), both areas official figures."
-   }
+   },
+   "removed": "2026-11-18",
+   "why": "owner 19.11: every Short is a 3D ladder (maps and rivers dropped)"
   },
   {
    "id": "area-lake-victoria-vs-austria",
    "kind": "area",
    "engine": "area-map",
-   "status": "planned",
+   "status": "removed",
    "source": "generated",
    "added": "2026-11-18",
    "category": "lake",
@@ -2134,13 +2167,15 @@
      "#geography"
     ],
     "intro": "Lake Victoria dropped onto Austria at true size: both outlines on an equal-area projection (Natural Earth), both areas official figures."
-   }
+   },
+   "removed": "2026-11-18",
+   "why": "owner 19.11: every Short is a 3D ladder (maps and rivers dropped)"
   },
   {
    "id": "area-ohio-vs-greece",
    "kind": "area",
    "engine": "area-map",
-   "status": "planned",
+   "status": "removed",
    "source": "generated",
    "added": "2026-11-18",
    "category": "state",
@@ -2184,13 +2219,15 @@
      "#geography"
     ],
     "intro": "Ohio dropped onto Greece at true size: both outlines on an equal-area projection (Natural Earth), both areas official figures."
-   }
+   },
+   "removed": "2026-11-18",
+   "why": "owner 19.11: every Short is a 3D ladder (maps and rivers dropped)"
   },
   {
    "id": "area-pennsylvania-vs-greece",
    "kind": "area",
    "engine": "area-map",
-   "status": "planned",
+   "status": "removed",
    "source": "generated",
    "added": "2026-11-18",
    "category": "state",
@@ -2234,13 +2271,15 @@
      "#geography"
     ],
     "intro": "Pennsylvania dropped onto Greece at true size: both outlines on an equal-area projection (Natural Earth), both areas official figures."
-   }
+   },
+   "removed": "2026-11-18",
+   "why": "owner 19.11: every Short is a 3D ladder (maps and rivers dropped)"
   },
   {
    "id": "area-nevada-vs-japan",
    "kind": "area",
    "engine": "area-map",
-   "status": "planned",
+   "status": "removed",
    "source": "generated",
    "added": "2026-11-18",
    "category": "state",
@@ -2284,13 +2323,15 @@
      "#geography"
     ],
     "intro": "Nevada dropped onto Japan at true size: both outlines on an equal-area projection (Natural Earth), both areas official figures."
-   }
+   },
+   "removed": "2026-11-18",
+   "why": "owner 19.11: every Short is a 3D ladder (maps and rivers dropped)"
   },
   {
    "id": "area-borneo-vs-myanmar",
    "kind": "area",
    "engine": "area-map",
-   "status": "planned",
+   "status": "removed",
    "source": "generated",
    "added": "2026-11-18",
    "category": "island",
@@ -2334,13 +2375,15 @@
      "#geography"
     ],
     "intro": "Borneo dropped onto Myanmar at true size: both outlines on an equal-area projection (Natural Earth), both areas official figures."
-   }
+   },
+   "removed": "2026-11-18",
+   "why": "owner 19.11: every Short is a 3D ladder (maps and rivers dropped)"
   },
   {
    "id": "area-lake-superior-vs-bulgaria",
    "kind": "area",
    "engine": "area-map",
-   "status": "planned",
+   "status": "removed",
    "source": "generated",
    "added": "2026-11-18",
    "category": "lake",
@@ -2386,13 +2429,15 @@
      "#geography"
     ],
     "intro": "Lake Superior dropped onto Bulgaria at true size: both outlines on an equal-area projection (Natural Earth), both areas official figures."
-   }
+   },
+   "removed": "2026-11-18",
+   "why": "owner 19.11: every Short is a 3D ladder (maps and rivers dropped)"
   },
   {
    "id": "area-lake-michigan-vs-switzerland",
    "kind": "area",
    "engine": "area-map",
-   "status": "planned",
+   "status": "removed",
    "source": "generated",
    "added": "2026-11-18",
    "category": "lake",
@@ -2436,13 +2481,15 @@
      "#geography"
     ],
     "intro": "Lake Michigan dropped onto Switzerland at true size: both outlines on an equal-area projection (Natural Earth), both areas official figures."
-   }
+   },
+   "removed": "2026-11-18",
+   "why": "owner 19.11: every Short is a 3D ladder (maps and rivers dropped)"
   },
   {
    "id": "area-lake-malawi-vs-netherlands",
    "kind": "area",
    "engine": "area-map",
-   "status": "planned",
+   "status": "removed",
    "source": "generated",
    "added": "2026-11-18",
    "category": "lake",
@@ -2486,13 +2533,15 @@
      "#geography"
     ],
     "intro": "Lake Malawi dropped onto Netherlands at true size: both outlines on an equal-area projection (Natural Earth), both areas official figures."
-   }
+   },
+   "removed": "2026-11-18",
+   "why": "owner 19.11: every Short is a 3D ladder (maps and rivers dropped)"
   },
   {
    "id": "area-oregon-vs-italy",
    "kind": "area",
    "engine": "area-map",
-   "status": "planned",
+   "status": "removed",
    "source": "generated",
    "added": "2026-11-18",
    "category": "state",
@@ -2536,13 +2585,15 @@
      "#geography"
     ],
     "intro": "Oregon dropped onto Italy at true size: both outlines on an equal-area projection (Natural Earth), both areas official figures."
-   }
+   },
+   "removed": "2026-11-18",
+   "why": "owner 19.11: every Short is a 3D ladder (maps and rivers dropped)"
   },
   {
    "id": "area-lake-erie-vs-albania",
    "kind": "area",
    "engine": "area-map",
-   "status": "planned",
+   "status": "removed",
    "source": "generated",
    "added": "2026-11-18",
    "category": "lake",
@@ -2586,13 +2637,15 @@
      "#geography"
     ],
     "intro": "Lake Erie dropped onto Albania at true size: both outlines on an equal-area projection (Natural Earth), both areas official figures."
-   }
+   },
+   "removed": "2026-11-18",
+   "why": "owner 19.11: every Short is a 3D ladder (maps and rivers dropped)"
   },
   {
    "id": "area-taiwan-island-vs-albania",
    "kind": "area",
    "engine": "area-map",
-   "status": "planned",
+   "status": "removed",
    "source": "generated",
    "added": "2026-11-18",
    "category": "island",
@@ -2636,13 +2689,15 @@
      "#geography"
     ],
     "intro": "Taiwan Island dropped onto Albania at true size: both outlines on an equal-area projection (Natural Earth), both areas official figures."
-   }
+   },
+   "removed": "2026-11-18",
+   "why": "owner 19.11: every Short is a 3D ladder (maps and rivers dropped)"
   },
   {
    "id": "area-wisconsin-vs-united-kingdom",
    "kind": "area",
    "engine": "area-map",
-   "status": "planned",
+   "status": "removed",
    "source": "generated",
    "added": "2026-11-18",
    "category": "state",
@@ -2686,13 +2741,15 @@
      "#geography"
     ],
     "intro": "Wisconsin dropped onto United Kingdom at true size: both outlines on an equal-area projection (Natural Earth), both areas official figures."
-   }
+   },
+   "removed": "2026-11-18",
+   "why": "owner 19.11: every Short is a 3D ladder (maps and rivers dropped)"
   },
   {
    "id": "area-kentucky-vs-austria",
    "kind": "area",
    "engine": "area-map",
-   "status": "planned",
+   "status": "removed",
    "source": "generated",
    "added": "2026-11-18",
    "category": "state",
@@ -2736,7 +2793,9 @@
      "#geography"
     ],
     "intro": "Kentucky dropped onto Austria at true size: both outlines on an equal-area projection (Natural Earth), both areas official figures."
-   }
+   },
+   "removed": "2026-11-18",
+   "why": "owner 19.11: every Short is a 3D ladder (maps and rivers dropped)"
   }
  ],
  "queue": {
