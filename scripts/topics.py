@@ -236,7 +236,7 @@ def type_of(tp):
 BOXES = {"Europe": (-32, 34, 70, 82), "Africa": (-26, -36, 58, 38), "Asia": (25, -11, 180, 82),
          "North America": (-170, 7, -50, 84), "South America": (-92, -57, -32, 13), "Oceania": (110, -50, 180, 0),
          "Antarctica": (-180, -90, 180, -60)}
-FAR_KM = 4500             # a summit this far from the rest of its country is an overseas territory (South Georgia)
+FAR_KM = 6000             # farther from the rest of its country = an overseas territory (South Georgia, Reunion); Alaska stays
 
 
 def km(a, b):

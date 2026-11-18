@@ -750,7 +750,7 @@
    "id": "peaks-united-states",
    "kind": "higher",
    "engine": "peaks",
-   "status": "planned",
+   "status": "removed",
    "source": "generated",
    "added": "2026-11-18",
    "steps": [
@@ -860,7 +860,9 @@
     ],
     "intro": "6 real mountains of United States, each taller than the last, side by side at true scale (Copernicus DEM elevation data): Mount Monadnock, Kīlauea, Mount Rushmore, Mount Hood, Mauna Kea, Mount Saint Elias."
    },
-   "type": "mountains"
+   "type": "mountains",
+   "removed": "2026-11-18",
+   "why": "same theme as the approved us-peaks; its top (Mount Saint Elias) is not the tallest in the US (Denali)"
   },
   {
    "id": "peaks-chile",
