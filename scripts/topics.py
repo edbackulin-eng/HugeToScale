@@ -37,7 +37,7 @@ VOLCANO = {"Q8072", "Q169358", "Q212057", "Q190869", "Q2120095"}
 PEAKS_SPARQL = """
 SELECT ?item ?itemLabel ?elev ?coord ?country ?countryLabel ?range ?rangeLabel ?links ?article WHERE {
   ?item wdt:P31 wd:%s; wikibase:sitelinks ?links.
-  FILTER(?links >= 15)
+  FILTER(?links >= 12)
   ?item wdt:P625 ?coord; wdt:P17 ?country; p:P2044/psn:P2044/wikibase:quantityAmount ?elev.
   OPTIONAL { ?item wdt:P4552 ?range. }
   ?article schema:about ?item; schema:isPartOf <https://en.wikipedia.org/>.
@@ -112,7 +112,7 @@ SMALL = {"a", "an", "and", "of", "in", "on", "the", "to", "vs", "vs.", "at", "by
 def title_case(s):
     w = s.split()
     return " ".join(x if any(c.isupper() for c in x[1:]) else (x if i and x in SMALL else x[:1].upper() + x[1:])
-                    for i, x in enumerate(w))
+                    for i, x in enumerate(w)).replace(" Us ", " US ").replace(" Us:", " US:").replace(" Uk ", " UK ").replace(" Uk:", " UK:")
 
 
 # ------------------------------------------------------------------------------------------------ peaks
@@ -138,6 +138,10 @@ def load_peaks():
         prec = lambda x: len(f"{x:g}".split(".")[1]) if "." in f"{x:g}" else -len(f"{x:g}") + len(f"{x:g}".rstrip("0"))
         if prec(v) > prec(p["h"]) or (prec(v) == prec(p["h"]) and v > p["h"]):
             p["h"] = v
+    for p in seen.values():
+        # Crimea is Ukraine (Wikidata lists Russia too for occupied Crimea): never "mountains of Russia"
+        if "Ukraine" in p["countries"] or (44.3 <= p["lat"] <= 46.3 and 32.4 <= p["lon"] <= 36.7):
+            p["countries"] = {"Ukraine"}
     return list(seen.values())
 
 
@@ -228,7 +232,7 @@ def peak_topics(peaks, verified, taken_ids, taken_sets, need):
         for r in p["ranges"]:
             by.setdefault(("range", r), []).append(p)
     for (kind, g), ps in by.items():
-        if len(ps) >= 6:
+        if len(ps) >= 5:
             groups.append((sum(p["links"] for p in ps), kind, g, ps))
     added = []
     for _, kind, g, ps in sorted(groups, key=lambda x: -x[0]):
@@ -320,10 +324,10 @@ def resolve_named(tp, peaks, verified):
             return None
         p = max(c, key=lambda p: p["links"])
         if not dem_check(p, verified):
-            print("  DEM disagrees:", label)
-            return None
+            print("  DEM disagrees, step dropped:", label)
+            continue
         sp.append(spec_step(p, verified))
-    return sp
+    return sp if len(sp) >= 5 else None
 
 
 # ------------------------------------------------------------------------------------------------ areas (engine not built)

@@ -293,9 +293,9 @@
      }
     ],
     "titles": [
-     "Highest Mountain in the Us: 5 Peaks to 6,190 m",
-     "Tallest Mountains in the Us: 5 Peaks to 6,190 m",
-     "Highest Peak in Us: 5 Peaks to 6,190 m"
+     "Highest Mountain in the US: 5 Peaks to 6,190 m",
+     "Tallest Mountains in the US: 5 Peaks to 6,190 m",
+     "Highest Peak in US: 5 Peaks to 6,190 m"
     ],
     "queries": [
      "highest mountains in the us",
@@ -752,124 +752,6 @@
      "#scale"
     ],
     "intro": "6 real mountains of United States, each taller than the last, side by side at true scale (Copernicus DEM elevation data): Mount Monadnock, Kīlauea, Mount Rushmore, Mount Hood, Mauna Kea, Mount Saint Elias."
-   }
-  },
-  {
-   "id": "peaks-russia",
-   "kind": "higher",
-   "engine": "peaks",
-   "status": "planned",
-   "source": "generated",
-   "added": "2026-11-18",
-   "steps": [
-    "Ayu-Dag 572 m",
-    "Ai-Petri 1,234 m",
-    "Mount Yamantau 1,640 m",
-    "Avachinsky 2,741 m",
-    "Belukha Mountain 4,506 m",
-    "Mount Elbrus 5,642 m"
-   ],
-   "data": "Copernicus DEM GLO-30 + Wikidata elevations (two sources, 2 % check)",
-   "spec": {
-    "steps": [
-     {
-      "key": "ayu-dag-q2470386",
-      "qid": "Q2470386",
-      "name": "AYU-DAG",
-      "value": "572 m",
-      "h": 572.0,
-      "lat": 44.56072,
-      "lon": 34.32678,
-      "sources": [
-       "https://www.wikidata.org/wiki/Q2470386 (elevation 572 m); https://en.wikipedia.org/wiki/Ayu-Dag",
-       "Copernicus DEM GLO-30, summit measured 578.5 m (within 2 %)"
-      ]
-     },
-     {
-      "key": "ai-petri-q1517833",
-      "qid": "Q1517833",
-      "name": "AI-PETRI",
-      "value": "1,234 m",
-      "h": 1234.2,
-      "lat": 44.45111,
-      "lon": 34.05278,
-      "sources": [
-       "https://www.wikidata.org/wiki/Q1517833 (elevation 1234.2 m); https://en.wikipedia.org/wiki/Ai-Petri",
-       "Copernicus DEM GLO-30, summit measured 1255.1 m (within 2 %)"
-      ]
-     },
-     {
-      "key": "mount-yamantau-q1514176",
-      "qid": "Q1514176",
-      "name": "MOUNT YAMANTAU",
-      "value": "1,640 m",
-      "h": 1640.0,
-      "lat": 54.255,
-      "lon": 58.102,
-      "sources": [
-       "https://www.wikidata.org/wiki/Q1514176 (elevation 1640 m); https://en.wikipedia.org/wiki/Mount_Yamantau",
-       "Copernicus DEM GLO-30, summit measured 1637.8 m (within 2 %)"
-      ]
-     },
-     {
-      "key": "avachinsky-q791652",
-      "qid": "Q791652",
-      "name": "AVACHINSKY",
-      "value": "2,741 m",
-      "h": 2741.0,
-      "lat": 53.255,
-      "lon": 158.83278,
-      "sources": [
-       "https://www.wikidata.org/wiki/Q791652 (elevation 2741 m); https://en.wikipedia.org/wiki/Avachinsky",
-       "Copernicus DEM GLO-30, summit measured 2728.5 m (within 2 %)"
-      ]
-     },
-     {
-      "key": "belukha-mountain-q724367",
-      "qid": "Q724367",
-      "name": "BELUKHA MOUNTAIN",
-      "value": "4,506 m",
-      "h": 4506.0,
-      "lat": 49.80694,
-      "lon": 86.58972,
-      "sources": [
-       "https://www.wikidata.org/wiki/Q724367 (elevation 4506 m); https://en.wikipedia.org/wiki/Belukha_Mountain",
-       "Copernicus DEM GLO-30, summit measured 4448.4 m (within 2 %)"
-      ]
-     },
-     {
-      "key": "mount-elbrus-q43105",
-      "qid": "Q43105",
-      "name": "MOUNT ELBRUS",
-      "value": "5,642 m",
-      "h": 5642.0,
-      "lat": 43.35254,
-      "lon": 42.43787,
-      "sources": [
-       "https://www.wikidata.org/wiki/Q43105 (elevation 5642 m); https://en.wikipedia.org/wiki/Mount_Elbrus",
-       "Copernicus DEM GLO-30, summit measured 5629.6 m (within 2 %)"
-      ]
-     }
-    ],
-    "titles": [
-     "Tallest Mountain in Russia: 6 Peaks to 5,642 m",
-     "Highest Mountain in Russia: 6 Peaks to 5,642 m",
-     "Russia Mountains: 6 Peaks to 5,642 m"
-    ],
-    "queries": [
-     "tallest mountains in Russia",
-     "highest mountains in Russia",
-     "Russia mountains",
-     "Mount Elbrus height"
-    ],
-    "hashtags": [
-     "#sizecomparison",
-     "#russia",
-     "#mountains",
-     "#3d",
-     "#scale"
-    ],
-    "intro": "6 real mountains of Russia, each taller than the last, side by side at true scale (Copernicus DEM elevation data): Ayu-Dag, Ai-Petri, Mount Yamantau, Avachinsky, Belukha Mountain, Mount Elbrus."
    }
   },
   {
