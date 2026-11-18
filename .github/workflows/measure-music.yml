@@ -1,0 +1,22 @@
+name: measure-music
+# Length + loudness (EBU R128) of the music tracks that have none yet; the registry is committed back.
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: state-commit
+  cancel-in-progress: false
+jobs:
+  measure:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+      - run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg > /dev/null
+      - run: python3 scripts/measure_music.py
+      - run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/music-registry.json
+          git diff --cached --quiet || { git commit -q -m "music: length and loudness measured on the runner"; git pull -q --rebase && git push -q; }
