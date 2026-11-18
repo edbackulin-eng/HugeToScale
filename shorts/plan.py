@@ -192,7 +192,7 @@ def ladder_short(name):
         "renderer": "blender", "seconds": L["seconds"], "hold": 0.0, "appear": 0.0, "ladder": name,
         "data": [["hdri"]] + [["copdem", *s["dem"]] for s in st if "dem" in s],
         "captions": caps,
-        "music": {"id": "oga-inevitable", "start": 119},
+        "music": {"id": "oga-generic-trailer-music", "start": "auto"},   # Texas/France has Inevitable (14-day rule)
         "queries": ["burj khalifa vs mount everest", "everest height comparison", "tallest things on earth", "mountain size comparison 3d"],
         "titles": ["Burj Khalifa vs Mount Everest: 828 m vs 8,849 m",
                    "Everest Height Comparison: From a 111 m Rocket Up",
