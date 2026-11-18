@@ -233,8 +233,21 @@ def type_of(tp):
     return tp.get("type") or ("volcanoes" if tp["id"].startswith("volcano") else "mountains")
 
 
-def peak_topics(peaks, verified, taken_ids, taken_sets, need, kinds=("country", "volcano", "range")):
-    groups = []
+BOXES = {"Europe": (-32, 34, 70, 82), "Africa": (-26, -36, 58, 38), "Asia": (25, -11, 180, 82),
+         "North America": (-170, 7, -50, 84), "South America": (-92, -57, -32, 13), "Oceania": (110, -50, 180, 0),
+         "Antarctica": (-180, -90, 180, -60)}
+FAR_KM = 4500             # a summit this far from the rest of its country is an overseas territory (South Georgia)
+
+
+def km(a, b):
+    import math
+    la1, la2 = math.radians(a["lat"]), math.radians(b["lat"])
+    d = math.radians(b["lon"] - a["lon"])
+    return 6371 * math.acos(max(-1, min(1, math.sin(la1) * math.sin(la2) + math.cos(la1) * math.cos(la2) * math.cos(d))))
+
+
+def build_groups(peaks):
+    """(kind, group) -> summits. Countries lose far overseas summits; continents keep only summits on that continent."""
     by = {}
     for p in peaks:
         for c in p["countries"]:
@@ -247,10 +260,57 @@ def peak_topics(peaks, verified, taken_ids, taken_sets, need, kinds=("country", 
                 by.setdefault(("volcano", c), []).append(p)
         for r in p["ranges"]:
             by.setdefault(("range", r), []).append(p)
-        if p.get("continent"):                      # "volcanoes of Africa", "tallest mountains in Europe"
-            by.setdefault(("country", p["continent"]), []).append(p)
-            if p["volcano"]:
-                by.setdefault(("volcano", p["continent"]), []).append(p)
+        k = p.get("continent")
+        if k and k in BOXES:                        # "volcanoes of Africa", "tallest mountains in Europe"
+            x0, y0, x1, y1 = BOXES[k]
+            if x0 <= p["lon"] <= x1 and y0 <= p["lat"] <= y1:
+                by.setdefault(("country", k), []).append(p)
+                if p["volcano"]:
+                    by.setdefault(("volcano", k), []).append(p)
+    for key, ps in by.items():
+        if key[0] in ("country", "volcano") and key[1] not in BOXES and len(ps) >= 3:
+            lats, lons = sorted(p["lat"] for p in ps), sorted(p["lon"] for p in ps)
+            mid = {"lat": lats[len(lats) // 2], "lon": lons[len(lons) // 2]}
+            by[key] = [p for p in ps if km(p, mid) <= FAR_KM]
+    return by
+
+
+def topic_group(tp):
+    for pre, kind in (("peaks-", "country"), ("volcanoes-", "volcano"), ("range-", "range")):
+        if tp["id"].startswith(pre):
+            return kind, tp["id"][len(pre):]
+    return None
+
+
+def validate(topics, by):
+    """Planned generated ladders must still obey the rules: the top is the group's tallest summit (titles say
+    "tallest"), and no step is a far overseas summit or off the continent. Others are removed (never deleted)."""
+    index = {(k, slug(g)): ps for (k, g), ps in by.items()}
+    out = []
+    for tp in topics:
+        if tp.get("source") != "generated" or tp["status"] != "planned" or tp.get("engine") != "peaks":
+            continue
+        grp = index.get(topic_group(tp) or ("", ""))
+        if not grp:
+            continue
+        qs = {p["qid"] for p in grp}
+        top = max(grp, key=lambda p: p["h"])["qid"]
+        steps = tp["spec"]["steps"]
+        why = None
+        if steps[-1].get("qid") != top:
+            why = "the top is not the tallest of its group"
+        elif any(s.get("qid") not in qs for s in steps):
+            why = "a step is an overseas summit or off the continent"
+        if why:
+            tp.update(id=tp["id"] + "-removed", status="removed", removed=str(date.today()), why=why)
+            out.append(tp["id"])
+            print("removed", tp["id"], "-", why)
+    return out
+
+
+def peak_topics(peaks, verified, taken_ids, taken_sets, need, kinds=("country", "volcano", "range"), by=None):
+    groups = []
+    by = by or build_groups(peaks)
     for (kind, g), ps in by.items():
         if len(ps) >= 5 and kind in kinds:
             groups.append((sum(p["links"] for p in ps), kind, g, ps))
@@ -264,8 +324,11 @@ def peak_topics(peaks, verified, taken_ids, taken_sets, need, kinds=("country", 
         # summits already in other topics are left out (a topic shares at most MAX_SHARED with any other), except the
         # two tallest, so a famous top (Fuji, Elbrus) can still crown a new ladder
         used_all = set().union(*taken_sets) if taken_sets else set()
+        tallest = max(ps, key=lambda p: p["h"])
         fresh = [p for p in ps if p["qid"] not in used_all]
         pool = fresh + sorted([p for p in ps if p["qid"] in used_all], key=lambda p: -p["h"])[:MAX_SHARED]
+        if tallest not in pool:
+            pool.append(tallest)
         for _ in range(4):          # a rejected summit is dropped and the pick repeated
             steps = pick_steps(pool)
             if not steps:
@@ -277,6 +340,8 @@ def peak_topics(peaks, verified, taken_ids, taken_sets, need, kinds=("country", 
         else:
             steps = []
         if not steps:
+            continue
+        if steps[-1]["qid"] != tallest["qid"]:          # titles say "tallest": the top must be the tallest
             continue
         qs = {p["qid"] for p in steps}
         if any(len(qs & s) > MAX_SHARED for s in taken_sets):
@@ -380,15 +445,19 @@ def main():
         planned = [t for t in topics if t["status"] == "planned"]
         return planned, [t for t in planned if t.get("engine") == "peaks" and t.get("spec")]
     planned, ready = queue()
+    by = build_groups(peaks)
+    validate(topics, by)
+    planned, ready = queue()
     taken_ids = {t["id"] for t in topics}
-    taken_sets = [{s["qid"] for s in t["spec"].get("steps", []) if "qid" in s} for t in topics if t.get("spec")]
+    taken_sets = [{s["qid"] for s in t["spec"].get("steps", []) if "qid" in s} for t in topics
+                  if t.get("spec") and t["status"] != "removed"]
     # owner 19.11: only 3D ladders (area maps removed); volcano ladders first, so types can alternate
     need_v = max(0, MIN_VOLCANO - sum(type_of(t) == "volcanoes" for t in ready))
-    new = peak_topics(peaks, verified, taken_ids, taken_sets, need_v, kinds=("volcano",))
+    new = peak_topics(peaks, verified, taken_ids, taken_sets, need_v, kinds=("volcano",), by=by)
     topics += new
     planned, ready = queue()
     need = max(MIN_READY - len(ready), MIN_PLANNED - len(planned), 0)
-    more = peak_topics(peaks, verified, taken_ids, taken_sets, need, kinds=("country", "range"))
+    more = peak_topics(peaks, verified, taken_ids, taken_sets, need, kinds=("country", "range"), by=by)
     topics += more
     new += more
     for t in topics:
