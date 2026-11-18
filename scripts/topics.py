@@ -71,7 +71,15 @@ def get(url, data=None, tries=4, timeout=120):
 
 def sparql(q):
     body = urllib.parse.urlencode({"query": q, "format": "json"}).encode()
-    r = json.loads(get("https://query.wikidata.org/sparql", data=body, timeout=180))
+    for k in range(4):         # the query service sometimes cuts a long answer off mid-stream (invalid JSON)
+        try:
+            r = json.loads(get("https://query.wikidata.org/sparql", data=body, timeout=180))
+            break
+        except json.JSONDecodeError as e:
+            if k == 3:
+                raise
+            print(f"sparql answer cut off ({e}); retry")
+            time.sleep(30 * (k + 1))
     return [{k: v["value"] for k, v in b.items()} for b in r["results"]["bindings"]]
 
 
