@@ -81,11 +81,14 @@
    "attribution_note": "This track has been released into the public domain as of January 2017",
    "checked_on": "2026-11-17",
    "mood": "trailer, cinematic (chosen from title/description, not yet heard)",
-   "seconds": null,
-   "loudness_lufs": null,
+   "seconds": 164.0,
+   "loudness_lufs": -10.2,
    "status": "active",
    "content_id_claims": 0,
-   "last_used": null
+   "last_used": null,
+   "true_peak_db": 0.6,
+   "sha256": "f1bbeeaa8155afc180fba14e0a3b127ffdc157ad3c0b35e7e679265306fad682",
+   "measured_on": "2026-11-18"
   },
   {
    "id": "oga-ancient-power-of-serpents",
@@ -99,11 +102,14 @@
    "attribution_note": "No attribution required. But if you do give any, give it to Kevin MacLeod.",
    "checked_on": "2026-11-17",
    "mood": "ancient, cinematic (chosen from title/description, not yet heard)",
-   "seconds": null,
-   "loudness_lufs": null,
+   "seconds": 108.9,
+   "loudness_lufs": -15.0,
    "status": "active",
    "content_id_claims": 0,
-   "last_used": null
+   "last_used": null,
+   "true_peak_db": 0.1,
+   "sha256": "2ba69cc4c6a7d45229f1787d463c10e353e186c3da7c7aa395ad3fdf24d37bf8",
+   "measured_on": "2026-11-18"
   },
   {
    "id": "oga-destiny-formation",
@@ -117,11 +123,14 @@
    "attribution_note": "None needed; 'bobjt' if you'd like",
    "checked_on": "2026-11-17",
    "mood": "epic orchestral (chosen from title/description, not yet heard)",
-   "seconds": null,
-   "loudness_lufs": null,
+   "seconds": 67.5,
+   "loudness_lufs": -11.4,
    "status": "active",
    "content_id_claims": 0,
-   "last_used": null
+   "last_used": null,
+   "true_peak_db": 0.2,
+   "sha256": "84fc91522c71217bf396b836fa8b7b71a7de15ec6c5ca30e045f84dcaf2df7ca",
+   "measured_on": "2026-11-18"
   },
   {
    "id": "oga-predynastic-dawn",
@@ -135,11 +144,14 @@
    "attribution_note": "None needed; 'bobjt' if you'd like",
    "checked_on": "2026-11-17",
    "mood": "ancient, epic (chosen from title/description, not yet heard)",
-   "seconds": null,
-   "loudness_lufs": null,
+   "seconds": 130.1,
+   "loudness_lufs": -11.6,
    "status": "active",
    "content_id_claims": 0,
-   "last_used": null
+   "last_used": null,
+   "true_peak_db": 0.6,
+   "sha256": "a9d62fc391d01b40ce727761033c20b2b39d24d7292476558058dfd1144dc749",
+   "measured_on": "2026-11-18"
   },
   {
    "id": "oga-laugos-journey",
@@ -153,11 +165,14 @@
    "attribution_note": null,
    "checked_on": "2026-11-17",
    "mood": "adventure orchestral (chosen from title/description, not yet heard)",
-   "seconds": null,
-   "loudness_lufs": null,
+   "seconds": 94.2,
+   "loudness_lufs": -14.5,
    "status": "active",
    "content_id_claims": 0,
-   "last_used": null
+   "last_used": null,
+   "true_peak_db": -0.9,
+   "sha256": "80842cfa63ba8d46a025da3a1121419ffaa54e0acec8e10cb56ab85ecfd1aa4b",
+   "measured_on": "2026-11-18"
   },
   {
    "id": "oga-doom-in-the-morning",
@@ -171,11 +186,14 @@
    "attribution_note": "If you want to credit Vishwa Jay, great. If not, you don't have to. Money is nice. Freedom to use is nicer.",
    "checked_on": "2026-11-17",
    "mood": "action, epic (chosen from title/description, not yet heard)",
-   "seconds": null,
-   "loudness_lufs": null,
+   "seconds": 114.1,
+   "loudness_lufs": -13.9,
    "status": "active",
    "content_id_claims": 0,
-   "last_used": null
+   "last_used": null,
+   "true_peak_db": 0.1,
+   "sha256": "1b07144c33a112738e822610648a4369116b4d90983dd8a7222147ade22d8e9d",
+   "measured_on": "2026-11-18"
   },
   {
    "id": "oga-ancient-mysteries",
@@ -189,11 +207,14 @@
    "attribution_note": "Not required but attribute Sperry Lion, LLC 2024, if you can.",
    "checked_on": "2026-11-17",
    "mood": "ancient, cinematic (chosen from title/description, not yet heard)",
-   "seconds": null,
-   "loudness_lufs": null,
+   "seconds": 120.0,
+   "loudness_lufs": -11.0,
    "status": "active",
    "content_id_claims": 0,
-   "last_used": null
+   "last_used": null,
+   "true_peak_db": 0.4,
+   "sha256": "fa10e70a5888d57bae1b04e66b43fda238d3651999c0e1182a7ec5741c0b85fc",
+   "measured_on": "2026-11-18"
   },
   {
    "id": "oga-fantasy-orchestral-theme",
@@ -207,11 +228,14 @@
    "attribution_note": "Credit to Joth or a link to my OGA page appreciated, but not required.",
    "checked_on": "2026-11-17",
    "mood": "orchestral (chosen from title/description, not yet heard)",
-   "seconds": null,
-   "loudness_lufs": null,
+   "seconds": 191.7,
+   "loudness_lufs": -15.4,
    "status": "active",
    "content_id_claims": 0,
-   "last_used": null
+   "last_used": null,
+   "true_peak_db": -0.9,
+   "sha256": "add1de5eae0771c4ce5b3782a6eae9c01f321d32446421691426587000e50cdc",
+   "measured_on": "2026-11-18"
   },
   {
    "id": "oga-laments-of-the-war",
@@ -225,11 +249,14 @@
    "attribution_note": "You can credit me as Cethiel if you want to.",
    "checked_on": "2026-11-17",
    "mood": "war, orchestral (chosen from title/description, not yet heard)",
-   "seconds": null,
-   "loudness_lufs": null,
+   "seconds": 228.0,
+   "loudness_lufs": -10.9,
    "status": "active",
    "content_id_claims": 0,
-   "last_used": null
+   "last_used": null,
+   "true_peak_db": 1.2,
+   "sha256": "cef8e50f55d72eb54613c8c31f83a3aa034acdcf33cc3af44fd43ed134ad4db0",
+   "measured_on": "2026-11-18"
   },
   {
    "id": "oga-battle-theme-0",
@@ -243,11 +270,14 @@
    "attribution_note": null,
    "checked_on": "2026-11-17",
    "mood": "battle, orchestral (chosen from title/description, not yet heard)",
-   "seconds": null,
-   "loudness_lufs": null,
+   "seconds": 116.1,
+   "loudness_lufs": -12.1,
    "status": "active",
    "content_id_claims": 0,
-   "last_used": null
+   "last_used": null,
+   "true_peak_db": 0.3,
+   "sha256": "dde7bd4f10bde031800ba8e22151fad591b7c13e1c9ae51920341b4e4ae37be5",
+   "measured_on": "2026-11-18"
   },
   {
    "id": "oga-samsara",
@@ -261,11 +291,14 @@
    "attribution_note": "I'll be glad if you notice me if you used my music somewhere.",
    "checked_on": "2026-11-17",
    "mood": "cinematic (chosen from title/description, not yet heard)",
-   "seconds": null,
-   "loudness_lufs": null,
+   "seconds": 340.0,
+   "loudness_lufs": -6.4,
    "status": "active",
    "content_id_claims": 0,
-   "last_used": null
+   "last_used": null,
+   "true_peak_db": 0.6,
+   "sha256": "3b7ad139cf1fcdf73668323b51e00bf0862541e5666c7d71a4290c052e063aa4",
+   "measured_on": "2026-11-18"
   },
   {
    "id": "oga-cyber-march",
@@ -279,11 +312,14 @@
    "attribution_note": "CC Zero // Public Domain OPTIONAL: https://allmylinks.com/iamoneabe",
    "checked_on": "2026-11-17",
    "mood": "march, driving (chosen from title/description, not yet heard)",
-   "seconds": null,
-   "loudness_lufs": null,
+   "seconds": 243.6,
+   "loudness_lufs": -15.5,
    "status": "active",
    "content_id_claims": 0,
-   "last_used": null
+   "last_used": null,
+   "true_peak_db": -0.7,
+   "sha256": "d498390c9cb4ec54b6e9f9744800bab4d2d2346e3210b0f120b8b4b8a46a38d0",
+   "measured_on": "2026-11-18"
   },
   {
    "id": "oga-the-sad-battle",
@@ -297,11 +333,14 @@
    "attribution_note": "Not required, but I hope you enjoyed.",
    "checked_on": "2026-11-17",
    "mood": "dramatic, orchestral (chosen from title/description, not yet heard)",
-   "seconds": null,
-   "loudness_lufs": null,
+   "seconds": 95.1,
+   "loudness_lufs": -14.7,
    "status": "active",
    "content_id_claims": 0,
-   "last_used": null
+   "last_used": null,
+   "true_peak_db": -0.5,
+   "sha256": "7fa2d27b182ffa66ab872759c5bf52e2d60504d15a1ae7fa085396a21aefcb14",
+   "measured_on": "2026-11-18"
   },
   {
    "id": "oga-beast-of-lokris",
@@ -315,11 +354,14 @@
    "attribution_note": "As with everything I create, music and otherwise, this track is released to the public domain under the Creative Commons Zero Attribution License (CC0), meaning",
    "checked_on": "2026-11-17",
    "mood": "epic, driving (chosen from title/description, not yet heard)",
-   "seconds": null,
-   "loudness_lufs": null,
+   "seconds": 195.3,
+   "loudness_lufs": -11.0,
    "status": "active",
    "content_id_claims": 0,
-   "last_used": null
+   "last_used": null,
+   "true_peak_db": 0.1,
+   "sha256": "dda91d2448b493929cf2e64fcd6f9eb1fde4a2c0a8a5bc2026389b5e72385571",
+   "measured_on": "2026-11-18"
   }
  ],
  "fallback_list": "https://github.com/beautyapp800-ctrl/yt-kids/blob/main/data/music-cc0-verified.json (CC0 Freesound tracks, not epic)",
