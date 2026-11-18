@@ -348,7 +348,7 @@ def main():
     planned = [t for t in topics if t["status"] == "planned"]
     ready = [t for t in planned if t.get("engine") in ("peaks", "area-map") and t.get("spec")]
     taken_ids = {t["id"] for t in topics}
-    taken_sets = [{s["qid"] for s in t["spec"]["steps"] if "qid" in s} for t in topics if t.get("spec")]
+    taken_sets = [{s["qid"] for s in t["spec"].get("steps", []) if "qid" in s} for t in topics if t.get("spec")]
     need_ready = max(0, MIN_READY - len(ready))
     need_total = max(0, MIN_PLANNED - len(planned))
     # area-map topics (owner 19.11): alternate with the mountain ladders, so about half of the renderable queue
