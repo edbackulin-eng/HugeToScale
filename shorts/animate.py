@@ -498,11 +498,18 @@ def saturnv_pyramid(preview, rig):
     # shadows of its own (rotating the sky's sun behind the camera washed the whole frame out), and the warm
     # sandstone courses of the ladder Short
     import ladder
-    fill = T.sun(30, 190, strength=1.6, angle=8.0)
+    fill = T.sun(30, 190, strength=0.7, angle=8.0)
     fill.data.cycles.cast_shadow = False
     pyr = bpy.data.objects["Great Pyramid"]
     pyr.data.materials.clear()
-    pyr.data.materials.append(ladder.sandstone())
+    mat = ladder.sandstone()
+    # seen from 400 m in full sun the ladder's albedo went white: darker warm stone, deeper joints between courses
+    br = next(n for n in mat.node_tree.nodes if n.type == "TEX_BRICK")
+    br.inputs["Color1"].default_value = (0.58, 0.40, 0.21, 1)
+    br.inputs["Color2"].default_value = (0.66, 0.47, 0.26, 1)
+    br.inputs["Mortar"].default_value = (0.26, 0.17, 0.09, 1)
+    br.inputs["Mortar Size"].default_value = 0.14
+    pyr.data.materials.append(mat)
     sv = next(o for o in bpy.data.objects if o.name.startswith("Saturn V") and o.parent is None)
     fa = F(P.SHORTS["saturnv_pyramid"]["appear"])
     land = fa + 14
