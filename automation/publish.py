@@ -134,6 +134,8 @@ def main():
                 raise SystemExit("; ".join(problems))
             title = meta["titles"]["titles"][0]["title"]
             if ytguard.find_existing(videos, None, title):
+                if dry:
+                    raise SystemExit(f"duplicate title: {title}")
                 ytguard.notify("Huge To Scale: same title already on the channel", f"{e['slug']}: {title}")
                 raise SystemExit("duplicate title")
             desc = meta["description"].rstrip() + "\n\n" + ytguard.ref(CHANNEL, e["slug"])
@@ -142,6 +144,7 @@ def main():
             if dry:
                 videos.append({"id": "dry", "title": title, "description": desc, "privacy": "private",
                                "publish_at": when.strftime("%Y-%m-%dT%H:%M:%SZ"), "published_at": None, "tags": []})
+                e.update(status="dry-run", publish_at=when.strftime("%Y-%m-%dT%H:%M:%SZ"))   # in memory only
                 continue
             vid = upload(yt, meta, title, desc, tags, when)
         e.update(status="uploaded", video_id=vid, publish_at=when.strftime("%Y-%m-%dT%H:%M:%SZ"), title=title)
