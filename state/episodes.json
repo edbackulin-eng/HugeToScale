@@ -20,8 +20,10 @@
   {
    "slug": "saturnv-pyramid",
    "short": "saturnv_pyramid",
-   "status": "queued",
-   "note": "re-render with the warm sandstone + fill light"
+   "status": "ready",
+   "note": "re-render with the warm sandstone + fill light",
+   "release": "ep-saturnv-pyramid",
+   "rendered": "2026-11-18"
   },
   {
    "slug": "ladder-heights",
