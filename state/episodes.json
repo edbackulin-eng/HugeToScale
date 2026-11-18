@@ -39,6 +39,17 @@
    "release": "ep-texas-france",
    "rendered": "2026-11-17",
    "withdrawn": "2026-11-18"
+  },
+  {
+   "slug": "ladder-volcanoes",
+   "short": "ladder_volcanoes",
+   "topic": "volcanoes",
+   "status": "queued",
+   "added": "2026-11-18",
+   "music": {
+    "id": "oga-ancient-mysteries",
+    "start": "auto"
+   }
   }
  ]
 }

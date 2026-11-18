@@ -211,7 +211,7 @@
    "loudness_lufs": -11.0,
    "status": "active",
    "content_id_claims": 0,
-   "last_used": null,
+   "last_used": "2026-11-18",
    "true_peak_db": 0.4,
    "sha256": "fa10e70a5888d57bae1b04e66b43fda238d3651999c0e1182a7ec5741c0b85fc",
    "measured_on": "2026-11-18"
