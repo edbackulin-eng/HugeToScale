@@ -45,7 +45,95 @@
     "#mountains",
     "#3d",
     "#scale"
-   ]
+   ],
+   "spec": {
+    "steps": [
+     {
+      "key": "mount-vesuvius-q524",
+      "qid": "Q524",
+      "name": "MOUNT VESUVIUS",
+      "value": "1,297 m",
+      "h": 1297.0,
+      "lat": 40.82261,
+      "lon": 14.42919,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q524 (elevation 1297 m); https://en.wikipedia.org/wiki/Mount_Vesuvius",
+       "Copernicus DEM GLO-30, summit measured 1285.9 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "mount-st-helens-q4675",
+      "qid": "Q4675",
+      "name": "MOUNT ST. HELENS",
+      "value": "2,549 m",
+      "h": 2549.0,
+      "lat": 46.20028,
+      "lon": -122.18944,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q4675 (elevation 2549 m); https://en.wikipedia.org/wiki/Mount_St._Helens",
+       "Copernicus DEM GLO-30, summit measured 2527.5 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "mount-fuji-q39231",
+      "qid": "Q39231",
+      "name": "MOUNT FUJI",
+      "value": "3,777 m",
+      "h": 3777.24,
+      "lat": 35.36056,
+      "lon": 138.7275,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q39231 (elevation 3777.24 m); https://en.wikipedia.org/wiki/Mount_Fuji",
+       "Copernicus DEM GLO-30, summit measured 3765.5 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "mount-kilimanjaro-q7296",
+      "qid": "Q7296",
+      "name": "MOUNT KILIMANJARO",
+      "value": "5,895 m",
+      "h": 5895.0,
+      "lat": -3.06667,
+      "lon": 37.35917,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q7296 (elevation 5895 m); https://en.wikipedia.org/wiki/Mount_Kilimanjaro",
+       "Copernicus DEM GLO-30, summit measured 5886.0 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "ojos-del-salado-q233836",
+      "qid": "Q233836",
+      "name": "OJOS DEL SALADO",
+      "value": "6,893 m",
+      "h": 6893.0,
+      "lat": -27.10972,
+      "lon": -68.54139,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q233836 (elevation 6893 m); https://en.wikipedia.org/wiki/Ojos_del_Salado",
+       "Copernicus DEM GLO-30, summit measured 6883.1 m (within 2 %)"
+      ]
+     }
+    ],
+    "titles": [
+     "Biggest Volcanoes in the World: 5 Peaks to 6,893 m",
+     "Biggest Volcano in the World 2026: 5 Peaks to 6,893 m",
+     "Biggest Mud Volcano in the World: 5 Peaks to 6,893 m"
+    ],
+    "queries": [
+     "biggest volcanoes in the world",
+     "volcano size comparison",
+     "tallest volcano in the world",
+     "Ojos Del Salado height"
+    ],
+    "hashtags": [
+     "#sizecomparison",
+     "#volcano",
+     "#mountains",
+     "#3d",
+     "#scale"
+    ],
+    "intro": "5 real mountains, each taller than the last, side by side at true scale (Copernicus DEM elevation data): Mount Vesuvius, Mount St. Helens, Mount Fuji, Mount Kilimanjaro, Ojos Del Salado."
+   }
   },
   {
    "id": "seven-summits",
@@ -1946,11 +2034,452 @@
     ],
     "intro": "5 real mountains of Finland, each taller than the last, side by side at true scale (Copernicus DEM elevation data): Orrdalsklint, Aavasaksa, Korvatunturi, Saana, Ritničohkka."
    }
+  },
+  {
+   "id": "peaks-russia",
+   "kind": "higher",
+   "engine": "peaks",
+   "status": "planned",
+   "source": "generated",
+   "added": "2026-11-18",
+   "steps": [
+    "Korvatunturi 486 m",
+    "Broutona 801 m",
+    "Mount Yamantau 1,640 m",
+    "Avachinsky 2,741 m",
+    "Belukha Mountain 4,506 m",
+    "Mount Elbrus 5,642 m"
+   ],
+   "data": "Copernicus DEM GLO-30 + Wikidata elevations (two sources, 2 % check)",
+   "spec": {
+    "steps": [
+     {
+      "key": "korvatunturi-q1784850",
+      "qid": "Q1784850",
+      "name": "KORVATUNTURI",
+      "value": "486 m",
+      "h": 486.0,
+      "lat": 68.07361,
+      "lon": 29.31528,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q1784850 (elevation 486 m); https://en.wikipedia.org/wiki/Korvatunturi",
+       "Copernicus DEM GLO-30, summit measured 477.0 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "broutona-q991004",
+      "qid": "Q991004",
+      "name": "BROUTONA",
+      "value": "801 m",
+      "h": 801.0,
+      "lat": 46.71667,
+      "lon": 150.73333,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q991004 (elevation 801 m); https://en.wikipedia.org/wiki/Broutona",
+       "Copernicus DEM GLO-30, summit measured 795.1 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "mount-yamantau-q1514176",
+      "qid": "Q1514176",
+      "name": "MOUNT YAMANTAU",
+      "value": "1,640 m",
+      "h": 1640.0,
+      "lat": 54.255,
+      "lon": 58.102,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q1514176 (elevation 1640 m); https://en.wikipedia.org/wiki/Mount_Yamantau",
+       "Copernicus DEM GLO-30, summit measured 1637.8 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "avachinsky-q791652",
+      "qid": "Q791652",
+      "name": "AVACHINSKY",
+      "value": "2,741 m",
+      "h": 2741.0,
+      "lat": 53.255,
+      "lon": 158.83278,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q791652 (elevation 2741 m); https://en.wikipedia.org/wiki/Avachinsky",
+       "Copernicus DEM GLO-30, summit measured 2728.5 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "belukha-mountain-q724367",
+      "qid": "Q724367",
+      "name": "BELUKHA MOUNTAIN",
+      "value": "4,506 m",
+      "h": 4506.0,
+      "lat": 49.80694,
+      "lon": 86.58972,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q724367 (elevation 4506 m); https://en.wikipedia.org/wiki/Belukha_Mountain",
+       "Copernicus DEM GLO-30, summit measured 4448.4 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "mount-elbrus-q43105",
+      "qid": "Q43105",
+      "name": "MOUNT ELBRUS",
+      "value": "5,642 m",
+      "h": 5642.0,
+      "lat": 43.35254,
+      "lon": 42.43787,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q43105 (elevation 5642 m); https://en.wikipedia.org/wiki/Mount_Elbrus",
+       "Copernicus DEM GLO-30, summit measured 5629.6 m (within 2 %)"
+      ]
+     }
+    ],
+    "titles": [
+     "Tallest Mountain in Russia: 6 Peaks to 5,642 m",
+     "Highest Mountain in Russia: 6 Peaks to 5,642 m",
+     "Russia Mountains: 6 Peaks to 5,642 m"
+    ],
+    "queries": [
+     "tallest mountains in Russia",
+     "highest mountains in Russia",
+     "Russia mountains",
+     "Mount Elbrus height"
+    ],
+    "hashtags": [
+     "#sizecomparison",
+     "#russia",
+     "#mountains",
+     "#3d",
+     "#scale"
+    ],
+    "intro": "6 real mountains of Russia, each taller than the last, side by side at true scale (Copernicus DEM elevation data): Korvatunturi, Broutona, Mount Yamantau, Avachinsky, Belukha Mountain, Mount Elbrus."
+   }
+  },
+  {
+   "id": "peaks-india",
+   "kind": "higher",
+   "engine": "peaks",
+   "status": "planned",
+   "source": "generated",
+   "added": "2026-11-18",
+   "steps": [
+    "Agastya Mala 1,839 m",
+    "Doddabetta 2,637 m",
+    "Sandakpu 3,636 m",
+    "Trisul 7,120 m",
+    "Kanchenjunga 8,586 m"
+   ],
+   "data": "Copernicus DEM GLO-30 + Wikidata elevations (two sources, 2 % check)",
+   "spec": {
+    "steps": [
+     {
+      "key": "agastya-mala-q390831",
+      "qid": "Q390831",
+      "name": "AGASTYA MALA",
+      "value": "1,839 m",
+      "h": 1839.0,
+      "lat": 8.6163,
+      "lon": 77.2461,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q390831 (elevation 1839 m); https://en.wikipedia.org/wiki/Agastya_Mala",
+       "Copernicus DEM GLO-30, summit measured 1817.7 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "doddabetta-q336749",
+      "qid": "Q336749",
+      "name": "DODDABETTA",
+      "value": "2,637 m",
+      "h": 2637.0,
+      "lat": 11.40242,
+      "lon": 76.73672,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q336749 (elevation 2637 m); https://en.wikipedia.org/wiki/Doddabetta",
+       "Copernicus DEM GLO-30, summit measured 2631.6 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "sandakpu-q2981161",
+      "qid": "Q2981161",
+      "name": "SANDAKPU",
+      "value": "3,636 m",
+      "h": 3636.0,
+      "lat": 27.10364,
+      "lon": 88.00012,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q2981161 (elevation 3636 m); https://en.wikipedia.org/wiki/Sandakphu",
+       "Copernicus DEM GLO-30, summit measured 3619.7 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "trisul-q1233570",
+      "qid": "Q1233570",
+      "name": "TRISUL",
+      "value": "7,120 m",
+      "h": 7120.0,
+      "lat": 30.31278,
+      "lon": 79.77722,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q1233570 (elevation 7120 m); https://en.wikipedia.org/wiki/Trisul",
+       "Copernicus DEM GLO-30, summit measured 7110.8 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "kanchenjunga-q82019",
+      "qid": "Q82019",
+      "name": "KANCHENJUNGA",
+      "value": "8,586 m",
+      "h": 8586.0,
+      "lat": 27.703,
+      "lon": 88.14735,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q82019 (elevation 8586 m); https://en.wikipedia.org/wiki/Kangchenjunga",
+       "Copernicus DEM GLO-30, summit measured 8558.8 m (within 2 %)"
+      ]
+     }
+    ],
+    "titles": [
+     "Tallest Mountain in India: 5 Peaks to 8,586 m",
+     "Tallest Peak in India: 5 Peaks to 8,586 m",
+     "Highest Mountain in India: 5 Peaks to 8,586 m"
+    ],
+    "queries": [
+     "tallest mountains in India",
+     "highest mountains in India",
+     "India mountains",
+     "Kanchenjunga height"
+    ],
+    "hashtags": [
+     "#sizecomparison",
+     "#india",
+     "#mountains",
+     "#3d",
+     "#scale"
+    ],
+    "intro": "5 real mountains of India, each taller than the last, side by side at true scale (Copernicus DEM elevation data): Agastya Mala, Doddabetta, Sandakpu, Trisul, Kanchenjunga."
+   }
+  },
+  {
+   "id": "peaks-norway",
+   "kind": "higher",
+   "engine": "peaks",
+   "status": "planned",
+   "source": "generated",
+   "added": "2026-11-18",
+   "steps": [
+    "Gråkallen 551 m",
+    "Bjørnfjell 761 m",
+    "Operafjellet 968 m",
+    "Tromsdalstinden 1,238 m",
+    "Newtontoppen 1,713 m",
+    "Galdhøpiggen 2,469 m"
+   ],
+   "data": "Copernicus DEM GLO-30 + Wikidata elevations (two sources, 2 % check)",
+   "spec": {
+    "steps": [
+     {
+      "key": "gr-kallen-q1798109",
+      "qid": "Q1798109",
+      "name": "GRÅKALLEN",
+      "value": "551 m",
+      "h": 551.0,
+      "lat": 63.42056,
+      "lon": 10.25139,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q1798109 (elevation 551 m); https://en.wikipedia.org/wiki/Gr%C3%A5kallen",
+       "Copernicus DEM GLO-30, summit measured 552.1 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "bj-rnfjell-q879882",
+      "qid": "Q879882",
+      "name": "BJØRNFJELL",
+      "value": "761 m",
+      "h": 761.0,
+      "lat": 68.44924,
+      "lon": 18.08693,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q879882 (elevation 761 m); https://en.wikipedia.org/wiki/Bj%C3%B8rnfjell,_Nordland",
+       "Copernicus DEM GLO-30, summit measured 757.4 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "operafjellet-q3362352",
+      "qid": "Q3362352",
+      "name": "OPERAFJELLET",
+      "value": "968 m",
+      "h": 968.0,
+      "lat": 78.225,
+      "lon": 16.05167,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q3362352 (elevation 968 m); https://en.wikipedia.org/wiki/Operafjellet",
+       "Copernicus DEM GLO-30, summit measured 956.1 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "tromsdalstinden-q2487508",
+      "qid": "Q2487508",
+      "name": "TROMSDALSTINDEN",
+      "value": "1,238 m",
+      "h": 1237.9,
+      "lat": 69.60716,
+      "lon": 19.14581,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q2487508 (elevation 1237.9 m); https://en.wikipedia.org/wiki/Tromsdalstinden",
+       "Copernicus DEM GLO-30, summit measured 1233.7 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "newtontoppen-q1419222",
+      "qid": "Q1419222",
+      "name": "NEWTONTOPPEN",
+      "value": "1,713 m",
+      "h": 1713.0,
+      "lat": 79.01056,
+      "lon": 17.49083,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q1419222 (elevation 1713 m); https://en.wikipedia.org/wiki/Newtontoppen",
+       "Copernicus DEM GLO-30, summit measured 1703.0 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "galdh-piggen-q203942",
+      "qid": "Q203942",
+      "name": "GALDHØPIGGEN",
+      "value": "2,469 m",
+      "h": 2468.85,
+      "lat": 61.63333,
+      "lon": 8.3,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q203942 (elevation 2468.85 m); https://en.wikipedia.org/wiki/Galdh%C3%B8piggen",
+       "Copernicus DEM GLO-30, summit measured 2455.6 m (within 2 %)"
+      ]
+     }
+    ],
+    "titles": [
+     "Tallest Mountain in Norway: 6 Peaks to 2,469 m",
+     "Highest Mountain in Norway: 6 Peaks to 2,469 m",
+     "Mountain in Norway: 6 Peaks to 2,469 m"
+    ],
+    "queries": [
+     "tallest mountains in Norway",
+     "Norway mountains"
+    ],
+    "hashtags": [
+     "#sizecomparison",
+     "#norway",
+     "#mountains",
+     "#3d",
+     "#scale"
+    ],
+    "intro": "6 real mountains of Norway, each taller than the last, side by side at true scale (Copernicus DEM elevation data): Gråkallen, Bjørnfjell, Operafjellet, Tromsdalstinden, Newtontoppen, Galdhøpiggen."
+   }
+  },
+  {
+   "id": "peaks-philippines",
+   "kind": "higher",
+   "engine": "peaks",
+   "status": "planned",
+   "source": "generated",
+   "added": "2026-11-18",
+   "steps": [
+    "Camiguin De Babuyanes 712 m",
+    "Mount Arayat 1,026 m",
+    "Pinatubo 1,486 m",
+    "Mayon Volcano 2,462 m",
+    "Mount Apo 2,954 m"
+   ],
+   "data": "Copernicus DEM GLO-30 + Wikidata elevations (two sources, 2 % check)",
+   "spec": {
+    "steps": [
+     {
+      "key": "camiguin-de-babuyanes-q1028902",
+      "qid": "Q1028902",
+      "name": "CAMIGUIN DE BABUYANES",
+      "value": "712 m",
+      "h": 712.0,
+      "lat": 18.83361,
+      "lon": 121.86111,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q1028902 (elevation 712 m); https://en.wikipedia.org/wiki/Camiguin_de_Babuyanes",
+       "Copernicus DEM GLO-30, summit measured 712.1 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "mount-arayat-q626809",
+      "qid": "Q626809",
+      "name": "MOUNT ARAYAT",
+      "value": "1,026 m",
+      "h": 1026.0,
+      "lat": 15.2,
+      "lon": 120.742,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q626809 (elevation 1026 m); https://en.wikipedia.org/wiki/Mount_Arayat",
+       "Copernicus DEM GLO-30, summit measured 1028.7 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "pinatubo-q1451",
+      "qid": "Q1451",
+      "name": "PINATUBO",
+      "value": "1,486 m",
+      "h": 1486.0,
+      "lat": 15.13,
+      "lon": 120.35,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q1451 (elevation 1486 m); https://en.wikipedia.org/wiki/Mount_Pinatubo",
+       "Copernicus DEM GLO-30, summit measured 1460.6 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "mayon-volcano-q1484",
+      "qid": "Q1484",
+      "name": "MAYON VOLCANO",
+      "value": "2,462 m",
+      "h": 2462.0,
+      "lat": 13.25667,
+      "lon": 123.685,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q1484 (elevation 2462 m); https://en.wikipedia.org/wiki/Mayon",
+       "Copernicus DEM GLO-30, summit measured 2460.0 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "mount-apo-q455963",
+      "qid": "Q455963",
+      "name": "MOUNT APO",
+      "value": "2,954 m",
+      "h": 2954.0,
+      "lat": 6.9875,
+      "lon": 125.27083,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q455963 (elevation 2954 m); https://en.wikipedia.org/wiki/Mount_Apo",
+       "Copernicus DEM GLO-30, summit measured 2943.4 m (within 2 %)"
+      ]
+     }
+    ],
+    "titles": [
+     "Tallest Mountain in Philippines: 5 Peaks to 2,954 m",
+     "Highest Mountain in Philippines: 5 Peaks to 2,954 m",
+     "Highest Peak in Philippines: 5 Peaks to 2,954 m"
+    ],
+    "queries": [
+     "tallest mountains in Philippines",
+     "highest mountains in Philippines",
+     "Philippines mountains"
+    ],
+    "hashtags": [
+     "#sizecomparison",
+     "#philippines",
+     "#mountains",
+     "#3d",
+     "#scale"
+    ],
+    "intro": "5 real mountains of Philippines, each taller than the last, side by side at true scale (Copernicus DEM elevation data): Camiguin De Babuyanes, Mount Arayat, Pinatubo, Mayon Volcano, Mount Apo."
+   }
   }
  ],
  "queue": {
-  "planned": 32,
-  "ready_for_production": 16,
+  "planned": 35,
+  "ready_for_production": 20,
   "updated": "2026-11-18",
   "rule": ">= 32 planned, >= 20 renderable; a topic is used once"
  }
