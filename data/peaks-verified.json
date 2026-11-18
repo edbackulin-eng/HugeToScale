@@ -1315,6 +1315,13 @@
   "ok": false,
   "wikidata_m": 365.0
  },
+ "Q1723814": {
+  "checked": "2026-11-18",
+  "dem_m": 2462.7,
+  "name": "Kanlaon Volcano",
+  "ok": true,
+  "wikidata_m": 2435.0
+ },
  "Q1729630": {
   "checked": "2026-11-18",
   "dem_m": 954.8,
@@ -2196,6 +2203,13 @@
   "name": "La Soufrière",
   "ok": false,
   "wikidata_m": 1220.0
+ },
+ "Q265585": {
+  "checked": "2026-11-18",
+  "dem_m": 1571.4,
+  "name": "Kentur Lokon",
+  "ok": true,
+  "wikidata_m": 1580.0
  },
  "Q2662514": {
   "checked": "2026-11-18",
@@ -3870,6 +3884,13 @@
   "ok": false,
   "wikidata_m": 251.0
  },
+ "Q713619": {
+  "checked": "2026-11-18",
+  "dem_m": 1887.3,
+  "name": "Mount Yōtei",
+  "ok": true,
+  "wikidata_m": 1898.0
+ },
  "Q714605": {
   "checked": "2026-11-18",
   "dem_m": 1806.5,
@@ -4331,6 +4352,13 @@
   "name": "Borawli",
   "ok": true,
   "wikidata_m": 812.0
+ },
+ "Q901554": {
+  "checked": "2026-11-18",
+  "dem_m": 1040.3,
+  "name": "Mount Seguam",
+  "ok": true,
+  "wikidata_m": 1054.0
  },
  "Q901776": {
   "checked": "2026-11-18",

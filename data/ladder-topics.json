@@ -5089,10 +5089,10 @@
    "type": "mountains"
   },
   {
-   "id": "peaks-australia",
+   "id": "peaks-australia-removed",
    "kind": "higher",
    "engine": "peaks",
-   "status": "planned",
+   "status": "removed",
    "source": "generated",
    "added": "2026-11-18",
    "steps": [
@@ -5204,7 +5204,9 @@
     ],
     "intro": "6 real mountains of Australia, each taller than the last, side by side at true scale (Copernicus DEM elevation data): Mount Bates, Mount Kembla, Mount Stromlo, Kunanyi / Mount Wellington, Mount Ossa, Mount Kosciuszko."
    },
-   "type": "mountains"
+   "type": "mountains",
+   "removed": "2026-11-18",
+   "why": "the top is not the tallest of its group"
   },
   {
    "id": "range-jura-mountains",
@@ -5761,13 +5763,248 @@
     "intro": "6 real mountains of Finland, each taller than the last, side by side at true scale (Copernicus DEM elevation data): Orrdalsklint, Aavasaksa, Koli, Aakenustunturi, Saana, Ritničohkka."
    },
    "type": "mountains"
+  },
+  {
+   "id": "volcanoes-asia",
+   "kind": "higher",
+   "engine": "peaks",
+   "status": "planned",
+   "source": "generated",
+   "added": "2026-11-18",
+   "steps": [
+    "Kentur Lokon 1,580 m",
+    "Mount Yōtei 1,898 m",
+    "Kanlaon Volcano 2,435 m",
+    "Mount Ontake 3,067 m",
+    "Mount Fuji 3,777 m",
+    "Damavand 5,628 m"
+   ],
+   "data": "Copernicus DEM GLO-30 + Wikidata elevations (two sources, 2 % check)",
+   "spec": {
+    "steps": [
+     {
+      "key": "kentur-lokon-q265585",
+      "qid": "Q265585",
+      "name": "KENTUR LOKON",
+      "value": "1,580 m",
+      "h": 1580.0,
+      "lat": 1.35806,
+      "lon": 124.79194,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q265585 (elevation 1580 m); https://en.wikipedia.org/wiki/Mount_Lokon",
+       "Copernicus DEM GLO-30, summit measured 1571.4 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "mount-y-tei-q713619",
+      "qid": "Q713619",
+      "name": "MOUNT YŌTEI",
+      "value": "1,898 m",
+      "h": 1898.0,
+      "lat": 42.82722,
+      "lon": 140.80639,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q713619 (elevation 1898 m); https://en.wikipedia.org/wiki/Mount_Y%C5%8Dtei",
+       "Copernicus DEM GLO-30, summit measured 1887.3 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "kanlaon-volcano-q1723814",
+      "qid": "Q1723814",
+      "name": "KANLAON VOLCANO",
+      "value": "2,435 m",
+      "h": 2435.0,
+      "lat": 10.41194,
+      "lon": 123.13194,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q1723814 (elevation 2435 m); https://en.wikipedia.org/wiki/Kanlaon",
+       "Copernicus DEM GLO-30, summit measured 2462.7 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "mount-ontake-q1754806",
+      "qid": "Q1754806",
+      "name": "MOUNT ONTAKE",
+      "value": "3,067 m",
+      "h": 3067.0,
+      "lat": 35.89306,
+      "lon": 137.48056,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q1754806 (elevation 3067 m); https://en.wikipedia.org/wiki/Mount_Ontake",
+       "Copernicus DEM GLO-30, summit measured 3054.7 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "mount-fuji-q39231",
+      "qid": "Q39231",
+      "name": "MOUNT FUJI",
+      "value": "3,777 m",
+      "h": 3777.24,
+      "lat": 35.36056,
+      "lon": 138.7275,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q39231 (elevation 3777.24 m); https://en.wikipedia.org/wiki/Mount_Fuji",
+       "Copernicus DEM GLO-30, summit measured 3765.5 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "damavand-q40758",
+      "qid": "Q40758",
+      "name": "DAMAVAND",
+      "value": "5,628 m",
+      "h": 5628.0,
+      "lat": 35.95528,
+      "lon": 52.10917,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q40758 (elevation 5628 m); https://en.wikipedia.org/wiki/Mount_Damavand",
+       "Copernicus DEM GLO-30, summit measured 5596.9 m (within 2 %)"
+      ]
+     }
+    ],
+    "titles": [
+     "Volcanoes in Asia: 6 Peaks to 5,628 m",
+     "Asia Volcano: 6 Peaks to 5,628 m",
+     "Asian Volcano: 6 Peaks to 5,628 m"
+    ],
+    "queries": [
+     "volcanoes in Asia",
+     "Asia volcanoes",
+     "Damavand height"
+    ],
+    "hashtags": [
+     "#sizecomparison",
+     "#asia",
+     "#volcano",
+     "#3d",
+     "#scale"
+    ],
+    "intro": "6 real volcanoes of Asia, each taller than the last, side by side at true scale (Copernicus DEM elevation data): Kentur Lokon, Mount Yōtei, Kanlaon Volcano, Mount Ontake, Mount Fuji, Damavand."
+   },
+   "type": "volcanoes"
+  },
+  {
+   "id": "volcanoes-united-states",
+   "kind": "higher",
+   "engine": "peaks",
+   "status": "planned",
+   "source": "generated",
+   "added": "2026-11-18",
+   "steps": [
+    "Mount Seguam 1,054 m",
+    "Kīlauea 1,247 m",
+    "Mount Cleveland 1,730 m",
+    "Mount Hood 3,425 m",
+    "Mauna Kea 4,207 m",
+    "Mount Bona 5,045 m"
+   ],
+   "data": "Copernicus DEM GLO-30 + Wikidata elevations (two sources, 2 % check)",
+   "spec": {
+    "steps": [
+     {
+      "key": "mount-seguam-q901554",
+      "qid": "Q901554",
+      "name": "MOUNT SEGUAM",
+      "value": "1,054 m",
+      "h": 1054.0,
+      "lat": 52.315,
+      "lon": -172.51,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q901554 (elevation 1054 m); https://en.wikipedia.org/wiki/Pyre_Peak",
+       "Copernicus DEM GLO-30, summit measured 1040.3 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "k-lauea-q188698",
+      "qid": "Q188698",
+      "name": "KĪLAUEA",
+      "value": "1,247 m",
+      "h": 1247.0,
+      "lat": 19.4211,
+      "lon": -155.28676,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q188698 (elevation 1247 m); https://en.wikipedia.org/wiki/K%C4%ABlauea",
+       "Copernicus DEM GLO-30, summit measured 1245.0 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "mount-cleveland-q783798",
+      "qid": "Q783798",
+      "name": "MOUNT CLEVELAND",
+      "value": "1,730 m",
+      "h": 1730.0,
+      "lat": 52.82222,
+      "lon": -169.945,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q783798 (elevation 1730 m); https://en.wikipedia.org/wiki/Mount_Cleveland_(Alaska)",
+       "Copernicus DEM GLO-30, summit measured 1739.9 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "mount-hood-q275662",
+      "qid": "Q275662",
+      "name": "MOUNT HOOD",
+      "value": "3,425 m",
+      "h": 3425.04,
+      "lat": 45.37361,
+      "lon": -121.69583,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q275662 (elevation 3425.04 m); https://en.wikipedia.org/wiki/Mount_Hood",
+       "Copernicus DEM GLO-30, summit measured 3407.2 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "mauna-kea-q131230",
+      "qid": "Q131230",
+      "name": "MAUNA KEA",
+      "value": "4,207 m",
+      "h": 4207.3,
+      "lat": 19.82056,
+      "lon": -155.46806,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q131230 (elevation 4207.3 m); https://en.wikipedia.org/wiki/Mauna_Kea",
+       "Copernicus DEM GLO-30, summit measured 4203.1 m (within 2 %)"
+      ]
+     },
+     {
+      "key": "mount-bona-q48691",
+      "qid": "Q48691",
+      "name": "MOUNT BONA",
+      "value": "5,045 m",
+      "h": 5045.0,
+      "lat": 61.3856,
+      "lon": -141.749,
+      "sources": [
+       "https://www.wikidata.org/wiki/Q48691 (elevation 5045 m); https://en.wikipedia.org/wiki/Mount_Bona",
+       "Copernicus DEM GLO-30, summit measured 4993.5 m (within 2 %)"
+      ]
+     }
+    ],
+    "titles": [
+     "Volcano in United States: 6 Peaks to 5,045 m",
+     "Active Volcanoes in the United States: 6 Peaks to 5,045 m",
+     "United States Volcanoes: 6 Peaks to 5,045 m"
+    ],
+    "queries": [
+     "volcanoes in United States",
+     "United States volcanoes"
+    ],
+    "hashtags": [
+     "#sizecomparison",
+     "#unitedstates",
+     "#volcano",
+     "#3d",
+     "#scale"
+    ],
+    "intro": "6 real volcanoes of United States, each taller than the last, side by side at true scale (Copernicus DEM elevation data): Mount Seguam, Kīlauea, Mount Cleveland, Mount Hood, Mauna Kea, Mount Bona."
+   },
+   "type": "volcanoes"
   }
  ],
  "queue": {
   "planned": 40,
   "ready_for_production": 32,
   "updated": "2026-11-18",
-  "volcanoes": 7,
+  "volcanoes": 9,
   "rule": ">= 32 planned, >= 32 renderable 3D ladders, >= 11 of them volcanoes; a topic is used once"
  }
 }
