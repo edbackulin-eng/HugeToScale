@@ -1,0 +1,779 @@
+{
+ "Q1045888": {
+  "checked": "2026-11-18",
+  "dem_m": 4802.6,
+  "name": "Puncak Jaya",
+  "ok": true,
+  "wikidata_m": 4884.0
+ },
+ "Q104674": {
+  "checked": "2026-11-18",
+  "dem_m": 1342.2,
+  "name": "Ben Nevis",
+  "ok": true,
+  "wikidata_m": 1344.53
+ },
+ "Q1048209": {
+  "checked": "2026-11-18",
+  "dem_m": 483.2,
+  "name": "Floreana Island",
+  "ok": false,
+  "wikidata_m": 444.0
+ },
+ "Q1049644": {
+  "checked": "2026-11-18",
+  "dem_m": 2620.5,
+  "name": "Piton de la Fournaise",
+  "ok": true,
+  "wikidata_m": 2632.0
+ },
+ "Q1056102": {
+  "checked": "2026-11-18",
+  "dem_m": 2838.0,
+  "name": "Cerro Torre",
+  "ok": false,
+  "wikidata_m": 3128.0
+ },
+ "Q1064098": {
+  "checked": "2026-11-18",
+  "dem_m": 636.9,
+  "name": "Pinta Island",
+  "ok": false,
+  "wikidata_m": 780.0
+ },
+ "Q107635": {
+  "checked": "2026-11-18",
+  "dem_m": 1315.2,
+  "name": "Baekdu Mountain",
+  "ok": false,
+  "wikidata_m": 2744.0
+ },
+ "Q1091113": {
+  "checked": "2026-11-18",
+  "dem_m": 4341.5,
+  "name": "Hüiten Peak",
+  "ok": true,
+  "wikidata_m": 4374.0
+ },
+ "Q1125206": {
+  "checked": "2026-11-18",
+  "dem_m": 1103.7,
+  "name": "Penteliko Mountain",
+  "ok": true,
+  "wikidata_m": 1109.0
+ },
+ "Q116693": {
+  "checked": "2026-11-18",
+  "dem_m": 898.4,
+  "name": "Esja",
+  "ok": true,
+  "wikidata_m": 914.0
+ },
+ "Q1195352": {
+  "checked": "2026-11-18",
+  "dem_m": 324.3,
+  "name": "Pinzón Island",
+  "ok": false,
+  "wikidata_m": 458.0
+ },
+ "Q128841": {
+  "checked": "2026-11-18",
+  "dem_m": 1103.4,
+  "name": "Sakurajima",
+  "ok": true,
+  "wikidata_m": 1117.0
+ },
+ "Q130321": {
+  "checked": "2026-11-18",
+  "dem_m": 2002.9,
+  "name": "Mount Athos",
+  "ok": true,
+  "wikidata_m": 2033.0
+ },
+ "Q131230": {
+  "checked": "2026-11-18",
+  "dem_m": 4203.1,
+  "name": "Mauna Kea",
+  "ok": true,
+  "wikidata_m": 4207.3
+ },
+ "Q1329959": {
+  "checked": "2026-11-18",
+  "dem_m": 629.3,
+  "name": "Mount Takao",
+  "ok": false,
+  "wikidata_m": 599.3
+ },
+ "Q1334825": {
+  "checked": "2026-11-18",
+  "dem_m": 1606.7,
+  "name": "Pelion",
+  "ok": false,
+  "wikidata_m": 1543.0
+ },
+ "Q1340624": {
+  "checked": "2026-11-18",
+  "dem_m": 325.5,
+  "name": "Rano Kau",
+  "ok": true,
+  "wikidata_m": 320.0
+ },
+ "Q1340711": {
+  "checked": "2026-11-18",
+  "dem_m": 411.0,
+  "name": "Mehetia",
+  "ok": false,
+  "wikidata_m": 435.0
+ },
+ "Q134108": {
+  "checked": "2026-11-18",
+  "dem_m": 2908.4,
+  "name": "Merapi",
+  "ok": true,
+  "wikidata_m": 2910.0
+ },
+ "Q134927": {
+  "checked": "2026-11-18",
+  "dem_m": 3095.9,
+  "name": "Mount Emei",
+  "ok": true,
+  "wikidata_m": 3099.0
+ },
+ "Q1376373": {
+  "checked": "2026-11-18",
+  "dem_m": 1702.0,
+  "name": "Volcán Wolf",
+  "ok": true,
+  "wikidata_m": 1707.0
+ },
+ "Q1377333": {
+  "checked": "2026-11-18",
+  "dem_m": 874.2,
+  "name": "Mount Osore",
+  "ok": true,
+  "wikidata_m": 879.0
+ },
+ "Q140084": {
+  "checked": "2026-11-18",
+  "dem_m": 2089.2,
+  "name": "Hvannadalshnúkur",
+  "ok": true,
+  "wikidata_m": 2110.0
+ },
+ "Q14081": {
+  "checked": "2026-11-18",
+  "dem_m": 6262.1,
+  "name": "Chimborazo",
+  "ok": true,
+  "wikidata_m": 6263.47
+ },
+ "Q1424979": {
+  "checked": "2026-11-18",
+  "dem_m": 1171.3,
+  "name": "Alcedo Volcano",
+  "ok": false,
+  "wikidata_m": 1130.0
+ },
+ "Q1481864": {
+  "checked": "2026-11-18",
+  "dem_m": 953.8,
+  "name": "Tai Mo Shan",
+  "ok": true,
+  "wikidata_m": 957.0
+ },
+ "Q1514176": {
+  "checked": "2026-11-18",
+  "dem_m": 1637.8,
+  "name": "Mount Yamantau",
+  "ok": true,
+  "wikidata_m": 1640.0
+ },
+ "Q1517833": {
+  "checked": "2026-11-18",
+  "dem_m": 1255.1,
+  "name": "Ai-Petri",
+  "ok": true,
+  "wikidata_m": 1234.2
+ },
+ "Q152380": {
+  "checked": "2026-11-18",
+  "dem_m": 1104.9,
+  "name": "Chaitén",
+  "ok": true,
+  "wikidata_m": 1122.0
+ },
+ "Q1547402": {
+  "checked": "2026-11-18",
+  "dem_m": 427.4,
+  "name": "Kirkjufell",
+  "ok": false,
+  "wikidata_m": 463.0
+ },
+ "Q155721": {
+  "checked": "2026-11-18",
+  "dem_m": 1141.4,
+  "name": "Brocken",
+  "ok": true,
+  "wikidata_m": 1142.1
+ },
+ "Q1631727": {
+  "checked": "2026-11-18",
+  "dem_m": 616.3,
+  "name": "Ofu-Olosega",
+  "ok": false,
+  "wikidata_m": 639.0
+ },
+ "Q164121": {
+  "checked": "2026-11-18",
+  "dem_m": 3125.7,
+  "name": "Llaima",
+  "ok": true,
+  "wikidata_m": 3125.0
+ },
+ "Q1641276": {
+  "checked": "2026-11-18",
+  "dem_m": 3888.2,
+  "name": "Quilotoa",
+  "ok": false,
+  "wikidata_m": 3800.0
+ },
+ "Q1738211": {
+  "checked": "2026-11-18",
+  "dem_m": 1675.6,
+  "name": "Keli Mutubuurai",
+  "ok": false,
+  "wikidata_m": 1639.0
+ },
+ "Q17541": {
+  "checked": "2026-11-18",
+  "dem_m": 545.2,
+  "name": "Victoria Peak",
+  "ok": true,
+  "wikidata_m": 552.0
+ },
+ "Q178167": {
+  "checked": "2026-11-18",
+  "dem_m": 2225.8,
+  "name": "Mount Kosciuszko",
+  "ok": true,
+  "wikidata_m": 2228.0
+ },
+ "Q184975": {
+  "checked": "2026-11-18",
+  "dem_m": 1482.1,
+  "name": "Hekla",
+  "ok": true,
+  "wikidata_m": 1491.0
+ },
+ "Q188698": {
+  "checked": "2026-11-18",
+  "dem_m": 1245.0,
+  "name": "Kīlauea",
+  "ok": true,
+  "wikidata_m": 1247.0
+ },
+ "Q194057": {
+  "checked": "2026-11-18",
+  "dem_m": 4410.7,
+  "name": "Mount Rainier",
+  "ok": true,
+  "wikidata_m": 4389.0
+ },
+ "Q194215": {
+  "checked": "2026-11-18",
+  "dem_m": 736.2,
+  "name": "Île Amsterdam",
+  "ok": false,
+  "wikidata_m": 867.0
+ },
+ "Q204821": {
+  "checked": "2026-11-18",
+  "dem_m": 250.8,
+  "name": "Île Saint-Paul",
+  "ok": false,
+  "wikidata_m": 270.0
+ },
+ "Q2062890": {
+  "checked": "2026-11-18",
+  "dem_m": 2039.1,
+  "name": "Queen Mary's Peak",
+  "ok": true,
+  "wikidata_m": 2062.0
+ },
+ "Q2071883": {
+  "checked": "2026-11-18",
+  "dem_m": 121.9,
+  "name": "Santorini caldera",
+  "ok": false,
+  "wikidata_m": 367.0
+ },
+ "Q207421": {
+  "checked": "2026-11-18",
+  "dem_m": 5011.1,
+  "name": "Tungurahua volcano",
+  "ok": true,
+  "wikidata_m": 5016.0
+ },
+ "Q207678": {
+  "checked": "2026-11-18",
+  "dem_m": 2436.2,
+  "name": "Mount Sinabung",
+  "ok": true,
+  "wikidata_m": 2460.0
+ },
+ "Q207680": {
+  "checked": "2026-11-18",
+  "dem_m": 5021.8,
+  "name": "Mount Kazbek",
+  "ok": true,
+  "wikidata_m": 5033.0
+ },
+ "Q209064": {
+  "checked": "2026-11-18",
+  "dem_m": 1904.3,
+  "name": "Mont Ventoux",
+  "ok": true,
+  "wikidata_m": 1910.0
+ },
+ "Q2092228": {
+  "checked": "2026-11-18",
+  "dem_m": 4021.0,
+  "name": "Monte San Valentin",
+  "ok": true,
+  "wikidata_m": 4058.0
+ },
+ "Q211529": {
+  "checked": "2026-11-18",
+  "dem_m": 7051.1,
+  "name": "Khan Tengri",
+  "ok": true,
+  "wikidata_m": 7010.0
+ },
+ "Q214916": {
+  "checked": "2026-11-18",
+  "dem_m": 6730.4,
+  "name": "Llullaillaco",
+  "ok": true,
+  "wikidata_m": 6723.0
+ },
+ "Q215138": {
+  "checked": "2026-11-18",
+  "dem_m": 2855.0,
+  "name": "Mount Fitz Roy",
+  "ok": false,
+  "wikidata_m": 3406.0
+ },
+ "Q216059": {
+  "checked": "2026-11-18",
+  "dem_m": 1530.2,
+  "name": "Mount Tai",
+  "ok": true,
+  "wikidata_m": 1545.0
+ },
+ "Q217142": {
+  "checked": "2026-11-18",
+  "dem_m": 1071.8,
+  "name": "Snowdon",
+  "ok": true,
+  "wikidata_m": 1085.0
+ },
+ "Q217274": {
+  "checked": "2026-11-18",
+  "dem_m": 219.0,
+  "name": "Eldfell",
+  "ok": false,
+  "wikidata_m": 279.0
+ },
+ "Q229107": {
+  "checked": "2026-11-18",
+  "dem_m": 6448.3,
+  "name": "Mount Kailash",
+  "ok": false,
+  "wikidata_m": 6638.0
+ },
+ "Q233836": {
+  "checked": "2026-11-18",
+  "dem_m": 6883.1,
+  "name": "Ojos del Salado",
+  "ok": true,
+  "wikidata_m": 6893.0
+ },
+ "Q2340739": {
+  "checked": "2026-11-18",
+  "dem_m": 1221.9,
+  "name": "Dukono",
+  "ok": false,
+  "wikidata_m": 1335.0
+ },
+ "Q235539": {
+  "checked": "2026-11-18",
+  "dem_m": 4408.7,
+  "name": "Mount Whitney",
+  "ok": true,
+  "wikidata_m": 4421.0
+ },
+ "Q2386185": {
+  "checked": "2026-11-18",
+  "dem_m": 1846.9,
+  "name": "Krasheninnikov",
+  "ok": true,
+  "wikidata_m": 1856.0
+ },
+ "Q2417680": {
+  "checked": "2026-11-18",
+  "dem_m": 1129.0,
+  "name": "Ebeko",
+  "ok": false,
+  "wikidata_m": 1156.0
+ },
+ "Q242730": {
+  "checked": "2026-11-18",
+  "dem_m": 2563.6,
+  "name": "Mount Asama",
+  "ok": true,
+  "wikidata_m": 2568.0
+ },
+ "Q2470386": {
+  "checked": "2026-11-18",
+  "dem_m": 578.5,
+  "name": "Ayu-Dag",
+  "ok": true,
+  "wikidata_m": 572.0
+ },
+ "Q248770": {
+  "checked": "2026-11-18",
+  "dem_m": 3525.3,
+  "name": "Reventador",
+  "ok": true,
+  "wikidata_m": 3562.0
+ },
+ "Q27015522": {
+  "checked": "2026-11-18",
+  "dem_m": 384.0,
+  "name": "Fagradalsfjall",
+  "ok": true,
+  "wikidata_m": 385.0
+ },
+ "Q275662": {
+  "checked": "2026-11-18",
+  "dem_m": 3407.2,
+  "name": "Mount Hood",
+  "ok": true,
+  "wikidata_m": 3425.04
+ },
+ "Q2859566": {
+  "checked": "2026-11-18",
+  "dem_m": 409.3,
+  "name": "Arashiyama",
+  "ok": false,
+  "wikidata_m": 382.0
+ },
+ "Q288403": {
+  "checked": "2026-11-18",
+  "dem_m": 1415.5,
+  "name": "Sarychev Peak",
+  "ok": false,
+  "wikidata_m": 1496.0
+ },
+ "Q298119": {
+  "checked": "2026-11-18",
+  "dem_m": 2027.4,
+  "name": "Öræfajökull",
+  "ok": false,
+  "wikidata_m": 2110.0
+ },
+ "Q316401": {
+  "checked": "2026-11-18",
+  "dem_m": 1493.1,
+  "name": "Feldberg",
+  "ok": true,
+  "wikidata_m": 1494.2
+ },
+ "Q317074": {
+  "checked": "2026-11-18",
+  "dem_m": 769.2,
+  "name": "Vogelsberg",
+  "ok": true,
+  "wikidata_m": 773.0
+ },
+ "Q3375": {
+  "checked": "2026-11-18",
+  "dem_m": 2948.8,
+  "name": "Zugspitze",
+  "ok": true,
+  "wikidata_m": 2962.06
+ },
+ "Q39231": {
+  "checked": "2026-11-18",
+  "dem_m": 3765.5,
+  "name": "Mount Fuji",
+  "ok": true,
+  "wikidata_m": 3777.24
+ },
+ "Q404728": {
+  "checked": "2026-11-18",
+  "dem_m": 3694.4,
+  "name": "Aiguille du Midi",
+  "ok": false,
+  "wikidata_m": 3842.0
+ },
+ "Q408217": {
+  "checked": "2026-11-18",
+  "dem_m": 469.6,
+  "name": "Santiago Island",
+  "ok": false,
+  "wikidata_m": 920.0
+ },
+ "Q414577": {
+  "checked": "2026-11-18",
+  "dem_m": 1092.5,
+  "name": "Akademia Nauk",
+  "ok": false,
+  "wikidata_m": 1180.0
+ },
+ "Q43105": {
+  "checked": "2026-11-18",
+  "dem_m": 5629.6,
+  "name": "Mount Elbrus",
+  "ok": true,
+  "wikidata_m": 5642.0
+ },
+ "Q43876": {
+  "checked": "2026-11-18",
+  "dem_m": 1694.3,
+  "name": "Mount Batur",
+  "ok": true,
+  "wikidata_m": 1717.0
+ },
+ "Q48691": {
+  "checked": "2026-11-18",
+  "dem_m": 4993.5,
+  "name": "Mount Bona",
+  "ok": true,
+  "wikidata_m": 5045.0
+ },
+ "Q513": {
+  "checked": "2026-11-18",
+  "dem_m": 8736.0,
+  "name": "Mount Everest",
+  "ok": true,
+  "wikidata_m": 8850.0
+ },
+ "Q524": {
+  "checked": "2026-11-18",
+  "dem_m": 1285.9,
+  "name": "Mount Vesuvius",
+  "ok": true,
+  "wikidata_m": 1297.0
+ },
+ "Q538601": {
+  "checked": "2026-11-18",
+  "dem_m": 507.7,
+  "name": "Terevaka",
+  "ok": true,
+  "wikidata_m": 507.0
+ },
+ "Q572801": {
+  "checked": "2026-11-18",
+  "dem_m": 1912.8,
+  "name": "Mount Washington",
+  "ok": true,
+  "wikidata_m": 1917.0
+ },
+ "Q577700": {
+  "checked": "2026-11-18",
+  "dem_m": 2234.3,
+  "name": "Puyehue-Cordón Caulle",
+  "ok": true,
+  "wikidata_m": 2236.0
+ },
+ "Q583": {
+  "checked": "2026-11-18",
+  "dem_m": 4807.8,
+  "name": "Mont Blanc",
+  "ok": true,
+  "wikidata_m": 4810.02
+ },
+ "Q602538": {
+  "checked": "2026-11-18",
+  "dem_m": 797.5,
+  "name": "Ithome",
+  "ok": true,
+  "wikidata_m": 805.0
+ },
+ "Q614531": {
+  "checked": "2026-11-18",
+  "dem_m": 726.6,
+  "name": "Antsiferov Island",
+  "ok": false,
+  "wikidata_m": 761.0
+ },
+ "Q615337": {
+  "checked": "2026-11-18",
+  "dem_m": 2034.0,
+  "name": "Mount Mitchell",
+  "ok": true,
+  "wikidata_m": 2037.0
+ },
+ "Q620860": {
+  "checked": "2026-11-18",
+  "dem_m": 1458.6,
+  "name": "Mount Unzen",
+  "ok": true,
+  "wikidata_m": 1486.0
+ },
+ "Q692922": {
+  "checked": "2026-11-18",
+  "dem_m": 1077.0,
+  "name": "Novarupta",
+  "ok": false,
+  "wikidata_m": 841.0
+ },
+ "Q701516": {
+  "checked": "2026-11-18",
+  "dem_m": 561.4,
+  "name": "Kaiserstuhl",
+  "ok": true,
+  "wikidata_m": 557.0
+ },
+ "Q703922": {
+  "checked": "2026-11-18",
+  "dem_m": 336.9,
+  "name": "Drachenfels",
+  "ok": false,
+  "wikidata_m": 320.7
+ },
+ "Q712311": {
+  "checked": "2026-11-18",
+  "dem_m": 233.3,
+  "name": "Arthur's Seat",
+  "ok": false,
+  "wikidata_m": 251.0
+ },
+ "Q724367": {
+  "checked": "2026-11-18",
+  "dem_m": 4448.4,
+  "name": "Belukha Mountain",
+  "ok": true,
+  "wikidata_m": 4506.0
+ },
+ "Q725591": {
+  "checked": "2026-11-18",
+  "dem_m": null,
+  "name": "Mount Bazardüzü",
+  "ok": false,
+  "wikidata_m": 4466.0
+ },
+ "Q748040": {
+  "checked": "2026-11-18",
+  "dem_m": 850.8,
+  "name": "Mount Hiei",
+  "ok": true,
+  "wikidata_m": 848.1
+ },
+ "Q752994": {
+  "checked": "2026-11-18",
+  "dem_m": 596.6,
+  "name": "Krafla",
+  "ok": false,
+  "wikidata_m": 818.0
+ },
+ "Q76309": {
+  "checked": "2026-11-18",
+  "dem_m": 1382.5,
+  "name": "Mount Pelée",
+  "ok": true,
+  "wikidata_m": 1397.0
+ },
+ "Q770496": {
+  "checked": "2026-11-18",
+  "dem_m": 5462.1,
+  "name": "Mount Saint Elias",
+  "ok": true,
+  "wikidata_m": 5500.0
+ },
+ "Q783798": {
+  "checked": "2026-11-18",
+  "dem_m": 1739.9,
+  "name": "Mount Cleveland",
+  "ok": true,
+  "wikidata_m": 1730.0
+ },
+ "Q791652": {
+  "checked": "2026-11-18",
+  "dem_m": 2728.5,
+  "name": "Avachinsky",
+  "ok": true,
+  "wikidata_m": 2741.0
+ },
+ "Q791817": {
+  "checked": "2026-11-18",
+  "dem_m": 1343.3,
+  "name": "Mount Awu",
+  "ok": true,
+  "wikidata_m": 1320.0
+ },
+ "Q80344": {
+  "checked": "2026-11-18",
+  "dem_m": 2895.6,
+  "name": "Mount Olympus",
+  "ok": true,
+  "wikidata_m": 2917.73
+ },
+ "Q827728": {
+  "checked": "2026-11-18",
+  "dem_m": 3774.0,
+  "name": "Mount Kerinci",
+  "ok": true,
+  "wikidata_m": 3805.0
+ },
+ "Q830766": {
+  "checked": "2026-11-18",
+  "dem_m": 2949.0,
+  "name": "Bezymianny",
+  "ok": false,
+  "wikidata_m": 2882.0
+ },
+ "Q83497": {
+  "checked": "2026-11-18",
+  "dem_m": 1728.9,
+  "name": "Mount Rushmore",
+  "ok": true,
+  "wikidata_m": 1745.0
+ },
+ "Q858808": {
+  "checked": "2026-11-18",
+  "dem_m": 2673.0,
+  "name": "Osorno",
+  "ok": true,
+  "wikidata_m": 2652.0
+ },
+ "Q862760": {
+  "checked": "2026-11-18",
+  "dem_m": 3512.4,
+  "name": "Kronotsky",
+  "ok": true,
+  "wikidata_m": 3482.0
+ },
+ "Q864337": {
+  "checked": "2026-11-18",
+  "dem_m": 1538.8,
+  "name": "Karymsky",
+  "ok": true,
+  "wikidata_m": 1536.0
+ },
+ "Q914225": {
+  "checked": "2026-11-18",
+  "dem_m": 539.1,
+  "name": "Inaccessible Island",
+  "ok": false,
+  "wikidata_m": 511.0
+ },
+ "Q991004": {
+  "checked": "2026-11-18",
+  "dem_m": 795.1,
+  "name": "Broutona",
+  "ok": true,
+  "wikidata_m": 801.0
+ }
+}
