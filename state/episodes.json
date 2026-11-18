@@ -15,10 +15,13 @@
   {
    "slug": "ladder-heights",
    "short": "ladder_heights",
-   "status": "ready",
+   "status": "uploaded",
    "topic": "heights-saturnv-everest",
    "release": "ep-ladder-heights",
-   "rendered": "2026-11-18"
+   "rendered": "2026-11-18",
+   "video_id": "q3gVdCFsnKE",
+   "publish_at": "2026-11-20T17:00:00Z",
+   "title": "Burj Khalifa vs Mount Everest: 828 m vs 8,849 m"
   },
   {
    "slug": "saturnv-pyramid",
