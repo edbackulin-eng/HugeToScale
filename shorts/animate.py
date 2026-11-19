@@ -567,7 +567,11 @@ def main():
         sc.cycles.samples = 8
     rig = Rig()
     t0 = time.time()
-    extra = SCENES[name](preview, rig)
+    if name in SCENES:
+        extra = SCENES[name](preview, rig)
+    else:                                   # ladders from data/ladder-topics.json (shorts/ladders.py)
+        import ladder
+        extra = ladder.build(name, preview, rig)
     build_s = time.time() - t0
     info = {"short": name, "preview": preview, "frames": [a, b, step], "checks": T.CHECKS, **extra,
             "build_seconds": round(build_s, 1)}
