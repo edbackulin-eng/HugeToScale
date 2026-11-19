@@ -6,6 +6,7 @@
 
 client_secret.json is the Desktop OAuth client of Google Cloud project yt-factory-510411 (owner 18.11); it is git-ignored.
 Scopes: youtube.upload (upload) + youtube.readonly (read the channel's full video list for the duplicate guard).
++ yt-analytics.readonly (views, % viewed, subscribers per Short for the report after 10 Shorts).
 The token stays in youtube_token.json (git-ignored) and in the secret; it is never printed.
 """
 import json
@@ -19,7 +20,8 @@ sys.path.insert(0, str(ROOT))
 
 REPO = "edbackulin-eng/HugeToScale"
 TOKEN_FILE = ROOT / "youtube_token.json"
-SCOPES = ["https://www.googleapis.com/auth/youtube.upload", "https://www.googleapis.com/auth/youtube.readonly"]
+SCOPES = ["https://www.googleapis.com/auth/youtube.upload", "https://www.googleapis.com/auth/youtube.readonly",
+          "https://www.googleapis.com/auth/yt-analytics.readonly"]   # analytics: report after 10 Shorts (owner 19.11)
 
 
 def authorize(client_secret):

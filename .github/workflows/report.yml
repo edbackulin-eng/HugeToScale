@@ -1,0 +1,32 @@
+name: report
+# Report after the first 10 published Shorts (owner 19.11): views, % viewed, subscribers per Short, best topics.
+# Daily check; the report is made once, 3 days after the 10th Short went public (analytics settle), into
+# reports/report-10.md. force=1 prints a test report with what is published so far (nothing committed).
+on:
+  schedule:
+    - cron: "30 8 * * *"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "1 = print a test report now"
+        default: "0"
+concurrency:
+  group: report
+  cancel-in-progress: false
+permissions:
+  contents: write
+  issues: write
+jobs:
+  report:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+      - run: pip install --quiet google-api-python-client google-auth
+      - env:
+          GH_TOKEN: ${{ github.token }}
+          YT_TOKEN_JSON: ${{ secrets.YT_TOKEN_JSON }}
+        run: python automation/report10.py ${{ inputs.force == '1' && '--force' || '' }}
