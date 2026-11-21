@@ -47,12 +47,14 @@
    "slug": "ladder-volcanoes",
    "short": "ladder_volcanoes",
    "topic": "volcanoes",
-   "status": "queued",
+   "status": "ready",
    "added": "2026-11-18",
    "music": {
     "id": "oga-ancient-mysteries",
     "start": "auto"
-   }
+   },
+   "release": "ep-ladder-volcanoes",
+   "rendered": "2026-11-21"
   }
  ]
 }
