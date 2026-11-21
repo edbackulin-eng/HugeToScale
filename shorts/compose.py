@@ -277,7 +277,7 @@ def main():
         if not dst.exists():
             dst.hardlink_to(f) if hasattr(dst, "hardlink_to") else dst.write_bytes(f.read_bytes())
     rendered = len(frames)
-    hold = s["seconds"] - rendered * step / P.FPS
+    hold = max(0.0, s["seconds"] - rendered * step / P.FPS)   # a preview (every 3rd frame) can overshoot
     tracks = sorted(chunks.glob("**/ladder_track.json"))
     track = json.loads(tracks[0].read_text()) if tracks else None
     caption_frames(short, total, work / "cap", track)
