@@ -99,6 +99,9 @@ def register(shorts, ladders, ladder_short):
         if name in shorts:
             continue
         ladders[name] = ladder_from_spec(spec)
+        if tp.get("type") == "volcanoes":           # dark basalt rock (shorts/ladder.generic_zones)
+            for st in ladders[name]["steps"]:
+                st["volcanic"] = st["key"] not in MODELS
         sh = ladder_short(name)
         sh.update(queries=spec["queries"], titles=spec["titles"], hashtags=spec["hashtags"], intro=spec["intro"],
                   music=episode_music(name) or {"id": "auto", "start": "auto"}, topic=tp["id"])

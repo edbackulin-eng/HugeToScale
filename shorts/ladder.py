@@ -109,8 +109,20 @@ ZONES = {  # (height m, colour) bands for real-looking mountains, plus snow line
 }
 
 
-def mountain_material(key, top):
-    bands, snow_line, max_slope = ZONES[key]
+def generic_zones(lat, top, volcanic=False):
+    """Bands for any summit from its latitude: forest up to the tree line, then scrub, bare rock (dark basalt for a
+    volcano), snow above the climatic snow line (tropics ~4,900 m, 45 deg ~2,700 m, 65 deg ~900 m)."""
+    a = abs(lat or 30.0)
+    tree = max(300.0, 3800.0 - max(0.0, a - 20) * 62)
+    snow = max(500.0, 4900.0 - max(0.0, a - 20) * 90)
+    rock = (0.12, 0.11, 0.10) if volcanic else (0.20, 0.18, 0.15)
+    bands = [(0, (0.07, 0.12, 0.05)), (0.6 * tree, (0.09, 0.13, 0.06)), (tree, (0.16, 0.14, 0.09)),
+             (tree + 0.35 * max(300.0, snow - tree), rock), (max(top, tree + 600.0), tuple(c * 0.9 for c in rock))]
+    return bands, snow, 0.5
+
+
+def mountain_material(key, top, lat=None, volcanic=False):
+    bands, snow_line, max_slope = ZONES[key] if key in ZONES else generic_zones(lat, top, volcanic)
     m = bpy.data.materials.new(f"{key} relief")
     m.use_nodes = True
     nt = m.node_tree
@@ -233,7 +245,7 @@ def mountain(step):
     ob = bpy.data.objects.new(step["name"].title(), me)
     bpy.context.collection.objects.link(ob)
     ob.location = (step["x"], step["y"], 0)
-    ob.data.materials.append(mountain_material(step["key"], meta["summit_m"]))
+    ob.data.materials.append(mountain_material(step["key"], meta["summit_m"], step.get("lat"), step.get("volcanic")))
     T.check(f"{step['name'].title()} summit in the scene vs {step['h']} m", float(Z.max()), step["h"], tol=0.01,
             note="Copernicus DEM relief, summit point restored to the surveyed height")
     return ob
