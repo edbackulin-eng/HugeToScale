@@ -244,7 +244,11 @@ def build_text(short, fetched):
     lines.append("- Font: Anton by Vernon Adams, SIL Open Font License 1.1")
     steps = P.LADDERS.get(s.get("ladder"), {}).get("steps", [])
     if short == "saturnv_pyramid" or any(st["key"] in ("saturnv", "pyramid", "burj") for st in steps):
-        lines.append("- 3D models built for this video from published dimensions (no third-party models)")
+        lines.append("- Saturn V, Great Pyramid, Burj Khalifa: 3D models built for this video from published dimensions")
+    import library
+    for cr in dict.fromkeys((library.get(st["key"]) or {}).get("credit") for st in steps):
+        if cr:
+            lines.append(f"- {cr}")
     lines.append("- Map data © OpenStreetMap contributors" if any("OpenStreetMap" in i["licence"] for i in fetched.values())
                  else "")
     # owner 21.11: no hashtags in the description (exactly 3 go into the title, automation/publish.final_title) and

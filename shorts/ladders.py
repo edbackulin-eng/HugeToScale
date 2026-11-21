@@ -33,27 +33,44 @@ def timing(n):
     return t, overview, rewind, round(rewind + 0.8, 2)
 
 
+def is_object(s):
+    """A modelled object (library), not a summit from the DEM."""
+    return "lat" not in s
+
+
 def layout(steps):
-    """Models stand in front (y = 0) on the left; summits stand further back, each taller one behind and to the right of
-    the last, their footprints never touching (ortho camera: depth never changes a size)."""
+    """Objects stand in front (y = 0) from the left, side by side with a gap; summits stand further back, each taller
+    one behind and to the right of the last, their footprints never touching (ortho camera: depth never changes a
+    size). The approved trio Saturn V / pyramid / Burj keeps its original spacing."""
+    import library
     out = []
     x = y = 0.0
     prev_r = 0.0
-    models = [s for s in steps if s["key"] in MODELS]
-    mx = -4460.0 if models else 0.0
+    objs = [s for s in steps if is_object(s)]
+    trio = {"saturnv": 160, "pyramid": 210, "burj": 0}
+    mx = -4460.0 if objs and all(s["key"] in trio for s in objs) else 0.0
+    prev = None
     for s in steps:
         s = dict(s)
         h = s["h"]
-        if s["key"] in MODELS:
-            s["x"], s["y"] = mx, 0
-            mx += {"saturnv": 160, "pyramid": 210, "burj": 0}[s["key"]]
+        if is_object(s):
+            lib = library.get(s["key"]) or {}
+            s.setdefault("w", lib.get("w", 0.2 * h))
+            if s["key"] in trio and mx < 0:
+                s["x"], s["y"] = mx, 0
+                mx += trio[s["key"]]
+            else:
+                if prev is not None:
+                    mx += prev["w"] / 2 + s["w"] / 2 + 0.15 * max(h, prev["h"])
+                s["x"], s["y"] = round(mx, 2), 0
+            prev = s
         else:
             r_in, r_out = max(0.7 * h, 1500.0), max(1.25 * h, 3500.0)
             half = r_out + 500.0
             px = int(min(720, max(400, 2 * half / 25)))
-            if not out or all(o["key"] in MODELS for o in out):
-                x = (mx + 1500.0 + 0.3 * h) if models else 0.0
-                y = r_out + (2500.0 if models else 0.0)
+            if not out or all(is_object(o) for o in out):
+                x = (mx + 1500.0 + 0.3 * h) if objs else 0.0
+                y = r_out + (2500.0 if objs else 0.0)
             else:
                 x += 0.42 * h
                 y += prev_r + r_out
@@ -102,7 +119,7 @@ def register(shorts, ladders, ladder_short):
         ladders[name] = ladder_from_spec(spec)
         if tp.get("type") == "volcanoes":           # dark basalt rock (shorts/ladder.generic_zones)
             for st in ladders[name]["steps"]:
-                st["volcanic"] = st["key"] not in MODELS
+                st["volcanic"] = not is_object(st)
         sh = ladder_short(name)
         sh.update(queries=spec["queries"], titles=spec["titles"], hashtags=spec["hashtags"], intro=spec["intro"],
                   music=episode_music(name) or {"id": "auto", "start": "auto"}, topic=tp["id"])

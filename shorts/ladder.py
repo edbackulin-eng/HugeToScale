@@ -217,6 +217,50 @@ def burj_khalifa(x, y):
     return BM.group(parts, "Burj Khalifa", x, y)
 
 
+def lib_object(step):
+    """A library object (data/objects.json): the model imported, joined into one mesh, stood upright with its base
+    at z = 0 (origin at the base centre, so the ladder can grow it with scale.z), scaled to the sourced height."""
+    import library
+    o = library.get(step["key"])
+    path = library.model_path(step["key"])
+    before = set(bpy.data.objects)
+    bpy.ops.import_scene.gltf(filepath=str(path))
+    new = [ob for ob in bpy.data.objects if ob not in before]
+    meshes = [ob for ob in new if ob.type == "MESH"]
+    for ob in new:                                  # bake parents' transforms, drop empties / cameras / lights
+        if ob.type == "MESH":
+            mw = ob.matrix_world.copy()
+            ob.parent = None
+            ob.matrix_world = mw
+    for ob in new:
+        if ob.type != "MESH":
+            bpy.data.objects.remove(ob)
+    bpy.ops.object.select_all(action="DESELECT")
+    for ob in meshes:
+        ob.select_set(True)
+    bpy.context.view_layer.objects.active = meshes[0]
+    if len(meshes) > 1:
+        bpy.ops.object.join()
+    ob = bpy.context.view_layer.objects.active
+    rx, ry, rz = (math.radians(a) for a in o["model"].get("rot", (0, 0, 0)))
+    ob.rotation_euler = (ob.rotation_euler.x + rx, ob.rotation_euler.y + ry, ob.rotation_euler.z + rz)
+    bpy.ops.object.transform_apply(location=True, rotation=True, scale=True)
+    (x0, x1), (y0, y1), (z0, z1) = O.world_bounds(ob)
+    for v in ob.data.vertices:                      # origin at the base centre
+        v.co.x -= (x0 + x1) / 2
+        v.co.y -= (y0 + y1) / 2
+        v.co.z -= z0
+    k = step["h"] / (z1 - z0)
+    ob.scale = (k, k, k)
+    bpy.ops.object.transform_apply(location=False, rotation=False, scale=True)
+    ob.location = (step["x"], step["y"], 0)
+    ob.name = o["name"].title()
+    T.check(f"{o['name'].title()} height", O.world_bounds(ob)[2][1], step["h"])
+    (x0, x1), (y0, y1), _ = O.world_bounds(ob)
+    step["model_w"] = round(x1 - x0, 2)
+    return ob
+
+
 def mountain(step):
     name = step["dem"][0]
     meta = json.loads((A.CACHE / f"dem_{name}.json").read_text())
@@ -259,7 +303,7 @@ def framings(L):
     out = []
     left = None
     for s in L["steps"]:
-        half_w = s.get("half_w") or {"saturnv": 8, "pyramid": 116, "burj": 75}.get(s["key"], 900)
+        half_w = s.get("half_w") or {"saturnv": 8, "pyramid": 116, "burj": 75}.get(s["key"]) or             (0.5 * s["w"] if s.get("w") else 900)
         lo, hi = s["x"] - half_w, s["x"] + half_w
         left = lo if left is None else min(left, lo)
         S = TOP_FILL * s["h"]
@@ -360,8 +404,10 @@ def build(name, preview, rig):
         elif k == "burj":
             ob = burj_khalifa(s["x"], s["y"])
             T.check("Burj Khalifa height", O.world_bounds(ob)[2][1], s["h"])
-        else:
+        elif "dem" in s:
             ob = mountain(s)
+        else:
+            ob = lib_object(s)
         objs.append(ob)
     for m in bpy.data.materials:
         if m.name.endswith("relief"):

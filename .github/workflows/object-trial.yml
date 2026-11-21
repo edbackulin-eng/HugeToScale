@@ -1,0 +1,57 @@
+name: object-trial
+# Owner 21.11: every new library object (data/objects.json) gets a trial frame before it is used in a Short.
+# One full-resolution still per object; the frames are judged and the object approved or rejected in the library.
+on:
+  workflow_dispatch:
+    inputs:
+      keys:
+        description: "comma-separated object keys"
+        required: true
+permissions:
+  contents: read
+jobs:
+  plan:
+    runs-on: ubuntu-24.04
+    outputs:
+      keys: ${{ steps.k.outputs.keys }}
+    steps:
+      - id: k
+        run: echo "keys=$(echo '${{ inputs.keys }}' | python3 -c 'import sys,json;print(json.dumps([x.strip() for x in sys.stdin.read().split(",") if x.strip()]))')" >> "$GITHUB_OUTPUT"
+  trial:
+    needs: plan
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      max-parallel: 3   # account limit 20 jobs at once, shared with the other channels
+      matrix:
+        key: ${{ fromJson(needs.plan.outputs.keys) }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+      - run: pip install --quiet pillow numpy
+      - run: |
+          python shorts/data_prep.py hdri
+          python shorts/data_prep.py model ${{ matrix.key }}
+      - id: blender_cache
+        uses: actions/cache@v4
+        with:
+          path: tools/blender
+          key: blender-4.2.3-linux
+      - if: steps.blender_cache.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p tools && cd tools
+          curl -sSfL --retry 2 -o b.tar.xz https://download.blender.org/release/Blender4.2/blender-4.2.3-linux-x64.tar.xz
+          echo "3a64efd1982465395abab4259b4091d5c8c56054c7267e9633e4f702a71ea3f4  b.tar.xz" | sha256sum -c
+          tar -xf b.tar.xz && rm b.tar.xz && mv blender-4.2.3-linux-x64 blender
+      - run: |
+          tools/blender/blender -b --factory-startup -P shorts/object_trial.py -- ${{ matrix.key }} "$PWD/trial" 2>&1 \
+            | grep -vE "^(Fra:|Read |TBB)| Synchronizing| Updating" | tail -40
+          test -f trial/trial_${{ matrix.key }}.png
+      - uses: actions/upload-artifact@v4
+        with:
+          name: trial-${{ matrix.key }}
+          path: trial/
+          retention-days: 7

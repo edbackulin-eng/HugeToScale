@@ -157,6 +157,31 @@ def ne(layer):
     print("ne", layer)
 
 
+def model(key):
+    """A library object's 3D model (data/objects.json) into assets/models/ (licence recorded)."""
+    import library
+    o = library.get(key)
+    m = o["model"]
+    dst = library.model_path(key)
+    if m["type"] == "builtin" or dst.exists():
+        print("model", key, "ready")
+        return
+    dst.parent.mkdir(parents=True, exist_ok=True)
+    if m["type"] == "glb":
+        dst.write_bytes(fetch(m["url"]))
+        record(dst, m["url"], m["licence"], m.get("page"))
+    elif m["type"] == "polyhaven":
+        files = json.loads(fetch(f"https://api.polyhaven.com/files/{m['id']}"))
+        g = files["gltf"][m.get("res", "1k")]["gltf"]
+        dst.write_bytes(fetch(g["url"]))
+        for rel, inc in g.get("include", {}).items():
+            q = dst.parent / rel
+            q.parent.mkdir(parents=True, exist_ok=True)
+            q.write_bytes(fetch(inc["url"]))
+        record(dst, f"https://polyhaven.com/a/{m['id']}", "CC0 1.0", "https://polyhaven.com/license")
+    print("model", key, dst.stat().st_size)
+
+
 def nasa(folder):
     base = "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/master/3D%20Models/"
     url = base + urllib.parse.quote(folder) + "/" + urllib.parse.quote(folder) + ".glb"
@@ -381,6 +406,8 @@ if __name__ == "__main__":
         osm(sys.argv[2], float(sys.argv[3]), float(sys.argv[4]), float(sys.argv[5]))
     elif cmd == "borders":
         borders()
+    elif cmd == "model":
+        model(sys.argv[2])
     elif cmd == "ne":
         ne(sys.argv[2])
     elif cmd == "dem":

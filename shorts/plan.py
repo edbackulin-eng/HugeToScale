@@ -190,7 +190,8 @@ def ladder_short(name):
     caps.append(cap(L["rewind"] + 0.5, 99, 280, (s0["name"], 104, WHITE), (s0["value"], 124, YELLOW)))
     return {
         "renderer": "blender", "seconds": L["seconds"], "hold": 0.0, "appear": 0.0, "ladder": name,
-        "data": [["hdri"]] + [["copdem", *s["dem"]] for s in st if "dem" in s],
+        "data": [["hdri"]] + [["copdem", *s["dem"]] for s in st if "dem" in s] +
+                [["model", s["key"]] for s in st if "dem" not in s and s["key"] not in ("saturnv", "pyramid", "burj")],
         "captions": caps,
         "music": {"id": "oga-generic-trailer-music", "start": "auto"},   # Texas/France has Inevitable (14-day rule)
         "queries": ["burj khalifa vs mount everest", "everest height comparison", "tallest things on earth", "mountain size comparison 3d"],
