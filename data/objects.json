@@ -1,39 +1,158 @@
 {
  "note": "Object library for size ladders (owner 21.11). Every object: a real, recognisable thing; its height from two sources; a 3D model that is CC0 / public domain (NASA, Poly Haven, Smithsonian CC0, MakeHuman CC0), CC BY with attribution, or modelled here from official dimensions. A new object gets a trial frame first (object-trial.yml); 'approved' objects are reused, 'rejected' ones (toy-like, wrong) are never used. Public-domain statues only; buildings without logos or advertising.",
  "objects": {
-  "saturnv": {"name": "SATURN V", "kind": "rocket", "h": 110.6, "w": 10.1, "model": {"type": "builtin"},
-              "sources": ["NASA: Saturn V 363 ft (110.6 m)", "Wikidata Q54363: 110.6 m"],
-              "status": "approved", "approved": "2026-11-17", "credit": null},
-  "pyramid": {"name": "GREAT PYRAMID", "kind": "monument", "h": 138.5, "w": 230.3, "model": {"type": "builtin"},
-              "sources": ["Britannica: present height about 138.5 m", "Wikipedia Great Pyramid of Giza: 138.5 m"],
-              "status": "approved", "approved": "2026-11-17", "credit": null},
-  "burj": {"name": "BURJ KHALIFA", "kind": "skyscraper", "h": 828.0, "w": 150.0, "model": {"type": "builtin"},
-           "sources": ["burjkhalifa.ae: 828 m", "CTBUH Skyscraper Center: 828 m"],
-           "status": "approved", "approved": "2026-11-18", "credit": null},
-  "astronaut": {"name": "ASTRONAUT", "kind": "person", "h": 1.8, "w": 0.7,
-                "model": {"type": "glb", "url": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/master/3D%20Models/Mercury%20Spacesuit/Mercury%20Spacesuit.glb",
-                          "licence": "NASA media (public domain, no endorsement)", "page": "nasa3d.arc.nasa.gov"},
-                "sources": ["NASA Project Mercury selection: astronauts no taller than 5 ft 11 in (1.80 m)",
-                            "Smithsonian NASM: Mercury pressure suit, fitted to the astronaut"],
-                "status": "candidate", "credit": "3D model: NASA 3D Resources"},
-  "redstone": {"name": "MERCURY-REDSTONE", "kind": "rocket", "h": 25.41, "w": 1.78,
-               "model": {"type": "glb", "url": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/master/3D%20Models/Redstone%203%20(Freedom%207)/Redstone%203%20(Freedom%207).glb",
-                         "licence": "NASA media (public domain, no endorsement)", "page": "nasa3d.arc.nasa.gov"},
-               "sources": ["NASA: Mercury-Redstone 83 ft (25.3 m) with escape tower", "Wikipedia Mercury-Redstone Launch Vehicle: 25.41 m"],
-               "status": "candidate", "credit": "3D model: NASA 3D Resources"},
-  "atlas": {"name": "MERCURY-ATLAS", "kind": "rocket", "h": 28.7, "w": 4.9,
-            "model": {"type": "glb", "url": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/master/3D%20Models/Atlas%206%20(Friendship%207)/Atlas%206%20(Friendship%207).glb",
-                      "licence": "NASA media (public domain, no endorsement)", "page": "nasa3d.arc.nasa.gov"},
-            "sources": ["NASA: Mercury-Atlas 95 ft (29 m) with escape tower", "Wikipedia Atlas LV-3B: 28.7 m"],
-            "status": "candidate", "credit": "3D model: NASA 3D Resources"},
-  "shuttle": {"name": "SPACE SHUTTLE", "kind": "rocket", "h": 56.1, "w": 23.8,
-              "model": {"type": "glb", "url": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/master/3D%20Models/Space%20Shuttle%20(A)/Space%20Shuttle%20(A).glb",
-                        "licence": "NASA media (public domain, no endorsement)", "page": "nasa3d.arc.nasa.gov"},
-              "sources": ["NASA Space Shuttle basics: stack 184.2 ft (56.1 m)", "Wikipedia Space Shuttle: 56.1 m"],
-              "status": "candidate", "credit": "3D model: NASA 3D Resources"},
-  "hyperion": {"name": "HYPERION (REDWOOD)", "kind": "tree", "h": 116.07, "w": 20.0,
-               "model": {"type": "polyhaven", "id": "fir_tree_01", "res": "1k", "licence": "CC0 1.0", "page": "polyhaven.com/a/fir_tree_01"},
-               "sources": ["US National Park Service (Redwood NP): Hyperion 380 ft (116 m)", "Wikipedia Hyperion (tree): 116.07 m (2019)"],
-               "status": "candidate", "credit": "3D model: Poly Haven (CC0), stand-in conifer scaled to the measured height"}
+  "saturnv": {
+   "name": "SATURN V",
+   "kind": "rocket",
+   "h": 110.6,
+   "w": 10.1,
+   "model": {
+    "type": "builtin"
+   },
+   "sources": [
+    "NASA: Saturn V 363 ft (110.6 m)",
+    "Wikidata Q54363: 110.6 m"
+   ],
+   "status": "approved",
+   "approved": "2026-11-17",
+   "credit": null
+  },
+  "pyramid": {
+   "name": "GREAT PYRAMID",
+   "kind": "monument",
+   "h": 138.5,
+   "w": 230.3,
+   "model": {
+    "type": "builtin"
+   },
+   "sources": [
+    "Britannica: present height about 138.5 m",
+    "Wikipedia Great Pyramid of Giza: 138.5 m"
+   ],
+   "status": "approved",
+   "approved": "2026-11-17",
+   "credit": null
+  },
+  "burj": {
+   "name": "BURJ KHALIFA",
+   "kind": "skyscraper",
+   "h": 828.0,
+   "w": 150.0,
+   "model": {
+    "type": "builtin"
+   },
+   "sources": [
+    "burjkhalifa.ae: 828 m",
+    "CTBUH Skyscraper Center: 828 m"
+   ],
+   "status": "approved",
+   "approved": "2026-11-18",
+   "credit": null
+  },
+  "astronaut": {
+   "name": "ASTRONAUT",
+   "kind": "person",
+   "h": 1.8,
+   "w": 0.7,
+   "model": {
+    "type": "glb",
+    "url": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/master/3D%20Models/Mercury%20Spacesuit/Mercury%20Spacesuit.glb",
+    "licence": "NASA media (public domain, no endorsement)",
+    "page": "nasa3d.arc.nasa.gov"
+   },
+   "sources": [
+    "NASA Project Mercury selection: astronauts no taller than 5 ft 11 in (1.80 m)",
+    "Smithsonian NASM: Mercury pressure suit, fitted to the astronaut"
+   ],
+   "status": "approved",
+   "credit": "3D model: NASA 3D Resources",
+   "approved": "2026-11-21",
+   "trial": "realistic white Mercury suit, correct proportions"
+  },
+  "redstone": {
+   "name": "MERCURY-REDSTONE",
+   "kind": "rocket",
+   "h": 25.41,
+   "w": 1.78,
+   "model": {
+    "type": "glb",
+    "url": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/master/3D%20Models/Redstone%203%20(Freedom%207)/Redstone%203%20(Freedom%207).glb",
+    "licence": "NASA media (public domain, no endorsement)",
+    "page": "nasa3d.arc.nasa.gov"
+   },
+   "sources": [
+    "NASA: Mercury-Redstone 83 ft (25.3 m) with escape tower",
+    "Wikipedia Mercury-Redstone Launch Vehicle: 25.41 m"
+   ],
+   "status": "rejected",
+   "credit": "3D model: NASA 3D Resources",
+   "rejected": "2026-11-21",
+   "why": "the NASA file is only the Mercury capsule, not the rocket"
+  },
+  "atlas": {
+   "name": "MERCURY-ATLAS",
+   "kind": "rocket",
+   "h": 28.7,
+   "w": 4.9,
+   "model": {
+    "type": "glb",
+    "url": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/master/3D%20Models/Atlas%206%20(Friendship%207)/Atlas%206%20(Friendship%207).glb",
+    "licence": "NASA media (public domain, no endorsement)",
+    "page": "nasa3d.arc.nasa.gov"
+   },
+   "sources": [
+    "NASA: Mercury-Atlas 95 ft (29 m) with escape tower",
+    "Wikipedia Atlas LV-3B: 28.7 m"
+   ],
+   "status": "rejected",
+   "credit": "3D model: NASA 3D Resources",
+   "rejected": "2026-11-21",
+   "why": "the NASA file is only the Mercury capsule, not the rocket"
+  },
+  "shuttle": {
+   "name": "SPACE SHUTTLE",
+   "kind": "rocket",
+   "h": 56.1,
+   "w": 23.8,
+   "model": {
+    "type": "glb",
+    "url": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/master/3D%20Models/Space%20Shuttle%20(A)/Space%20Shuttle%20(A).glb",
+    "licence": "NASA media (public domain, no endorsement)",
+    "page": "nasa3d.arc.nasa.gov",
+    "rot": [
+     90,
+     0,
+     0
+    ]
+   },
+   "sources": [
+    "NASA Space Shuttle basics: stack 184.2 ft (56.1 m)",
+    "Wikipedia Space Shuttle: 56.1 m"
+   ],
+   "status": "candidate",
+   "credit": "3D model: NASA 3D Resources",
+   "trial": "first trial: lying on its side (seen from the engines); retried upright"
+  },
+  "hyperion": {
+   "name": "HYPERION (REDWOOD)",
+   "kind": "tree",
+   "h": 116.07,
+   "w": 20.0,
+   "model": {
+    "type": "polyhaven",
+    "id": "fir_tree_01",
+    "res": "1k",
+    "licence": "CC0 1.0",
+    "page": "polyhaven.com/a/fir_tree_01"
+   },
+   "sources": [
+    "US National Park Service (Redwood NP): Hyperion 380 ft (116 m)",
+    "Wikipedia Hyperion (tree): 116.07 m (2019)"
+   ],
+   "status": "rejected",
+   "credit": "3D model: Poly Haven (CC0), stand-in conifer scaled to the measured height",
+   "rejected": "2026-11-21",
+   "why": "the stand-in fir looks like a thin sapling, not a giant redwood (toy-like at 116 m); the file also holds several trees"
+  }
  }
 }
