@@ -197,7 +197,7 @@ def spec_step(p, verified):
                         f"Copernicus DEM GLO-30, summit measured {v['dem_m']} m (within 2 %)"]}
 
 
-def titles_for(seeds, keys, steps):
+def titles_for(seeds, keys, steps, noun="Peaks"):
     """Up to 3 titles: a real YouTube suggestion (for one of the seeds, mentioning one of the keys) + the numbers."""
     top = steps[-1]
     used, sugg = [], []
@@ -212,7 +212,7 @@ def titles_for(seeds, keys, steps):
     out = []
     for s in sugg[:8]:
         s = title_case(s)
-        for t in (f"{s}: {n} Peaks to {top['value']}", f"{s}: {top['value']} at True Scale",
+        for t in (f"{s}: {n} {noun} to {top['value']}", f"{s}: {top['value']} at True Scale",
                   f"{s} ({steps[0]['value']} to {top['value']})"):
             if len(t) <= 60 and t not in out and re.search(r"\d", t):
                 out.append(t)
@@ -401,8 +401,19 @@ def search_peak(name):
 
 def resolve_named(tp, peaks, verified):
     """Approved topics written as names ("Fuji 3,776 m"): matched to Wikidata summits by name and height."""
+    import library
     sp = []
     for label in tp["steps"]:
+        if label.startswith("obj:"):                # a library object (data/objects.json): only approved ones
+            o = library.get(label[4:])
+            if not o or o["status"] != "approved":
+                print("  waiting for object:", label[4:], (o or {}).get("status"))
+                return None
+            v = o["h"]
+            sp.append({"key": label[4:], "name": o["name"], "h": v,
+                       "value": f"{v:,.1f} m".replace(".0 m", " m") if v < 100 else f"{round(v):,} m",
+                       "sources": o["sources"]})
+            continue
         m = re.match(r"(.+?)\s+~?([\d,]+) m$", label)
         if not m:
             return None
@@ -431,19 +442,20 @@ def main():
     print(len(peaks), "Wikidata summits")
     # approved topics of the peaks engine that are still names only
     for tp in topics:
-        if tp.get("engine") == "peaks" and not tp.get("spec") and tp["status"] == "planned":
+        if tp.get("engine") in ("peaks", "objects") and not tp.get("spec") and tp["status"] == "planned":
             sp = resolve_named(tp, peaks, verified)
             if sp:
-                titles, used = titles_for(tp.get("seeds", []), tp.get("keys", []), sp)
+                titles, used = titles_for(tp.get("seeds", []), tp.get("keys", []), sp,
+                                          "Steps" if tp["engine"] == "objects" else "Peaks")
                 tp["spec"] = {"steps": sp, "titles": tp.get("titles") or titles, "queries": tp.get("queries") or used,
                               "hashtags": tp.get("hashtags") or ["#sizecomparison", "#mountains", "#3d", "#scale"],
-                              "intro": tp.get("intro") or (f"{len(sp)} real mountains, each taller than the last, side "
+                              "intro": tp.get("intro") or (f"{len(sp)} real {'things' if tp['engine'] == 'objects' else 'mountains'}, each taller than the last, side "
                                                            "by side at true scale (Copernicus DEM elevation data): "
                                                            + ", ".join(s["name"].title() for s in sp) + ".")}
                 print("resolved", tp["id"], tp["spec"]["titles"][:1])
     def queue():
         planned = [t for t in topics if t["status"] == "planned"]
-        return planned, [t for t in planned if t.get("engine") == "peaks" and t.get("spec")]
+        return planned, [t for t in planned if t.get("engine") in ("peaks", "objects") and t.get("spec")]
     planned, ready = queue()
     by = build_groups(peaks)
     validate(topics, by)

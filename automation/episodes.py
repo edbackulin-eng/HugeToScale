@@ -52,7 +52,7 @@ def assign_music(st, e):
 
 
 MAX_SAME_TYPE = 2       # owner 19.11: every Short is a 3D ladder; no more than 2 ladders of one type in a row
-ENGINES = ("peaks",)    # engines that render today (next: depth, then planets and moons)
+ENGINES = ("peaks", "objects")    # engines that render today (next: depth, then planets and moons)
 TRIAL_TYPES = {"crater_manhattan": "craters", "saturnv_pyramid": "structures", "ladder_heights": "mixed",
                "texas_france": "map"}
 

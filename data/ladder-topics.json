@@ -425,14 +425,31 @@
    "kind": "higher",
    "status": "planned",
    "steps": [
-    "Mercury-Redstone 25 m",
-    "Gemini-Titan II 33 m",
-    "Space Shuttle stack 56 m",
-    "SLS Block 1 98 m",
-    "Saturn V 111 m"
+    "obj:astronaut",
+    "obj:redstone",
+    "obj:atlas",
+    "obj:shuttle",
+    "obj:saturnv"
    ],
-   "data": "own models from NASA dimensions (NASA vehicles only, no company brands)",
-   "engine": "models (own NASA-dimension models)"
+   "data": "NASA 3D Resources models (public domain) + own Saturn V model; heights from NASA and a second source",
+   "engine": "objects",
+   "type": "rockets",
+   "seeds": [
+    "rocket size comparison",
+    "nasa rockets size comparison",
+    "saturn v size comparison"
+   ],
+   "keys": [
+    "rocket",
+    "saturn v",
+    "nasa"
+   ],
+   "hashtags": [
+    "#sizecomparison",
+    "#rockets",
+    "#nasa"
+   ],
+   "intro": "An astronaut and four NASA rockets side by side at true size: Mercury-Redstone, Mercury-Atlas, the Space Shuttle and Saturn V."
   },
   {
    "id": "canyons",
@@ -5998,6 +6015,39 @@
     "intro": "6 real volcanoes of United States, each taller than the last, side by side at true scale (Copernicus DEM elevation data): Mount Seguam, Kīlauea, Mount Cleveland, Mount Hood, Mauna Kea, Mount Bona."
    },
    "type": "volcanoes"
+  },
+  {
+   "id": "human-to-everest",
+   "kind": "higher",
+   "engine": "objects",
+   "type": "mixed",
+   "status": "planned",
+   "source": "owner 21.11 example",
+   "added": "2026-11-21",
+   "steps": [
+    "obj:astronaut",
+    "obj:hyperion",
+    "obj:pyramid",
+    "obj:burj",
+    "Mount Fuji 3,776 m",
+    "Mount Everest 8,849 m"
+   ],
+   "seeds": [
+    "human vs mount everest",
+    "everest size comparison",
+    "size comparison human to everest"
+   ],
+   "keys": [
+    "everest",
+    "human"
+   ],
+   "hashtags": [
+    "#sizecomparison",
+    "#everest",
+    "#3d"
+   ],
+   "data": "library objects (NASA, Poly Haven, own models) + Copernicus DEM summits",
+   "intro": "From a person to Mount Everest: an astronaut, the tallest tree, the Great Pyramid, Burj Khalifa, Mount Fuji and Everest, side by side at true size."
   }
  ],
  "queue": {

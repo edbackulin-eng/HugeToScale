@@ -111,7 +111,7 @@ def short_name(tp):
 def register(shorts, ladders, ladder_short):
     for tp in load_topics():
         spec = tp.get("spec")
-        if not spec or tp.get("engine") != "peaks":
+        if not spec or tp.get("engine") not in ("peaks", "objects"):
             continue
         name = "ladder_" + tp["id"].replace("-", "_")
         if name in shorts:
