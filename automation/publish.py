@@ -13,6 +13,7 @@ DRY_RUN=1: reads the channel and prints the plan, uploads nothing.
 """
 import json
 import os
+import re
 import subprocess
 import sys
 import tempfile
@@ -61,6 +62,41 @@ def preflight(short, meta, d):
     if not meta["mp4"].exists():
         problems.append("no mp4")
     return problems
+
+
+GENERIC_TAGS = {"#sizecomparison", "#3d", "#scale", "#shorts"}
+TYPE_TAG = {"volcanoes": "#volcano", "mountains": "#mountains"}
+
+
+def final_title(short, base):
+    """Owner 21.11: the text of a real search query + exactly 3 hashtags at the end: #shorts, #sizecomparison and one
+    for this video (its type, or the first specific hashtag of the Short); the whole title <= 100 characters."""
+    import plan as P
+    s = P.SHORTS.get(short, {})
+    base = re.sub(r"\s*#\S+", "", base).strip()
+    kind = None
+    if s.get("topic"):
+        topics = json.loads((ROOT / "data" / "ladder-topics.json").read_text(encoding="utf-8"))["topics"]
+        kind = next((t.get("type") for t in topics if t["id"] == s["topic"]), None)
+    tag = s.get("title_tag") or TYPE_TAG.get(kind) or next(
+        (h for h in s.get("hashtags", []) if h.lower() not in GENERIC_TAGS), "#scale")
+    return f"{base} #shorts #sizecomparison {tag.lower()}"
+
+
+def title_problems(title):
+    out = []
+    if len(title) > 100:
+        out.append(f"title over 100 characters ({len(title)})")
+    tags = re.findall(r"#\S+", title)
+    if len(tags) != 3 or tags[0] != "#shorts" or not re.search(r"( #\S+){3}$", title):
+        out.append("the title must end with exactly 3 hashtags, #shorts first")
+    return out
+
+
+def clean_description(desc):
+    """No hashtag lines (the 3 hashtags are in the title) and no https:// (links stay plain text)."""
+    desc = re.sub(r"https?://", "", desc)
+    return "\n".join(ln for ln in desc.splitlines() if not re.fullmatch(r"\s*(#\S+\s*)+", ln)).strip()
 
 
 def tags_for(short, meta):
@@ -132,13 +168,16 @@ def main():
             if problems:
                 ytguard.notify(f"Huge To Scale: {e['slug']} failed the preflight", "\n".join(problems))
                 raise SystemExit("; ".join(problems))
-            title = meta["titles"]["titles"][0]["title"]
+            title = final_title(e["short"], meta["titles"]["titles"][0]["title"])
+            if title_problems(title):
+                ytguard.notify(f"Huge To Scale: {e['slug']} title", "; ".join(title_problems(title)))
+                raise SystemExit("; ".join(title_problems(title)))
             if ytguard.find_existing(videos, None, title):
                 if dry:
                     raise SystemExit(f"duplicate title: {title}")
                 ytguard.notify("Huge To Scale: same title already on the channel", f"{e['slug']}: {title}")
                 raise SystemExit("duplicate title")
-            desc = meta["description"].rstrip() + "\n\n" + ytguard.ref(CHANNEL, e["slug"])
+            desc = clean_description(meta["description"]) + "\n\n" + ytguard.ref(CHANNEL, e["slug"])
             tags = tags_for(e["short"], meta)
             print(f"-> {e['slug']}: '{title}' at {when.astimezone(TZ):%Y-%m-%d %H:%M} Kyiv")
             if dry:

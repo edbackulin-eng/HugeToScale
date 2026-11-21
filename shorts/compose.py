@@ -247,8 +247,11 @@ def build_text(short, fetched):
         lines.append("- 3D models built for this video from published dimensions (no third-party models)")
     lines.append("- Map data © OpenStreetMap contributors" if any("OpenStreetMap" in i["licence"] for i in fetched.values())
                  else "")
-    lines += ["", " ".join(s["hashtags"])]
-    return "\n".join(x for x in lines if x is not None).replace("\n\n\n", "\n\n")
+    # owner 21.11: no hashtags in the description (exactly 3 go into the title, automation/publish.final_title) and
+    # no "https://" (the channel has no advanced features: links stay plain text)
+    import re
+    text = "\n".join(x for x in lines if x is not None).replace("\n\n\n", "\n\n")
+    return re.sub(r"https?://", "", text)
 
 
 def main():
