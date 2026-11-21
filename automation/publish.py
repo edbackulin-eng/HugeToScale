@@ -95,8 +95,10 @@ def title_problems(title):
 
 def clean_description(desc):
     """No hashtag lines (the 3 hashtags are in the title) and no https:// (links stay plain text)."""
-    desc = re.sub(r"https?://", "", desc)
-    return "\n".join(ln for ln in desc.splitlines() if not re.fullmatch(r"\s*(#\S+\s*)+", ln)).strip()
+    desc = re.sub(r"https?://", "", desc).replace("<", "").replace(">", "")   # owner 21.11: no links, no < >
+    desc = "\n".join(ln for ln in desc.splitlines() if not re.fullmatch(r"\s*(#\S+\s*)+", ln)).strip()
+    raw = desc.encode("utf-8")
+    return raw[:4800].decode("utf-8", "ignore").rsplit("\n", 1)[0] if len(raw) > 4800 else desc
 
 
 def tags_for(short, meta):
