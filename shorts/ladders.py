@@ -24,11 +24,12 @@ def fmt_value(h):
 
 
 def timing(n):
-    """15-20 s: first object at 0 s, the second at 2 s, then one every dt; the whole ladder, then the rewind."""
-    dt = 2.6 if n <= 6 else 2.3
-    t = [0.0] + [round(2.0 + dt * i, 2) for i in range(n - 1)]
+    """Owner 21.11: 15-20 s, a new object every 1-2 s: the first at 0 s, the second at 1.5 s, then one every dt;
+    the whole ladder held, then the rewind into the first frame (seamless loop)."""
+    dt = 1.9 if n <= 6 else 1.7
+    t = [0.0] + [round(1.5 + dt * i, 2) for i in range(n - 1)]
     overview = round(t[-1] + dt, 2)
-    rewind = round(overview + 2.2, 2)
+    rewind = round(max(overview + 2.2, 14.2), 2)
     return t, overview, rewind, round(rewind + 0.8, 2)
 
 
