@@ -153,6 +153,42 @@
    "credit": "3D model: Poly Haven (CC0), stand-in conifer scaled to the measured height",
    "rejected": "2026-11-21",
    "why": "the stand-in fir looks like a thin sapling, not a giant redwood (toy-like at 116 m); the file also holds several trees"
+  },
+  "mammoth": {
+   "name": "WOOLLY MAMMOTH",
+   "kind": "animal",
+   "h": 3.4,
+   "w": 5.0,
+   "model": {
+    "type": "glb",
+    "url": "https://3d-api.si.edu/content/document/3d_package:341c96cd-f967-4540-8ed1-d3fc56d31f12/woolly-mammoth-150k-2048-medium.glb",
+    "licence": "CC0 1.0 (Smithsonian Open Access)",
+    "page": "3d.si.edu"
+   },
+   "sources": [
+    "Natural History Museum London: woolly mammoths up to 3.4 m at the shoulder",
+    "Britannica: woolly mammoth 2.7-3.4 m tall"
+   ],
+   "status": "candidate",
+   "credit": "3D model: Smithsonian Open Access (CC0)"
+  },
+  "washington_statue": {
+   "name": "WASHINGTON STATUE (1840)",
+   "kind": "statue",
+   "h": 3.45,
+   "w": 2.6,
+   "model": {
+    "type": "glb",
+    "url": "https://3d-api.si.edu/content/document/3d_package:789cf90a-4387-4ac1-9e96-c7d6a7b9d26f/george-washington-greenough-statue-(1840)-150k-2048-medium.glb",
+    "licence": "CC0 1.0 (Smithsonian Open Access); statue 1840, public domain",
+    "page": "3d.si.edu"
+   },
+   "sources": [
+    "Smithsonian American Art Museum: Horatio Greenough, George Washington, 136 in (3.45 m)",
+    "Wikipedia George Washington (Greenough): 3.45 m"
+   ],
+   "status": "candidate",
+   "credit": "3D model: Smithsonian Open Access (CC0)"
   }
  }
 }
