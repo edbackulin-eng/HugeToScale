@@ -63,12 +63,14 @@
    "slug": "ladder-seven-summits",
    "short": "ladder_seven_summits",
    "topic": "seven-summits",
-   "status": "queued",
+   "status": "ready",
    "added": "2026-11-21",
    "music": {
     "id": "oga-ancient-power-of-serpents",
     "start": "auto"
-   }
+   },
+   "release": "ep-ladder-seven-summits",
+   "rendered": "2026-11-21"
   }
  ]
 }
